@@ -1,0 +1,73 @@
+# Netlify configuration — publish the site/ directory (no build step)
+[build]
+  publish = "site"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "/assets/css/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Friendly URLs: /careers works same as /careers.html
+[[redirects]]
+  from = "/careers"
+  to = "/careers.html"
+  status = 200
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+[[redirects]]
+  from = "/industries"
+  to = "/industries.html"
+  status = 200
+[[redirects]]
+  from = "/accelerators"
+  to = "/accelerators.html"
+  status = 200
+[[redirects]]
+  from = "/resources"
+  to = "/resources.html"
+  status = 200
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+# Legacy paths (pre site/ reorganization)
+[[redirects]]
+  from = "/styles.css"
+  to = "/assets/css/styles.css"
+  status = 301
+[[redirects]]
+  from = "/logo.svg"
+  to = "/assets/images/logo.svg"
+  status = 301
+[[redirects]]
+  from = "/blog-ai-enabled-delivery.html"
+  to = "/content/blog-ai-enabled-delivery.html"
+  status = 301
+[[redirects]]
+  from = "/blog-midmarket-salesforce.html"
+  to = "/content/blog-midmarket-salesforce.html"
+  status = 301
+[[redirects]]
+  from = "/blog-lpi-accelerator.html"
+  to = "/content/blog-lpi-accelerator.html"
+  status = 301
+[[redirects]]
+  from = "/whitepaper-midmarket-guide.html"
+  to = "/content/whitepaper-midmarket-guide.html"
+  status = 301
