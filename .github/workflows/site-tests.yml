@@ -3,7 +3,7 @@ name: Site Tests
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, dev, test]
 
 jobs:
   static-tests:
