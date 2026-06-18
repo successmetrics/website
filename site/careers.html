@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers | Join SuccessMetrics</title>
+<meta name="description" content="Join SuccessMetrics — a fast-growing, AI-forward Salesforce consultancy. Open roles for Salesforce Developers, Architects, and Accessibility Specialists.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="accelerators.html">Accelerators</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="careers.html" class="active">Careers</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Talk to an Expert</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="kicker">Careers</div>
+    <h1>Build the future of AI-enabled Salesforce delivery</h1>
+    <p>SuccessMetrics is a nimble, fast-growing company that thrives on innovation and collaboration. We learn alongside experts, stay at the forefront of SaaS and AI, and foster a supportive culture where every member's best ideas matter.</p>
+  </div>
+</header>
+
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Why SuccessMetrics</div>
+      <h2 class="title">Work that compounds your skills</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><div class="icon">🤖</div><h3>AI-First Engineering</h3><p>Work with AI-enabled development tooling daily — code generation, automated testing, and intelligent delivery pipelines that most consultancies haven't touched yet.</p></div>
+      <div class="card"><div class="icon">📈</div><h3>Fast Growth, Real Ownership</h3><p>Small teams, big responsibility. You'll own outcomes, present to clients, and shape our accelerators — not sit five layers deep on a bench.</p></div>
+      <div class="card"><div class="icon">🎓</div><h3>Continuous Learning</h3><p>Certification support, mentorship from leaders with 30+ years of experience, and exposure to the newest Salesforce clouds and AI capabilities.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="openings">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Open Positions</div>
+      <h2 class="title">Current openings</h2>
+    </div>
+
+    <div class="job-row">
+      <div class="info">
+        <h3>Senior Salesforce Developer</h3>
+        <div class="meta"><span>JD-0084</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
+      </div>
+      <a class="btn btn-primary" href="#apply" onclick="selectRole('Senior Salesforce Developer (JD-0084)')">Apply Now</a>
+    </div>
+
+    <div class="job-row">
+      <div class="info">
+        <h3>Accessibility Specialist</h3>
+        <div class="meta"><span>JD-0083</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
+      </div>
+      <a class="btn btn-primary" href="#apply" onclick="selectRole('Accessibility Specialist (JD-0083)')">Apply Now</a>
+    </div>
+
+    <div class="job-row">
+      <div class="info">
+        <h3>Salesforce Architect</h3>
+        <div class="meta"><span>JD-0082</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
+      </div>
+      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Architect (JD-0082)')">Apply Now</a>
+    </div>
+
+    <div class="job-row">
+      <div class="info">
+        <h3>Salesforce Developer</h3>
+        <div class="meta"><span>JD-0081</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
+      </div>
+      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Developer (JD-0081)')">Apply Now</a>
+    </div>
+
+    <p style="color: var(--text-faint); font-size: 0.9rem; margin-top: 18px;">Don't see a fit? Send a general application below — we're always looking for exceptional Salesforce talent.</p>
+  </div>
+</section>
+
+<section class="block" id="apply">
+  <div class="container" style="max-width: 800px;">
+    <div class="section-head">
+      <div class="kicker">Apply</div>
+      <h2 class="title">Submit your application</h2>
+      <p>We review every application personally and respond within 5 business days.</p>
+    </div>
+
+    <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab).
+         Set up email notifications there: Site settings -> Forms -> Form notifications. -->
+    <form class="form-card" name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+      <input type="hidden" name="form-name" value="job-application">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="jane@example.com">
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 / +1 ...">
+        </div>
+        <div class="field">
+          <label for="role">Position *</label>
+          <select id="role" name="position" required>
+            <option value="">Select a role…</option>
+            <option>Senior Salesforce Developer (JD-0084)</option>
+            <option>Accessibility Specialist (JD-0083)</option>
+            <option>Salesforce Architect (JD-0082)</option>
+            <option>Salesforce Developer (JD-0081)</option>
+            <option>General Application</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="linkedin">LinkedIn / Portfolio URL</label>
+          <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+        </div>
+        <div class="field full">
+          <label for="resume">Resume (PDF or Word, max 8 MB) *</label>
+          <input type="file" id="resume" name="resume" required accept=".pdf,.doc,.docx">
+        </div>
+        <div class="field full">
+          <label for="message">Why SuccessMetrics? *</label>
+          <textarea id="message" name="message" required placeholder="Tell us briefly about your experience and what excites you about this role…"></textarea>
+        </div>
+      </div>
+      <div style="margin-top: 24px;">
+        <button type="submit" class="btn btn-primary">Submit Application →</button>
+      </div>
+      <p class="form-note">Prefer email? Send your resume directly to <a href="mailto:careers@successmetrics.io">careers@successmetrics.io</a> with the Job ID in the subject line.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+        <p>AI-enabled Salesforce implementation services for mid-market companies. Headquartered in California with a Development &amp; Research Center in India.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Expertise</h5>
+        <ul>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="accelerators.html">Accelerators</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="resources.html">Blog &amp; Articles</a></li>
+          <li><a href="resources.html#whitepapers">White Papers</a></li>
+          <li><a href="https://www.linkedin.com/company/successmetrics-corp">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div>460 Center Street #6021, Moraga, CA 94570 · (510) 330-6457 · support@successmetrics.io</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function selectRole(role) {
+  var sel = document.getElementById('role');
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].text === role) { sel.selectedIndex = i; break; }
+  }
+}
+</script>
+
+</body>
+</html>

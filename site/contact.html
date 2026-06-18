@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us | SuccessMetrics</title>
+<meta name="description" content="Talk to a Salesforce expert at SuccessMetrics. Book a free assessment, request an accelerator demo, or get a quote.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="accelerators.html">Accelerators</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta active">Talk to an Expert</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <div class="kicker">Contact</div>
+    <h1>Talk to an expert</h1>
+    <p>Tell us about your project, RFP, or org challenge. We'll respond within one business day with relevant experience and a recommended next step.</p>
+  </div>
+</header>
+
+<section class="block">
+  <div class="container">
+    <div class="two-col" style="align-items: start;">
+      <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab). -->
+      <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Work Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="company">Company / Agency *</label>
+            <input type="text" id="company" name="company" required>
+          </div>
+          <div class="field">
+            <label for="interest">I'm interested in…</label>
+            <select id="interest" name="interest">
+              <option>Free Salesforce Assessment</option>
+              <option>New Implementation</option>
+              <option>Advisory / Roadmap</option>
+              <option>Managed Services</option>
+              <option>Accelerator Demo (LPI, LWC, Org Insights, Data Masking)</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="message">How can we help? *</label>
+            <textarea id="message" name="message" required placeholder="A few sentences about your goals, timeline, or current Salesforce setup…"></textarea>
+          </div>
+        </div>
+        <div style="margin-top: 24px;">
+          <button type="submit" class="btn btn-primary">Send Message →</button>
+        </div>
+      </form>
+
+      <div>
+        <div class="card" style="margin-bottom: 18px;">
+          <div class="icon">📧</div>
+          <h3>Email</h3>
+          <p><a href="mailto:support@successmetrics.io">support@successmetrics.io</a></p>
+        </div>
+        <div class="card" style="margin-bottom: 18px;">
+          <div class="icon">📞</div>
+          <h3>Phone</h3>
+          <p><a href="tel:+15103306457">(510) 330-6457</a></p>
+        </div>
+        <div class="card">
+          <div class="icon">📍</div>
+          <h3>Headquarters</h3>
+          <p>460 Center Street #6021<br>Moraga, CA 94570, USA</p>
+          <p style="margin-top: 10px;">Development &amp; Research Center:<br>Pondicherry, India</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+        <p>AI-enabled Salesforce implementation services for mid-market companies. Headquartered in California with a Development &amp; Research Center in India.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Expertise</h5>
+        <ul>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="accelerators.html">Accelerators</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="resources.html">Blog &amp; Articles</a></li>
+          <li><a href="resources.html#whitepapers">White Papers</a></li>
+          <li><a href="https://www.linkedin.com/company/successmetrics-corp">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div>460 Center Street #6021, Moraga, CA 94570 · (510) 330-6457 · support@successmetrics.io</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
