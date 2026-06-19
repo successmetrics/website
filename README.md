@@ -49,6 +49,31 @@ npm run test:e2e         # browser smoke tests (Playwright; run `npx playwright 
 
 **E2E checks** load every page in Chromium, verify navigation, forms, and key homepage content.
 
+**Netlify checks** (two layers):
+
+| Layer | Command | When it runs |
+|---|---|---|
+| Static | included in `npm run test:static` | Every PR — validates `netlify.toml`, form markup, honeypot, fields |
+| Live submissions | `npm run test:netlify` | On `test` branch CI when `NETLIFY_SITE_URL` is set |
+| Live browser | `npm run test:netlify:e2e` | On `test` branch CI when `NETLIFY_SITE_URL` is set |
+
+Forms only work on the deployed Netlify site (not local preview). To enable live form tests in CI on the **`test` branch**:
+
+1. GitHub → **Settings → Secrets and variables → Actions → Variables**
+2. Add `NETLIFY_SITE_URL` = `https://successmetrics.netlify.app`
+3. Push to `test` (or open a PR targeting `test`) — two extra jobs run:
+   - **Netlify form submissions** (POST tests for contact + careers)
+   - **Netlify form browser tests** (Playwright fill & submit)
+
+Static Netlify markup checks (`netlify.toml`, form HTML) already run on every branch via `npm run test:static`.
+
+Submissions appear in [Netlify Forms](https://app.netlify.com/projects/successmetrics/forms) (tagged with `ci-` / `Automated` — safe to delete).
+
+```bash
+NETLIFY_SITE_URL=https://your-site.netlify.app npm run test:netlify
+NETLIFY_SITE_URL=https://your-site.netlify.app npm run test:netlify:e2e
+```
+
 ## Local preview
 
 ```bash
@@ -76,7 +101,7 @@ Netlify → Site settings → Domain management → Add `www.successmetrics.io`,
 
 Both forms (`job-application` in `site/careers.html`, `contact` in `site/contact.html`) use [Netlify Forms](https://docs.netlify.com/forms/setup/). After the first deploy:
 
-1. Netlify dashboard → your site → **Forms** — submissions (including resume uploads, 8 MB max) appear here
+1. [Netlify Forms dashboard](https://app.netlify.com/projects/successmetrics/forms) — submissions (including resume uploads, 8 MB max) appear here
 2. **Site settings → Forms → Form notifications** — add email notifications (e.g. careers@successmetrics.io and support@successmetrics.io)
 
 Spam protection via honeypot field is included. Note: forms only work on the deployed Netlify site, not when opening files locally.
