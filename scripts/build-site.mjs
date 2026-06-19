@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from "node:fs";
 import { join, extname } from "node:path";
+import { spawnSync } from "node:child_process";
 
 const ROOT = process.cwd();
 const SITE_DIR = join(ROOT, "site");
@@ -70,6 +71,14 @@ function buildPage(filename) {
 
 const pages = findHtmlPages(SITE_DIR);
 let updated = 0;
+
+const storiesBuild = spawnSync("node", ["scripts/build-client-stories.mjs"], {
+  cwd: ROOT,
+  stdio: "inherit",
+});
+if (storiesBuild.status !== 0) {
+  process.exit(storiesBuild.status ?? 1);
+}
 
 for (const page of pages) {
   if (buildPage(page)) {

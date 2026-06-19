@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MOHCD Agentforce Success Story | SuccessMetrics</title>
-<meta name="description" content="How SuccessMetrics built the SFHD Employee Assistant — a router and three specialized Agentforce subagents for MOHCD affordable housing program support.">
+<meta name="description" content="MOHCD program staff support San Franciscans with complex affordable housing programs — answering detailed questions about eligibility, income limits, lo…">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
 <link rel="stylesheet" href="../../assets/css/styles.css">
@@ -32,69 +32,52 @@
   <div class="prose-header">
     <div class="prose-header-copy">
       <span class="badge teal">Public Sector</span>
-      <h1>Unifying Housing Program Support: MOHCD Employee Assistant</h1>
+      <h1>Giving Housing Staff a Seamless, Intelligent Workspace at MOHCD</h1>
 
       <div class="story-meta">
         <div><strong>Client:</strong> Mayor’s Office of Housing and Community Development (MOHCD), San Francisco</div>
         <div><strong>Industry:</strong> Public Sector — Affordable Housing &amp; Community Development</div>
-        <div><strong>Solution:</strong> Multi-Subagent Salesforce Agentforce Employee Assistant (SFHD Assistant)</div>
+        <div><strong>Solution:</strong> Embedded Salesforce Agentforce Assistant</div>
         <div><strong>Implementation Partner:</strong> SuccessMetrics</div>
       </div>
     </div>
-    <img class="prose-client-logo prose-client-logo--mohcd" src="../../assets/images/clients/mohcd.svg" alt="MOHCD" width="140" height="30" loading="lazy">
+    <img class="prose-client-logo prose-client-logo--mohcd" src="../../assets/images/clients/mohcd.svg" alt="Mayor’s Office of Housing and Community Development" width="140" height="30" loading="lazy">
   </div>
 
-  <blockquote>
-    <p>AI agents built on Agentforce can compress multi-screen service workflows into a single guided conversation — without removing human control from consequential actions.</p>
-  </blockquote>
-
-  <h2>The Challenge: One Assistant, Three Very Different Jobs</h2>
-  <p>MOHCD program staff answer questions about DALP loans, Below Market Rate (BMR) ownership, Teacher Next Door eligibility, income limits, and the DAHLIA portal — often while actively managing live affordable housing applications in Salesforce.</p>
-  <p>Staff needed one place to:</p>
-  <ol>
-    <li>Ask detailed program and policy questions and receive answers grounded in official MOHCD documents with clear source citations.</li>
-    <li>Look up application status and key fields (plus household members and linked listings) by application number, and update status when needed.</li>
-    <li>Draft and send a consolidated summary email to an applicant that pulls together both the application record and everything discussed in the current session.</li>
-  </ol>
-  <p>Each of these is fundamentally different work — retrieval, data operations, and communication. Bundling them into a single monolithic agent tends to produce mediocre performance across all three. MOHCD needed precision, safety, and reliability in a high-stakes housing context where application numbers can be transposed and policy language overlaps across programs.</p>
-
-  <h2>The Solution: A Router + Three Specialized Subagents</h2>
-  <p>SuccessMetrics built the <strong>SFHD Employee Assistant</strong> as a single persistent panel inside Salesforce, powered by a parent router agent that recognizes intent and hands off to three purpose-built subagents. This architecture delivers excellence in each domain rather than compromise.</p>
-
-  <h3>The Three Subagents</h3>
+  <h2>The Challenge: Juggling Knowledge, Applications, and Communication Across Multiple Systems</h2>
+  <p>MOHCD program staff support San Franciscans with complex affordable housing programs — answering detailed questions about eligibility, income limits, loans, and ownership opportunities while simultaneously managing live applications in Salesforce.</p>
+  <p>Staff previously had to move constantly between policy documents, the Salesforce application record, and email. This fragmented experience made it difficult to respond quickly during applicant interactions, increased the risk of small inconsistencies, and pulled staff attention away from the person they were helping. As application volumes grew, the inefficiency became more noticeable and limited how much focused support staff could provide.</p>
+  <h2>The Solution: One Deeply Integrated Assistant for End-to-End Workflow Support</h2>
+  <p>SuccessMetrics built an intelligent Agentforce assistant that lives as a persistent panel inside MOHCD’s existing Salesforce environment. Staff can access it from any screen without switching tools or losing context.</p>
+  <p>The assistant fluidly handles the full range of daily work: answering program and policy questions with accurate, sourced information; looking up and updating application details; and preparing clear, consolidated communications to applicants. It maintains awareness of the current application and conversation history, so staff can move naturally between tasks without re-explaining or re-entering information.</p>
+  <p>Every action that changes data or sends communication requires explicit staff confirmation, keeping humans fully in control while removing friction from the repetitive parts of the work.</p>
+  <h2>How Daily Work Feels Different Now</h2>
+  <p>Staff describe the experience as having a capable colleague who understands the full context of an application and can support the entire interaction in one place:</p>
   <ul>
-    <li><strong>SFHD FAQ Subagent</strong> — Answers questions using retrieval-augmented generation against a curated MOHCD knowledge library. Always cites the source document. Includes topic disambiguation logic for overlapping terminology (e.g., “50% AMI” or “Section 8” appearing in multiple programs) and asks clarifying questions when a query could reasonably refer to more than one program area.</li>
-    <li><strong>Application Status Subagent</strong> — First validates the application number against existing records. On success, retrieves seven key fields plus household members and the linked listing. Can update application status (Draft / Submitted / Removed / Needs Review) when explicitly requested. Stops cleanly on invalid numbers.</li>
-    <li><strong>SFHD Email Subagent</strong> — Consolidates every FAQ answer from the session plus relevant application context into one well-organized email draft. Auto-fetches the applicant’s email address from the Salesforce record. Handles multi-question sessions gracefully.</li>
+  <li>They can ask a detailed housing program question and receive clear, policy-grounded guidance without leaving the application they’re working on.</li>
+  <li>They can check application status, household details, or update records directly through the conversation when needed.</li>
+  <li>When it’s time to communicate with an applicant, the assistant prepares a well-organized summary email that incorporates both the application information and everything discussed in the current session.</li>
+  <li>Staff review and approve — then move to the next task — all without switching screens or losing their place.</li>
   </ul>
-
-  <h2>Design Decisions That Made It Production-Ready</h2>
-  <p>Several architectural choices proved essential for real-world reliability in San Francisco’s housing programs:</p>
+  <p>Complex, multi-step interactions that once required constant context-switching now feel like a single, continuous workflow. Staff stay focused on judgment, relationships, and problem-solving rather than administrative overhead.</p>
+  <h2>Impact: Higher Efficiency, Better Focus, and Improved Applicant Experience</h2>
+  <p>By embedding intelligent support directly into MOHCD’s daily workflows, the agency has seen clear improvements in both staff productivity and service quality:</p>
   <ul>
-    <li><strong>Strict validation as the first step</strong> — If an application number does not match an existing record, the agent stops immediately and clearly states the issue. No silent failures, no actions taken against the wrong applicant’s record.</li>
-    <li><strong>Order-independent subagents with smart session memory</strong> — Staff can ask a housing question, then request a status update, then ask for an email summary — or any sequence. Context retrieved earlier is reused intelligently while each subagent’s underlying flow remains self-contained for data integrity.</li>
-    <li><strong>Multi-FAQ email handling from day one</strong> — When a staff member asks three program questions during a session and then requests an email summary, the agent includes all three answers, clearly organized — not just the last one.</li>
-    <li><strong>Defined, non-improvising fallback</strong> — When a question is not covered by the knowledge base, the FAQ subagent tells the employee plainly and provides MOHCD’s direct contact information instead of guessing.</li>
-    <li><strong>Explicit confirmation for every write action</strong> — Status updates and emails are never sent without a clear summary and an explicit “YES.”</li>
+  <li><strong>Dramatically reduced context switching</strong> — Staff no longer lose time and mental energy moving between separate knowledge resources, records, and email.</li>
+  <li><strong>Faster response and resolution times</strong> — What used to take multiple steps across different systems now happens in one guided conversation, allowing staff to handle more inquiries and applications efficiently.</li>
+  <li><strong>Greater consistency in program guidance</strong> — Every staff member has access to the same accurate, up-to-date information, reducing variation in how questions are answered.</li>
+  <li><strong>Improved staff capacity and satisfaction</strong> — By handling routine lookup, summarization, and preparation work, the assistant frees specialists to focus on higher-value activities and applicant relationships.</li>
+  <li><strong>Stronger applicant experience</strong> — Faster, more complete responses and clearer communications help residents move through the housing process with less frustration.</li>
   </ul>
-
-  <h2>Why Focused Subagents Outperform Monolithic Agents</h2>
-  <p>A single large agent attempting retrieval, data operations, and email drafting at once tends to be mediocre at all three. By giving each subagent a single, well-defined responsibility with its own reasoning instructions, SuccessMetrics delivered:</p>
-  <ul>
-    <li>Higher accuracy and trust on policy answers (grounded retrieval + mandatory citations)</li>
-    <li>Safer data operations (validation gates + confirmation requirements)</li>
-    <li>More coherent, useful communications (full session context, not just the last exchange)</li>
-  </ul>
-  <p>When MOHCD needs to update program content, only the FAQ subagent is modified — zero risk to application lookup or email capabilities. Each subagent is easier to test in isolation and easier to explain to end users.</p>
-
-  <h2>Impact</h2>
-  <p>MOHCD staff now have a true single pane of glass for program knowledge, application management, and applicant communication. The assistant handles complexity while staff retain complete control over every consequential action. In a domain where application numbers get confused between programs and policy questions carry real weight for residents, this combination of precision, validation, and graceful edge-case handling is what turns a promising demo into a tool staff rely on every day.</p>
-  <p>This project exemplifies SuccessMetrics’ core philosophy: <strong>Agentforce implementation is an architecture discipline, not a prompt-writing exercise.</strong> The patterns — single-responsibility subagents, explicit routing, validation-first design, grounded retrieval with citations, and workflow-first discovery — are the same ones we apply across government, healthcare, and mission-driven organizations.</p>
-
+  <p>Because the assistant is designed to be transparent and always defers final decisions to staff, adoption has been high. It feels like a natural extension of existing tools rather than a separate system to manage.</p>
+  <h2>Setting a New Standard for Integrated Public Sector AI</h2>
+  <p>This implementation shows the power of embedding AI deeply into the systems and workflows government staff already use every day. Instead of adding new tools or forcing process changes, SuccessMetrics created an experience that feels seamless, reliable, and genuinely supportive — accelerating work while maintaining the human oversight essential in public programs.</p>
+  <p>MOHCD staff now have a single, intelligent workspace that helps them move fluidly between policy guidance, application management, and applicant communication. The result is measurable gains in efficiency, consistency, and the overall quality of service delivered to San Francisco residents.</p>
+  <p>SuccessMetrics partners with public sector organizations to deliver this caliber of seamless, high-impact AI integration. By focusing first on how staff actually work and then embedding intelligence where it removes the most friction, we help agencies achieve real performance improvements without added complexity or risk.</p>
   <hr>
 
   <div class="callout">
-    <p>SuccessMetrics partners with public sector agencies to design and deploy safe, focused, production-grade Agentforce solutions. <a href="../../contact.html">Contact us</a> to begin a workflow mapping engagement for your team.</p>
+    <p>Ready to explore how a deeply integrated Agentforce assistant could transform workflows for your team? <a href="../../contact.html">Contact SuccessMetrics</a> to start the conversation.</p>
   </div>
 </article>
 
