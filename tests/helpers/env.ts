@@ -30,3 +30,7 @@ export function hasNotionCareersConfig(): boolean {
       process.env.NOTION_APPLICATIONS_DATABASE_ID?.trim(),
   );
 }
+
+export function hasResendConfig(): boolean {
+  return Boolean(process.env.RESEND_API_KEY?.trim());
+}

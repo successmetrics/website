@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { Client } from "@notionhq/client";
 import { hasNotionCareersConfig, loadDotEnv } from "../helpers/env";
+import { createTestResumeFile } from "../helpers/test-resume";
 import {
   createApplicationPage,
   fetchOpenJobs,
@@ -11,23 +12,6 @@ import {
 loadDotEnv();
 
 const notionConfigured = hasNotionCareersConfig();
-
-const TEST_RESUME_BYTES = Buffer.from(
-  "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n2 0 obj<</Type/Pages/Kids[]/Count 0>>endobj\ntrailer<</Size 3/Root 1 0 R>>\n%%EOF\n",
-);
-
-function createTestResumeFile() {
-  return {
-    name: "ci-test-resume.pdf",
-    type: "application/pdf",
-    size: TEST_RESUME_BYTES.length,
-    arrayBuffer: async () =>
-      TEST_RESUME_BYTES.buffer.slice(
-        TEST_RESUME_BYTES.byteOffset,
-        TEST_RESUME_BYTES.byteOffset + TEST_RESUME_BYTES.byteLength,
-      ),
-  };
-}
 
 describe.skipIf(!notionConfigured)("Notion careers live API", () => {
   const runId = `ci-${Date.now()}`;

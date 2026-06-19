@@ -105,11 +105,12 @@ Netlify → Site settings → Domain management → Add `www.successmetrics.io`,
 
 Open roles and job applications use **Notion** as the backend. Submissions are saved to a Notion database and trigger an email via **Resend**.
 
-See [NOTION-CAREERS-SETUP.md](./NOTION-CAREERS-SETUP.md) for database schemas and Netlify environment variables.
+See [docs/NOTION-CAREERS-SETUP.md](./docs/NOTION-CAREERS-SETUP.md) for database schemas and Netlify environment variables.
 
 ```bash
 cp .env.example .env
 npm run dev    # Netlify Dev — site + /api/jobs + /api/job-application
+npm run test:resend   # live Resend email test (needs RESEND_API_KEY in .env)
 ```
 
 The contact form still uses Netlify Forms.
