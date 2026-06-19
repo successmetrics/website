@@ -393,6 +393,11 @@ footer {
 
 /* ============ PROSE (blog/article) ============ */
 .prose { max-width: 760px; margin: 0 auto; padding: 60px 24px; }
+.prose.prose--story {
+  max-width: min(var(--max-w), 100%);
+  width: min(100%, calc(var(--max-w) - 48px));
+  padding: 60px max(24px, 4vw);
+}
 .prose h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.18; margin-bottom: 18px; }
 .prose .meta { color: var(--text-faint); font-size: 0.9rem; margin-bottom: 38px; display: flex; gap: 14px; flex-wrap: wrap; }
 .prose h2 { font-size: 1.55rem; font-weight: 750; margin: 44px 0 16px; letter-spacing: -0.015em; }
@@ -436,6 +441,9 @@ footer {
 }
 .prose-client-logo--sfhss { max-width: 200px; height: 40px; }
 .prose-client-logo--mohcd { max-width: 260px; height: 54px; }
+.prose--story .prose-client-logo { height: 52px; max-width: 240px; }
+.prose--story .prose-client-logo--sfhss { max-width: 280px; height: 56px; }
+.prose--story .prose-client-logo--mohcd { max-width: 320px; height: 72px; }
 .prose table {
   width: 100%; border-collapse: collapse; margin: 24px 0 28px;
   font-size: 0.95rem;
@@ -497,29 +505,35 @@ footer {
   height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
 }
 .res-card .body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
+.story-card .thumb {
+  height: 260px;
+  min-height: 260px;
+}
 .story-card-thumb {
-  gap: 32px;
+  flex-direction: column;
+  gap: 22px;
   justify-content: center;
+  padding: 32px 28px;
 }
 .story-card-icon {
-  font-size: 2.6rem;
+  font-size: 5rem;
   line-height: 1;
   flex-shrink: 0;
 }
 .story-card .link { margin-top: auto; padding-top: 18px; }
 .story-client-logo {
   object-fit: contain;
-  opacity: 0.88;
+  opacity: 0.92;
   flex-shrink: 0;
 }
 .story-client-logo--thumb {
-  height: 35px;
+  height: 64px;
   width: auto;
-  max-width: 150px;
+  max-width: min(320px, 85%);
   object-position: center;
 }
-.story-client-logo--sfhss.story-client-logo--thumb { max-width: 188px; }
-.story-client-logo--mohcd.story-client-logo--thumb { height: 44px; max-width: 210px; }
+.story-client-logo--sfhss.story-client-logo--thumb { max-width: min(360px, 90%); height: 72px; }
+.story-client-logo--mohcd.story-client-logo--thumb { height: 80px; max-width: min(380px, 90%); }
 .thumb-1 { background: linear-gradient(135deg, rgba(79,124,255,0.25), rgba(167,139,250,0.2)); }
 .thumb-2 { background: linear-gradient(135deg, rgba(56,217,192,0.22), rgba(79,124,255,0.2)); }
 .thumb-3 { background: linear-gradient(135deg, rgba(167,139,250,0.22), rgba(56,217,192,0.18)); }

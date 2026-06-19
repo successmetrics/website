@@ -207,7 +207,7 @@ function renderStoryPage(slug, parsed, markdown) {
 <body>
 
 <!-- @nav active="client-stories" -->
-<article class="prose">
+<article class="prose prose--story">
   <div class="prose-header">
     <div class="prose-header-copy">
       <span${badgeClass}>${config.badge}</span>
