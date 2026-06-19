@@ -66,3 +66,17 @@ describe("resources index", () => {
     }
   });
 });
+
+describe("client stories index", () => {
+  it("links to every client story", () => {
+    const $ = loadPage("client-stories.html");
+    const expected = [
+      "content/client-stories/sfhss-agentforce-success-story.html",
+      "content/client-stories/mohcd-agentforce-success-story.html",
+    ];
+
+    for (const href of expected) {
+      expect($(`a[href="${href}"]`).length).toBeGreaterThan(0);
+    }
+  });
+});

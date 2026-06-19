@@ -6,6 +6,7 @@ export const MAIN_PAGES = [
   "industries.html",
   "accelerators.html",
   "resources.html",
+  "client-stories.html",
   "careers.html",
   "about.html",
   "contact.html",
@@ -16,6 +17,8 @@ export const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
+  "content/client-stories/sfhss-agentforce-success-story.html",
+  "content/client-stories/mohcd-agentforce-success-story.html",
 ] as const;
 
 export const NAV_LINKS = [
@@ -23,6 +26,7 @@ export const NAV_LINKS = [
   { label: "Industries", href: "industries.html" },
   { label: "Accelerators", href: "accelerators.html" },
   { label: "Resources", href: "resources.html" },
+  { label: "Client Stories", href: "client-stories.html" },
   { label: "Careers", href: "careers.html" },
   { label: "About", href: "about.html" },
   { label: "Talk to an Expert", href: "contact.html" },
@@ -34,6 +38,7 @@ export const NETLIFY_CLEAN_URLS: Record<string, string> = {
   "/industries": "industries.html",
   "/accelerators": "accelerators.html",
   "/resources": "resources.html",
+  "/client-stories": "client-stories.html",
   "/about": "about.html",
   "/contact": "contact.html",
 };

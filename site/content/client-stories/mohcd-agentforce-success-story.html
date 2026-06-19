@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOHCD Agentforce Success Story | SuccessMetrics</title>
+<meta name="description" content="How SuccessMetrics built the SFHD Employee Assistant — a router and three specialized Agentforce subagents for MOHCD affordable housing program support.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo"><img src="../../assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../services.html">Services</a></li>
+      <li><a href="../../industries.html">Industries</a></li>
+      <li><a href="../../accelerators.html">Accelerators</a></li>
+      <li><a href="../../resources.html">Resources</a></li>
+      <li><a href="../../client-stories.html" class="active">Client Stories</a></li>
+      <li><a href="../../careers.html">Careers</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../contact.html" class="nav-cta">Talk to an Expert</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<article class="prose">
+  <span class="badge teal">Public Sector</span>
+  <h1>Unifying Housing Program Support: MOHCD Employee Assistant</h1>
+
+  <div class="story-meta">
+    <div><strong>Client:</strong> Mayor’s Office of Housing and Community Development (MOHCD), San Francisco</div>
+    <div><strong>Industry:</strong> Public Sector — Affordable Housing &amp; Community Development</div>
+    <div><strong>Solution:</strong> Multi-Subagent Salesforce Agentforce Employee Assistant (SFHD Assistant)</div>
+    <div><strong>Implementation Partner:</strong> SuccessMetrics</div>
+  </div>
+
+  <blockquote>
+    <p>AI agents built on Agentforce can compress multi-screen service workflows into a single guided conversation — without removing human control from consequential actions.</p>
+  </blockquote>
+
+  <h2>The Challenge: One Assistant, Three Very Different Jobs</h2>
+  <p>MOHCD program staff answer questions about DALP loans, Below Market Rate (BMR) ownership, Teacher Next Door eligibility, income limits, and the DAHLIA portal — often while actively managing live affordable housing applications in Salesforce.</p>
+  <p>Staff needed one place to:</p>
+  <ol>
+    <li>Ask detailed program and policy questions and receive answers grounded in official MOHCD documents with clear source citations.</li>
+    <li>Look up application status and key fields (plus household members and linked listings) by application number, and update status when needed.</li>
+    <li>Draft and send a consolidated summary email to an applicant that pulls together both the application record and everything discussed in the current session.</li>
+  </ol>
+  <p>Each of these is fundamentally different work — retrieval, data operations, and communication. Bundling them into a single monolithic agent tends to produce mediocre performance across all three. MOHCD needed precision, safety, and reliability in a high-stakes housing context where application numbers can be transposed and policy language overlaps across programs.</p>
+
+  <h2>The Solution: A Router + Three Specialized Subagents</h2>
+  <p>SuccessMetrics built the <strong>SFHD Employee Assistant</strong> as a single persistent panel inside Salesforce, powered by a parent router agent that recognizes intent and hands off to three purpose-built subagents. This architecture delivers excellence in each domain rather than compromise.</p>
+
+  <h3>The Three Subagents</h3>
+  <ul>
+    <li><strong>SFHD FAQ Subagent</strong> — Answers questions using retrieval-augmented generation against a curated MOHCD knowledge library. Always cites the source document. Includes topic disambiguation logic for overlapping terminology (e.g., “50% AMI” or “Section 8” appearing in multiple programs) and asks clarifying questions when a query could reasonably refer to more than one program area.</li>
+    <li><strong>Application Status Subagent</strong> — First validates the application number against existing records. On success, retrieves seven key fields plus household members and the linked listing. Can update application status (Draft / Submitted / Removed / Needs Review) when explicitly requested. Stops cleanly on invalid numbers.</li>
+    <li><strong>SFHD Email Subagent</strong> — Consolidates every FAQ answer from the session plus relevant application context into one well-organized email draft. Auto-fetches the applicant’s email address from the Salesforce record. Handles multi-question sessions gracefully.</li>
+  </ul>
+
+  <h2>Design Decisions That Made It Production-Ready</h2>
+  <p>Several architectural choices proved essential for real-world reliability in San Francisco’s housing programs:</p>
+  <ul>
+    <li><strong>Strict validation as the first step</strong> — If an application number does not match an existing record, the agent stops immediately and clearly states the issue. No silent failures, no actions taken against the wrong applicant’s record.</li>
+    <li><strong>Order-independent subagents with smart session memory</strong> — Staff can ask a housing question, then request a status update, then ask for an email summary — or any sequence. Context retrieved earlier is reused intelligently while each subagent’s underlying flow remains self-contained for data integrity.</li>
+    <li><strong>Multi-FAQ email handling from day one</strong> — When a staff member asks three program questions during a session and then requests an email summary, the agent includes all three answers, clearly organized — not just the last one.</li>
+    <li><strong>Defined, non-improvising fallback</strong> — When a question is not covered by the knowledge base, the FAQ subagent tells the employee plainly and provides MOHCD’s direct contact information instead of guessing.</li>
+    <li><strong>Explicit confirmation for every write action</strong> — Status updates and emails are never sent without a clear summary and an explicit “YES.”</li>
+  </ul>
+
+  <h2>Why Focused Subagents Outperform Monolithic Agents</h2>
+  <p>A single large agent attempting retrieval, data operations, and email drafting at once tends to be mediocre at all three. By giving each subagent a single, well-defined responsibility with its own reasoning instructions, SuccessMetrics delivered:</p>
+  <ul>
+    <li>Higher accuracy and trust on policy answers (grounded retrieval + mandatory citations)</li>
+    <li>Safer data operations (validation gates + confirmation requirements)</li>
+    <li>More coherent, useful communications (full session context, not just the last exchange)</li>
+  </ul>
+  <p>When MOHCD needs to update program content, only the FAQ subagent is modified — zero risk to application lookup or email capabilities. Each subagent is easier to test in isolation and easier to explain to end users.</p>
+
+  <h2>Impact</h2>
+  <p>MOHCD staff now have a true single pane of glass for program knowledge, application management, and applicant communication. The assistant handles complexity while staff retain complete control over every consequential action. In a domain where application numbers get confused between programs and policy questions carry real weight for residents, this combination of precision, validation, and graceful edge-case handling is what turns a promising demo into a tool staff rely on every day.</p>
+  <p>This project exemplifies SuccessMetrics’ core philosophy: <strong>Agentforce implementation is an architecture discipline, not a prompt-writing exercise.</strong> The patterns — single-responsibility subagents, explicit routing, validation-first design, grounded retrieval with citations, and workflow-first discovery — are the same ones we apply across government, healthcare, and mission-driven organizations.</p>
+
+  <hr>
+
+  <div class="callout">
+    <p>SuccessMetrics partners with public sector agencies to design and deploy safe, focused, production-grade Agentforce solutions. <a href="../../contact.html">Contact us</a> to begin a workflow mapping engagement for your team.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div><a href="../../client-stories.html">← Back to Client Stories</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

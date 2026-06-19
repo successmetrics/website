@@ -38,6 +38,10 @@
   to = "/resources.html"
   status = 200
 [[redirects]]
+  from = "/client-stories"
+  to = "/client-stories.html"
+  status = 200
+[[redirects]]
   from = "/about"
   to = "/about.html"
   status = 200

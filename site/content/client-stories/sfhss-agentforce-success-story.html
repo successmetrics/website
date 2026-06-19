@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFHSS Agentforce Success Story | SuccessMetrics</title>
+<meta name="description" content="How SuccessMetrics deployed a multi-subagent Agentforce Research Assistant for San Francisco Health Service System benefits administration.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo"><img src="../../assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../services.html">Services</a></li>
+      <li><a href="../../industries.html">Industries</a></li>
+      <li><a href="../../accelerators.html">Accelerators</a></li>
+      <li><a href="../../resources.html">Resources</a></li>
+      <li><a href="../../client-stories.html" class="active">Client Stories</a></li>
+      <li><a href="../../careers.html">Careers</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../contact.html" class="nav-cta">Talk to an Expert</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<article class="prose">
+  <span class="badge">Public Sector</span>
+  <h1>Transforming Benefits Administration: SFHSS Research Assistant</h1>
+
+  <div class="story-meta">
+    <div><strong>Client:</strong> San Francisco Health Service System (SFHSS)</div>
+    <div><strong>Industry:</strong> Public Sector — Government Healthcare Benefits Administration</div>
+    <div><strong>Solution:</strong> Multi-Subagent Salesforce Agentforce Research Assistant</div>
+    <div><strong>Implementation Partner:</strong> SuccessMetrics</div>
+  </div>
+
+  <blockquote>
+    <p>AI agents built on Agentforce can compress multi-screen service workflows into a single guided conversation — without removing human control from consequential actions.</p>
+  </blockquote>
+
+  <h2>The Challenge</h2>
+  <p>Health Benefits Specialists at SFHSS manage Qualifying Life Events (QLEs) — life changes that trigger updates to members’ health benefits eligibility. Every member interaction follows a repeatable but fragmented pattern:</p>
+  <ul>
+    <li>Pull the member’s case record</li>
+    <li>Answer detailed questions about Medicare, enrollment, and coverage</li>
+    <li>Decide on and execute the next step (such as creating a mailing record for physical documents)</li>
+    <li>Confirm the action and close the loop with a follow-up email</li>
+  </ul>
+  <p>Before Agentforce, each of these tasks lived on a different screen inside Salesforce. Specialists constantly switched between records, knowledge articles, and email, manually re-entering information and losing valuable time during live calls. In a high-volume government benefits environment, these inefficiencies compounded daily while increasing the risk of errors on actions that directly affect people’s healthcare access.</p>
+
+  <h2>The Solution: SFHSS Research Assistant</h2>
+  <p>SuccessMetrics designed and deployed a <strong>persistent, multi-capability Agentforce assistant</strong> that lives inside the Salesforce Lightning Service Console. Staff open a chat panel from any screen, type their request, and complete the entire workflow without leaving their existing workspace.</p>
+  <p>The assistant is built as four focused sub-capabilities, each mapping directly to a real step in the specialist workflow:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Case Information</strong></td>
+        <td>Fetches case details and member info using a case number. Stores everything for the session.</td>
+      </tr>
+      <tr>
+        <td><strong>Benefits FAQ</strong></td>
+        <td>Answers benefit questions covering Medicare, enrollment, and coverage. Context-aware when a case is loaded.</td>
+      </tr>
+      <tr>
+        <td><strong>Mailing Record</strong></td>
+        <td>Guides specialists through document type and member group selection. Creates the Salesforce record on explicit confirmation.</td>
+      </tr>
+      <tr>
+        <td><strong>Send Member Email</strong></td>
+        <td>Drafts a benefit summary email using the FAQ answer and member email from the case record. Sends on explicit YES.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>A Real Session: Five Exchanges, One Screen</h2>
+  <p>Here is a typical SFHSS specialist session from start to finish — previously requiring navigation across at least four separate screens:</p>
+  <ol>
+    <li><strong>Specialist:</strong> “Get me case 00503027”<br><strong>Agent:</strong> Fetches case details and stores member name, email, case reason, and sub-reason for the entire session.</li>
+    <li><strong>Specialist:</strong> “What are the Medicare enrollment options for this member?”<br><strong>Agent:</strong> Searches the SFHSS knowledge base. Because a case is loaded, it filters results by Case Reason: Retiree / Sub Reason: Retiree - Counsel and returns precise, contextual guidance.</li>
+    <li><strong>Specialist:</strong> “Create a mailing record”<br><strong>Agent:</strong> Asks for document type and member group. Specialist selects from the list. Agent displays a clear confirmation summary of exactly what will be created.</li>
+    <li><strong>Specialist:</strong> “YES”<br><strong>Agent:</strong> Creates the mailing record in Salesforce and displays the new Record ID and status.</li>
+    <li><strong>Specialist:</strong> “Send email”<br><strong>Agent:</strong> Drafts a complete email using the FAQ answer and member email from the case record. Specialist reviews the draft, confirms, and the email is sent.</li>
+  </ol>
+  <p>The full workflow — case lookup, benefits research, mailing record creation, and personalized email — now completes in a single guided conversation inside the agent panel.</p>
+
+  <h2>Five Design Principles That Delivered Production-Ready Results</h2>
+  <p>SuccessMetrics followed a disciplined, workflow-first approach that proved essential for government environments:</p>
+  <ol>
+    <li><strong>Start with the workflow, not the technology</strong> — Every sub-capability was mapped to an actual step specialists perform during live member calls. Nothing was added simply because it was technically possible.</li>
+    <li><strong>Session memory removes the biggest source of friction</strong> — Once a case number is provided, the agent stores member name, email, and context for the rest of the conversation. Staff never re-enter data.</li>
+    <li><strong>Validate first. Confirm before every consequential action.</strong> — Case numbers are validated before any action. Mailing records and emails require an explicit “YES.” In public-sector work where errors have real human consequences, this is not overhead — it is the point.</li>
+    <li><strong>Focused subagents outperform monolithic agents</strong> — Each capability is isolated. When benefits content needs updating, only the relevant subagent changes. Easier to test, maintain, and explain to end users.</li>
+    <li><strong>Edge cases are the real product</strong> — Wrong case numbers, missing emails, multi-question sessions, and confirmation flows were all scripted, tested, and handled gracefully before go-live. An agent that handles the unexpected earns lasting trust.</li>
+  </ol>
+
+  <h2>Impact</h2>
+  <p>By collapsing fragmented, multi-screen processes into one trustworthy conversation, SFHSS specialists now move faster while maintaining full human oversight on every action that affects members. The deliberate emphasis on validation, explicit confirmation, and transparent output separates a tool staff actually use from one they quietly abandon after the first mistake.</p>
+  <p>This implementation shows exactly how Agentforce, when built around real workflows and public-sector safeguards, can deliver meaningful efficiency gains without compromising control or accuracy.</p>
+
+  <hr>
+
+  <div class="callout">
+    <p>SuccessMetrics helps government and mission-driven organizations design and deploy focused, production-grade Agentforce solutions. <a href="../../contact.html">Contact us</a> to start a workflow discovery conversation for your team.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div><a href="../../client-stories.html">← Back to Client Stories</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

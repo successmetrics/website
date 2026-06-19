@@ -6,6 +6,7 @@ const MAIN_PAGES = [
   "industries.html",
   "accelerators.html",
   "resources.html",
+  "client-stories.html",
   "careers.html",
   "about.html",
   "contact.html",
@@ -16,6 +17,8 @@ const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
+  "content/client-stories/sfhss-agentforce-success-story.html",
+  "content/client-stories/mohcd-agentforce-success-story.html",
 ];
 
 const NAV_LINKS = [
@@ -23,6 +26,7 @@ const NAV_LINKS = [
   { href: "industries.html" },
   { href: "accelerators.html" },
   { href: "resources.html" },
+  { href: "client-stories.html" },
   { href: "careers.html" },
   { href: "about.html" },
   { href: "contact.html" },
@@ -136,12 +140,34 @@ test.describe("forms", () => {
 
 test.describe("content pages", () => {
   test("blog posts link back to resources", async ({ page }) => {
-    for (const article of CONTENT_PAGES) {
+    const articles = [
+      "content/blog-ai-enabled-delivery.html",
+      "content/blog-midmarket-salesforce.html",
+      "content/blog-lpi-accelerator.html",
+      "content/whitepaper-midmarket-guide.html",
+    ];
+
+    for (const article of articles) {
       await page.goto(`/${article}`);
       const backLink = page.getByRole("link", { name: "← Back to Resources" });
       await expect(backLink).toBeVisible();
       await backLink.click();
       await expect(page).toHaveURL(/resources\.html$/);
+    }
+  });
+
+  test("client stories link back to client stories index", async ({ page }) => {
+    const stories = [
+      "content/client-stories/sfhss-agentforce-success-story.html",
+      "content/client-stories/mohcd-agentforce-success-story.html",
+    ];
+
+    for (const story of stories) {
+      await page.goto(`/${story}`);
+      const backLink = page.getByRole("link", { name: "← Back to Client Stories" });
+      await expect(backLink).toBeVisible();
+      await backLink.click();
+      await expect(page).toHaveURL(/client-stories\.html$/);
     }
   });
 });
