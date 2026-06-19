@@ -101,14 +101,27 @@ git push -u origin main
 
 Netlify → Site settings → Domain management → Add `www.successmetrics.io`, then update the DNS records at your registrar as Netlify instructs. SSL is automatic.
 
-## Forms (Netlify Forms — already wired up)
+## Careers (Notion + email)
 
-Both forms (`job-application` in `site/careers.html`, `contact` in `site/contact.html`) use [Netlify Forms](https://docs.netlify.com/forms/setup/). After the first deploy:
+Open roles and job applications use **Notion** as the backend. Submissions are saved to a Notion database and trigger an email via **Resend**.
 
-1. [Netlify Forms dashboard](https://app.netlify.com/projects/successmetrics/forms) — submissions (including resume uploads, 8 MB max) appear here
-2. **Site settings → Forms → Form notifications** — add email notifications (e.g. careers@successmetrics.io and support@successmetrics.io)
+See [NOTION-CAREERS-SETUP.md](./NOTION-CAREERS-SETUP.md) for database schemas and Netlify environment variables.
 
-Spam protection via honeypot field is included. Note: forms only work on the deployed Netlify site, not when opening files locally.
+```bash
+cp .env.example .env
+npm run dev    # Netlify Dev — site + /api/jobs + /api/job-application
+```
+
+The contact form still uses Netlify Forms.
+
+## Contact form (Netlify Forms)
+
+The contact form in `site/contact.html` uses [Netlify Forms](https://docs.netlify.com/forms/setup/). After the first deploy:
+
+1. [Netlify Forms dashboard](https://app.netlify.com/projects/successmetrics/forms) — contact submissions appear here
+2. **Site settings → Forms → Form notifications** — add email notifications (e.g. support@successmetrics.io)
+
+Spam protection via honeypot field is included. Note: the contact form only works on the deployed Netlify site, not when opening files locally.
 
 ## Editing with AI
 

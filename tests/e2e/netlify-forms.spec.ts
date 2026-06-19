@@ -34,36 +34,34 @@ test.describe("Netlify form submissions (deployed site)", () => {
     expect(body).toMatch(/thank you|SuccessMetrics|Talk to an expert/i);
   });
 
-  test("careers application form submits with resume upload", async ({ page }) => {
-    const runId = Date.now();
-
-    await page.goto("/careers.html#apply");
-
-    await page.locator("#name").fill("Netlify E2E Test");
-    await page.locator("#email").fill(`careers-e2e+${runId}@example.com`);
-    await page.locator("#role").selectOption({ label: "General Application" });
-    await page
-      .locator("#message")
-      .fill(`Playwright Netlify careers test (${runId}). Safe to delete.`);
-
-    await page.locator("#resume").setInputFiles({
-      name: "ci-test-resume.pdf",
-      mimeType: "application/pdf",
-      buffer: Buffer.from(
-        "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n2 0 obj<</Type/Pages/Kids[]/Count 0>>endobj\ntrailer<</Size 3/Root 1 0 R>>\n%%EOF\n",
-      ),
-    });
-
-    const responsePromise = page.waitForResponse(
-      (response) => response.request().method() === "POST",
+  test("careers application API accepts resume upload", async ({ request }) => {
+    test.skip(!siteUrl, "NETLIFY_SITE_URL is not set");
+    test.skip(
+      !process.env.NOTION_TOKEN || !process.env.NOTION_APPLICATIONS_DATABASE_ID,
+      "Notion careers backend is not configured in CI",
     );
 
-    await page.locator('form[name="job-application"] button[type="submit"]').click();
-    const response = await responsePromise;
+    const runId = Date.now();
+
+    const response = await request.post(`${siteUrl}/api/job-application`, {
+      multipart: {
+        name: "Netlify E2E Test",
+        email: `careers-e2e+${runId}@example.com`,
+        phone: "+1 555 010 0199",
+        position: "General Application",
+        message: `Playwright careers API test (${runId}). Safe to delete.`,
+        resume: {
+          name: "ci-test-resume.pdf",
+          mimeType: "application/pdf",
+          buffer: Buffer.from(
+            "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n2 0 obj<</Type/Pages/Kids[]/Count 0>>endobj\ntrailer<</Size 3/Root 1 0 R>>\n%%EOF\n",
+          ),
+        },
+      },
+    });
 
     expect(response.status()).toBeLessThan(400);
-
-    const body = await page.content();
-    expect(body).toMatch(/thank you|SuccessMetrics|careers|application/i);
+    const payload = await response.json();
+    expect(payload.ok).toBe(true);
   });
 });

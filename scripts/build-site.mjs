@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from "node:fs";
 import { join, extname } from "node:path";
 
 const ROOT = process.cwd();
@@ -78,3 +78,10 @@ for (const page of pages) {
 }
 
 console.log(`Built navigation for ${pages.length} pages (${updated} updated).`);
+
+const fallbackSource = join(ROOT, "data", "careers-fallback.json");
+const fallbackTargetDir = join(SITE_DIR, "data");
+const fallbackTarget = join(fallbackTargetDir, "careers-fallback.json");
+mkdirSync(fallbackTargetDir, { recursive: true });
+copyFileSync(fallbackSource, fallbackTarget);
+console.log("Copied careers fallback data to site/data/careers-fallback.json");

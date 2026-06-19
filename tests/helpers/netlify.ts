@@ -104,7 +104,7 @@ export async function assertNetlifySiteReady(siteUrl: string): Promise<void> {
     );
   }
 
-  for (const { page, name } of Object.values(NETLIFY_FORMS)) {
+  for (const { page, name } of [NETLIFY_FORMS.contact]) {
     const response = await fetch(`${siteUrl}/${page}`);
     if (!response.ok) {
       throw new Error(

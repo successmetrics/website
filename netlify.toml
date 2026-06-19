@@ -3,6 +3,21 @@
   command = "npm run build"
   publish = "site"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["data/careers-fallback.json"]
+
+# Careers + Notion API
+[[redirects]]
+  from = "/api/jobs"
+  to = "/.netlify/functions/jobs"
+  status = 200
+[[redirects]]
+  from = "/api/job-application"
+  to = "/.netlify/functions/job-application"
+  status = 200
+
 # Security headers
 [[headers]]
   for = "/*"

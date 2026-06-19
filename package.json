@@ -9,10 +9,17 @@
     "pretest": "npm run build",
     "test": "npm run test:static && npm run test:e2e",
     "test:static": "vitest run",
+    "test:notion": "vitest run --config vitest.notion.config.ts && playwright test --config playwright.notion.config.ts",
+    "verify:notion": "node scripts/verify-notion.mjs",
     "test:netlify": "vitest run --config vitest.netlify.config.ts",
     "test:netlify:e2e": "playwright test tests/e2e/netlify-forms.spec.ts",
     "test:e2e": "playwright test",
-    "preview": "python3 -m http.server 8080 --directory site"
+    "preview": "python3 -m http.server 8080 --directory site",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "resend": "^4.8.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.1",

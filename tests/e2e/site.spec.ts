@@ -60,13 +60,13 @@ test.describe("page smoke tests", () => {
     await expect(page.locator(".client-marquee-section")).toBeVisible();
     await expect(page.locator("#client-marquee-title")).toHaveText("Trusted By");
     await expect(page.locator(".client-marquee")).toBeVisible();
-    await expect(page.locator('.client-logo img[alt="RLI"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Cal OES"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Alameda Municipal Power"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Roller Software"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Caltrans"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="RPM"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="LeafLink"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="RLI"]')).toHaveCount(0);
   });
 
   test("homepage shows partner logos", async ({ page }) => {
@@ -147,13 +147,14 @@ test.describe("forms", () => {
   test("careers application form renders and Apply Now pre-selects role", async ({ page }) => {
     await page.goto("/careers.html");
 
-    await page.getByRole("link", { name: "Apply Now" }).first().click();
+    await expect(page.locator("#job-list .job-row")).toHaveCount(4);
+    await page.getByRole("button", { name: "Apply Now" }).first().click();
     await expect(page.locator("#apply")).toBeInViewport();
 
     const roleSelect = page.locator("#role");
     await expect(roleSelect).toHaveValue("Senior Salesforce Developer (JD-0084)");
 
-    await expect(page.locator('form[name="job-application"]')).toBeVisible();
+    await expect(page.locator("#job-application-form")).toBeVisible();
     await expect(page.locator("#resume")).toBeVisible();
   });
 });

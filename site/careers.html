@@ -57,36 +57,8 @@
       <h2 class="title">Current openings</h2>
     </div>
 
-    <div class="job-row">
-      <div class="info">
-        <h3>Senior Salesforce Developer</h3>
-        <div class="meta"><span>JD-0084</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Senior Salesforce Developer (JD-0084)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Accessibility Specialist</h3>
-        <div class="meta"><span>JD-0083</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Accessibility Specialist (JD-0083)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Salesforce Architect</h3>
-        <div class="meta"><span>JD-0082</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Architect (JD-0082)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Salesforce Developer</h3>
-        <div class="meta"><span>JD-0081</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Developer (JD-0081)')">Apply Now</a>
+    <div id="job-list" data-state="loading" aria-live="polite">
+      <p class="jobs-status">Loading current openings…</p>
     </div>
 
     <p style="color: var(--text-faint); font-size: 0.9rem; margin-top: 18px;">Don't see a fit? Send a general application below — we're always looking for exceptional Salesforce talent.</p>
@@ -101,10 +73,9 @@
       <p>We review every application personally and respond within 5 business days.</p>
     </div>
 
-    <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab).
-         Set up email notifications there: Site settings -> Forms -> Form notifications. -->
-    <form class="form-card" name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
-      <input type="hidden" name="form-name" value="job-application">
+    <!-- Applications are saved to Notion and emailed to the careers inbox via Netlify Functions. -->
+    <div id="form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+    <form class="form-card" id="job-application-form" name="job-application" method="POST" enctype="multipart/form-data" novalidate>
       <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-grid">
         <div class="field">
@@ -122,12 +93,7 @@
         <div class="field">
           <label for="role">Position *</label>
           <select id="role" name="position" required>
-            <option value="">Select a role…</option>
-            <option>Senior Salesforce Developer (JD-0084)</option>
-            <option>Accessibility Specialist (JD-0083)</option>
-            <option>Salesforce Architect (JD-0082)</option>
-            <option>Salesforce Developer (JD-0081)</option>
-            <option>General Application</option>
+            <option value="">Loading roles…</option>
           </select>
         </div>
         <div class="field full">
@@ -191,14 +157,6 @@
   </div>
 </footer>
 
-<script>
-function selectRole(role) {
-  var sel = document.getElementById('role');
-  for (var i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].text === role) { sel.selectedIndex = i; break; }
-  }
-}
-</script>
-
+<script src="assets/js/careers.js" defer></script>
 </body>
 </html>

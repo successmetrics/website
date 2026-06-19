@@ -39,23 +39,6 @@ describe.skipIf(!siteUrl)("Netlify live form submissions", () => {
     ).toBe(true);
   });
 
-  it("accepts a careers application POST with resume upload", async () => {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      body: buildJobApplicationFormData(runId),
-      redirect: "manual",
-    });
-
-    const body = await response.text();
-
-    expect(
-      isNetlifySuccessResponse(response.status, body),
-      response.status === 404
-        ? netlifyFormNotRegisteredHelp(siteUrl!)
-        : `Careers form failed (${response.status}): ${body.slice(0, 300)}`,
-    ).toBe(true);
-  });
-
   it("silently discards honeypot spam without a client error", async () => {
     const payload = buildContactPayload(`${runId}-spam`);
     payload.set("bot-field", "definitely-a-bot");

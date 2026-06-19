@@ -191,6 +191,31 @@ a:hover { text-decoration: none; }
   transition: opacity 0.2s;
 }
 .client-logo:hover img { opacity: 1; }
+.client-logo--caloes img,
+.client-logo--alameda img,
+.client-logo--caltrans img {
+  height: 24px;
+  max-width: 160px;
+  opacity: 0.9;
+  mix-blend-mode: lighten;
+}
+.client-logo--alameda img { max-width: 200px; }
+.client-logo--roller img {
+  height: 26px;
+  max-width: 150px;
+}
+.client-logo--leaflink img {
+  height: 20px;
+  max-width: 140px;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+.client-logo--rpm img {
+  height: 22px;
+  max-width: 80px;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
 @keyframes client-marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-25%); }
@@ -325,12 +350,16 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
   object-fit: contain;
 }
 .partner-logo--salesforce img {
-  max-width: 280px;
-  max-height: 68px;
+  max-width: 340px;
+  max-height: 96px;
+}
+.partner-logo--xtech img {
+  max-width: 300px;
+  max-height: 80px;
 }
 .partner-logo--odaseva img {
-  max-width: 180px;
-  max-height: 40px;
+  max-width: 200px;
+  max-height: 48px;
 }
 
 /* ============ FOOTER ============ */
@@ -451,6 +480,16 @@ footer {
 .job-row .info h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 4px; }
 .job-row .info .meta { font-size: 0.86rem; color: var(--text-faint); display: flex; gap: 14px; flex-wrap: wrap; }
 .job-row .meta span::before { content: ''; }
+.jobs-status { color: var(--text-dim); font-size: 0.95rem; padding: 12px 0; }
+.form-status {
+  margin-bottom: 18px; padding: 14px 16px; border-radius: 10px; font-size: 0.95rem; line-height: 1.5;
+}
+.form-status--success {
+  background: rgba(56, 217, 192, 0.12); border: 1px solid rgba(56, 217, 192, 0.35); color: var(--text);
+}
+.form-status--error {
+  background: rgba(255, 99, 99, 0.1); border: 1px solid rgba(255, 99, 99, 0.35); color: #ffb4b4;
+}
 
 /* ============ RESOURCE CARDS ============ */
 .res-card { overflow: hidden; padding: 0; }

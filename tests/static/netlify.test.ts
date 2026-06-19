@@ -5,6 +5,11 @@ import { NETLIFY_FORMS, readNetlifyToml } from "../helpers/netlify";
 const netlifyToml = readNetlifyToml();
 
 describe("netlify.toml", () => {
+  it.skipIf(netlifyToml === null)("exposes careers API routes", () => {
+    expect(netlifyToml).toContain('from = "/api/jobs"');
+    expect(netlifyToml).toContain('from = "/api/job-application"');
+  });
+
   it.skipIf(netlifyToml === null)("runs the site build before publish", () => {
     expect(netlifyToml).toMatch(/command\s*=\s*"npm run build"/);
   });
@@ -26,38 +31,36 @@ describe("netlify.toml", () => {
 });
 
 describe("Netlify form markup", () => {
-  it.each([
-    ["contact", "contact.html", NETLIFY_FORMS.contact.name, false],
-    ["job application", "careers.html", NETLIFY_FORMS.jobApplication.name, true],
-  ] as const)(
-    "%s form meets Netlify requirements",
-    (_label, page, formName, expectsMultipart) => {
-      const $ = loadPage(page);
-      const form = $(`form[name="${formName}"]`);
+  it("contact form meets Netlify requirements", () => {
+    const $ = loadPage("contact.html");
+    const form = $('form[name="contact"]');
 
-      expect(form.length).toBe(1);
-      expect(form.attr("method")?.toUpperCase()).toBe("POST");
-      expect(form.attr("data-netlify")).toBe("true");
-      expect(form.attr("netlify-honeypot")).toBe("bot-field");
-      expect(form.find('input[name="form-name"]').attr("value")).toBe(formName);
-      expect(form.find('input[name="bot-field"]').length).toBe(1);
+    expect(form.length).toBe(1);
+    expect(form.attr("method")?.toUpperCase()).toBe("POST");
+    expect(form.attr("data-netlify")).toBe("true");
+    expect(form.attr("netlify-honeypot")).toBe("bot-field");
+    expect(form.find('input[name="form-name"]').attr("value")).toBe("contact");
+    expect(form.find('input[name="bot-field"]').length).toBe(1);
+    expect(form.attr("enctype")).toBeUndefined();
+  });
 
-      if (expectsMultipart) {
-        expect(form.attr("enctype")).toBe("multipart/form-data");
-      } else {
-        expect(form.attr("enctype")).toBeUndefined();
-      }
-    },
-  );
+  it("careers application form uses the API handler instead of Netlify Forms", () => {
+    const $ = loadPage("careers.html");
+    const form = $("#job-application-form");
 
-  it("registers exactly two Netlify forms across the site", () => {
+    expect(form.length).toBe(1);
+    expect(form.attr("data-netlify")).toBeUndefined();
+    expect(form.attr("enctype")).toBe("multipart/form-data");
+    expect(form.find('input[name="bot-field"]').length).toBe(1);
+  });
+
+  it("registers the contact Netlify form across the site", () => {
     const contact = loadPage("contact.html")('form[data-netlify="true"]');
     const careers = loadPage("careers.html")('form[data-netlify="true"]');
 
     expect(contact.length).toBe(1);
-    expect(careers.length).toBe(1);
+    expect(careers.length).toBe(0);
     expect(contact.attr("name")).toBe("contact");
-    expect(careers.attr("name")).toBe("job-application");
   });
 
   it("contact form exposes all expected submission fields", () => {
@@ -69,7 +72,7 @@ describe("Netlify form markup", () => {
   });
 
   it("careers form exposes all expected submission fields including resume upload", () => {
-    const form = loadPage("careers.html")('form[name="job-application"]');
+    const form = loadPage("careers.html")("#job-application-form");
 
     for (const field of NETLIFY_FORMS.jobApplication.fields) {
       expect(form.find(`[name="${field}"]`).length).toBeGreaterThan(0);
