@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40" role="img" aria-label="Roller Software">
+  <circle cx="16" cy="20" r="10" fill="#ff6b4a"/>
+  <circle cx="28" cy="20" r="10" fill="#ffb347" opacity="0.85"/>
+  <text x="46" y="27" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#e8edf5" letter-spacing="-0.01em">ROLLER</text>
+</svg>

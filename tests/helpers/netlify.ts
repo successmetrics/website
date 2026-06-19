@@ -8,7 +8,7 @@ export const NETLIFY_FORMS = {
   contact: {
     page: "contact.html",
     name: "contact",
-    fields: ["name", "email", "company", "interest", "message"] as const,
+    fields: ["name", "email", "phone", "company", "interest", "message"] as const,
   },
   jobApplication: {
     page: "careers.html",
@@ -39,6 +39,7 @@ export function buildContactPayload(runId: string): URLSearchParams {
     "form-name": NETLIFY_FORMS.contact.name,
     name: "Netlify CI Test",
     email: `contact-test+${runId}@example.com`,
+    phone: "+1 555 010 0199",
     company: "SuccessMetrics QA",
     interest: "Other",
     message: `Automated Netlify contact form test (${runId}). Safe to delete.`,

@@ -14,6 +14,7 @@ test.describe("Netlify form submissions (deployed site)", () => {
 
     await page.locator("#name").fill("Netlify E2E Test");
     await page.locator("#email").fill(`contact-e2e+${runId}@example.com`);
+    await page.locator("#phone").fill("+1 555 010 0199");
     await page.locator("#company").fill("SuccessMetrics QA");
     await page.locator("#interest").selectOption({ label: "Other" });
     await page

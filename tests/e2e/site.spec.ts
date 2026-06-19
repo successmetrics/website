@@ -49,6 +49,34 @@ test.describe("page smoke tests", () => {
     await expect(page.getByRole("link", { name: "Explore Our Accelerators" })).toBeVisible();
     await expect(page.locator(".stats-bar .stat")).toHaveCount(4);
   });
+
+  test("homepage shows client logo marquee", async ({ page }) => {
+    await page.goto("/index.html");
+
+    await expect(page.locator(".client-marquee-section")).toBeVisible();
+    await expect(page.locator("#client-marquee-title")).toHaveText("Trusted By");
+    await expect(page.locator(".client-marquee")).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="RLI"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Cal OES"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Alameda Municipal Power"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Roller Software"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Caltrans"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="RPM"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="LeafLink"]')).toBeVisible();
+  });
+
+  test("homepage shows partner logos", async ({ page }) => {
+    await page.goto("/index.html");
+
+    await expect(page.locator(".partners-section")).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="Salesforce"]')).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="Carahsoft"]')).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="dotSolved"]')).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="5M"]')).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="Odaseva"]')).toBeVisible();
+    await expect(page.locator('.partner-logo img[alt="Xtech.com"]')).toBeVisible();
+    await expect(page.locator(".partner-logo")).toHaveCount(6);
+  });
 });
 
 test.describe("navigation", () => {
@@ -82,6 +110,7 @@ test.describe("forms", () => {
     await expect(page.locator('form[name="contact"]')).toBeVisible();
     await expect(page.locator("#name")).toBeVisible();
     await expect(page.locator("#email")).toBeVisible();
+    await expect(page.locator("#phone")).toBeVisible();
     await expect(page.locator("#company")).toBeVisible();
     await expect(page.locator("#interest")).toBeVisible();
     await expect(page.locator("#message")).toBeVisible();

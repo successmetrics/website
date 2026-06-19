@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" role="img" aria-label="Caltrans">
+  <path d="M8 6 L32 6 L36 34 L4 34 Z" fill="none" stroke="#4f7cff" stroke-width="2"/>
+  <text x="10" y="18" font-family="Inter, Arial, sans-serif" font-size="7" font-weight="700" fill="#e8edf5" letter-spacing="0.05em">STATE OF</text>
+  <text x="10" y="28" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="800" fill="#e8edf5" letter-spacing="0.04em">CALIFORNIA</text>
+  <text x="44" y="27" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#e8edf5" letter-spacing="-0.01em">Caltrans</text>
+</svg>
