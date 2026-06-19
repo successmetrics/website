@@ -2,6 +2,11 @@
   "name": "successmetrics-website",
   "private": true,
   "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "prepreview": "npm run build",
+    "pretest:static": "npm run build",
+    "pretest:e2e": "npm run build",
+    "pretest": "npm run build",
     "test": "npm run test:static && npm run test:e2e",
     "test:static": "vitest run",
     "test:netlify": "vitest run --config vitest.netlify.config.ts",

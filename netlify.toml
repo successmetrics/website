@@ -1,5 +1,6 @@
 # Netlify configuration — publish the site/ directory (no build step)
 [build]
+  command = "npm run build"
   publish = "site"
 
 # Security headers

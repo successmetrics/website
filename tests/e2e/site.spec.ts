@@ -22,14 +22,14 @@ const CONTENT_PAGES = [
 ];
 
 const NAV_LINKS = [
-  { href: "services.html" },
-  { href: "industries.html" },
-  { href: "accelerators.html" },
-  { href: "resources.html" },
-  { href: "client-stories.html" },
-  { href: "careers.html" },
-  { href: "about.html" },
-  { href: "contact.html" },
+  { href: "/services.html" },
+  { href: "/industries.html" },
+  { href: "/accelerators.html" },
+  { href: "/resources.html" },
+  { href: "/client-stories.html" },
+  { href: "/careers.html" },
+  { href: "/about.html" },
+  { href: "/contact.html" },
 ];
 
 const ALL_PAGES = [...MAIN_PAGES, ...CONTENT_PAGES];
@@ -89,9 +89,22 @@ test.describe("navigation", () => {
 
     for (const { href } of NAV_LINKS) {
       await page.locator(`.nav-links a[href="${href}"]`).click();
-      await expect(page).toHaveURL(new RegExp(`${href.replace(".", "\\.")}$`));
+      await expect(page).toHaveURL(new RegExp(`${href.replace(/\//g, "\\/").replace(".", "\\.")}$`));
       await expect(page.locator("h1")).toBeVisible();
       await page.goto("/index.html");
+    }
+  });
+
+  test("tablet nav menu shows Client Stories on resources and careers", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+
+    for (const pagePath of ["resources.html", "careers.html"]) {
+      await page.goto(`/${pagePath}`);
+      await page.getByRole("button", { name: "Menu" }).click();
+      const clientStories = page.locator(".nav-links").getByRole("link", { name: "Client Stories" });
+      await expect(clientStories).toBeVisible();
+      await clientStories.click();
+      await expect(page).toHaveURL(/client-stories\.html$/);
     }
   });
 
@@ -105,6 +118,13 @@ test.describe("navigation", () => {
     await page.getByRole("button", { name: "Menu" }).click();
     await expect(navLinks).toHaveClass(/open/);
   });
+
+  for (const pagePath of ALL_PAGES) {
+    test(`${pagePath} shows Client Stories in the primary nav`, async ({ page }) => {
+      await page.goto(`/${pagePath}`);
+      await expect(page.locator(".nav-links").getByRole("link", { name: "Client Stories" })).toBeVisible();
+    });
+  }
 });
 
 test.describe("forms", () => {

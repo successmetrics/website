@@ -1,6 +1,6 @@
 # SuccessMetrics Website
 
-Static marketing site for SuccessMetrics Corp (successmetrics.io). Plain HTML/CSS — no build step.
+Static marketing site for SuccessMetrics Corp (successmetrics.io). Plain HTML/CSS with a small nav build step.
 
 ## Repository layout
 
@@ -15,11 +15,13 @@ Static marketing site for SuccessMetrics Corp (successmetrics.io). Plain HTML/CS
 │   └── content/             # Blog posts & white papers
 │       ├── blog-*.html
 │       └── whitepaper-*.html
+├── templates/nav.html       # Shared primary navigation (single source of truth)
+├── scripts/build-site.mjs   # Injects nav into every page before preview/deploy
 ├── docs/                    # Internal guides (not deployed)
 ├── tests/                   # Static + Playwright PR checks
 ├── .github/workflows/       # CI
-├── netlify.toml             # Publish dir, headers, clean URLs, legacy redirects
-└── package.json             # Test tooling only
+├── netlify.toml             # Build command, publish dir, headers, clean URLs
+└── package.json             # Build + test tooling
 ```
 
 | Path | Purpose |
@@ -77,15 +79,17 @@ NETLIFY_SITE_URL=https://your-site.netlify.app npm run test:netlify:e2e
 ## Local preview
 
 ```bash
-python3 -m http.server 8080 --directory site
-# → http://localhost:8080
+npm run preview
+# runs npm run build, then serves site/ at http://localhost:8080
 ```
+
+To change the primary nav, edit `templates/nav.html`, then run `npm run build`. Each page keeps a `<!-- @nav active="…" -->` marker so the build can set the active tab.
 
 ## Deploy (GitHub + Netlify)
 
 1. Create a repo at github.com/new (e.g. `successmetrics-website`)
 2. Push this folder (see commands below)
-3. At app.netlify.com: **Add new site → Import an existing project → GitHub** → pick the repo → Deploy (no build settings needed; `netlify.toml` sets `publish = "site"`)
+3. At app.netlify.com: **Add new site → Import an existing project → GitHub** → pick the repo → Deploy (`netlify.toml` sets `command = "npm run build"` and `publish = "site"`)
 4. Every future `git push` auto-deploys in ~30 seconds
 
 ```bash
@@ -110,5 +114,5 @@ Spam protection via honeypot field is included. Note: forms only work on the dep
 
 This site is designed to be edited conversationally (Claude, Cursor, etc.):
 - All design tokens (colors, fonts, spacing) are CSS variables at the top of `site/assets/css/styles.css`
-- Each page is self-contained; nav/footer are repeated per page — ask the AI to "update the nav on all pages" when changing menus
+- Primary navigation lives in `templates/nav.html` — run `npm run build` after editing
 - New blog post = copy an existing file in `site/content/`, replace content, add a card in `site/resources.html`

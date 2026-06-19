@@ -22,14 +22,14 @@ export const CONTENT_PAGES = [
 ] as const;
 
 export const NAV_LINKS = [
-  { label: "Services", href: "services.html" },
-  { label: "Industries", href: "industries.html" },
-  { label: "Accelerators", href: "accelerators.html" },
-  { label: "Resources", href: "resources.html" },
-  { label: "Client Stories", href: "client-stories.html" },
-  { label: "Careers", href: "careers.html" },
-  { label: "About", href: "about.html" },
-  { label: "Talk to an Expert", href: "contact.html" },
+  { label: "Services", href: "/services.html" },
+  { label: "Industries", href: "/industries.html" },
+  { label: "Accelerators", href: "/accelerators.html" },
+  { label: "Resources", href: "/resources.html" },
+  { label: "Client Stories", href: "/client-stories.html" },
+  { label: "Careers", href: "/careers.html" },
+  { label: "About", href: "/about.html" },
+  { label: "Talk to an Expert", href: "/contact.html" },
 ] as const;
 
 export const NETLIFY_CLEAN_URLS: Record<string, string> = {

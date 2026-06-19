@@ -5,6 +5,10 @@ import { NETLIFY_FORMS, readNetlifyToml } from "../helpers/netlify";
 const netlifyToml = readNetlifyToml();
 
 describe("netlify.toml", () => {
+  it.skipIf(netlifyToml === null)("runs the site build before publish", () => {
+    expect(netlifyToml).toMatch(/command\s*=\s*"npm run build"/);
+  });
+
   it.skipIf(netlifyToml === null)("sets site/ as the publish directory", () => {
     expect(netlifyToml).toMatch(/publish\s*=\s*"site"/);
   });
