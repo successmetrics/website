@@ -385,6 +385,28 @@ footer {
   display: grid; gap: 6px;
 }
 .prose .story-meta strong { color: var(--text); font-weight: 600; }
+.prose-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.prose-header-copy { flex: 1; min-width: 0; }
+.prose-header .badge { display: inline-block; margin-bottom: 12px; }
+.prose-header h1 { margin-bottom: 18px; }
+.prose-header .story-meta { margin-bottom: 0; }
+.prose-client-logo {
+  flex-shrink: 0;
+  height: 38px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  object-position: right bottom;
+  opacity: 0.88;
+}
+.prose-client-logo--sfhss { max-width: 200px; height: 40px; }
+.prose-client-logo--mohcd { max-width: 260px; height: 54px; }
 .prose table {
   width: 100%; border-collapse: collapse; margin: 24px 0 28px;
   font-size: 0.95rem;
@@ -436,6 +458,29 @@ footer {
   height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
 }
 .res-card .body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
+.story-card-thumb {
+  gap: 32px;
+  justify-content: center;
+}
+.story-card-icon {
+  font-size: 2.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.story-card .link { margin-top: auto; padding-top: 18px; }
+.story-client-logo {
+  object-fit: contain;
+  opacity: 0.88;
+  flex-shrink: 0;
+}
+.story-client-logo--thumb {
+  height: 35px;
+  width: auto;
+  max-width: 150px;
+  object-position: center;
+}
+.story-client-logo--sfhss.story-client-logo--thumb { max-width: 188px; }
+.story-client-logo--mohcd.story-client-logo--thumb { height: 44px; max-width: 210px; }
 .thumb-1 { background: linear-gradient(135deg, rgba(79,124,255,0.25), rgba(167,139,250,0.2)); }
 .thumb-2 { background: linear-gradient(135deg, rgba(56,217,192,0.22), rgba(79,124,255,0.2)); }
 .thumb-3 { background: linear-gradient(135deg, rgba(167,139,250,0.22), rgba(56,217,192,0.18)); }
@@ -473,4 +518,6 @@ footer {
   .hero { padding: 70px 0 60px; }
   section.block { padding: 60px 0; }
   .cta-banner .inner { padding: 44px 26px; }
+  .prose-header { flex-direction: column; align-items: flex-start; }
+  .prose-client-logo { align-self: flex-end; }
 }
