@@ -3,6 +3,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
-/docs/*
+.env
+
+docs/*
+media/*
 
 .DS_Store

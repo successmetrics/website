@@ -1,6 +1,26 @@
 # Netlify configuration — publish the site/ directory (no build step)
 [build]
+  command = "npm run build"
   publish = "site"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["data/careers-fallback.json"]
+
+# Careers + Notion API
+[[redirects]]
+  from = "/api/jobs"
+  to = "/.netlify/functions/jobs"
+  status = 200
+[[redirects]]
+  from = "/api/job-application"
+  to = "/.netlify/functions/job-application"
+  status = 200
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
 
 # Security headers
 [[headers]]
@@ -38,12 +58,42 @@
   to = "/resources.html"
   status = 200
 [[redirects]]
+  from = "/client-stories"
+  to = "/client-stories.html"
+  status = 200
+[[redirects]]
   from = "/about"
   to = "/about.html"
   status = 200
 [[redirects]]
   from = "/contact"
   to = "/contact.html"
+  status = 200
+
+# Clean URLs for content pages
+[[redirects]]
+  from = "/content/blog-ai-enabled-delivery"
+  to = "/content/blog-ai-enabled-delivery.html"
+  status = 200
+[[redirects]]
+  from = "/content/blog-midmarket-salesforce"
+  to = "/content/blog-midmarket-salesforce.html"
+  status = 200
+[[redirects]]
+  from = "/content/blog-lpi-accelerator"
+  to = "/content/blog-lpi-accelerator.html"
+  status = 200
+[[redirects]]
+  from = "/content/whitepaper-midmarket-guide"
+  to = "/content/whitepaper-midmarket-guide.html"
+  status = 200
+[[redirects]]
+  from = "/content/client-stories/sfhss-agentforce-success-story"
+  to = "/content/client-stories/sfhss-agentforce-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/client-stories/mohcd-agentforce-success-story"
+  to = "/content/client-stories/mohcd-agentforce-success-story.html"
   status = 200
 
 # Legacy paths (pre site/ reorganization)

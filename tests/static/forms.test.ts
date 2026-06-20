@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { loadPage } from "../helpers/site";
+import { NETLIFY_FORMS } from "../helpers/netlify";
 
-describe("Netlify forms", () => {
-  it("contact form is configured for Netlify with required fields", () => {
+describe("form submissions", () => {
+  it("contact form posts to the contact API", () => {
     const $ = loadPage("contact.html");
-    const form = $('form[name="contact"]');
+    const form = $("#contact-form");
 
     expect(form.length).toBe(1);
     expect(form.attr("method")).toBe("POST");
-    expect(form.attr("data-netlify")).toBe("true");
-    expect(form.find('input[name="form-name"]').attr("value")).toBe("contact");
+    expect(form.attr("data-netlify")).toBeUndefined();
     expect(form.find('input[name="bot-field"]').length).toBe(1);
 
     for (const field of ["name", "email", "company", "message"]) {
@@ -17,41 +17,43 @@ describe("Netlify forms", () => {
     }
 
     expect(form.find('select[name="interest"] option').length).toBeGreaterThanOrEqual(5);
+    expect($('script[src="assets/js/contact.js"]').length).toBe(1);
+    expect($("#form-status").length).toBe(1);
   });
 
-  it("careers application form is configured for Netlify with file upload", () => {
+  it("careers application form posts to the careers API with file upload", () => {
     const $ = loadPage("careers.html");
-    const form = $('form[name="job-application"]');
+    const form = $("#job-application-form");
 
     expect(form.length).toBe(1);
     expect(form.attr("method")).toBe("POST");
-    expect(form.attr("data-netlify")).toBe("true");
     expect(form.attr("enctype")).toBe("multipart/form-data");
-    expect(form.find('input[name="form-name"]').attr("value")).toBe("job-application");
+    expect(form.attr("data-netlify")).toBeUndefined();
+    expect(form.find('input[name="bot-field"]').length).toBe(1);
 
     for (const field of ["name", "email", "position", "message"]) {
       expect(form.find(`[name="${field}"][required]`).length).toBe(1);
     }
 
     expect(form.find('input[type="file"][name="resume"][required]').length).toBe(1);
-
-    const roles = form
-      .find('select[name="position"] option')
-      .map((_, el) => $(el).text().trim())
-      .get()
-      .filter(Boolean);
-
-    expect(roles).toContain("Senior Salesforce Developer (JD-0084)");
-    expect(roles).toContain("General Application");
+    expect($('script[src="assets/js/careers.js"]').length).toBe(1);
+    expect($("#job-list").length).toBe(1);
+    expect($("#form-status").length).toBe(1);
   });
 });
 
 describe("careers page", () => {
-  it("lists all four open job IDs", () => {
-    const html = loadPage("careers.html").html() ?? "";
+  it("includes dynamic job board containers and fallback data", () => {
+    const $ = loadPage("careers.html");
 
-    for (const jobId of ["JD-0081", "JD-0082", "JD-0083", "JD-0084"]) {
-      expect(html).toContain(jobId);
-    }
+    expect($("#job-list").length).toBe(1);
+    expect($("#role option").length).toBeGreaterThan(0);
+  });
+});
+
+describe("form API routes", () => {
+  it("maps both forms to Netlify function endpoints", () => {
+    expect(NETLIFY_FORMS.contact.api).toBe("/api/contact");
+    expect(NETLIFY_FORMS.jobApplication.api).toBe("/api/job-application");
   });
 });

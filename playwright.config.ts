@@ -1,10 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4173;
+const PORT = Number(process.env.CAREERS_TEST_PORT || 4173);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({
   testDir: "tests/e2e",
+  testIgnore: [
+    "**/netlify-forms.spec.mjs",
+    "**/careers-form-notion.spec.ts",
+  ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
@@ -21,10 +25,15 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `python3 -m http.server ${PORT} --bind 127.0.0.1 --directory site`,
+    command: "npm run build && node scripts/careers-test-server.mjs",
     url: `${BASE_URL}/index.html`,
     reuseExistingServer: !process.env.CI,
-    stdout: "ignore",
+    timeout: 120_000,
+    stdout: "pipe",
     stderr: "pipe",
+    env: {
+      ...process.env,
+      CAREERS_TEST_PORT: String(PORT),
+    },
   },
 });

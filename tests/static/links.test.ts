@@ -4,9 +4,17 @@ import {
   MAIN_PAGES,
   NAV_LINKS,
   collectInternalLinks,
+  expectedNavHref,
   loadPage,
   pageExists,
 } from "../helpers/site";
+
+describe("shared navigation", () => {
+  it.each(HTML_PAGES)("%s includes a nav build marker", (page) => {
+    const html = loadPage(page).html() ?? "";
+    expect(html).toMatch(/<!-- @nav active="[^"]*" -->/);
+  });
+});
 
 describe("internal links", () => {
   it.each(HTML_PAGES)("%s has no broken internal page links", (page) => {
@@ -21,14 +29,26 @@ describe("internal links", () => {
     expect(broken, `Broken links on ${page}`).toEqual([]);
   });
 
-  it.each(MAIN_PAGES)("%s includes the full primary navigation", (page) => {
+  it.each(HTML_PAGES)("%s includes the full primary navigation", (page) => {
     const $ = loadPage(page);
 
     for (const { label, href } of NAV_LINKS) {
-      const link = $(`.nav-links a[href="${href}"]`);
+      const expectedHref = expectedNavHref(page, href);
+      const link = $(`.nav-links a[href="${expectedHref}"]`);
       expect(link.length, `Missing nav link "${label}" on ${page}`).toBe(1);
       expect(link.text().trim()).toContain(label === "Talk to an Expert" ? "Talk to an Expert" : label);
     }
+  });
+});
+
+describe("client stories navigation", () => {
+  it.each(HTML_PAGES)("%s includes Client Stories in the primary nav", (page) => {
+    const $ = loadPage(page);
+    const href = expectedNavHref(page, "client-stories.html");
+    const link = $(`.nav-links a[href="${href}"]`);
+
+    expect(link.length, `Missing Client Stories nav on ${page}`).toBe(1);
+    expect(link.text().trim()).toContain("Client Stories");
   });
 });
 
@@ -59,6 +79,20 @@ describe("resources index", () => {
       "content/blog-midmarket-salesforce.html",
       "content/blog-lpi-accelerator.html",
       "content/whitepaper-midmarket-guide.html",
+    ];
+
+    for (const href of expected) {
+      expect($(`a[href="${href}"]`).length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("client stories index", () => {
+  it("links to every client story", () => {
+    const $ = loadPage("client-stories.html");
+    const expected = [
+      "content/client-stories/sfhss-agentforce-success-story.html",
+      "content/client-stories/mohcd-agentforce-success-story.html",
     ];
 
     for (const href of expected) {

@@ -1,0 +1,160 @@
+{
+  "siteOrigin": "https://www.successmetrics.io",
+  "defaultOgImage": "/assets/images/og-default.png",
+  "organization": {
+    "name": "SuccessMetrics Corp",
+    "telephone": "+1-510-330-6457",
+    "email": "support@successmetrics.io",
+    "streetAddress": "460 Center Street #6021",
+    "addressLocality": "Moraga",
+    "addressRegion": "CA",
+    "postalCode": "94570",
+    "addressCountry": "US",
+    "linkedin": "https://www.linkedin.com/company/successmetrics-corp"
+  },
+  "sitemap": {
+    "index.html": { "changefreq": "weekly", "priority": "1.0" },
+    "services.html": { "changefreq": "monthly", "priority": "0.9" },
+    "industries.html": { "changefreq": "monthly", "priority": "0.9" },
+    "accelerators.html": { "changefreq": "monthly", "priority": "0.9" },
+    "client-stories.html": { "changefreq": "monthly", "priority": "0.85" },
+    "contact.html": { "changefreq": "monthly", "priority": "0.9" },
+    "resources.html": { "changefreq": "weekly", "priority": "0.75" },
+    "about.html": { "changefreq": "quarterly", "priority": "0.7" },
+    "careers.html": { "changefreq": "weekly", "priority": "0.65" },
+    "content/blog-ai-enabled-delivery.html": { "changefreq": "monthly", "priority": "0.6" },
+    "content/blog-midmarket-salesforce.html": { "changefreq": "monthly", "priority": "0.6" },
+    "content/blog-lpi-accelerator.html": { "changefreq": "monthly", "priority": "0.6" },
+    "content/whitepaper-midmarket-guide.html": { "changefreq": "monthly", "priority": "0.6" },
+    "content/client-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "content/client-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" }
+  },
+  "pages": {
+    "index.html": {
+      "path": "/",
+      "title": "SuccessMetrics | AI-Enabled Salesforce for Mid-Market",
+      "description": "Salesforce implementation for mid-market & public sector. AI-enabled delivery, proven accelerators, Agentforce expertise. Free assessment — Moraga, CA.",
+      "keywords": ["Salesforce implementation mid-market", "AI-enabled Salesforce consulting", "Salesforce SI partner California"],
+      "ogType": "website",
+      "schema": ["Organization", "WebSite"]
+    },
+    "services.html": {
+      "path": "/services",
+      "title": "Salesforce Services | Implementation & Managed Support",
+      "description": "Advisory, roadmap, implementation & managed Salesforce services for mid-market teams. AI-enabled delivery with measurable outcomes.",
+      "keywords": ["Salesforce services", "Salesforce managed services", "Salesforce implementation partner"],
+      "ogType": "website",
+      "schema": ["Service"]
+    },
+    "industries.html": {
+      "path": "/industries",
+      "title": "Salesforce by Industry | Gov, Health, FinServ & SaaS",
+      "description": "Industry-focused Salesforce for government, financial services, healthcare, SaaS & nonprofit. Public sector Agentforce, FSC, Health Cloud expertise.",
+      "keywords": ["Salesforce by industry", "Salesforce public sector solutions", "Financial Services Cloud", "Health Cloud"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "accelerators.html": {
+      "path": "/accelerators",
+      "title": "Salesforce Accelerators | LPI, Org Insights & More",
+      "description": "Proven Salesforce accelerators: LPI (120+ story points), Org Insights, Data Masking, LWC library. Go live faster with less risk.",
+      "keywords": ["Salesforce LPI accelerator", "org health check Salesforce", "Salesforce data masking"],
+      "ogType": "website",
+      "schema": ["Product"]
+    },
+    "client-stories.html": {
+      "path": "/client-stories",
+      "title": "Salesforce Agentforce Client Stories | SuccessMetrics",
+      "description": "See how SFHSS & MOHCD use embedded Salesforce Agentforce assistants to speed benefits & housing workflows — staff in full control.",
+      "keywords": ["Agentforce case study", "embedded Agentforce Service Console", "Salesforce public sector case study"],
+      "ogType": "website",
+      "schema": ["CollectionPage"]
+    },
+    "resources.html": {
+      "path": "/resources",
+      "title": "Salesforce Resources | Blog, Guides & White Papers",
+      "description": "Mid-market Salesforce strategy, AI-enabled delivery insights, LPI accelerator guides & implementation playbooks from SuccessMetrics.",
+      "keywords": ["Salesforce resources", "mid-market Salesforce blog", "Salesforce implementation guide"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "about.html": {
+      "path": "/about",
+      "title": "About SuccessMetrics | Salesforce Consulting Partner",
+      "description": "SuccessMetrics delivers AI-enabled Salesforce consulting for mid-market & public sector. 30+ years leadership experience. California HQ, India delivery center.",
+      "keywords": ["Salesforce consulting partner", "SuccessMetrics Salesforce", "AI-enabled Salesforce delivery"],
+      "ogType": "website",
+      "schema": ["Organization"]
+    },
+    "contact.html": {
+      "path": "/contact",
+      "title": "Contact SuccessMetrics | Free Salesforce Assessment",
+      "description": "Book a free Salesforce assessment, LPI or Agentforce demo, or request a quote. SuccessMetrics responds within one business day.",
+      "keywords": ["Salesforce consultation free", "Salesforce implementation quote", "Agentforce demo"],
+      "ogType": "website",
+      "schema": ["ContactPage"]
+    },
+    "careers.html": {
+      "path": "/careers",
+      "title": "Careers at SuccessMetrics | Salesforce Jobs",
+      "description": "Join an AI-forward Salesforce consultancy hiring developers, architects & accessibility specialists. Pondicherry & remote-friendly roles.",
+      "keywords": ["Salesforce developer jobs", "Salesforce architect careers", "Pondicherry Salesforce jobs"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "content/blog-ai-enabled-delivery.html": {
+      "path": "/content/blog-ai-enabled-delivery",
+      "title": "AI-Enabled Salesforce Development | SuccessMetrics",
+      "description": "How SuccessMetrics uses AI for requirements, code generation, automated testing & documentation — faster delivery without sacrificing quality.",
+      "keywords": ["AI-enabled Salesforce development", "AI Salesforce delivery", "Salesforce AI coding"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2025-11-01"
+    },
+    "content/blog-midmarket-salesforce.html": {
+      "path": "/content/blog-midmarket-salesforce",
+      "title": "Mid-Market Salesforce Mistakes & Fixes | SuccessMetrics",
+      "description": "Five ways mid-market Salesforce projects fail — and the playbook to prevent scope creep, adoption gaps & budget overruns.",
+      "keywords": ["mid-market Salesforce mistakes", "Salesforce implementation failures", "Salesforce scope creep"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2025-10-15"
+    },
+    "content/blog-lpi-accelerator.html": {
+      "path": "/content/blog-lpi-accelerator",
+      "title": "Salesforce LPI Accelerator | Launch in Months, Not Years",
+      "description": "Cut public-sector licensing & permitting timelines with SuccessMetrics LPI Accelerator — 120+ prebuilt story points on Salesforce.",
+      "keywords": ["Salesforce LPI accelerator", "licensing permitting Salesforce", "Salesforce Public Sector Solutions"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2025-09-20"
+    },
+    "content/whitepaper-midmarket-guide.html": {
+      "path": "/content/whitepaper-midmarket-guide",
+      "title": "Mid-Market Salesforce Implementation Guide | White Paper",
+      "description": "Free framework for mid-market teams: budgeting, phasing, accelerators & AI-enabled delivery for successful Salesforce rollout.",
+      "keywords": ["mid-market Salesforce implementation guide", "Salesforce white paper", "Salesforce rollout framework"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2025-08-01"
+    },
+    "content/client-stories/sfhss-agentforce-success-story.html": {
+      "path": "/content/client-stories/sfhss-agentforce-success-story",
+      "title": "SFHSS Agentforce Case Study | Benefits Administration",
+      "description": "How SFHSS embedded Agentforce in Salesforce Service Console to speed benefits service, cut context switching & improve member support.",
+      "keywords": ["SFHSS Agentforce", "Salesforce benefits administration AI", "embedded Agentforce Service Console"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-03-01"
+    },
+    "content/client-stories/mohcd-agentforce-success-story.html": {
+      "path": "/content/client-stories/mohcd-agentforce-success-story",
+      "title": "MOHCD Agentforce Case Study | Affordable Housing",
+      "description": "MOHCD staff use embedded Salesforce Agentforce for housing program guidance, application updates & applicant email — one workspace, full control.",
+      "keywords": ["MOHCD Agentforce", "Salesforce affordable housing", "Agentforce public sector case study"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-04-01"
+    }
+  }
+}

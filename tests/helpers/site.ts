@@ -59,6 +59,12 @@ export function resolvePagePath(fromPage: string, href: string): string | null {
   const withoutHash = href.split("#")[0];
   if (!withoutHash) return null;
 
+  if (withoutHash.startsWith("/")) {
+    const rootRelative = withoutHash.replace(/^\//, "");
+    if (!rootRelative || rootRelative.includes("..")) return null;
+    return rootRelative;
+  }
+
   const resolved = normalize(join(dirname(fromPage), withoutHash));
   if (resolved.startsWith("..")) return null;
 
@@ -83,4 +89,8 @@ export function pageExists(fromPage: string, href: string): boolean {
   const target = resolvePagePath(fromPage, href);
   if (!target) return false;
   return existsSync(join(ROOT, target));
+}
+
+export function expectedNavHref(_fromPage: string, toPage: string): string {
+  return toPage.startsWith("/") ? toPage : `/${toPage}`;
 }

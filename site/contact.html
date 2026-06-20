@@ -3,30 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact Us | SuccessMetrics</title>
-<meta name="description" content="Talk to a Salesforce expert at SuccessMetrics. Book a free assessment, request an accelerator demo, or get a quote.">
+<!-- seo:start -->
+<title>Contact SuccessMetrics | Free Salesforce Assessment</title>
+<meta name="description" content="Book a free Salesforce assessment, LPI or Agentforce demo, or request a quote. SuccessMetrics responds within one business day.">
+<link rel="canonical" href="https://www.successmetrics.io/contact">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="Contact SuccessMetrics | Free Salesforce Assessment">
+<meta property="og:description" content="Book a free Salesforce assessment, LPI or Agentforce demo, or request a quote. SuccessMetrics responds within one business day.">
+<meta property="og:url" content="https://www.successmetrics.io/contact">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact SuccessMetrics | Free Salesforce Assessment">
+<meta name="twitter:description" content="Book a free Salesforce assessment, LPI or Agentforce demo, or request a quote. SuccessMetrics responds within one business day.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"Contact SuccessMetrics | Free Salesforce Assessment","description":"Book a free Salesforce assessment, LPI or Agentforce demo, or request a quote. SuccessMetrics responds within one business day.","url":"https://www.successmetrics.io/contact"}</script>
+
+<!-- seo:end -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
+<!-- @nav active="" -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="industries.html">Industries</a></li>
-      <li><a href="accelerators.html">Accelerators</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta active">Talk to an Expert</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/client-stories.html">Client Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Expert</a></li>
     </ul>
     <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
 <header class="page-hero">
   <div class="container">
     <div class="kicker">Contact</div>
@@ -38,9 +55,9 @@
 <section class="block">
   <div class="container">
     <div class="two-col" style="align-items: start;">
-      <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab). -->
-      <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
+      <!-- Submissions are emailed to the support inbox via Netlify Functions + Resend. -->
+      <div id="form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+      <form class="form-card" id="contact-form" name="contact" method="POST" novalidate>
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
         <div class="form-grid">
           <div class="field">
@@ -52,10 +69,14 @@
             <input type="email" id="email" name="email" required>
           </div>
           <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 555-5555">
+          </div>
+          <div class="field">
             <label for="company">Company / Agency *</label>
             <input type="text" id="company" name="company" required>
           </div>
-          <div class="field">
+          <div class="field full">
             <label for="interest">I'm interested in…</label>
             <select id="interest" name="interest">
               <option>Free Salesforce Assessment</option>
@@ -109,7 +130,8 @@
         <h5>Company</h5>
         <ul>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="client-stories.html">Client Stories</a></li>
+      <li><a href="careers.html">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -137,5 +159,6 @@
   </div>
 </footer>
 
+<script src="assets/js/contact.js" defer></script>
 </body>
 </html>

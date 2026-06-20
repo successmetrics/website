@@ -3,30 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Careers | Join SuccessMetrics</title>
-<meta name="description" content="Join SuccessMetrics — a fast-growing, AI-forward Salesforce consultancy. Open roles for Salesforce Developers, Architects, and Accessibility Specialists.">
+<!-- seo:start -->
+<title>Careers at SuccessMetrics | Salesforce Jobs</title>
+<meta name="description" content="Join an AI-forward Salesforce consultancy hiring developers, architects &amp; accessibility specialists. Pondicherry &amp; remote-friendly roles.">
+<link rel="canonical" href="https://www.successmetrics.io/careers">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="Careers at SuccessMetrics | Salesforce Jobs">
+<meta property="og:description" content="Join an AI-forward Salesforce consultancy hiring developers, architects &amp; accessibility specialists. Pondicherry &amp; remote-friendly roles.">
+<meta property="og:url" content="https://www.successmetrics.io/careers">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Careers at SuccessMetrics | Salesforce Jobs">
+<meta name="twitter:description" content="Join an AI-forward Salesforce consultancy hiring developers, architects &amp; accessibility specialists. Pondicherry &amp; remote-friendly roles.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Careers at SuccessMetrics | Salesforce Jobs","description":"Join an AI-forward Salesforce consultancy hiring developers, architects & accessibility specialists. Pondicherry & remote-friendly roles.","url":"https://www.successmetrics.io/careers"}</script>
+
+<!-- seo:end -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
+<!-- @nav active="careers" -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="industries.html">Industries</a></li>
-      <li><a href="accelerators.html">Accelerators</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="careers.html" class="active">Careers</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta">Talk to an Expert</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/client-stories.html">Client Stories</a></li>
+      <li><a href="/careers.html" class="active">Careers</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Expert</a></li>
     </ul>
     <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
 <header class="page-hero">
   <div class="container">
     <div class="kicker">Careers</div>
@@ -56,36 +73,8 @@
       <h2 class="title">Current openings</h2>
     </div>
 
-    <div class="job-row">
-      <div class="info">
-        <h3>Senior Salesforce Developer</h3>
-        <div class="meta"><span>JD-0084</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Senior Salesforce Developer (JD-0084)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Accessibility Specialist</h3>
-        <div class="meta"><span>JD-0083</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Accessibility Specialist (JD-0083)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Salesforce Architect</h3>
-        <div class="meta"><span>JD-0082</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Architect (JD-0082)')">Apply Now</a>
-    </div>
-
-    <div class="job-row">
-      <div class="info">
-        <h3>Salesforce Developer</h3>
-        <div class="meta"><span>JD-0081</span><span>📍 Pondicherry, India</span><span>Full-time</span></div>
-      </div>
-      <a class="btn btn-primary" href="#apply" onclick="selectRole('Salesforce Developer (JD-0081)')">Apply Now</a>
+    <div id="job-list" data-state="loading" aria-live="polite">
+      <p class="jobs-status">Loading current openings…</p>
     </div>
 
     <p style="color: var(--text-faint); font-size: 0.9rem; margin-top: 18px;">Don't see a fit? Send a general application below — we're always looking for exceptional Salesforce talent.</p>
@@ -100,10 +89,9 @@
       <p>We review every application personally and respond within 5 business days.</p>
     </div>
 
-    <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab).
-         Set up email notifications there: Site settings -> Forms -> Form notifications. -->
-    <form class="form-card" name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
-      <input type="hidden" name="form-name" value="job-application">
+    <!-- Applications are saved to Notion and emailed to the careers inbox via Netlify Functions. -->
+    <div id="form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+    <form class="form-card" id="job-application-form" name="job-application" method="POST" enctype="multipart/form-data" novalidate>
       <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-grid">
         <div class="field">
@@ -121,12 +109,7 @@
         <div class="field">
           <label for="role">Position *</label>
           <select id="role" name="position" required>
-            <option value="">Select a role…</option>
-            <option>Senior Salesforce Developer (JD-0084)</option>
-            <option>Accessibility Specialist (JD-0083)</option>
-            <option>Salesforce Architect (JD-0082)</option>
-            <option>Salesforce Developer (JD-0081)</option>
-            <option>General Application</option>
+            <option value="">Loading roles…</option>
           </select>
         </div>
         <div class="field full">
@@ -161,7 +144,8 @@
         <h5>Company</h5>
         <ul>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="client-stories.html">Client Stories</a></li>
+      <li><a href="careers.html">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -189,14 +173,6 @@
   </div>
 </footer>
 
-<script>
-function selectRole(role) {
-  var sel = document.getElementById('role');
-  for (var i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].text === role) { sel.selectedIndex = i; break; }
-  }
-}
-</script>
-
+<script src="assets/js/careers.js" defer></script>
 </body>
 </html>

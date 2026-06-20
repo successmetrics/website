@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" role="img" aria-label="Cal OES">
+  <circle cx="18" cy="20" r="14" fill="none" stroke="#c9a227" stroke-width="2"/>
+  <text x="10" y="25" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#c9a227">CA</text>
+  <text x="40" y="27" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#e8edf5" letter-spacing="0.02em">Cal OES</text>
+</svg>
