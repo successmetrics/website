@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { hasResendConfig, loadDotEnv } from "../helpers/env";
 import { createTestResumeFile } from "../helpers/test-resume";
 import { sendApplicationNotification } from "../../netlify/functions/shared/email.mjs";
@@ -6,31 +6,15 @@ import { sendApplicationNotification } from "../../netlify/functions/shared/emai
 loadDotEnv();
 
 const resendConfigured = hasResendConfig();
-const SANDBOX_FROM = "SuccessMetrics Careers <onboarding@resend.dev>";
+const VERIFIED_FROM = "SuccessMetrics <sduraisamy@successmetrics.io>";
+const NOTIFY_TO = "aditya@successmetrics.io";
 
 describe.skipIf(!resendConfigured)("Resend careers email live API", () => {
   const runId = `ci-${Date.now()}`;
-  const previousFrom = process.env.RESEND_FROM_EMAIL;
 
-  beforeAll(() => {
-    process.env.RESEND_FROM_EMAIL = SANDBOX_FROM;
-  });
-
-  afterAll(() => {
-    if (previousFrom === undefined) {
-      delete process.env.RESEND_FROM_EMAIL;
-    } else {
-      process.env.RESEND_FROM_EMAIL = previousFrom;
-    }
-  });
-
-  it("sends a careers application notification with resume attachment", async () => {
-    const notifyEmail = process.env.CAREERS_NOTIFY_EMAIL?.trim();
-    if (!notifyEmail) {
-      throw new Error(
-        "CAREERS_NOTIFY_EMAIL is not set. With onboarding@resend.dev, this must be the email on your Resend account.",
-      );
-    }
+  it("sends a careers application notification from sduraisamy@ to aditya@", async () => {
+    process.env.RESEND_FROM_EMAIL = VERIFIED_FROM;
+    process.env.CAREERS_NOTIFY_EMAIL = NOTIFY_TO;
 
     const result = await sendApplicationNotification({
       name: "Resend CI Test",

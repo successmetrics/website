@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { loadPage } from "../helpers/site";
+import { NETLIFY_FORMS } from "../helpers/netlify";
 
-describe("Netlify forms", () => {
-  it("contact form is configured for Netlify with required fields", () => {
+describe("form submissions", () => {
+  it("contact form posts to the contact API", () => {
     const $ = loadPage("contact.html");
-    const form = $('form[name="contact"]');
+    const form = $("#contact-form");
 
     expect(form.length).toBe(1);
     expect(form.attr("method")).toBe("POST");
-    expect(form.attr("data-netlify")).toBe("true");
-    expect(form.find('input[name="form-name"]').attr("value")).toBe("contact");
+    expect(form.attr("data-netlify")).toBeUndefined();
     expect(form.find('input[name="bot-field"]').length).toBe(1);
 
     for (const field of ["name", "email", "company", "message"]) {
@@ -17,6 +17,8 @@ describe("Netlify forms", () => {
     }
 
     expect(form.find('select[name="interest"] option').length).toBeGreaterThanOrEqual(5);
+    expect($('script[src="assets/js/contact.js"]').length).toBe(1);
+    expect($("#form-status").length).toBe(1);
   });
 
   it("careers application form posts to the careers API with file upload", () => {
@@ -46,5 +48,12 @@ describe("careers page", () => {
 
     expect($("#job-list").length).toBe(1);
     expect($("#role option").length).toBeGreaterThan(0);
+  });
+});
+
+describe("form API routes", () => {
+  it("maps both forms to Netlify function endpoints", () => {
+    expect(NETLIFY_FORMS.contact.api).toBe("/api/contact");
+    expect(NETLIFY_FORMS.jobApplication.api).toBe("/api/job-application");
   });
 });

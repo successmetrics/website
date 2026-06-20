@@ -55,9 +55,9 @@
 <section class="block">
   <div class="container">
     <div class="two-col" style="align-items: start;">
-      <!-- Netlify Forms: submissions appear in your Netlify dashboard (Forms tab). -->
-      <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
+      <!-- Submissions are emailed to the support inbox via Netlify Functions + Resend. -->
+      <div id="form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+      <form class="form-card" id="contact-form" name="contact" method="POST" novalidate>
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
         <div class="form-grid">
           <div class="field">
@@ -159,5 +159,6 @@
   </div>
 </footer>
 
+<script src="assets/js/contact.js" defer></script>
 </body>
 </html>

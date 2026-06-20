@@ -4,11 +4,12 @@ import { join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import jobsHandler from "../netlify/functions/jobs.mjs";
 import jobApplicationHandler from "../netlify/functions/job-application.mjs";
+import contactHandler from "../netlify/functions/contact.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const SITE = join(ROOT, "site");
-const PORT = Number(process.env.CAREERS_TEST_PORT || 4174);
+const PORT = Number(process.env.CAREERS_TEST_PORT || 4173);
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -96,6 +97,10 @@ createServer(async (req, res) => {
 
     if (url.pathname === "/api/job-application") {
       return sendResponse(res, await jobApplicationHandler(toWebRequest(req, url)));
+    }
+
+    if (url.pathname === "/api/contact") {
+      return sendResponse(res, await contactHandler(toWebRequest(req, url)));
     }
 
     serveStatic(url.pathname, res);

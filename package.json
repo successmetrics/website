@@ -13,8 +13,7 @@
     "test:resend": "vitest run --config vitest.resend.config.ts",
     "verify:notion": "node scripts/verify-notion.mjs",
     "verify:resend": "node scripts/verify-resend.mjs",
-    "test:netlify": "vitest run --config vitest.netlify.config.ts",
-    "test:netlify:e2e": "playwright test tests/e2e/netlify-forms.spec.ts",
+    "test:netlify:e2e": "playwright test --config playwright.netlify.config.ts",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 8080 --directory site",
     "dev": "netlify dev"

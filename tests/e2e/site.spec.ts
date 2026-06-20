@@ -148,11 +148,16 @@ test.describe("forms", () => {
     await page.goto("/careers.html");
 
     await expect(page.locator("#job-list .job-row")).toHaveCount(4);
-    await page.getByRole("button", { name: "Apply Now" }).first().click();
+
+    const firstApply = page.getByRole("button", { name: "Apply Now" }).first();
+    const expectedRole = await firstApply.getAttribute("data-role");
+    expect(expectedRole).toBeTruthy();
+
+    await firstApply.click();
     await expect(page.locator("#apply")).toBeInViewport();
 
     const roleSelect = page.locator("#role");
-    await expect(roleSelect).toHaveValue("Senior Salesforce Developer (JD-0084)");
+    await expect(roleSelect).toHaveValue(expectedRole!);
 
     await expect(page.locator("#job-application-form")).toBeVisible();
     await expect(page.locator("#resume")).toBeVisible();

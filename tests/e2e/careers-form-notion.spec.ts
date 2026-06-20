@@ -1,6 +1,10 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test, expect } from "@playwright/test";
+import {
+  submitCareersForm,
+  waitForCareersRoles,
+} from "../helpers/forms-e2e.mjs";
 
 function loadDotEnv(path = join(process.cwd(), ".env")) {
   if (!existsSync(path)) return;
@@ -25,9 +29,6 @@ const notionConfigured = Boolean(
     process.env.NOTION_JOBS_DATABASE_ID?.trim() &&
     process.env.NOTION_APPLICATIONS_DATABASE_ID?.trim(),
 );
-const TEST_RESUME = Buffer.from(
-  "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n2 0 obj<</Type/Pages/Kids[]/Count 0>>endobj\ntrailer<</Size 3/Root 1 0 R>>\n%%EOF\n",
-);
 
 test.describe("Careers form submission → Notion", () => {
   test.skip(!notionConfigured, "NOTION_* env vars are not set");
@@ -44,33 +45,9 @@ test.describe("Careers form submission → Notion", () => {
 
     await page.goto("/careers.html");
     await expect(page.locator("#job-application-form")).toBeVisible();
-    await expect(page.locator("#job-list")).toHaveAttribute("data-state", "ready", {
-      timeout: 15000,
-    });
-    await expect(page.locator('#role option[value="General Application"]')).toHaveCount(1, {
-      timeout: 15000,
-    });
+    await waitForCareersRoles(page);
 
-    await page.locator("#name").fill(name);
-    await page.locator("#email").fill(email);
-    await page.locator("#phone").fill("+1 555 010 0199");
-    await page.locator("#role").selectOption("General Application");
-    await page.locator("#message").fill(message);
-    await page.locator("#resume").setInputFiles({
-      name: "ci-test-resume.pdf",
-      mimeType: "application/pdf",
-      buffer: TEST_RESUME,
-    });
-
-    const responsePromise = page.waitForResponse(
-      (response) =>
-        response.url().includes("/api/job-application") &&
-        response.request().method() === "POST",
-    );
-
-    await page.getByRole("button", { name: "Submit Application →" }).click();
-
-    const response = await responsePromise;
+    const response = await submitCareersForm(page, runId, { name, email, message });
     expect(response.ok()).toBe(true);
 
     const payload = await response.json();

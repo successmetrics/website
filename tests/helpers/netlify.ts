@@ -8,11 +8,13 @@ export const NETLIFY_FORMS = {
   contact: {
     page: "contact.html",
     name: "contact",
+    api: "/api/contact",
     fields: ["name", "email", "phone", "company", "interest", "message"] as const,
   },
   jobApplication: {
     page: "careers.html",
     name: "job-application",
+    api: "/api/job-application",
     fields: ["name", "email", "phone", "position", "linkedin", "resume", "message"] as const,
   },
 } as const;
@@ -34,6 +36,21 @@ export function netlifyFormEndpoint(siteUrl: string): string {
   return `${siteUrl}/`;
 }
 
+export function buildContactApiPayload(runId: string): FormData {
+  const formData = new FormData();
+  formData.append("name", "Netlify CI Test");
+  formData.append("email", `contact-test+${runId}@example.com`);
+  formData.append("phone", "+1 555 010 0199");
+  formData.append("company", "SuccessMetrics QA");
+  formData.append("interest", "Other");
+  formData.append(
+    "message",
+    `Automated contact API test (${runId}). Safe to delete.`,
+  );
+  return formData;
+}
+
+/** @deprecated Contact form now uses /api/contact instead of Netlify Forms POST. */
 export function buildContactPayload(runId: string): URLSearchParams {
   return new URLSearchParams({
     "form-name": NETLIFY_FORMS.contact.name,
@@ -104,7 +121,7 @@ export async function assertNetlifySiteReady(siteUrl: string): Promise<void> {
     );
   }
 
-  for (const { page, name } of [NETLIFY_FORMS.contact]) {
+  for (const { page, api } of [NETLIFY_FORMS.contact, NETLIFY_FORMS.jobApplication]) {
     const response = await fetch(`${siteUrl}/${page}`);
     if (!response.ok) {
       throw new Error(
@@ -114,11 +131,10 @@ export async function assertNetlifySiteReady(siteUrl: string): Promise<void> {
     }
 
     const html = await response.text();
-    if (!hasDeployedNetlifyForm(html, name)) {
+    const scriptName = api === "/api/contact" ? "contact.js" : "careers.js";
+    if (!html.includes(scriptName)) {
       throw new Error(
-        `${page} is deployed but the "${name}" form is not ready. ` +
-          `Source HTML needs data-netlify="true", then redeploy. ` +
-          `Check ${NETLIFY_FORMS_DASHBOARD}`,
+        `${page} is deployed but does not load ${scriptName}. Redeploy the latest site build.`,
       );
     }
   }

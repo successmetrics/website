@@ -47,32 +47,27 @@ npm run test:static      # fast HTML/link/form checks (Vitest)
 npm run test:e2e         # browser smoke tests (Playwright; run `npx playwright install chromium` once locally)
 ```
 
-**Static checks** validate page structure, SEO meta tags (canonical, OG, Twitter, JSON-LD, sitemap, robots.txt), internal links, nav consistency, Netlify form wiring, footer contact info, and design-token presence in CSS.
+**Static checks** validate page structure, SEO meta tags (canonical, OG, Twitter, JSON-LD, sitemap, robots.txt), internal links, nav consistency, form/API wiring, email helper behavior, footer contact info, and design-token presence in CSS.
 
-**E2E checks** load every page in Chromium, verify navigation, forms, and key homepage content.
+**E2E checks** load every page in Chromium, verify navigation, and submit contact/careers forms through the real UI (local test server with API handlers).
 
-**Netlify checks** (two layers):
+**Deployed form checks** (test branch only, needs `NETLIFY_SITE_URL`):
 
 | Layer | Command | When it runs |
 |---|---|---|
 | Static | included in `npm run test:static` | Every PR — validates `netlify.toml`, form markup, honeypot, fields |
-| Live submissions | `npm run test:netlify` | On `test` branch CI when `NETLIFY_SITE_URL` is set |
-| Live browser | `npm run test:netlify:e2e` | On `test` branch CI when `NETLIFY_SITE_URL` is set |
+| Local browser forms | included in `npm run test:e2e` | Every PR — fills & submits contact + careers forms via UI |
+| Deployed browser forms | `npm run test:netlify:e2e` | On `test` branch CI when `NETLIFY_SITE_URL` is set |
+| Resend email | `npm run test:resend` | When `RESEND_API_KEY` GitHub secret is set |
 
-Forms only work on the deployed Netlify site (not local preview). To enable live form tests in CI on the **`test` branch**:
+Forms work locally via `npm run test:e2e` (uses `careers-test-server.mjs` with `/api/contact` + `/api/job-application`) and on the deployed Netlify site. To enable deployed form tests in CI on the **`test` branch**:
 
 1. GitHub → **Settings → Secrets and variables → Actions → Variables**
 2. Add `NETLIFY_SITE_URL` = `https://successmetrics.netlify.app`
-3. Push to `test` (or open a PR targeting `test`) — two extra jobs run:
-   - **Netlify form submissions** (POST tests for contact + careers)
-   - **Netlify form browser tests** (Playwright fill & submit)
-
-Static Netlify markup checks (`netlify.toml`, form HTML) already run on every branch via `npm run test:static`.
-
-Submissions appear in [Netlify Forms](https://app.netlify.com/projects/successmetrics/forms) (tagged with `ci-` / `Automated` — safe to delete).
+3. Push to `test` (or open a PR targeting `test`) — the **Deployed form browser tests** job runs Playwright fill & submit against the live site.
 
 ```bash
-NETLIFY_SITE_URL=https://your-site.netlify.app npm run test:netlify
+npm run test:e2e
 NETLIFY_SITE_URL=https://your-site.netlify.app npm run test:netlify:e2e
 ```
 
@@ -101,28 +96,31 @@ git push -u origin main
 
 Netlify → Site settings → Domain management → Add `www.successmetrics.io`, then update the DNS records at your registrar as Netlify instructs. SSL is automatic.
 
-## Careers (Notion + email)
+## Form notifications (Resend)
 
-Open roles and job applications use **Notion** as the backend. Submissions are saved to a Notion database and trigger an email via **Resend**.
+Both the **contact** and **careers** forms send email notifications via **Resend** through Netlify Functions:
 
-See [docs/NOTION-CAREERS-SETUP.md](./docs/NOTION-CAREERS-SETUP.md) for database schemas and Netlify environment variables.
+| Form | API route | Notify inbox env var |
+|------|-----------|----------------------|
+| Contact | `/api/contact` | `CONTACT_NOTIFY_EMAIL` (default: aditya@successmetrics.io) |
+| Careers | `/api/job-application` | `CAREERS_NOTIFY_EMAIL` (default: aditya@successmetrics.io) |
+
+Both forms send **from** `sduraisamy@successmetrics.io` via `RESEND_FROM_EMAIL` / `RESEND_CONTACT_FROM_EMAIL`.
+
+Careers submissions are also saved to **Notion**. See [docs/NOTION-CAREERS-SETUP.md](./docs/NOTION-CAREERS-SETUP.md).
 
 ```bash
 cp .env.example .env
-npm run dev    # Netlify Dev — site + /api/jobs + /api/job-application
-npm run test:resend   # live Resend email test (needs RESEND_API_KEY in .env)
+npm run dev              # Netlify Dev — site + /api/contact + /api/jobs + /api/job-application
+npm run verify:resend    # send test contact + careers emails
+npm run test:resend      # live Resend API tests (needs RESEND_API_KEY in .env)
 ```
 
-The contact form still uses Netlify Forms.
+**Netlify environment variables:** `RESEND_API_KEY`, `CONTACT_NOTIFY_EMAIL`, `CAREERS_NOTIFY_EMAIL`, `RESEND_FROM_EMAIL`, `RESEND_CONTACT_FROM_EMAIL`
 
-## Contact form (Netlify Forms)
+**GitHub Actions:** add `RESEND_API_KEY` as a repository secret and `CAREERS_NOTIFY_EMAIL` / `CONTACT_NOTIFY_EMAIL` as variables to enable the **Resend email notifications** CI job.
 
-The contact form in `site/contact.html` uses [Netlify Forms](https://docs.netlify.com/forms/setup/). After the first deploy:
-
-1. [Netlify Forms dashboard](https://app.netlify.com/projects/successmetrics/forms) — contact submissions appear here
-2. **Site settings → Forms → Form notifications** — add email notifications (e.g. support@successmetrics.io)
-
-Spam protection via honeypot field is included. Note: the contact form only works on the deployed Netlify site, not when opening files locally.
+Spam protection via honeypot field is included on both forms. Forms only work on the deployed Netlify site (or `npm run dev`), not when opening HTML files locally.
 
 ## Editing with AI
 

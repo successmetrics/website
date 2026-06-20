@@ -36,28 +36,9 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
 
-  # Live Netlify form tests — runs on test branch only (needs NETLIFY_SITE_URL repo variable).
-  netlify-form-tests:
-    name: Netlify form submissions
-    runs-on: ubuntu-latest
-    if: >-
-      vars.NETLIFY_SITE_URL != '' &&
-      (github.ref == 'refs/heads/test' || github.base_ref == 'test')
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: npm
-
-      - run: npm ci
-      - run: npm run test:netlify
-        env:
-          NETLIFY_SITE_URL: ${{ vars.NETLIFY_SITE_URL }}
-
+  # Live form browser tests — runs on test branch only (needs NETLIFY_SITE_URL repo variable).
   netlify-form-e2e:
-    name: Netlify form browser tests
+    name: Deployed form browser tests
     runs-on: ubuntu-latest
     if: >-
       vars.NETLIFY_SITE_URL != '' &&
@@ -75,3 +56,24 @@ jobs:
       - run: npm run test:netlify:e2e
         env:
           NETLIFY_SITE_URL: ${{ vars.NETLIFY_SITE_URL }}
+
+  resend-email-tests:
+    name: Resend email notifications
+    runs-on: ubuntu-latest
+    if: secrets.RESEND_API_KEY != ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run test:resend
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          CAREERS_NOTIFY_EMAIL: aditya@successmetrics.io
+          CONTACT_NOTIFY_EMAIL: aditya@successmetrics.io
+          RESEND_FROM_EMAIL: SuccessMetrics <sduraisamy@successmetrics.io>
+          RESEND_CONTACT_FROM_EMAIL: SuccessMetrics <sduraisamy@successmetrics.io>
