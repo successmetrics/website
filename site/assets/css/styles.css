@@ -183,9 +183,9 @@ a:hover { text-decoration: none; }
 }
 .client-logo img {
   display: block;
-  height: 28px;
+  height: 34px;
   width: auto;
-  max-width: 180px;
+  max-width: 220px;
   object-fit: contain;
   opacity: 0.7;
   transition: opacity 0.2s;
@@ -194,27 +194,27 @@ a:hover { text-decoration: none; }
 .client-logo--caloes img,
 .client-logo--alameda img,
 .client-logo--caltrans img {
-  height: 24px;
-  max-width: 160px;
+  height: 36px;
+  max-width: 220px;
   opacity: 0.9;
   mix-blend-mode: lighten;
 }
-.client-logo--alameda img { max-width: 200px; }
+.client-logo--alameda img { max-width: 260px; }
 .client-logo--roller img {
   height: 26px;
   max-width: 150px;
 }
 .client-logo--leaflink img {
-  height: 20px;
-  max-width: 140px;
+  height: 32px;
+  max-width: 180px;
   filter: brightness(0) invert(1);
   opacity: 0.85;
 }
-.client-logo--rpm img {
-  height: 22px;
-  max-width: 80px;
-  filter: brightness(0) invert(1);
-  opacity: 0.75;
+.client-logo--rli img {
+  height: 36px;
+  max-width: 140px;
+  opacity: 0.9;
+  mix-blend-mode: lighten;
 }
 @keyframes client-marquee-scroll {
   from { transform: translateX(0); }
@@ -350,12 +350,12 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
   object-fit: contain;
 }
 .partner-logo--salesforce img {
-  max-width: 340px;
-  max-height: 96px;
+  max-width: 400px;
+  max-height: 112px;
 }
 .partner-logo--xtech img {
-  max-width: 300px;
-  max-height: 80px;
+  max-width: 480px;
+  max-height: 128px;
 }
 .partner-logo--odaseva img {
   max-width: 200px;

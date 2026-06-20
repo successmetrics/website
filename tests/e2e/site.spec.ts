@@ -58,15 +58,15 @@ test.describe("page smoke tests", () => {
     await page.goto("/index.html");
 
     await expect(page.locator(".client-marquee-section")).toBeVisible();
-    await expect(page.locator("#client-marquee-title")).toHaveText("Trusted By");
+    await expect(page.locator("#client-marquee-title")).toHaveText("Our Clients");
     await expect(page.locator(".client-marquee")).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Cal OES"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Alameda Municipal Power"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Roller Software"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="Caltrans"]')).toBeVisible();
-    await expect(page.locator('.client-logo img[alt="RPM"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="RLI"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="LeafLink"]')).toBeVisible();
-    await expect(page.locator('.client-logo img[alt="RLI"]')).toHaveCount(0);
+    await expect(page.locator('.client-logo img[alt="RPM"]')).toHaveCount(0);
   });
 
   test("homepage shows partner logos", async ({ page }) => {
