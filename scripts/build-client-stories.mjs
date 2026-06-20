@@ -1,7 +1,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { applySeoToHtml, loadSeoConfig } from "./seo.mjs";
 
 const ROOT = process.cwd();
+const seo = loadSeoConfig(ROOT);
 const STORIES_DIR = join(ROOT, "site", "content", "client-stories");
 const INDEX_PATH = join(ROOT, "site", "client-stories.html");
 
@@ -166,12 +168,6 @@ function challengeExcerpt(markdown) {
   return match?.[1]?.trim() || "";
 }
 
-function metaDescription(markdown, title) {
-  const excerpt = challengeExcerpt(markdown);
-  if (!excerpt) return title;
-  return excerpt.length > 155 ? `${excerpt.slice(0, 152)}…` : excerpt;
-}
-
 function renderFooter(footerLines) {
   if (footerLines.length === 0) return "";
 
@@ -188,18 +184,23 @@ function renderFooter(footerLines) {
   </div>`;
 }
 
-function renderStoryPage(slug, parsed, markdown) {
+function renderStoryPage(slug, parsed) {
   const config = STORY_CONFIG[slug];
   const badgeClass = config.badgeTeal ? ' class="badge teal"' : ' class="badge"';
-  const description = metaDescription(markdown, parsed.title);
+  const pageKey = `content/client-stories/${slug}.html`;
+  const seoBlock = applySeoToHtml(
+    "<title>placeholder</title>\n<meta name=\"description\" content=\"placeholder\">",
+    pageKey,
+    seo,
+    process.env.GOOGLE_ANALYTICS_ID?.trim() || "",
+  );
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(config.pageTitle)} | SuccessMetrics</title>
-<meta name="description" content="${escapeHtml(description)}">
+${seoBlock}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
 <link rel="stylesheet" href="../../assets/css/styles.css">
@@ -287,7 +288,7 @@ for (const slug of STORY_ORDER) {
 
   const markdown = readFileSync(join(STORIES_DIR, filename), "utf8");
   const parsed = parseStoryMarkdown(markdown);
-  const html = renderStoryPage(slug, parsed, markdown);
+  const html = renderStoryPage(slug, parsed);
   const htmlPath = join(STORIES_DIR, `${slug}.html`);
 
   writeFileSync(htmlPath, html);

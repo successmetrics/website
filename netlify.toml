@@ -66,6 +66,32 @@
   to = "/contact.html"
   status = 200
 
+# Clean URLs for content pages
+[[redirects]]
+  from = "/content/blog-ai-enabled-delivery"
+  to = "/content/blog-ai-enabled-delivery.html"
+  status = 200
+[[redirects]]
+  from = "/content/blog-midmarket-salesforce"
+  to = "/content/blog-midmarket-salesforce.html"
+  status = 200
+[[redirects]]
+  from = "/content/blog-lpi-accelerator"
+  to = "/content/blog-lpi-accelerator.html"
+  status = 200
+[[redirects]]
+  from = "/content/whitepaper-midmarket-guide"
+  to = "/content/whitepaper-midmarket-guide.html"
+  status = 200
+[[redirects]]
+  from = "/content/client-stories/sfhss-agentforce-success-story"
+  to = "/content/client-stories/sfhss-agentforce-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/client-stories/mohcd-agentforce-success-story"
+  to = "/content/client-stories/mohcd-agentforce-success-story.html"
+  status = 200
+
 # Legacy paths (pre site/ reorganization)
 [[redirects]]
   from = "/styles.css"

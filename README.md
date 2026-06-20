@@ -47,7 +47,7 @@ npm run test:static      # fast HTML/link/form checks (Vitest)
 npm run test:e2e         # browser smoke tests (Playwright; run `npx playwright install chromium` once locally)
 ```
 
-**Static checks** validate page structure, SEO meta tags, internal links, nav consistency, Netlify form wiring, footer contact info, and design-token presence in CSS.
+**Static checks** validate page structure, SEO meta tags (canonical, OG, Twitter, JSON-LD, sitemap, robots.txt), internal links, nav consistency, Netlify form wiring, footer contact info, and design-token presence in CSS.
 
 **E2E checks** load every page in Chromium, verify navigation, forms, and key homepage content.
 

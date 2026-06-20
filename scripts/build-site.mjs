@@ -1,6 +1,12 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from "node:fs";
 import { join, extname } from "node:path";
 import { spawnSync } from "node:child_process";
+import {
+  applySeoToHtml,
+  generateRobotsTxt,
+  generateSitemapXml,
+  loadSeoConfig,
+} from "./seo.mjs";
 
 const ROOT = process.cwd();
 const SITE_DIR = join(ROOT, "site");
@@ -69,8 +75,12 @@ function buildPage(filename) {
   return true;
 }
 
+const seo = loadSeoConfig(ROOT);
+const gaId = process.env.GOOGLE_ANALYTICS_ID?.trim() || "";
+
 const pages = findHtmlPages(SITE_DIR);
-let updated = 0;
+let navUpdated = 0;
+let seoUpdated = 0;
 
 const storiesBuild = spawnSync("node", ["scripts/build-client-stories.mjs"], {
   cwd: ROOT,
@@ -82,11 +92,36 @@ if (storiesBuild.status !== 0) {
 
 for (const page of pages) {
   if (buildPage(page)) {
-    updated += 1;
+    navUpdated += 1;
   }
 }
 
-console.log(`Built navigation for ${pages.length} pages (${updated} updated).`);
+for (const page of pages) {
+  if (!seo.pages[page]) continue;
+
+  const filePath = join(SITE_DIR, page);
+  const content = readFileSync(filePath, "utf8");
+  const next = applySeoToHtml(content, page, seo, gaId);
+
+  if (next !== content) {
+    writeFileSync(filePath, next);
+    seoUpdated += 1;
+  }
+}
+
+writeFileSync(join(SITE_DIR, "robots.txt"), generateRobotsTxt(seo));
+writeFileSync(join(SITE_DIR, "sitemap.xml"), generateSitemapXml(seo));
+
+console.log(
+  `Built navigation for ${pages.length} pages (${navUpdated} updated).`,
+);
+console.log(`Applied SEO to ${seoUpdated} pages.`);
+console.log("Generated site/robots.txt and site/sitemap.xml.");
+if (gaId) {
+  console.log(`Google Analytics enabled (${gaId}).`);
+} else {
+  console.log("Google Analytics not configured (set GOOGLE_ANALYTICS_ID to enable).");
+}
 
 const fallbackSource = join(ROOT, "data", "careers-fallback.json");
 const fallbackTargetDir = join(SITE_DIR, "data");
