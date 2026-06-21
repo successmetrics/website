@@ -7,8 +7,6 @@ import {
 } from "../netlify/functions/shared/email.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const VERIFIED_FROM = "SuccessMetrics <sduraisamy@successmetrics.io>";
-const NOTIFY_TO = "aditya@successmetrics.io";
 
 function loadDotEnv(path = join(ROOT, ".env")) {
   if (!existsSync(path)) return;
@@ -23,24 +21,31 @@ function loadDotEnv(path = join(ROOT, ".env")) {
   }
 }
 
-loadDotEnv();
-
-const apiKey = process.env.RESEND_API_KEY?.trim();
-if (!apiKey) {
-  console.error("RESEND_API_KEY is missing. Copy .env.example to .env first.");
-  process.exit(1);
+function requireEnv(name) {
+  const value = process.env[name]?.trim();
+  if (!value) {
+    console.error(`${name} is missing. Copy .env.example to .env and fill it in.`);
+    process.exit(1);
+  }
+  return value;
 }
 
-process.env.RESEND_FROM_EMAIL = VERIFIED_FROM;
-process.env.RESEND_CONTACT_FROM_EMAIL = VERIFIED_FROM;
-process.env.CAREERS_NOTIFY_EMAIL = NOTIFY_TO;
-process.env.CONTACT_NOTIFY_EMAIL = NOTIFY_TO;
+loadDotEnv();
+
+requireEnv("RESEND_API_KEY");
+const fromEmail = requireEnv("RESEND_FROM_EMAIL");
+const notifyTo = requireEnv("CONTACT_NOTIFY_EMAIL");
+
+process.env.RESEND_CONTACT_FROM_EMAIL =
+  process.env.RESEND_CONTACT_FROM_EMAIL?.trim() || fromEmail;
+process.env.CAREERS_NOTIFY_EMAIL =
+  process.env.CAREERS_NOTIFY_EMAIL?.trim() || notifyTo;
 
 const runId = Date.now();
 
 console.log("Checking Resend email notifications...\n");
-console.log(`From: ${VERIFIED_FROM}`);
-console.log(`To: ${NOTIFY_TO}`);
+console.log(`From: ${fromEmail}`);
+console.log(`To: ${notifyTo}`);
 
 try {
   const careersResult = await sendApplicationNotification({

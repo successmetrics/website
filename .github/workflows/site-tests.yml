@@ -105,7 +105,7 @@ jobs:
       - run: npm run test:resend
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          CAREERS_NOTIFY_EMAIL: aditya@successmetrics.io
-          CONTACT_NOTIFY_EMAIL: aditya@successmetrics.io
-          RESEND_FROM_EMAIL: SuccessMetrics <sduraisamy@successmetrics.io>
-          RESEND_CONTACT_FROM_EMAIL: SuccessMetrics <sduraisamy@successmetrics.io>
+          CAREERS_NOTIFY_EMAIL: ${{ vars.CAREERS_NOTIFY_EMAIL }}
+          CONTACT_NOTIFY_EMAIL: ${{ vars.CONTACT_NOTIFY_EMAIL }}
+          RESEND_FROM_EMAIL: ${{ vars.RESEND_FROM_EMAIL }}
+          RESEND_CONTACT_FROM_EMAIL: ${{ vars.RESEND_CONTACT_FROM_EMAIL }}

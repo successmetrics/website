@@ -34,3 +34,11 @@ export function hasNotionCareersConfig(): boolean {
 export function hasResendConfig(): boolean {
   return Boolean(process.env.RESEND_API_KEY?.trim());
 }
+
+export function requireEnv(name: string): string {
+  const value = process.env[name]?.trim();
+  if (!value) {
+    throw new Error(`${name} is not set`);
+  }
+  return value;
+}

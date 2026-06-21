@@ -1,9 +1,5 @@
 import { Resend } from "resend";
 
-const VERIFIED_FROM_EMAIL =
-  "SuccessMetrics <sduraisamy@successmetrics.io>";
-const DEFAULT_NOTIFY_EMAIL = "aditya@successmetrics.io";
-
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) return null;
@@ -15,11 +11,11 @@ function getFromEmail(kind = "careers") {
     return (
       process.env.RESEND_CONTACT_FROM_EMAIL?.trim() ||
       process.env.RESEND_FROM_EMAIL?.trim() ||
-      VERIFIED_FROM_EMAIL
+      ""
     );
   }
 
-  return process.env.RESEND_FROM_EMAIL?.trim() || VERIFIED_FROM_EMAIL;
+  return process.env.RESEND_FROM_EMAIL?.trim() || "";
 }
 
 function getNotifyEmail(kind = "careers") {
@@ -27,11 +23,17 @@ function getNotifyEmail(kind = "careers") {
     return (
       process.env.CONTACT_NOTIFY_EMAIL?.trim() ||
       process.env.CAREERS_NOTIFY_EMAIL?.trim() ||
-      DEFAULT_NOTIFY_EMAIL
+      ""
     );
   }
 
-  return process.env.CAREERS_NOTIFY_EMAIL?.trim() || DEFAULT_NOTIFY_EMAIL;
+  return process.env.CAREERS_NOTIFY_EMAIL?.trim() || "";
+}
+
+function missingEmailConfig(fromEmail, notifyEmail) {
+  if (!fromEmail) return "missing_from_email";
+  if (!notifyEmail) return "missing_notify_email";
+  return null;
 }
 
 export async function sendContactNotification({
@@ -49,6 +51,12 @@ export async function sendContactNotification({
   if (!resend) {
     console.warn("RESEND_API_KEY is not set — skipping contact notification email");
     return { sent: false, reason: "missing_api_key" };
+  }
+
+  const configError = missingEmailConfig(fromEmail, notifyEmail);
+  if (configError) {
+    console.warn(`Contact email config missing: ${configError}`);
+    return { sent: false, reason: configError };
   }
 
   const submittedAt = new Date().toISOString();
@@ -95,6 +103,12 @@ export async function sendApplicationNotification({
   if (!resend) {
     console.warn("RESEND_API_KEY is not set — skipping careers notification email");
     return { sent: false, reason: "missing_api_key" };
+  }
+
+  const configError = missingEmailConfig(fromEmail, notifyEmail);
+  if (configError) {
+    console.warn(`Careers email config missing: ${configError}`);
+    return { sent: false, reason: configError };
   }
 
   const submittedAt = new Date().toISOString();
