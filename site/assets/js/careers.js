@@ -141,7 +141,11 @@
         });
 
         if (!response.ok || !payload.ok) {
-          throw new Error(payload.error || "Submission failed. Please try again.");
+          throw new Error(
+            payload.error ||
+              payload.errorMessage ||
+              "Submission failed. Please try again.",
+          );
         }
 
         form.reset();

@@ -1,20 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { hasResendConfig, loadDotEnv } from "../helpers/env";
+import { hasResendConfig, loadDotEnv, requireEnv } from "../helpers/env";
 import { sendContactNotification } from "../../netlify/functions/shared/email.mjs";
 
 loadDotEnv();
 
 const resendConfigured = hasResendConfig();
-const VERIFIED_FROM = "SuccessMetrics <sduraisamy@successmetrics.io>";
-const NOTIFY_TO = "aditya@successmetrics.io";
 
 describe.skipIf(!resendConfigured)("Resend contact email live API", () => {
   const runId = `ci-${Date.now()}`;
 
-  it("sends a contact form notification from sduraisamy@ to aditya@", async () => {
-    process.env.RESEND_CONTACT_FROM_EMAIL = VERIFIED_FROM;
-    process.env.RESEND_FROM_EMAIL = VERIFIED_FROM;
-    process.env.CONTACT_NOTIFY_EMAIL = NOTIFY_TO;
+  it("sends a contact form notification using configured env vars", async () => {
+    process.env.RESEND_CONTACT_FROM_EMAIL =
+      process.env.RESEND_CONTACT_FROM_EMAIL?.trim() || requireEnv("RESEND_FROM_EMAIL");
+    process.env.RESEND_FROM_EMAIL = requireEnv("RESEND_FROM_EMAIL");
+    process.env.CONTACT_NOTIFY_EMAIL = requireEnv("CONTACT_NOTIFY_EMAIL");
 
     const result = await sendContactNotification({
       name: "Resend Contact CI Test",

@@ -28,6 +28,7 @@
       if (!response.ok || !payload.ok) {
         throw new Error(
           payload.error ||
+            payload.errorMessage ||
             "Submission failed. Please email support@successmetrics.io directly.",
         );
       }

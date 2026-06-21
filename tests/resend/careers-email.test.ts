@@ -1,20 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { hasResendConfig, loadDotEnv } from "../helpers/env";
+import { hasResendConfig, loadDotEnv, requireEnv } from "../helpers/env";
 import { createTestResumeFile } from "../helpers/test-resume";
 import { sendApplicationNotification } from "../../netlify/functions/shared/email.mjs";
 
 loadDotEnv();
 
 const resendConfigured = hasResendConfig();
-const VERIFIED_FROM = "SuccessMetrics <sduraisamy@successmetrics.io>";
-const NOTIFY_TO = "aditya@successmetrics.io";
 
 describe.skipIf(!resendConfigured)("Resend careers email live API", () => {
   const runId = `ci-${Date.now()}`;
 
-  it("sends a careers application notification from sduraisamy@ to aditya@", async () => {
-    process.env.RESEND_FROM_EMAIL = VERIFIED_FROM;
-    process.env.CAREERS_NOTIFY_EMAIL = NOTIFY_TO;
+  it("sends a careers application notification using configured env vars", async () => {
+    process.env.RESEND_FROM_EMAIL = requireEnv("RESEND_FROM_EMAIL");
+    process.env.CAREERS_NOTIFY_EMAIL = requireEnv("CAREERS_NOTIFY_EMAIL");
 
     const result = await sendApplicationNotification({
       name: "Resend CI Test",
