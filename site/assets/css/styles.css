@@ -78,7 +78,7 @@ a:hover { text-decoration: none; }
 /* ============ HERO ============ */
 .hero {
   position: relative; overflow: hidden;
-  padding: 110px 0 90px;
+  padding: 40px 0 90px;
   background:
     radial-gradient(ellipse 60% 50% at 70% 0%, rgba(79, 124, 255, 0.18), transparent),
     radial-gradient(ellipse 50% 40% at 20% 100%, rgba(56, 217, 192, 0.10), transparent),
@@ -450,10 +450,14 @@ footer {
   opacity: 0.88;
 }
 .prose-client-logo--sfhss { max-width: 200px; height: 40px; }
-.prose-client-logo--mohcd { max-width: 260px; height: 54px; }
+.prose-client-logo--mohcd,
+.story-client-logo--mohcd {
+  filter: brightness(0) invert(1);
+}
+.prose-client-logo--mohcd { max-width: 480px; height: auto; max-height: 108px; }
 .prose--story .prose-client-logo { height: 52px; max-width: 240px; }
 .prose--story .prose-client-logo--sfhss { max-width: 280px; height: 56px; }
-.prose--story .prose-client-logo--mohcd { max-width: 320px; height: 72px; }
+.prose--story .prose-client-logo--mohcd { max-width: 540px; max-height: 120px; height: auto; }
 .prose table {
   width: 100%; border-collapse: collapse; margin: 24px 0 28px;
   font-size: 0.95rem;
@@ -574,7 +578,7 @@ footer {
   object-position: center;
 }
 .story-client-logo--sfhss.story-client-logo--thumb { max-width: min(360px, 90%); height: 72px; }
-.story-client-logo--mohcd.story-client-logo--thumb { height: 80px; max-width: min(380px, 90%); }
+.story-client-logo--mohcd.story-client-logo--thumb { height: auto; max-height: 84px; max-width: min(630px, 92%); }
 .thumb-1 { background: linear-gradient(135deg, rgba(79,124,255,0.25), rgba(167,139,250,0.2)); }
 .thumb-2 { background: linear-gradient(135deg, rgba(56,217,192,0.22), rgba(79,124,255,0.2)); }
 .thumb-3 { background: linear-gradient(135deg, rgba(167,139,250,0.22), rgba(56,217,192,0.18)); }
@@ -618,7 +622,7 @@ footer {
 }
 @media (max-width: 680px) {
   .grid-2, .grid-3, .grid-4, .process, .two-col, .form-grid, .footer-grid, .partners-grid { grid-template-columns: 1fr; }
-  .hero { padding: 70px 0 60px; }
+  .hero { padding: 32px 0 60px; }
   section.block { padding: 60px 0; }
   .container { padding: 0 18px; }
   .form-card { padding: 24px 18px; }
