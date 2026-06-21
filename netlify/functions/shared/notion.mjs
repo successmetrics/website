@@ -3,12 +3,12 @@ import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const moduleDir = dirname(fileURLToPath(import.meta.url));
 
 function loadFallbackJobs() {
   const candidates = [
     join(process.cwd(), "data/careers-fallback.json"),
-    join(__dirname, "../../../data/careers-fallback.json"),
+    join(moduleDir, "../../../data/careers-fallback.json"),
   ];
 
   for (const path of candidates) {
