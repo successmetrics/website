@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join, extname } from "node:path";
 import { spawnSync } from "node:child_process";
 import {
@@ -52,6 +53,31 @@ function findHtmlPages(dir, relativeDir = "") {
   }
 
   return pages;
+}
+
+const STYLESHEET_HREF =
+  /href="((?:\.\.\/)*assets\/css\/styles\.css)(?:\?v=[^"]*)?"/g;
+
+function stylesheetVersion() {
+  const cssPath = join(SITE_DIR, "assets/css/styles.css");
+  const css = readFileSync(cssPath);
+  return createHash("sha256").update(css).digest("hex").slice(0, 12);
+}
+
+function applyStylesheetVersion(filename, version) {
+  const filePath = join(SITE_DIR, filename);
+  const content = readFileSync(filePath, "utf8");
+  const next = content.replace(
+    STYLESHEET_HREF,
+    (_match, href) => `href="${href}?v=${version}"`,
+  );
+
+  if (next !== content) {
+    writeFileSync(filePath, next);
+    return true;
+  }
+
+  return false;
 }
 
 function buildPage(filename) {
@@ -112,10 +138,22 @@ for (const page of pages) {
 writeFileSync(join(SITE_DIR, "robots.txt"), generateRobotsTxt(seo));
 writeFileSync(join(SITE_DIR, "sitemap.xml"), generateSitemapXml(seo));
 
+const cssVersion = stylesheetVersion();
+let stylesheetUpdated = 0;
+
+for (const page of pages) {
+  if (applyStylesheetVersion(page, cssVersion)) {
+    stylesheetUpdated += 1;
+  }
+}
+
 console.log(
   `Built navigation for ${pages.length} pages (${navUpdated} updated).`,
 );
 console.log(`Applied SEO to ${seoUpdated} pages.`);
+console.log(
+  `Applied stylesheet cache bust v=${cssVersion} to ${stylesheetUpdated} pages.`,
+);
 console.log("Generated site/robots.txt and site/sitemap.xml.");
 if (gaId) {
   console.log(`Google Analytics enabled (${gaId}).`);

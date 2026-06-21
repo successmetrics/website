@@ -69,6 +69,27 @@ test.describe("page smoke tests", () => {
     await expect(page.locator('.client-logo img[alt="RPM"]')).toHaveCount(0);
   });
 
+  test("client marquee logos stay in a horizontal row", async ({ page }) => {
+    await page.goto("/index.html");
+
+    const tops = await page
+      .locator(".client-marquee-group:first-child .client-logo")
+      .evaluateAll((elements) => elements.map((el) => el.getBoundingClientRect().top));
+
+    expect(tops.length).toBeGreaterThan(1);
+    expect(Math.max(...tops) - Math.min(...tops)).toBeLessThan(8);
+  });
+
+  test("client stories cards render styled thumbnails", async ({ page }) => {
+    await page.goto("/client-stories.html");
+
+    const thumb = page.locator(".story-card .story-card-thumb").first();
+    await expect(thumb).toBeVisible();
+
+    const height = await thumb.evaluate((el) => el.getBoundingClientRect().height);
+    expect(height).toBeGreaterThanOrEqual(240);
+  });
+
   test("homepage shows partner logos", async ({ page }) => {
     await page.goto("/index.html");
 
@@ -142,6 +163,25 @@ test.describe("forms", () => {
       "href",
       "tel:+15103306457",
     );
+  });
+
+  test("forms fit within mobile viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    for (const pagePath of ["contact.html", "careers.html"]) {
+      await page.goto(`/${pagePath}`);
+
+      const form = page.locator(".form-card").first();
+      const box = await form.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box!.x).toBeGreaterThanOrEqual(0);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(391);
+
+      const hasHorizontalOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > window.innerWidth + 1,
+      );
+      expect(hasHorizontalOverflow, `Horizontal overflow on ${pagePath}`).toBe(false);
+    }
   });
 
   test("careers application form renders and Apply Now pre-selects role", async ({ page }) => {

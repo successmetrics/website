@@ -26,7 +26,7 @@ describe("site pages", () => {
     expect($("html").attr("lang")).toBe("en");
     expect($("title").text().trim().length).toBeGreaterThan(0);
     expect($('meta[name="description"]').attr("content")?.trim().length).toBeGreaterThan(0);
-    expect($('link[rel="stylesheet"][href*="assets/css/styles.css"]').length).toBe(1);
+    expect($('link[rel="stylesheet"][href*="assets/css/styles.css?v="]').length).toBe(1);
     expect($('link[rel="icon"][href*="assets/images/logo.svg"]').length).toBe(1);
     expect($("nav.nav").length).toBe(1);
     expect($("footer").length).toBe(1);
@@ -49,6 +49,17 @@ describe("shared assets", () => {
     expect(css).toContain("--card:");
     expect(css).toContain("--gradient:");
     expect(css).toContain("--font:");
+  });
+
+  it("every page links to a versioned stylesheet", () => {
+    const versions = HTML_PAGES.map((page) => {
+      const $ = loadPage(page);
+      const href = $('link[rel="stylesheet"][href*="assets/css/styles.css?v="]').attr("href");
+      expect(href).toMatch(/assets\/css\/styles\.css\?v=[a-f0-9]{12}$/);
+      return href?.split("?v=")[1];
+    });
+
+    expect(new Set(versions).size).toBe(1);
   });
 
   it("logo.svg exists and is valid SVG", () => {
