@@ -20,7 +20,7 @@ describe("netlify.toml", () => {
   });
 
   it.skipIf(netlifyToml === null)("defines clean URLs for main pages", () => {
-    for (const slug of ["careers", "services", "contact"]) {
+    for (const slug of ["careers", "services", "contact", "success-stories"]) {
       expect(netlifyToml).toContain(`from = "/${slug}"`);
       expect(netlifyToml).toContain(`to = "/${slug}.html"`);
     }

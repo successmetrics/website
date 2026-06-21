@@ -1,6 +1,6 @@
 # SuccessMetrics Website
 
-Static marketing site for [successmetrics.io](https://www.successmetrics.io). Plain HTML/CSS with a small Node build step for shared navigation, SEO metadata, and client story pages. Deployed on Netlify with serverless functions for contact and careers forms.
+Static marketing site for [successmetrics.io](https://www.successmetrics.io). Plain HTML/CSS with a small Node build step for shared navigation, SEO metadata, and success story pages. Deployed on Netlify with serverless functions for contact and careers forms.
 
 ## Repository layout
 
@@ -9,16 +9,16 @@ Static marketing site for [successmetrics.io](https://www.successmetrics.io). Pl
 │   ├── *.html               # Main pages (/services, /careers, … via clean URLs)
 │   ├── assets/css/styles.css
 │   ├── assets/js/
-│   └── content/             # Blog posts, white papers, client stories
+│   └── content/             # Blog posts, white papers, success stories
 ├── templates/nav.html       # Shared primary navigation
 ├── data/seo.json            # Page titles, meta descriptions, sitemap config
-├── scripts/build-site.mjs   # Build: nav, SEO, sitemap, client stories
+├── scripts/build-site.mjs   # Build: nav, SEO, sitemap, success stories
 ├── netlify/functions/       # Contact, careers, and job listing APIs
 ├── tests/                   # Static checks + Playwright smoke tests
 └── netlify.toml
 ```
 
-Main pages: Home, Services, Industries, Accelerators, Resources, Client Stories, Careers, About, Contact.
+Main pages: Home, Services, Industries, Accelerators, Resources, Success Stories, Careers, About, Contact.
 
 ## Local development
 
@@ -56,4 +56,4 @@ Contact and careers forms post to Netlify Functions. Notifications go out via Re
 - **Nav** — `templates/nav.html`, then `npm run build`
 - **SEO** — `data/seo.json`, then `npm run build`
 - **Blog / white paper** — copy an existing file in `site/content/`, add a card in `site/resources.html`
-- **Client story** — add Markdown under `site/content/client-stories/`, run `npm run build`
+- **Success story** — add Markdown under `site/content/success-stories/`, run `npm run build`
