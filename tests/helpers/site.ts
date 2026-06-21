@@ -86,7 +86,8 @@ export function collectInternalLinks(filename: string): string[] {
 }
 
 export function pageExists(fromPage: string, href: string): boolean {
-  const target = resolvePagePath(fromPage, href);
+  const cleanHref = href.split("#")[0]?.split("?")[0] ?? href;
+  const target = resolvePagePath(fromPage, cleanHref);
   if (!target) return false;
   return existsSync(join(ROOT, target));
 }

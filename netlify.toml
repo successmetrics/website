@@ -30,11 +30,16 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Cache static assets aggressively
+# Cache static assets aggressively (query string busts on each deploy)
 [[headers]]
-  for = "/assets/css/styles.css"
+  for = "/assets/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Friendly URLs: /careers works same as /careers.html
 [[redirects]]

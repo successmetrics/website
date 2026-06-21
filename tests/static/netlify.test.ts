@@ -26,8 +26,9 @@ describe("netlify.toml", () => {
     }
   });
 
-  it.skipIf(netlifyToml === null)("caches the shared stylesheet", () => {
-    expect(netlifyToml).toContain('for = "/assets/css/styles.css"');
+  it.skipIf(netlifyToml === null)("caches versioned static assets", () => {
+    expect(netlifyToml).toContain('for = "/assets/css/*"');
+    expect(netlifyToml).toContain('for = "/assets/js/*"');
   });
 });
 

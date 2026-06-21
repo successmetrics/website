@@ -161,7 +161,10 @@ a:hover { text-decoration: none; }
 }
 .client-marquee-inner {
   display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   width: max-content;
+  will-change: transform;
   animation: client-marquee-scroll 45s linear infinite;
 }
 .client-marquee:hover .client-marquee-inner {
@@ -169,6 +172,7 @@ a:hover { text-decoration: none; }
 }
 .client-marquee-group {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 56px;
   flex-shrink: 0;
@@ -221,10 +225,16 @@ a:hover { text-decoration: none; }
   to { transform: translateX(-25%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .client-marquee-inner { animation: none; flex-wrap: wrap; justify-content: center; width: auto; gap: 24px 40px; padding: 0 24px; }
+  .client-marquee-inner {
+    animation: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: max-content;
+    transform: none;
+  }
   .client-marquee { mask-image: none; -webkit-mask-image: none; }
   .client-marquee-group[aria-hidden="true"] { display: none; }
-  .client-marquee-group { padding-right: 0; }
+  .client-marquee-group { padding-right: 56px; }
 }
 
 /* ============ STATS BAR ============ */
@@ -461,15 +471,31 @@ footer {
 .form-card {
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 38px;
+  min-width: 0;
+  max-width: 100%;
 }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.field { display: flex; flex-direction: column; gap: 7px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; min-width: 0; }
+.field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .field.full { grid-column: 1 / -1; }
 .field label { font-size: 0.86rem; font-weight: 600; color: var(--text-dim); }
 .field input, .field select, .field textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background: var(--bg-2); border: 1px solid var(--border); border-radius: 9px;
   padding: 12px 14px; color: var(--text); font-family: var(--font); font-size: 0.95rem;
   transition: border-color 0.2s;
+}
+.field select {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.field input[type="file"] {
+  padding: 10px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none; border-color: var(--accent);
@@ -499,13 +525,28 @@ footer {
   background: rgba(255, 99, 99, 0.1); border: 1px solid rgba(255, 99, 99, 0.35); color: #ffb4b4;
 }
 
-/* ============ RESOURCE CARDS ============ */
-.res-card { overflow: hidden; padding: 0; }
-.res-card .thumb {
-  height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
+/* ============ RESOURCE / STORY CARDS ============ */
+.card.res-card {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
-.res-card .body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
-.story-card .thumb {
+.card.res-card .thumb {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  flex-shrink: 0;
+}
+.card.res-card .body {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card.res-card.story-card .thumb {
   height: 260px;
   min-height: 260px;
 }
@@ -520,7 +561,7 @@ footer {
   line-height: 1;
   flex-shrink: 0;
 }
-.story-card .link { margin-top: auto; padding-top: 18px; }
+.card.res-card.story-card .link { margin-top: auto; padding-top: 18px; }
 .story-client-logo {
   object-fit: contain;
   opacity: 0.92;
@@ -541,6 +582,7 @@ footer {
 
 /* ============ MISC ============ */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.two-col > * { min-width: 0; }
 .check-list { list-style: none; }
 .check-list li {
   padding-left: 32px; position: relative; margin-bottom: 14px; color: var(--text-dim); font-size: 0.97rem;
@@ -578,6 +620,8 @@ footer {
   .grid-2, .grid-3, .grid-4, .process, .two-col, .form-grid, .footer-grid, .partners-grid { grid-template-columns: 1fr; }
   .hero { padding: 70px 0 60px; }
   section.block { padding: 60px 0; }
+  .container { padding: 0 18px; }
+  .form-card { padding: 24px 18px; }
   .cta-banner .inner { padding: 44px 26px; }
   .prose-header { flex-direction: column; align-items: flex-start; }
   .prose-client-logo { align-self: flex-end; }
