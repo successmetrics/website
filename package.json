@@ -13,6 +13,7 @@
     "test:resend": "vitest run --config vitest.resend.config.ts",
     "verify:notion": "node scripts/verify-notion.mjs",
     "verify:resend": "node scripts/verify-resend.mjs",
+    "verify:deploy": "node scripts/verify-deploy.mjs",
     "test:netlify:e2e": "playwright test --config playwright.netlify.config.ts",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 8080 --directory site",
@@ -26,6 +27,7 @@
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.2",
     "cheerio": "^1.0.0",
+    "esbuild": "^0.25.12",
     "typescript": "^5.7.2",
     "vitest": "^3.0.5"
   }

@@ -7,8 +7,35 @@ on:
     branches: [main, dev, test]
 
 jobs:
+  repo-ready:
+    name: Verify site checkout
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ -d site ] && [ -f scripts/build-site.mjs ]; then
+            echo "ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "ready=false" >> $GITHUB_OUTPUT
+          fi
+
+  main-needs-merge:
+    name: main branch sync check
+    needs: repo-ready
+    if: needs.repo-ready.outputs.ready == 'false' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "::error::main is missing the site/ directory and build scripts. Merge the test branch into main so CI and Netlify deploy the same code."
+          exit 1
+
   static-tests:
     name: Static site checks
+    needs: repo-ready
+    if: needs.repo-ready.outputs.ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +50,8 @@ jobs:
 
   e2e-tests:
     name: Browser smoke tests
+    needs: repo-ready
+    if: needs.repo-ready.outputs.ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +68,10 @@ jobs:
   # Live form browser tests — runs on test branch only (needs NETLIFY_SITE_URL repo variable).
   netlify-form-e2e:
     name: Deployed form browser tests
+    needs: repo-ready
     runs-on: ubuntu-latest
     if: >-
+      needs.repo-ready.outputs.ready == 'true' &&
       vars.NETLIFY_SITE_URL != '' &&
       (github.ref == 'refs/heads/test' || github.base_ref == 'test')
     steps:
@@ -59,8 +90,9 @@ jobs:
 
   resend-email-tests:
     name: Resend email notifications
+    needs: repo-ready
     runs-on: ubuntu-latest
-    if: secrets.RESEND_API_KEY != ''
+    if: needs.repo-ready.outputs.ready == 'true' && secrets.RESEND_API_KEY != ''
     steps:
       - uses: actions/checkout@v4
 

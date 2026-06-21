@@ -5,10 +5,11 @@ import { NETLIFY_FORMS, readNetlifyToml } from "../helpers/netlify";
 const netlifyToml = readNetlifyToml();
 
 describe("netlify.toml", () => {
-  it.skipIf(netlifyToml === null)("exposes careers and contact API routes", () => {
+  it.skipIf(netlifyToml === null)("exposes health, careers, and contact API routes", () => {
     expect(netlifyToml).toContain('from = "/api/jobs"');
     expect(netlifyToml).toContain('from = "/api/job-application"');
     expect(netlifyToml).toContain('from = "/api/contact"');
+    expect(netlifyToml).toContain('from = "/api/health"');
   });
 
   it.skipIf(netlifyToml === null)("runs the site build before publish", () => {
