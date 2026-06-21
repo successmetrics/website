@@ -17,7 +17,7 @@
     "services.html": { "changefreq": "monthly", "priority": "0.9" },
     "industries.html": { "changefreq": "monthly", "priority": "0.9" },
     "accelerators.html": { "changefreq": "monthly", "priority": "0.9" },
-    "client-stories.html": { "changefreq": "monthly", "priority": "0.85" },
+    "success-stories.html": { "changefreq": "monthly", "priority": "0.85" },
     "contact.html": { "changefreq": "monthly", "priority": "0.9" },
     "resources.html": { "changefreq": "weekly", "priority": "0.75" },
     "about.html": { "changefreq": "quarterly", "priority": "0.7" },
@@ -26,8 +26,8 @@
     "content/blog-midmarket-salesforce.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/blog-lpi-accelerator.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/whitepaper-midmarket-guide.html": { "changefreq": "monthly", "priority": "0.6" },
-    "content/client-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
-    "content/client-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" }
+    "content/success-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "content/success-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" }
   },
   "pages": {
     "index.html": {
@@ -62,9 +62,9 @@
       "ogType": "website",
       "schema": ["Product"]
     },
-    "client-stories.html": {
-      "path": "/client-stories",
-      "title": "Salesforce Agentforce Client Stories | SuccessMetrics",
+    "success-stories.html": {
+      "path": "/success-stories",
+      "title": "Salesforce Agentforce Success Stories | SuccessMetrics",
       "description": "See how SFHSS & MOHCD use embedded Salesforce Agentforce assistants to speed benefits & housing workflows — staff in full control.",
       "keywords": ["Agentforce case study", "embedded Agentforce Service Console", "Salesforce public sector case study"],
       "ogType": "website",
@@ -138,8 +138,8 @@
       "schema": ["Article"],
       "datePublished": "2025-08-01"
     },
-    "content/client-stories/sfhss-agentforce-success-story.html": {
-      "path": "/content/client-stories/sfhss-agentforce-success-story",
+    "content/success-stories/sfhss-agentforce-success-story.html": {
+      "path": "/content/success-stories/sfhss-agentforce-success-story",
       "title": "SFHSS Agentforce Case Study | Benefits Administration",
       "description": "How SFHSS embedded Agentforce in Salesforce Service Console to speed benefits service, cut context switching & improve member support.",
       "keywords": ["SFHSS Agentforce", "Salesforce benefits administration AI", "embedded Agentforce Service Console"],
@@ -147,8 +147,8 @@
       "schema": ["Article"],
       "datePublished": "2026-03-01"
     },
-    "content/client-stories/mohcd-agentforce-success-story.html": {
-      "path": "/content/client-stories/mohcd-agentforce-success-story",
+    "content/success-stories/mohcd-agentforce-success-story.html": {
+      "path": "/content/success-stories/mohcd-agentforce-success-story",
       "title": "MOHCD Agentforce Case Study | Affordable Housing",
       "description": "MOHCD staff use embedded Salesforce Agentforce for housing program guidance, application updates & applicant email — one workspace, full control.",
       "keywords": ["MOHCD Agentforce", "Salesforce affordable housing", "Agentforce public sector case study"],

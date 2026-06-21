@@ -6,7 +6,7 @@ const MAIN_PAGES = [
   "industries.html",
   "accelerators.html",
   "resources.html",
-  "client-stories.html",
+  "success-stories.html",
   "careers.html",
   "about.html",
   "contact.html",
@@ -17,8 +17,8 @@ const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
-  "content/client-stories/sfhss-agentforce-success-story.html",
-  "content/client-stories/mohcd-agentforce-success-story.html",
+  "content/success-stories/sfhss-agentforce-success-story.html",
+  "content/success-stories/mohcd-agentforce-success-story.html",
 ];
 
 const NAV_LINKS = [
@@ -26,7 +26,7 @@ const NAV_LINKS = [
   { href: "/industries.html" },
   { href: "/accelerators.html" },
   { href: "/resources.html" },
-  { href: "/client-stories.html" },
+  { href: "/success-stories.html" },
   { href: "/careers.html" },
   { href: "/about.html" },
   { href: "/contact.html" },
@@ -80,8 +80,8 @@ test.describe("page smoke tests", () => {
     expect(Math.max(...tops) - Math.min(...tops)).toBeLessThan(8);
   });
 
-  test("client stories cards render styled thumbnails", async ({ page }) => {
-    await page.goto("/client-stories.html");
+  test("success stories cards render styled thumbnails", async ({ page }) => {
+    await page.goto("/success-stories.html");
 
     const thumb = page.locator(".story-card .story-card-thumb").first();
     await expect(thumb).toBeVisible();
@@ -116,16 +116,16 @@ test.describe("navigation", () => {
     }
   });
 
-  test("tablet nav menu shows Client Stories on resources and careers", async ({ page }) => {
+  test("tablet nav menu shows Success Stories on resources and careers", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
 
     for (const pagePath of ["resources.html", "careers.html"]) {
       await page.goto(`/${pagePath}`);
       await page.getByRole("button", { name: "Menu" }).click();
-      const clientStories = page.locator(".nav-links").getByRole("link", { name: "Client Stories" });
-      await expect(clientStories).toBeVisible();
-      await clientStories.click();
-      await expect(page).toHaveURL(/client-stories\.html$/);
+      const successStories = page.locator(".nav-links").getByRole("link", { name: "Success Stories" });
+      await expect(successStories).toBeVisible();
+      await successStories.click();
+      await expect(page).toHaveURL(/success-stories\.html$/);
     }
   });
 
@@ -141,9 +141,9 @@ test.describe("navigation", () => {
   });
 
   for (const pagePath of ALL_PAGES) {
-    test(`${pagePath} shows Client Stories in the primary nav`, async ({ page }) => {
+    test(`${pagePath} shows Success Stories in the primary nav`, async ({ page }) => {
       await page.goto(`/${pagePath}`);
-      await expect(page.locator(".nav-links").getByRole("link", { name: "Client Stories" })).toBeVisible();
+      await expect(page.locator(".nav-links").getByRole("link", { name: "Success Stories" })).toBeVisible();
     });
   }
 });
@@ -222,18 +222,18 @@ test.describe("content pages", () => {
     }
   });
 
-  test("client stories link back to client stories index", async ({ page }) => {
+  test("success stories link back to success stories index", async ({ page }) => {
     const stories = [
-      "content/client-stories/sfhss-agentforce-success-story.html",
-      "content/client-stories/mohcd-agentforce-success-story.html",
+      "content/success-stories/sfhss-agentforce-success-story.html",
+      "content/success-stories/mohcd-agentforce-success-story.html",
     ];
 
     for (const story of stories) {
       await page.goto(`/${story}`);
-      const backLink = page.getByRole("link", { name: "← Back to Client Stories" });
+      const backLink = page.getByRole("link", { name: "← Back to Success Stories" });
       await expect(backLink).toBeVisible();
       await backLink.click();
-      await expect(page).toHaveURL(/client-stories\.html$/);
+      await expect(page).toHaveURL(/success-stories\.html$/);
     }
   });
 });

@@ -4,8 +4,8 @@ import { applySeoToHtml, loadSeoConfig } from "./seo.mjs";
 
 const ROOT = process.cwd();
 const seo = loadSeoConfig(ROOT);
-const STORIES_DIR = join(ROOT, "site", "content", "client-stories");
-const INDEX_PATH = join(ROOT, "site", "client-stories.html");
+const STORIES_DIR = join(ROOT, "site", "content", "success-stories");
+const INDEX_PATH = join(ROOT, "site", "success-stories.html");
 
 const STORY_ORDER = [
   "sfhss-agentforce-success-story",
@@ -24,19 +24,19 @@ const STORY_CONFIG = {
     thumbWidth: 130,
     thumbHeight: 28,
     thumbClass: "thumb-3",
-    icon: "🏛️",
+    icon: "🩺",
     pageTitle: "SFHSS Agentforce Success Story",
   },
   "mohcd-agentforce-success-story": {
     badge: "Public Sector",
     badgeTeal: true,
-    logo: "mohcd.svg",
+    logo: "mohcd.png",
     logoClass: "prose-client-logo--mohcd",
     thumbLogoClass: "story-client-logo--mohcd",
-    logoWidth: 140,
-    logoHeight: 30,
-    thumbWidth: 110,
-    thumbHeight: 28,
+    logoWidth: 420,
+    logoHeight: 107,
+    thumbWidth: 300,
+    thumbHeight: 77,
     thumbClass: "thumb-2",
     icon: "🏠",
     pageTitle: "MOHCD Agentforce Success Story",
@@ -187,7 +187,7 @@ function renderFooter(footerLines) {
 function renderStoryPage(slug, parsed) {
   const config = STORY_CONFIG[slug];
   const badgeClass = config.badgeTeal ? ' class="badge teal"' : ' class="badge"';
-  const pageKey = `content/client-stories/${slug}.html`;
+  const pageKey = `content/success-stories/${slug}.html`;
   const seoBlock = applySeoToHtml(
     "<title>placeholder</title>\n<meta name=\"description\" content=\"placeholder\">",
     pageKey,
@@ -207,7 +207,7 @@ ${seoBlock}
 </head>
 <body>
 
-<!-- @nav active="client-stories" -->
+<!-- @nav active="success-stories" -->
 <article class="prose prose--story">
   <div class="prose-header">
     <div class="prose-header-copy">
@@ -231,7 +231,7 @@ ${seoBlock}
   <div class="container">
     <div class="footer-bottom" style="border-top: none; padding-top: 0;">
       <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
-      <div><a href="../../client-stories.html">← Back to Client Stories</a></div>
+      <div><a href="../../success-stories.html">← Back to Success Stories</a></div>
     </div>
   </div>
 </footer>
@@ -255,7 +255,7 @@ function renderIndexCard(slug, parsed, markdown) {
           <span${badgeClass}>${config.badge}</span>
           <h3>${inlineMarkdown(parsed.title)}</h3>
           <p>${inlineMarkdown(excerpt)}</p>
-          <a class="link" href="content/client-stories/${slug}.html">Read the story →</a>
+          <a class="link" href="content/success-stories/${slug}.html">Read the story →</a>
         </div>
       </div>`;
 }
@@ -268,7 +268,7 @@ function updateIndexPage(cards) {
 
   if (!markerPattern.test(html)) {
     throw new Error(
-      "client-stories.html is missing <!-- story-cards:start/end --> markers",
+      "success-stories.html is missing <!-- story-cards:start/end --> markers",
     );
   }
 

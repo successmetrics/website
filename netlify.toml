@@ -63,8 +63,8 @@
   to = "/resources.html"
   status = 200
 [[redirects]]
-  from = "/client-stories"
-  to = "/client-stories.html"
+  from = "/success-stories"
+  to = "/success-stories.html"
   status = 200
 [[redirects]]
   from = "/about"
@@ -93,13 +93,39 @@
   to = "/content/whitepaper-midmarket-guide.html"
   status = 200
 [[redirects]]
-  from = "/content/client-stories/sfhss-agentforce-success-story"
-  to = "/content/client-stories/sfhss-agentforce-success-story.html"
+  from = "/content/success-stories/sfhss-agentforce-success-story"
+  to = "/content/success-stories/sfhss-agentforce-success-story.html"
   status = 200
 [[redirects]]
-  from = "/content/client-stories/mohcd-agentforce-success-story"
-  to = "/content/client-stories/mohcd-agentforce-success-story.html"
+  from = "/content/success-stories/mohcd-agentforce-success-story"
+  to = "/content/success-stories/mohcd-agentforce-success-story.html"
   status = 200
+
+# Legacy client-stories URLs (renamed to success-stories)
+[[redirects]]
+  from = "/client-stories"
+  to = "/success-stories"
+  status = 301
+[[redirects]]
+  from = "/client-stories.html"
+  to = "/success-stories.html"
+  status = 301
+[[redirects]]
+  from = "/content/client-stories/sfhss-agentforce-success-story"
+  to = "/content/success-stories/sfhss-agentforce-success-story"
+  status = 301
+[[redirects]]
+  from = "/content/client-stories/sfhss-agentforce-success-story.html"
+  to = "/content/success-stories/sfhss-agentforce-success-story.html"
+  status = 301
+[[redirects]]
+  from = "/content/client-stories/mohcd-agentforce-success-story"
+  to = "/content/success-stories/mohcd-agentforce-success-story"
+  status = 301
+[[redirects]]
+  from = "/content/client-stories/mohcd-agentforce-success-story.html"
+  to = "/content/success-stories/mohcd-agentforce-success-story.html"
+  status = 301
 
 # Legacy paths (pre site/ reorganization)
 [[redirects]]

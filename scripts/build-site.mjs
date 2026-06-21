@@ -21,7 +21,7 @@ const ACTIVE_KEYS = {
   industries: "ACTIVE_INDUSTRIES",
   accelerators: "ACTIVE_ACCELERATORS",
   resources: "ACTIVE_RESOURCES",
-  "client-stories": "ACTIVE_CLIENT_STORIES",
+  "success-stories": "ACTIVE_SUCCESS_STORIES",
   careers: "ACTIVE_CAREERS",
   about: "ACTIVE_ABOUT",
 };
@@ -108,7 +108,7 @@ const pages = findHtmlPages(SITE_DIR);
 let navUpdated = 0;
 let seoUpdated = 0;
 
-const storiesBuild = spawnSync("node", ["scripts/build-client-stories.mjs"], {
+const storiesBuild = spawnSync("node", ["scripts/build-success-stories.mjs"], {
   cwd: ROOT,
   stdio: "inherit",
 });
