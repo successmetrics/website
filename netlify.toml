@@ -67,6 +67,10 @@
   to = "/resources.html"
   status = 200
 [[redirects]]
+  from = "/ai-research"
+  to = "/ai-research.html"
+  status = 200
+[[redirects]]
   from = "/success-stories"
   to = "/success-stories.html"
   status = 200
@@ -95,6 +99,10 @@
 [[redirects]]
   from = "/content/whitepaper-midmarket-guide"
   to = "/content/whitepaper-midmarket-guide.html"
+  status = 200
+[[redirects]]
+  from = "/content/ai-research/off-grid-ai-lab-patient-trial-matching"
+  to = "/content/ai-research/off-grid-ai-lab-patient-trial-matching.html"
   status = 200
 [[redirects]]
   from = "/content/success-stories/sfhss-agentforce-success-story"

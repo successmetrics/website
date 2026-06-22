@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- seo:start -->
+<title>Off-the-Grid AI Lab for Trial Matching | White Paper</title>
+<meta name="description" content="Blueprint for a privacy-preserving, air-gapped AI lab to fine-tune medical models for patient-to-trial matching with HIPAA-grade controls.">
+<link rel="canonical" href="https://www.successmetrics.io/content/ai-research/off-grid-ai-lab-patient-trial-matching">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="Off-the-Grid AI Lab for Trial Matching | White Paper">
+<meta property="og:description" content="Blueprint for a privacy-preserving, air-gapped AI lab to fine-tune medical models for patient-to-trial matching with HIPAA-grade controls.">
+<meta property="og:url" content="https://www.successmetrics.io/content/ai-research/off-grid-ai-lab-patient-trial-matching">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Off-the-Grid AI Lab for Trial Matching | White Paper">
+<meta name="twitter:description" content="Blueprint for a privacy-preserving, air-gapped AI lab to fine-tune medical models for patient-to-trial matching with HIPAA-grade controls.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Off-the-Grid AI Lab for Trial Matching | White Paper","description":"Blueprint for a privacy-preserving, air-gapped AI lab to fine-tune medical models for patient-to-trial matching with HIPAA-grade controls.","url":"https://www.successmetrics.io/content/ai-research/off-grid-ai-lab-patient-trial-matching","datePublished":"2026-06-01","dateModified":"2026-06-01","author":{"@type":"Organization","name":"SuccessMetrics Corp","url":"https://www.successmetrics.io"},"publisher":{"@type":"Organization","name":"SuccessMetrics Corp","logo":{"@type":"ImageObject","url":"https://www.successmetrics.io/assets/images/logo.svg"}},"mainEntityOfPage":"https://www.successmetrics.io/content/ai-research/off-grid-ai-lab-patient-trial-matching"}</script>
+
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/styles.css?v=78f9242a7fe3">
+</head>
+<body>
+
+<!-- @nav active="ai-research" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html" class="active">AI Research</a></li>
+      <li><a href="/success-stories.html">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Expert</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<article class="prose prose--paper">
+  <span class="badge blue">White Paper</span>
+  <h1>Designing Off-the-Grid AI Lab for Patient to Trial Matching</h1>
+  <p class="research-lead"><em>A Practical Blueprint for Secure, On-Premises Fine-Tuning of Medical AI Models</em></p>
+  <div class="meta"><span>SuccessMetrics Corp</span><span>·</span><span>Version 1.0</span><span>·</span><span>June 2026</span><span>·</span><span>18 min read</span></div>
+
+  <h2>Executive Summary</h2>
+  <p>Matching patients to clinical trials is a high-value but data-sensitive task. It requires processing protected health information (PHI), medical histories, genomics, and eligibility criteria while meeting strict privacy, compliance, and ethical standards. Public cloud AI services introduce unacceptable risks of data exposure, model supply-chain contamination, and loss of control over proprietary matching logic.</p>
+  <p>This white paper outlines how to build a <strong>privacy-preserving, off-the-grid AI laboratory</strong> dedicated to training and fine-tuning models for patient-to-trial matching. The design assumes ePHI or equivalent sensitive data and applies the same physical, network, identity, and audit controls expected in enterprise environments at Meta, Google, or Amazon scale—adapted for healthcare.</p>
+  <p><strong>“Off-the-grid”</strong> here means production training and inference systems have no persistent public internet connectivity. Models, containers, and dependencies are acquired once through a hardened import path, verified, and mirrored into a private registry. All subsequent work occurs in a segmented, auditable environment. The goal is to improve matching accuracy and speed without ever exposing patient data externally.</p>
+
+  <h2>Use Case and Privacy Goals</h2>
+  <p><strong>Patient-to-trial matching</strong> typically involves:</p>
+  <ul>
+    <li>Ingesting structured and unstructured patient data (EHR extracts, notes, labs, imaging reports, genomics).</li>
+    <li>Encoding trial eligibility criteria (inclusion/exclusion from ClinicalTrials.gov or sponsor protocols).</li>
+    <li>Scoring or ranking matches while explaining why a patient qualifies or is excluded.</li>
+  </ul>
+  <p><strong>Sensitive elements</strong> that must remain internal:</p>
+  <ul>
+    <li>Direct identifiers and quasi-identifiers.</li>
+    <li>Detailed medical history, diagnoses, medications, and outcomes.</li>
+    <li>Any derived embeddings or intermediate representations that could leak information.</li>
+  </ul>
+  <p><strong>Core privacy objectives</strong>:</p>
+  <ul>
+    <li>Patient data never leaves controlled infrastructure.</li>
+    <li>Model training and inference occur without runtime calls to public endpoints.</li>
+    <li>Every access, training run, and model change is logged immutably for audit and incident response.</li>
+    <li>The system supports de-identification or privacy-preserving techniques (tokenization, synthetic data augmentation) where feasible before model training.</li>
+  </ul>
+  <p>These goals align with HIPAA-style safeguards, emerging AI safety expectations in healthcare, and the operational need for reproducible, governable matching models.</p>
+
+  <h2>Reference Architecture</h2>
+  <p>The lab uses a <strong>zoned, zero-trust architecture</strong> with strict segmentation. Production zones have no public internet routes. A single controlled DMZ/bastion handles all ingress and approved egress.</p>
+  <p><strong>Primary Zones</strong>:</p>
+  <ul>
+    <li><strong>Import/Egress DMZ (Bastion)</strong>: The only zone with temporary, whitelisted external connectivity. Used for model acquisition, integrity verification, scanning, and mirroring into the private registry. Also stages incoming patient datasets or trial criteria for classification and controlled movement inward.</li>
+    <li><strong>Data Ingestion &amp; Preprocessing Zone</strong>: Receives approved data. Performs de-identification, tokenization, quality checks, and feature engineering. Outputs privacy-safe training artifacts to the Data Zone.</li>
+    <li><strong>Data Zone</strong>: Encrypted, tiered storage (hot NVMe scratch, shared warm storage, cold object/NAS) for curated datasets, embeddings, and versioned artifacts. Access is mediated and logged.</li>
+    <li><strong>Training / Fine-Tuning Zone</strong>: GPU cluster running hardened containers. Pulls only from the private model registry and approved storage. Writes checkpoints and metrics to designated paths. No outbound internet.</li>
+    <li><strong>Model Registry &amp; Serving Zone</strong>: Versioned, signed models and inference endpoints for internal use (matching API or dashboard). Models loaded read-only. Internal-only access with strong authentication.</li>
+    <li><strong>Management &amp; Audit Zone</strong>: Orchestration (Kubernetes/Slurm), monitoring, SIEM, secrets vault, RBAC enforcement, and jump hosts for administration. All actions here are heavily logged.</li>
+  </ul>
+  <p><strong>Data &amp; Model Flow</strong>: Patient data → controlled ingestion &amp; preprocessing → approved storage → training jobs pull from private registry → outputs registered or archived internally. Nothing leaves production zones except through the governed DMZ path.</p>
+  <p>The architecture diagram below illustrates these zones and controlled flows (the same layered pattern applies directly to the medical use case, with added emphasis on the preprocessing step for ePHI).</p>
+
+  <figure class="prose-figure">
+    <img src="../../assets/images/ai-research/privacy-diagram-1.jpg" alt="Reference architecture diagram showing zoned off-the-grid AI lab with DMZ bastion, data ingestion, encrypted storage, GPU training cluster, private model registry, and management controls" width="1200" height="675" loading="lazy">
+    <figcaption><strong>Figure 1: Reference Architecture</strong> — zoned off-the-grid AI lab with DMZ as sole boundary, encrypted data paths, GPU training cluster, private registry, and management controls.</figcaption>
+  </figure>
+
+  <h2>Physical Infrastructure</h2>
+  <p>Dense GPU workloads for medical models (especially multimodal or larger language models) require serious facility planning.</p>
+  <p><strong>Key Elements</strong>:</p>
+  <ul>
+    <li><strong>Compute</strong>: NVIDIA H100/H200/B200-class or equivalent dense servers (4–8 GPUs per node) with high system RAM and fast local NVMe. Multi-node scaling via InfiniBand or RoCE with GPUDirect RDMA.</li>
+    <li><strong>Power &amp; Density</strong>: Plan for 80–120 kW per rack in liquid-cooled designs. Include N+1 or 2N UPS, metered PDUs, and redundant power feeds where available.</li>
+    <li><strong>Cooling</strong>: Liquid cooling (direct-to-chip or immersion) is effectively mandatory above ~40 kW/rack for efficiency and hardware longevity. Include coolant distribution units (CDUs), leak detection, and integration with facility chilled water or dry coolers. Target low PUE.</li>
+    <li><strong>Facility Protection</strong> (healthcare-grade physical security):
+      <ul>
+        <li>Badge + biometric or PIN access with logging and escort policies.</li>
+        <li>Locked equipment rooms or cages; tamper-resistant or sensor-equipped racks.</li>
+        <li>Comprehensive camera coverage with retention and motion analytics.</li>
+        <li>Environmental monitoring (temperature, humidity, differential pressure, liquid leaks) tied to alerting.</li>
+        <li>Fire detection (VESDA) + clean-agent suppression (Novec 1230 or equivalent) to protect electronics without water damage.</li>
+        <li>Backup cooling and environmental controls to prevent thermal throttling or hardware damage during outages.</li>
+      </ul>
+    </li>
+  </ul>
+  <p>Power and cooling are first-class design constraints, not afterthoughts. They directly affect achievable model size, training throughput, and long-term operating cost.</p>
+
+  <h2>Logical Access Controls</h2>
+  <p>Treat the lab like any other system processing ePHI or high-value clinical data.</p>
+  <p><strong>Core Controls</strong>:</p>
+  <ul>
+    <li><strong>Identity &amp; Access</strong>: Centralized IAM with MFA everywhere. Role-based access control (RBAC) with clear separation: Data Stewards (approve datasets), Model Governors (approve models and fine-tunes), ML Engineers (submit training jobs within policy), Auditors (read-only), Platform Ops (infrastructure only).</li>
+    <li><strong>Least Privilege &amp; Just-in-Time</strong>: No standing admin access on training or serving nodes. Privileged actions require approval workflows and are time-limited.</li>
+    <li><strong>Audit Logging</strong>: Immutable, tamper-evident logs for every authentication, authorization decision, data access, training job submission, model load, and configuration change. Centralized SIEM for correlation and alerting.</li>
+    <li><strong>Encryption</strong>: All data at rest (LUKS/SED with centrally managed keys, preferably HSM-backed). Encryption in transit for all storage and control-plane traffic (mTLS).</li>
+    <li><strong>Secrets Management</strong>: No secrets in images or code. Retrieved from isolated vault at runtime with short TTLs.</li>
+    <li><strong>Endpoint Hardening</strong>: Admin workstations and jump hosts are hardened (CIS benchmarks, EDR, full-disk encryption, USB control). No personal devices for privileged access.</li>
+  </ul>
+  <p>These controls map directly to healthcare security program expectations and support both internal governance and external audit readiness.</p>
+
+  <h2>Model Sourcing and Selection</h2>
+  <p>Three practical starting points exist for patient-to-trial matching models. Choose based on task fit, licensing, data requirements, and validation burden.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Approach</th>
+        <th>Best For</th>
+        <th>Advantages</th>
+        <th>Trade-offs</th>
+        <th>Example Starting Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>General-purpose base model</strong></td>
+        <td>Broad reasoning + heavy custom adaptation</td>
+        <td>Flexible; widely available; strong reasoning foundations</td>
+        <td>Requires substantial high-quality medical data and alignment work</td>
+        <td>Llama 3.1 / Mistral / Qwen2 variants (permissive licenses)</td>
+      </tr>
+      <tr>
+        <td><strong>Biomedical / oncology-specialized model</strong></td>
+        <td>Clinical language, entity recognition, trial semantics</td>
+        <td>Better medical vocabulary and ontology awareness out of the box</td>
+        <td>Quality varies; may still need task-specific fine-tuning</td>
+        <td>OpenMEDLab collections, MEDomicsLab oncology models, Hugging Face biomedical releases</td>
+      </tr>
+      <tr>
+        <td><strong>Domain-specific model with local fine-tuning</strong></td>
+        <td>Narrow task (trial eligibility matching)</td>
+        <td>Strong task performance; easier to govern and validate locally</td>
+        <td>Requires rigorous curation of labeled matching datasets and ongoing validation</td>
+        <td>Fine-tune a specialized biomedical model on approved internal matching data</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Selection Criteria</strong>:</p>
+  <ul>
+    <li>Licensing that explicitly permits commercial use and local deployment/mirroring.</li>
+    <li>Context length and tokenization suitable for long eligibility criteria and patient notes.</li>
+    <li>Availability of tokenizer, config, and modeling code for fully offline use.</li>
+    <li>Provenance and release quality (signed releases, documented training data summary, known limitations).</li>
+  </ul>
+  <p>Open-source medical model ecosystems (OpenMEDLab, MEDomicsLab, academic oncology computational groups, and curated Hugging Face medical collections) provide viable starting points. Commercial medical AI vendors may also allow licensed local mirroring—always verify contract terms for offline rights and redistribution restrictions.</p>
+
+  <h2>Offline Model Operations</h2>
+  <p><strong>Acquisition &amp; Lifecycle Process</strong> (never fetch at runtime):</p>
+  <ol>
+    <li><strong>Controlled Download (DMZ only)</strong>: On a dedicated, logged bastion workstation with temporary whitelisted access, download from official/trusted sources only.</li>
+    <li><strong>Verification</strong>: Cryptographic hash (SHA-256+), signature validation where available, file structure and statistical checks, license review.</li>
+    <li><strong>Private Mirroring</strong>: Push to an internal, authenticated model registry (e.g., Harbor extended for models, MLflow + MinIO, or equivalent) with rich metadata: source, hashes, approval date, approver, intended use, model card.</li>
+    <li><strong>Dependency Pinning</strong>: Mirror and pin tokenizers, sentencepiece models, container base images (NVIDIA NGC or hardened equivalents), and any required wheels. Rebuild containers internally when practical.</li>
+    <li><strong>Approval &amp; Promotion</strong>: Formal review by the Model Governance Board before a model version is promoted to the training or serving registry.</li>
+    <li><strong>Update, Rollback &amp; Retirement</strong>: New versions follow the same gated process. Maintain previous versions for rollback. Retire models with documented rationale and audit trail. Flag and restrict any model if new safety or bias issues emerge.</li>
+  </ol>
+  <p>This process adds controlled latency but eliminates entire classes of supply-chain and runtime exposure risk.</p>
+
+  <h2>Data Governance and Compliance</h2>
+  <p><strong>Patient Data Handling</strong>:</p>
+  <ul>
+    <li>All inbound data passes through the controlled ingestion/preprocessing zone for classification, de-identification or tokenization where possible, and approval before entering training storage.</li>
+    <li>Clear retention policies (e.g., raw identifiers deleted after N days post-project unless legal/regulatory hold; derived artifacts retained per business and compliance needs).</li>
+    <li>Cryptographic deletion support where required.</li>
+  </ul>
+  <p><strong>Audit &amp; Incident Response</strong>:</p>
+  <ul>
+    <li>Immutable logs feed SIEM with alerting on anomalies (unusual data volume/access patterns, configuration drift, failed authentications).</li>
+    <li>Documented playbooks for suspected data exposure, model misbehavior, or physical compromise. Emphasis on rapid isolation and evidence preservation.</li>
+    <li>Regular access reviews, tabletop exercises, and (where appropriate) external audit support.</li>
+  </ul>
+  <p><strong>Validation</strong>:</p>
+  <ul>
+    <li>Matching models require clinical validation (accuracy, fairness, safety) in addition to technical metrics. Maintain human-in-the-loop review for high-stakes decisions and continuous monitoring for drift.</li>
+  </ul>
+  <p>These practices support HIPAA-aligned programs and emerging expectations for trustworthy medical AI.</p>
+
+  <h2>Implementation Roadmap</h2>
+  <p><strong>Phase 1 – Pilot (4–8 weeks)</strong>: Minimal viable lab with one hardened GPU node, basic physical controls, DMZ import process for 1–2 approved models, private registry, and simple inference endpoint. Focus on governed import-to-serving flow and initial policy drafting.</p>
+  <p><strong>Phase 2 – Secure Training Environment (2–4 months)</strong>: Add GPU cluster capacity, tiered encrypted storage, network segmentation, RBAC/IAM integration, Model Governance Board, preprocessing pipeline for de-identification, and immutable logging. Pilot fine-tuning of a chosen biomedical or general base model on approved internal matching data.</p>
+  <p><strong>Phase 3 – Production-Grade Operations (4–8 months)</strong>: Full physical security stack (biometrics, environmental monitoring integrated to SIEM, clean-agent fire suppression), liquid cooling if density requires, automated policy enforcement, staging environment for updates, hardware lifecycle process, and validated matching workflow with audit-ready trails. Achieve readiness for regulated or high-volume use.</p>
+  <p><strong>Phase 4 – Maturity &amp; Scale (ongoing)</strong>: Automate more governance workflows, expand validation and monitoring, explore confidential computing features as GPU TEEs mature, and integrate with broader clinical or automation platforms via secure internal APIs.</p>
+  <p>Start small, prove the controlled flow, then scale while embedding governance.</p>
+
+  <h2>Conclusion</h2>
+  <p>A privacy-preserving AI lab for patient-to-trial matching is a <strong>systems problem</strong>, not just a GPU problem. Success requires tight integration of:</p>
+  <ul>
+    <li>Physical facility controls (secure, environmentally resilient housing for dense compute).</li>
+    <li>Network isolation (segmented zones with zero persistent public internet on training and serving systems).</li>
+    <li>Healthcare-grade logical controls (RBAC, MFA, immutable audit, encryption, least privilege).</li>
+    <li>A trusted offline model supply chain (verified acquisition, private registry, pinned dependencies, formal approval and rollback).</li>
+    <li>Strong data governance (controlled ingestion, retention policies, clinical validation, incident readiness).</li>
+  </ul>
+  <p>Organizations that invest in this full stack can fine-tune or adapt powerful models—whether starting from general-purpose foundations or existing biomedical/oncology-specialized collections—while keeping sensitive patient data entirely within controlled boundaries. The result is faster, more accurate trial matching with defensible privacy, compliance posture, and operational sovereignty.</p>
+  <p>This blueprint provides the practical foundation. Specific implementation details will depend on your threat model, existing facility assets, regulatory environment, and chosen starting models. The principles remain consistent: control the ingress, segment the environment, govern the models, and audit everything.</p>
+  <p>For architecture workshops, detailed TCO modeling, or implementation support tailored to your clinical automation or AI platform needs, engage your trusted infrastructure and security partners.</p>
+
+  <hr>
+  <p class="prose-footnote"><strong>Document Control</strong><br>Classification: Internal / Client-Distribution Appropriate<br>Review Cycle: Annual or upon significant regulatory or technology changes</p>
+  <p class="prose-footnote"><em>This white paper provides practical guidance synthesized from air-gapped deployment patterns, healthcare security expectations, and current open-source medical model ecosystems. Always validate design decisions against your specific legal, regulatory, and clinical requirements.</em></p>
+
+  <div class="callout"><p><strong>Discuss this architecture with our team.</strong> We design secure, governable AI labs for healthcare and enterprise workloads. <a href="../../contact.html">Talk to an expert →</a></p></div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div><a href="../../ai-research.html">← Back to AI Research</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -21,6 +21,7 @@ const ACTIVE_KEYS = {
   industries: "ACTIVE_INDUSTRIES",
   accelerators: "ACTIVE_ACCELERATORS",
   resources: "ACTIVE_RESOURCES",
+  "ai-research": "ACTIVE_AI_RESEARCH",
   "success-stories": "ACTIVE_SUCCESS_STORIES",
   careers: "ACTIVE_CAREERS",
   about: "ACTIVE_ABOUT",
@@ -167,3 +168,10 @@ const fallbackTarget = join(fallbackTargetDir, "careers-fallback.json");
 mkdirSync(fallbackTargetDir, { recursive: true });
 copyFileSync(fallbackSource, fallbackTarget);
 console.log("Copied careers fallback data to site/data/careers-fallback.json");
+
+const privacyThumbSource = join(ROOT, "media", "white-papers", "privacy-thumbnail.jpg");
+const privacyThumbTargetDir = join(SITE_DIR, "assets", "images", "ai-research");
+const privacyThumbTarget = join(privacyThumbTargetDir, "privacy-thumbnail.jpg");
+mkdirSync(privacyThumbTargetDir, { recursive: true });
+copyFileSync(privacyThumbSource, privacyThumbTarget);
+console.log("Copied privacy white paper thumbnail to site/assets/images/ai-research/");

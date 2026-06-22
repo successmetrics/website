@@ -6,6 +6,7 @@ const MAIN_PAGES = [
   "industries.html",
   "accelerators.html",
   "resources.html",
+  "ai-research.html",
   "success-stories.html",
   "careers.html",
   "about.html",
@@ -17,6 +18,7 @@ const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
+  "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
 ];
@@ -26,6 +28,7 @@ const NAV_LINKS = [
   { href: "/industries.html" },
   { href: "/accelerators.html" },
   { href: "/resources.html" },
+  { href: "/ai-research.html" },
   { href: "/success-stories.html" },
   { href: "/careers.html" },
   { href: "/about.html" },
