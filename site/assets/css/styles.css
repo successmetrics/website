@@ -220,6 +220,17 @@ a:hover { text-decoration: none; }
   opacity: 0.9;
   mix-blend-mode: lighten;
 }
+.client-logo--sfhss img {
+  height: 34px;
+  max-width: 180px;
+  opacity: 0.85;
+}
+.client-logo--mohcd img {
+  height: 76px;
+  max-width: 296px;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
 @keyframes client-marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-25%); }

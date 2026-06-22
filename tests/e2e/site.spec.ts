@@ -66,6 +66,8 @@ test.describe("page smoke tests", () => {
     await expect(page.locator('.client-logo img[alt="Caltrans"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="RLI"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="LeafLink"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="San Francisco Health Service System"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Mayor’s Office of Housing and Community Development"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="RPM"]')).toHaveCount(0);
   });
 
