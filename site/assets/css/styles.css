@@ -246,6 +246,14 @@ a:hover { text-decoration: none; }
   .client-marquee { mask-image: none; -webkit-mask-image: none; }
   .client-marquee-group[aria-hidden="true"] { display: none; }
   .client-marquee-group { padding-right: 56px; }
+  .accelerator-demo-video { display: none; }
+  .accelerator-demo-card::before {
+    content: "📊";
+    display: block;
+    font-size: 3.4rem;
+    padding: 48px 20px 12px;
+    text-align: center;
+  }
 }
 
 /* ============ STATS BAR ============ */
@@ -296,6 +304,30 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
 .card p { color: var(--text-dim); font-size: 0.93rem; flex: 1; }
 .card .link { margin-top: 18px; font-weight: 600; font-size: 0.9rem; color: var(--accent-2); }
 .card .link:hover { text-decoration: underline; }
+
+.accelerator-demo-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+.accelerator-demo-card:hover { transform: none; }
+.accelerator-demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1404 / 1018;
+  object-fit: cover;
+  background: #0a0f1a;
+}
+.accelerator-demo-caption {
+  margin: 0;
+  padding: 16px 20px 20px;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-align: center;
+}
 .badge {
   display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
   padding: 4px 10px; border-radius: 999px; margin-bottom: 14px;
