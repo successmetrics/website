@@ -175,3 +175,36 @@ const privacyThumbTarget = join(privacyThumbTargetDir, "privacy-thumbnail.jpg");
 mkdirSync(privacyThumbTargetDir, { recursive: true });
 copyFileSync(privacyThumbSource, privacyThumbTarget);
 console.log("Copied privacy white paper thumbnail to site/assets/images/ai-research/");
+
+const orgInsightsSource = join(ROOT, "media", "videos", "OrgInishgts-New.mov");
+const orgInsightsTargetDir = join(SITE_DIR, "assets", "videos");
+const orgInsightsTarget = join(orgInsightsTargetDir, "orginsights.mp4");
+mkdirSync(orgInsightsTargetDir, { recursive: true });
+
+const ffmpeg = spawnSync(
+  "ffmpeg",
+  [
+    "-y",
+    "-i",
+    orgInsightsSource,
+    "-c:v",
+    "libx264",
+    "-crf",
+    "22",
+    "-preset",
+    "medium",
+    "-g",
+    "120",
+    "-keyint_min",
+    "120",
+    "-an",
+    "-movflags",
+    "+faststart",
+    orgInsightsTarget,
+  ],
+  { stdio: "inherit" },
+);
+if (ffmpeg.status !== 0) {
+  process.exit(ffmpeg.status ?? 1);
+}
+console.log("Converted Org Insights demo video to site/assets/videos/orginsights.mp4");

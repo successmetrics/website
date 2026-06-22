@@ -306,6 +306,7 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
 .card .link:hover { text-decoration: underline; }
 
 .accelerator-demo-card {
+  position: relative;
   padding: 0;
   overflow: hidden;
   display: flex;
@@ -317,9 +318,27 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1404 / 1018;
+  aspect-ratio: 1522 / 1152;
   object-fit: cover;
+  object-position: center top;
   background: #0a0f1a;
+  cursor: zoom-in;
+}
+.accelerator-demo-expand-hint {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(10, 15, 26, 0.72);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
 }
 .accelerator-demo-caption {
   margin: 0;
@@ -327,6 +346,121 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
   font-size: 1.05rem;
   color: var(--text);
   text-align: center;
+}
+.accelerator-demo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.accelerator-demo-overlay[hidden] {
+  display: none;
+}
+body.accelerator-demo-overlay-open {
+  overflow: hidden;
+}
+.accelerator-demo-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 26, 0.82);
+}
+.accelerator-demo-overlay-panel {
+  position: relative;
+  z-index: 1;
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.accelerator-demo-overlay-video-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 1;
+}
+.accelerator-demo-overlay-video-wrap > .accelerator-demo-video {
+  display: block;
+  max-width: 80vw;
+  max-height: calc(80vh - 3.5rem);
+  width: auto;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #0a0f1a;
+  border-radius: 0.5rem 0.5rem 0 0;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  cursor: default;
+}
+.accelerator-demo-overlay-skip-controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: rgba(10, 15, 26, 0.95);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+.accelerator-demo-overlay-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.accelerator-demo-overlay-skip:hover,
+.accelerator-demo-overlay-skip:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  outline: none;
+}
+.accelerator-demo-overlay-skip svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+.accelerator-demo-overlay-minimize {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(10, 15, 26, 0.78);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.accelerator-demo-overlay-minimize:hover,
+.accelerator-demo-overlay-minimize:focus-visible {
+  background: rgba(10, 15, 26, 0.95);
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+.accelerator-demo-overlay-minimize svg {
+  width: 1rem;
+  height: 1rem;
 }
 .badge {
   display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
