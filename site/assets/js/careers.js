@@ -138,18 +138,13 @@
               escapeHtml(job.detailUrl) +
               '">More info</a>',
           );
-          actions.push(
-            '<a class="btn btn-primary" href="' +
-              escapeHtml(job.detailUrl + "#apply") +
-              '">Apply Now</a>',
-          );
-        } else {
-          actions.push(
-            '<button type="button" class="btn btn-primary apply-btn" data-role="' +
-              escapeHtml(job.label) +
-              '">Apply Now</button>',
-          );
         }
+
+        actions.push(
+          '<button type="button" class="btn btn-primary apply-btn" data-role="' +
+            escapeHtml(job.label) +
+            '">Apply Now</button>',
+        );
 
         return (
           '<div class="job-row">' +

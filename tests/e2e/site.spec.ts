@@ -200,19 +200,22 @@ test.describe("forms", () => {
     const firstMoreInfo = page.getByRole("link", { name: "More info" }).first();
     await expect(firstMoreInfo).toBeVisible();
 
-    const firstApply = page.getByRole("link", { name: "Apply Now" }).first();
-    const detailHref = await firstApply.getAttribute("href");
-    expect(detailHref).toContain("/careers/");
-    expect(detailHref).toContain("#apply");
+    const firstApply = page.getByRole("button", { name: "Apply Now" }).first();
+    const expectedRole = await firstApply.getAttribute("data-role");
+    expect(expectedRole).toBeTruthy();
+
+    await firstApply.click();
+    await expect(page.locator("#apply")).toBeInViewport();
+
+    const roleSelect = page.locator("#role");
+    await expect(roleSelect).toHaveValue(expectedRole!);
+
+    await expect(page.locator("#job-application-form")).toBeVisible();
+    await expect(page.locator("#resume")).toBeVisible();
 
     await firstMoreInfo.click();
     await expect(page).toHaveURL(/\/careers\/[^/]+$/);
     await expect(page.locator(".job-detail-content")).toBeVisible();
-    await expect(page.locator("#job-application-form")).toBeVisible();
-
-    const roleSelect = page.locator("#role");
-    await expect(roleSelect).not.toHaveValue("");
-    await expect(page.locator("#resume")).toBeVisible();
   });
 });
 
