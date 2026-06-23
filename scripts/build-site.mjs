@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, extname } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -173,38 +173,54 @@ const privacyThumbSource = join(ROOT, "media", "white-papers", "privacy-thumbnai
 const privacyThumbTargetDir = join(SITE_DIR, "assets", "images", "ai-research");
 const privacyThumbTarget = join(privacyThumbTargetDir, "privacy-thumbnail.jpg");
 mkdirSync(privacyThumbTargetDir, { recursive: true });
-copyFileSync(privacyThumbSource, privacyThumbTarget);
-console.log("Copied privacy white paper thumbnail to site/assets/images/ai-research/");
+if (existsSync(privacyThumbSource)) {
+  copyFileSync(privacyThumbSource, privacyThumbTarget);
+  console.log("Copied privacy white paper thumbnail to site/assets/images/ai-research/");
+} else if (existsSync(privacyThumbTarget)) {
+  console.log("Using committed privacy white paper thumbnail in site/assets/images/ai-research/");
+} else {
+  throw new Error(
+    "Missing privacy white paper thumbnail. Add media/white-papers/privacy-thumbnail.jpg locally or commit site/assets/images/ai-research/privacy-thumbnail.jpg.",
+  );
+}
 
 const orgInsightsSource = join(ROOT, "media", "videos", "OrgInishgts-New.mov");
 const orgInsightsTargetDir = join(SITE_DIR, "assets", "videos");
 const orgInsightsTarget = join(orgInsightsTargetDir, "orginsights.mp4");
 mkdirSync(orgInsightsTargetDir, { recursive: true });
 
-const ffmpeg = spawnSync(
-  "ffmpeg",
-  [
-    "-y",
-    "-i",
-    orgInsightsSource,
-    "-c:v",
-    "libx264",
-    "-crf",
-    "22",
-    "-preset",
-    "medium",
-    "-g",
-    "120",
-    "-keyint_min",
-    "120",
-    "-an",
-    "-movflags",
-    "+faststart",
-    orgInsightsTarget,
-  ],
-  { stdio: "inherit" },
-);
-if (ffmpeg.status !== 0) {
-  process.exit(ffmpeg.status ?? 1);
+if (existsSync(orgInsightsSource)) {
+  const ffmpeg = spawnSync(
+    "ffmpeg",
+    [
+      "-y",
+      "-i",
+      orgInsightsSource,
+      "-c:v",
+      "libx264",
+      "-crf",
+      "22",
+      "-preset",
+      "medium",
+      "-g",
+      "120",
+      "-keyint_min",
+      "120",
+      "-an",
+      "-movflags",
+      "+faststart",
+      orgInsightsTarget,
+    ],
+    { stdio: "inherit" },
+  );
+  if (ffmpeg.status !== 0) {
+    process.exit(ffmpeg.status ?? 1);
+  }
+  console.log("Converted Org Insights demo video to site/assets/videos/orginsights.mp4");
+} else if (existsSync(orgInsightsTarget)) {
+  console.log("Using committed Org Insights demo video in site/assets/videos/orginsights.mp4");
+} else {
+  throw new Error(
+    "Missing Org Insights demo video. Add media/videos/OrgInishgts-New.mov locally or commit site/assets/videos/orginsights.mp4.",
+  );
 }
-console.log("Converted Org Insights demo video to site/assets/videos/orginsights.mp4");

@@ -312,6 +312,7 @@ h2.title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; letter-spa
   display: flex;
   flex-direction: column;
   min-height: 280px;
+  cursor: zoom-in;
 }
 .accelerator-demo-card:hover { transform: none; }
 .accelerator-demo-video {

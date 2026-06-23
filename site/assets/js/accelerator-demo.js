@@ -12,10 +12,12 @@
     return;
   }
 
-  const originalSrc = video.getAttribute("src") || "";
+  const videoSrc = video.getAttribute("src") || "";
+  const videoUrl = new URL(videoSrc, window.location.href).href;
   let seekableUrl = null;
   let seekablePromise = null;
   let lastFocus = null;
+  let openToken = 0;
   const skipSeconds = 10;
 
   function isExpanded() {
@@ -31,7 +33,7 @@
       return seekablePromise;
     }
 
-    seekablePromise = fetch(originalSrc)
+    seekablePromise = fetch(videoUrl)
       .then(function (response) {
         if (!response.ok) {
           throw new Error("Video fetch failed");
@@ -58,22 +60,39 @@
       return Promise.resolve();
     }
 
-    return prepareSeekableVideo().then(function (url) {
-      return new Promise(function (resolve) {
-        function onReady() {
-          video.removeEventListener("loadedmetadata", onReady);
-          video.dataset.seekableReady = "true";
-          if (Number.isFinite(savedTime)) {
-            video.currentTime = savedTime;
-          }
-          resolve();
-        }
+    return prepareSeekableVideo()
+      .then(function (url) {
+        return new Promise(function (resolve) {
+          let settled = false;
 
-        video.addEventListener("loadedmetadata", onReady);
-        video.src = url;
-        video.load();
+          function done() {
+            if (settled) return;
+            settled = true;
+            video.removeEventListener("loadedmetadata", done);
+            video.dataset.seekableReady = "true";
+            if (Number.isFinite(savedTime)) {
+              video.currentTime = savedTime;
+            }
+            resolve();
+          }
+
+          video.addEventListener("loadedmetadata", done);
+
+          if (video.src !== url) {
+            video.src = url;
+            video.load();
+          }
+
+          if (video.readyState >= 1) {
+            done();
+          } else {
+            window.setTimeout(done, 4000);
+          }
+        });
+      })
+      .catch(function () {
+        return Promise.resolve();
       });
-    });
   }
 
   function seekToTime(target) {
@@ -119,9 +138,7 @@
       });
     }
 
-    swapToSeekableSource(video.currentTime).then(runSkip).catch(function () {
-      runSkip();
-    });
+    swapToSeekableSource(video.currentTime).then(runSkip);
   }
 
   function mountExpandedVideo() {
@@ -138,31 +155,29 @@
   }
 
   function openOverlay() {
-    if (isExpanded() || overlay.dataset.opening === "true") return;
+    if (isExpanded()) return;
 
-    overlay.dataset.opening = "true";
+    const token = ++openToken;
     lastFocus = document.activeElement;
     const savedTime = video.currentTime;
     const wasPlaying = !video.paused;
 
-    swapToSeekableSource(savedTime)
-      .then(function () {
-        mountExpandedVideo();
-        if (!wasPlaying) {
-          video.pause();
-        }
-      })
-      .catch(function () {
-        mountExpandedVideo();
-      })
-      .finally(function () {
-        delete overlay.dataset.opening;
-      });
+    mountExpandedVideo();
+
+    swapToSeekableSource(savedTime).then(function () {
+      if (token !== openToken || !isExpanded()) return;
+      if (!wasPlaying) {
+        video.pause();
+      } else {
+        video.play().catch(function () {});
+      }
+    });
   }
 
   function closeOverlay() {
     if (!isExpanded()) return;
 
+    openToken += 1;
     video.pause();
     video.removeAttribute("controls");
     video.removeAttribute("tabindex");
@@ -181,11 +196,13 @@
     video.play().catch(function () {});
   }
 
-  video.addEventListener("click", function () {
-    if (!isExpanded()) {
-      openOverlay();
-    }
-  });
+  function handleOpenRequest(event) {
+    if (isExpanded()) return;
+    if (event.target.closest(".accelerator-demo-overlay-minimize")) return;
+    openOverlay();
+  }
+
+  card.addEventListener("click", handleOpenRequest);
 
   minimizeBtn.addEventListener("click", function (event) {
     event.preventDefault();
