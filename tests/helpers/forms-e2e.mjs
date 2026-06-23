@@ -19,6 +19,14 @@ export async function waitForCareersRoles(page) {
   );
 }
 
+export async function waitForCareersDetailRole(page, expectedLabel) {
+  await page.waitForFunction(
+    (label) => document.querySelector("#role")?.value === label,
+    expectedLabel,
+    { timeout: 15_000 },
+  );
+}
+
 async function fillHoneypot(page, value) {
   await page.evaluate((spam) => {
     const input = document.querySelector('input[name="bot-field"]');
@@ -108,6 +116,11 @@ export async function submitCareersForm(page, runId, overrides) {
   const responsePromise = waitForCareersApiPost(page);
   await page.getByRole("button", { name: "Submit Application →" }).click();
   return responsePromise;
+}
+
+export async function submitCareersDetailForm(page, runId, { label, ...overrides }) {
+  await waitForCareersDetailRole(page, label);
+  return submitCareersForm(page, runId, { position: label, ...overrides });
 }
 
 export async function readJsonResponse(response) {

@@ -21,6 +21,9 @@ const CONTENT_PAGES = [
   "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+  "careers/senior-salesforce-developer-0084.html",
+  "careers/salesforce-architect-0082.html",
+  "careers/salesforce-developer-0081.html",
 ];
 
 const NAV_LINKS = [
@@ -192,7 +195,10 @@ test.describe("forms", () => {
   test("careers application form renders and Apply Now pre-selects role", async ({ page }) => {
     await page.goto("/careers.html");
 
-    await expect(page.locator("#job-list .job-row")).toHaveCount(4);
+    await expect(page.locator("#job-list .job-row")).toHaveCount(3);
+
+    const firstMoreInfo = page.getByRole("link", { name: "More info" }).first();
+    await expect(firstMoreInfo).toBeVisible();
 
     const firstApply = page.getByRole("button", { name: "Apply Now" }).first();
     const expectedRole = await firstApply.getAttribute("data-role");
@@ -206,6 +212,10 @@ test.describe("forms", () => {
 
     await expect(page.locator("#job-application-form")).toBeVisible();
     await expect(page.locator("#resume")).toBeVisible();
+
+    await firstMoreInfo.click();
+    await expect(page).toHaveURL(/\/careers\/[^/]+$/);
+    await expect(page.locator(".job-detail-content")).toBeVisible();
   });
 });
 

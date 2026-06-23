@@ -1,0 +1,49 @@
+About the Role
+                                                                                                          
+SuccessMetrics is looking for a skilled Salesforce Developer with 3–4 years of hands-on experience developing and configuring applications on the Salesforce platform. The ideal candidate is PD1, Admin, and App Builder certified, with working knowledge across Sales Cloud, Service Cloud, Experience Cloud, and OmniStudio. Consultant certifications in any of the Salesforce Clouds are highly preferred.
+​
+You will collaborate with architects, business analysts, and product owners to build scalable, maintainable solutions that enhance business processes and user experience. This is an exciting opportunity to work across multiple Salesforce orgs in public sector and nonprofit engagements and grow into a senior technical role.
+⸻
+​
+Key Responsibilities​
+​
+Configure and customize Salesforce applications using Apex, Lightning Web Components (LWC), SOQL, and Flows
+Build and manage OmniStudio components: FlexCards, OmniScripts, Integration Procedures, DataRaptors
+Implement features across Sales Cloud, Service Cloud, and Experience Cloud based on project needs
+Translate business requirements into technical solutions under the guidance of architects
+Integrate Salesforce with external systems using REST/SOAP APIs and middleware tools
+Develop unit tests and ensure code follows Salesforce best practices and performance guidelines
+Assist with data migration tasks and manage data using Data Loader, Workbench, and ETL tools
+Participate in sprint planning, code reviews, and team collaboration sessions
+Create and maintain clear documentation for implemented solutions
+⸻
+​
+Required Qualifications
+​
+3–4 years of Salesforce development experience with real-world project delivery
+Salesforce Administrator, Platform Developer I, and App Builder certifications (Required)
+At least one Salesforce Consultant certification (e.g., Service Cloud, Sales Cloud, Experience Cloud)
+Hands-on experience with OmniStudio (FlexCards, OmniScripts, Integration Procedures)
+Proficiency in Apex, LWC, JavaScript, SOQL, JSON, and standard Salesforce configuration
+Familiarity with Version Control (Git), Salesforce CLI, and DevOps workflows
+Ability to collaborate effectively in a hybrid, fast-paced, Agile environment
+Strong communication skills and ability to explain technical solutions to business users
+⸻
+
+Preferred Qualifications
+​
+OmniStudio Consultant certification
+Exposure to Salesforce Public Sector Solutions or Nonprofit Cloud
+Experience working with CI/CD pipelines, GitHub, or other DevOps tools
+Understanding of Salesforce security model, sharing settings, and field-level access
+Experience with Experience Cloud site customization and dynamic page layouts
+⸻
+​
+Why Join Us?
+At SuccessMetrics, we’re building a world-class team of Salesforce experts who are passionate about impact and innovation. You’ll get to :
+
+
+Work alongside Certified Technical Architects and solution experts
+Get exposed to multi-cloud projects across public sector and nonprofit domains
+Grow your career with structured mentorship and certification support
+Contribute to innovative accelerators in the Salesforce ecosystem

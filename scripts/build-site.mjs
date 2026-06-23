@@ -117,6 +117,14 @@ if (storiesBuild.status !== 0) {
   process.exit(storiesBuild.status ?? 1);
 }
 
+const careersBuild = spawnSync("node", ["scripts/build-career-opportunities.mjs"], {
+  cwd: ROOT,
+  stdio: "inherit",
+});
+if (careersBuild.status !== 0) {
+  process.exit(careersBuild.status ?? 1);
+}
+
 for (const page of pages) {
   if (buildPage(page)) {
     navUpdated += 1;
