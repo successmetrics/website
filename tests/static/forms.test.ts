@@ -1,6 +1,21 @@
 import { describe, expect, it } from "vitest";
 import { loadPage } from "../helpers/site";
 import { NETLIFY_FORMS } from "../helpers/netlify";
+import { loadCareerJobPages } from "../helpers/careers.mjs";
+
+const careerJobs = loadCareerJobPages();
+
+function expectCareerDetailApplyForm($: ReturnType<typeof loadPage>, job: (typeof careerJobs)[number]) {
+  const form = $("#job-application-form");
+
+  expect(form.length).toBe(1);
+  expect($(".job-detail-content").length).toBe(1);
+  expect($(".job-detail-apply").length).toBe(1);
+  expect($("body").attr("data-preselected-role")).toBe(job.label);
+  expect($(".job-detail-content .job-section").length).toBeGreaterThan(0);
+  expect($(".job-desc-heading").length).toBeGreaterThan(0);
+  expect(form.attr("data-netlify")).toBeUndefined();
+}
 
 describe("form submissions", () => {
   it("contact form posts to the contact API", () => {
@@ -42,24 +57,21 @@ describe("form submissions", () => {
   });
 });
 
-describe("careers page", () => {
-  it("includes dynamic job board containers and fallback data", () => {
+describe("careers pages", () => {
+  it("includes dynamic job board containers on the index page", () => {
     const $ = loadPage("careers.html");
 
     expect($("#job-list").length).toBe(1);
     expect($("#role option").length).toBeGreaterThan(0);
   });
 
-  it("builds career opportunity detail pages with apply forms", () => {
-    const $ = loadPage("careers/salesforce-developer-0081.html");
-
-    expect($(".job-detail-content").length).toBe(1);
-    expect($(".job-detail-apply").length).toBe(1);
-    expect($("#job-application-form").length).toBe(1);
-    expect($("body").attr("data-preselected-role")).toContain("JD-0081");
-    expect($(".job-detail-content .job-section").length).toBeGreaterThan(0);
-    expect($(".job-desc-heading").length).toBeGreaterThan(0);
-  });
+  it.each(careerJobs.map((job) => [job.title, job]))(
+    "builds %s detail page with structured job description and apply form",
+    (_title, job) => {
+      const $ = loadPage(job.page);
+      expectCareerDetailApplyForm($, job);
+    },
+  );
 });
 
 describe("form API routes", () => {

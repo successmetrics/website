@@ -2,11 +2,14 @@ import { test, expect } from "@playwright/test";
 import {
   readJsonResponse,
   submitCareersForm,
+  submitCareersDetailForm,
   submitContactForm,
   waitForCareersRoles,
 } from "../helpers/forms-e2e.mjs";
+import { loadCareerJobPages } from "../helpers/careers.mjs";
 
 const siteUrl = process.env.NETLIFY_SITE_URL?.replace(/\/$/, "");
+const careerJobs = loadCareerJobPages();
 
 async function expectContactFormSuccess(page, response) {
   const payload = await readJsonResponse(response);
@@ -85,4 +88,17 @@ test.describe("Deployed careers form submission", () => {
     const response = await submitCareersForm(page, runId);
     await expectCareersFormSuccess(page, response);
   });
+
+  for (const job of careerJobs) {
+    test(`submits through ${job.path} apply form on the deployed site`, async ({ page }) => {
+      const runId = Date.now();
+
+      await page.goto(job.path);
+      await expect(page.locator("#job-application-form")).toBeVisible();
+
+      const response = await submitCareersDetailForm(page, runId, { label: job.label });
+      await expectCareersFormSuccess(page, response);
+      await expect(page.locator("#role")).toHaveValue(job.label);
+    });
+  }
 });

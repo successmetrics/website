@@ -1,5 +1,6 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { loadCareerJobPages } from "./careers.mjs";
 
 export const NETLIFY_FORMS_DASHBOARD =
   "https://app.netlify.com/projects/successmetrics/forms";
@@ -135,6 +136,29 @@ export async function assertNetlifySiteReady(siteUrl: string): Promise<void> {
     if (!html.includes(scriptName)) {
       throw new Error(
         `${page} is deployed but does not load ${scriptName}. Redeploy the latest site build.`,
+      );
+    }
+  }
+
+  for (const job of loadCareerJobPages()) {
+    const response = await fetch(`${siteUrl}${job.path}`);
+    if (!response.ok) {
+      throw new Error(
+        `${siteUrl}${job.path} returned HTTP ${response.status}. ` +
+          `Confirm netlify.toml maps /careers/:slug to /careers/:slug.html.`,
+      );
+    }
+
+    const html = await response.text();
+    if (!html.includes("careers.js") || !html.includes("job-application-form")) {
+      throw new Error(
+        `${job.path} is deployed but is missing the careers apply form. Redeploy the latest site build.`,
+      );
+    }
+
+    if (!html.includes(job.label)) {
+      throw new Error(
+        `${job.path} is deployed but does not include the pre-selected role "${job.label}".`,
       );
     }
   }

@@ -2,9 +2,13 @@ import { test, expect } from "@playwright/test";
 import {
   readJsonResponse,
   submitCareersForm,
+  submitCareersDetailForm,
   submitContactForm,
   waitForCareersRoles,
 } from "../helpers/forms-e2e.mjs";
+import { loadCareerJobPages } from "../helpers/careers.mjs";
+
+const careerJobs = loadCareerJobPages();
 
 async function expectContactFormSuccess(page, response) {
   const payload = await readJsonResponse(response);
@@ -78,4 +82,18 @@ test.describe("Careers form submission", () => {
     const response = await submitCareersForm(page, runId);
     await expectCareersFormSuccess(page, response);
   });
+
+  for (const job of careerJobs) {
+    test(`submits through ${job.path} apply form`, async ({ page }) => {
+      const runId = Date.now();
+
+      await page.goto(job.path);
+      await expect(page.locator("#job-application-form")).toBeVisible();
+      await expect(page.locator(".job-detail-layout")).toBeVisible();
+
+      const response = await submitCareersDetailForm(page, runId, { label: job.label });
+      await expectCareersFormSuccess(page, response);
+      await expect(page.locator("#role")).toHaveValue(job.label);
+    });
+  }
 });
