@@ -1,0 +1,45 @@
+About the Role                                                                                                                                                     
+
+SuccessMetrics is seeking an experienced Salesforce Solution Architect with 8–10 years of hands-on experience to lead solution design and delivery across large-scale Salesforce programs. The ideal candidate is PDII-certified, holds either the Application Architect or System Architect credential, and brings a proven track record of architecting complex, high-volume solutions across Sales Cloud, Service Cloud, and Experience Cloud—with deep expertise in OmniStudio and data integrations.
+You’ll be a strategic contributor, responsible for crafting scalable, secure, and performant solutions that meet business goals and adhere to best practices. This is a client-facing role that involves leadership, mentoring, and full ownership of architectural decisions.
+⸻​​
+​
+Key Responsibilities
+Lead end-to-end architecture for enterprise Salesforce implementations
+Translate business needs into scalable, secure, and performant Salesforce solutions
+Design system and data architectures across Sales Cloud, Service Cloud, and Experience Cloud
+Develop OmniStudio architectures including FlexCards, OmniScripts, Integration Procedures, and DataRaptors
+Own integration strategy with external systems using REST/SOAP APIs, middleware platforms, and third-party connectors
+Provide guidance on data migration, ETL strategy, large data volumes (LDV), and performance optimization
+Coach, mentor, and review the work of junior developers and administrators
+Participate in pre-sales solutioning and estimation activities when needed
+Ensure adherence to Salesforce security, governance, and DevOps practices
+⸻
+​
+Required Qualifications
+8–10 years of Salesforce experience with 3+ years as a Solution or Technical Architect
+Salesforce Platform Developer I & II certifications
+Certified Application Architect or System Architect
+Sales or Service Cloud Consultant Certification (Must)
+Experience Cloud Consultant Certification (Must)
+At least 1–2 years of OmniStudio implementation experience
+Strong expertise in Apex, LWC, SOQL, JavaScript, JSON, and integration frameworks
+Demonstrated experience in large data volume processing and scalable architecture patterns
+Experience designing security models, sharing rules, and governance frameworks
+Excellent communication skills, with the ability to explain complex technical concepts to non-technical audiences
+Proven ability to work independently and manage solution delivery end to end
+⸻
+​
+Preferred Qualifications
+Background in Public Sector Solutions, Nonprofit Cloud, or Health Cloud
+Familiarity with Agile methodology, Salesforce DevOps tools (Salesforce CLI, GitHub, CI/CD pipelines)
+Experience in architecture review boards or technical governance
+⸻
+​
+Why Join Us?
+At SuccessMetrics, we’re building a world-class team of Salesforce experts who are passionate about impact and innovation. You’ll get :
+A leadership role with ownership of key solution decisions
+Opportunity to mentor and shape delivery teams
+Meaningful projects in the public and nonprofit sectors
+Remote-first flexibility and a team of ex-Salesforce professionals
+

@@ -49,6 +49,17 @@ describe("careers page", () => {
     expect($("#job-list").length).toBe(1);
     expect($("#role option").length).toBeGreaterThan(0);
   });
+
+  it("builds career opportunity detail pages with apply forms", () => {
+    const $ = loadPage("careers/salesforce-developer-0081.html");
+
+    expect($(".job-detail-content").length).toBe(1);
+    expect($(".job-detail-apply").length).toBe(1);
+    expect($("#job-application-form").length).toBe(1);
+    expect($("body").attr("data-preselected-role")).toContain("JD-0081");
+    expect($(".job-detail-content .job-section").length).toBeGreaterThan(0);
+    expect($(".job-desc-heading").length).toBeGreaterThan(0);
+  });
 });
 
 describe("form API routes", () => {

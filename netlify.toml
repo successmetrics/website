@@ -51,6 +51,10 @@
   to = "/careers.html"
   status = 200
 [[redirects]]
+  from = "/careers/:slug"
+  to = "/careers/:slug.html"
+  status = 200
+[[redirects]]
   from = "/services"
   to = "/services.html"
   status = 200

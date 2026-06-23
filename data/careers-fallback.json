@@ -2,25 +2,28 @@
   {
     "id": "JD-0084",
     "title": "Senior Salesforce Developer",
-    "location": "Pondicherry, India",
-    "type": "Full-time"
-  },
-  {
-    "id": "JD-0083",
-    "title": "Accessibility Specialist",
-    "location": "Pondicherry, India",
-    "type": "Full-time"
+    "location": "Pondicherry (Relocation Required).",
+    "type": "Full-Time",
+    "label": "Senior Salesforce Developer (JD-0084)",
+    "slug": "senior-salesforce-developer-0084",
+    "detailUrl": "/careers/senior-salesforce-developer-0084"
   },
   {
     "id": "JD-0082",
     "title": "Salesforce Architect",
     "location": "Pondicherry, India",
-    "type": "Full-time"
+    "type": "Full-time",
+    "label": "Salesforce Architect (JD-0082)",
+    "slug": "salesforce-architect-0082",
+    "detailUrl": "/careers/salesforce-architect-0082"
   },
   {
     "id": "JD-0081",
     "title": "Salesforce Developer",
     "location": "Pondicherry, India",
-    "type": "Full-time"
+    "type": "Full-time",
+    "label": "Salesforce Developer (JD-0081)",
+    "slug": "salesforce-developer-0081",
+    "detailUrl": "/careers/salesforce-developer-0081"
   }
 ]

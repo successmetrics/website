@@ -128,8 +128,15 @@ export function toPublicJob(job) {
     title: job.title,
     location: job.location,
     type: job.type,
-    label: `${job.title} (${job.id})`,
+    label: job.label || `${job.title} (${job.id})`,
+    slug: job.slug || null,
+    detailUrl: job.detailUrl || null,
   };
+}
+
+function isListedJob(job) {
+  if (job.id === "JD-0083") return false;
+  return !/accessibility specialist/i.test(job.title || "");
 }
 
 export async function fetchOpenJobs() {
@@ -137,7 +144,10 @@ export async function fetchOpenJobs() {
   const databaseId = getJobsDatabaseId();
 
   if (!notion || !databaseId) {
-    return { jobs: FALLBACK_JOBS.map(toPublicJob), source: "fallback" };
+    return {
+      jobs: FALLBACK_JOBS.filter(isListedJob).map(toPublicJob),
+      source: "fallback",
+    };
   }
 
   try {
@@ -149,13 +159,17 @@ export async function fetchOpenJobs() {
     const jobs = response.results
       .map(parseJobPage)
       .filter(isOpenJob)
+      .filter(isListedJob)
       .sort((a, b) => a.sortOrder - b.sortOrder)
       .map(toPublicJob);
 
     return { jobs, source: "notion" };
   } catch (error) {
     console.error("Notion jobs query failed:", error);
-    return { jobs: FALLBACK_JOBS.map(toPublicJob), source: "fallback" };
+    return {
+      jobs: FALLBACK_JOBS.filter(isListedJob).map(toPublicJob),
+      source: "fallback",
+    };
   }
 }
 

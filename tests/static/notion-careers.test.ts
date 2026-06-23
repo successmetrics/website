@@ -40,6 +40,29 @@ describe("notion careers helpers", () => {
       location: "Pondicherry, India",
       type: "Full-time",
       label: "Salesforce Developer (JD-0081)",
+      slug: null,
+      detailUrl: null,
+    });
+  });
+
+  it("includes slug and detailUrl when present on fallback jobs", () => {
+    expect(
+      toPublicJob({
+        id: "JD-0081",
+        title: "Salesforce Developer",
+        location: "Pondicherry, India",
+        type: "Full-time",
+        slug: "salesforce-developer-0081",
+        detailUrl: "/careers/salesforce-developer-0081",
+      }),
+    ).toEqual({
+      id: "JD-0081",
+      title: "Salesforce Developer",
+      location: "Pondicherry, India",
+      type: "Full-time",
+      label: "Salesforce Developer (JD-0081)",
+      slug: "salesforce-developer-0081",
+      detailUrl: "/careers/salesforce-developer-0081",
     });
   });
 

@@ -29,7 +29,10 @@
     "content/whitepaper-midmarket-guide.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/ai-research/off-grid-ai-lab-patient-trial-matching.html": { "changefreq": "monthly", "priority": "0.75" },
     "content/success-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
-    "content/success-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" }
+    "content/success-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "careers/senior-salesforce-developer-0084.html": { "changefreq": "weekly", "priority": "0.6" },
+    "careers/salesforce-architect-0082.html": { "changefreq": "weekly", "priority": "0.6" },
+    "careers/salesforce-developer-0081.html": { "changefreq": "weekly", "priority": "0.6" }
   },
   "pages": {
     "index.html": {
@@ -107,8 +110,32 @@
     "careers.html": {
       "path": "/careers",
       "title": "Careers at SuccessMetrics | Salesforce Jobs",
-      "description": "Join an AI-forward Salesforce consultancy hiring developers, architects & accessibility specialists. Pondicherry & remote-friendly roles.",
+      "description": "Join an AI-forward Salesforce consultancy hiring developers and architects. Pondicherry & remote-friendly roles.",
       "keywords": ["Salesforce developer jobs", "Salesforce architect careers", "Pondicherry Salesforce jobs"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "careers/senior-salesforce-developer-0084.html": {
+      "path": "/careers/senior-salesforce-developer-0084",
+      "title": "Senior Salesforce Developer | Careers at SuccessMetrics",
+      "description": "Senior Salesforce Developer role in Pondicherry. 5–7 years experience, PD1, Admin, App Builder, and OmniStudio. Apply at SuccessMetrics.",
+      "keywords": ["Senior Salesforce Developer jobs", "Salesforce developer Pondicherry", "OmniStudio developer jobs"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "careers/salesforce-architect-0082.html": {
+      "path": "/careers/salesforce-architect-0082",
+      "title": "Salesforce Architect | Careers at SuccessMetrics",
+      "description": "Salesforce Solution Architect role with 8–10 years experience. Lead enterprise Salesforce design across Sales, Service, and Experience Cloud.",
+      "keywords": ["Salesforce architect jobs", "Salesforce solution architect Pondicherry", "PDII architect careers"],
+      "ogType": "website",
+      "schema": ["WebPage"]
+    },
+    "careers/salesforce-developer-0081.html": {
+      "path": "/careers/salesforce-developer-0081",
+      "title": "Salesforce Developer | Careers at SuccessMetrics",
+      "description": "Salesforce Developer role with 3–4 years experience. Apex, LWC, OmniStudio, and multi-cloud delivery across public sector and nonprofit projects.",
+      "keywords": ["Salesforce developer jobs", "Salesforce PD1 jobs", "Pondicherry Salesforce careers"],
       "ogType": "website",
       "schema": ["WebPage"]
     },

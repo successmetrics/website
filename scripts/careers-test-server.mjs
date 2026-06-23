@@ -22,7 +22,8 @@ const MIME_TYPES = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".ico": "image/x-icon",
-  ".pdf": "application/pdf",
+  ".mp4": "video/mp4",
+  ".mov": "video/quicktime",
 };
 
 function loadDotEnv(path = join(ROOT, ".env")) {
@@ -67,13 +68,43 @@ function toWebRequest(req, url) {
   return new Request(url, init);
 }
 
-function serveStatic(pathname, res) {
-  let filePath = join(SITE, pathname.replace(/^\//, ""));
-  if (pathname.endsWith("/")) {
-    filePath = join(filePath, "index.html");
+function resolveStaticPath(pathname) {
+  let rel = pathname.replace(/^\//, "");
+  if (!rel) rel = "index.html";
+
+  const cleanUrlMap = {
+    careers: "careers.html",
+    services: "services.html",
+    industries: "industries.html",
+    accelerators: "accelerators.html",
+    resources: "resources.html",
+    "ai-research": "ai-research.html",
+    "success-stories": "success-stories.html",
+    about: "about.html",
+    contact: "contact.html",
+  };
+
+  if (cleanUrlMap[rel]) {
+    rel = cleanUrlMap[rel];
   }
 
-  if (!filePath.startsWith(SITE) || !existsSync(filePath) || !statSync(filePath).isFile()) {
+  let filePath = join(SITE, rel);
+  if (existsSync(filePath) && statSync(filePath).isFile()) {
+    return filePath;
+  }
+
+  const htmlPath = join(SITE, `${rel}.html`);
+  if (existsSync(htmlPath) && statSync(htmlPath).isFile()) {
+    return htmlPath;
+  }
+
+  return null;
+}
+
+function serveStatic(pathname, res) {
+  const filePath = resolveStaticPath(pathname);
+
+  if (!filePath || !filePath.startsWith(SITE)) {
     res.statusCode = 404;
     res.end("Not found");
     return;

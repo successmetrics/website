@@ -2,24 +2,53 @@
   const JOBS_API = "/api/jobs";
   const APPLY_API = "/api/job-application";
   const FALLBACK_URL = "/data/careers-fallback.json";
+  const JOB_INDEX_URL = "/data/careers-job-index.json";
 
   const jobsContainer = document.getElementById("job-list");
   const roleSelect = document.getElementById("role");
   const form = document.getElementById("job-application-form");
   const formStatus = document.getElementById("form-status");
   const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+  const preselectedRole = document.body.dataset.preselectedRole || "";
 
-  if (!jobsContainer || !roleSelect || !form) return;
+  if (!roleSelect || !form) return;
 
   init();
 
   async function init() {
-    setJobsLoading(true);
-    const jobs = await loadJobs();
-    renderJobs(jobs);
-    renderRoleOptions(jobs);
-    setJobsLoading(false);
+    if (jobsContainer) {
+      setJobsLoading(true);
+    }
+
+    const [jobs, jobIndex] = await Promise.all([loadJobs(), loadJobIndex()]);
+    const enrichedJobs = enrichJobs(jobs, jobIndex);
+
+    if (jobsContainer) {
+      renderJobs(enrichedJobs);
+      setJobsLoading(false);
+    }
+
+    renderRoleOptions(enrichedJobs);
+
+    if (preselectedRole) {
+      selectRole(preselectedRole);
+    }
+
     bindForm();
+  }
+
+  async function loadJobIndex() {
+    try {
+      const response = await fetch(JOB_INDEX_URL, {
+        headers: { Accept: "application/json" },
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (_error) {
+      /* no index available */
+    }
+    return {};
   }
 
   async function loadJobs() {
@@ -56,11 +85,33 @@
         location: job.location,
         type: job.type,
         label: job.label || job.title + " (" + job.id + ")",
+        slug: job.slug || null,
+        detailUrl: job.detailUrl || null,
       };
     });
   }
 
+  function enrichJobs(jobs, jobIndex) {
+    return jobs
+      .filter(function (job) {
+        return job.id !== "JD-0083" && !/accessibility specialist/i.test(job.title || "");
+      })
+      .map(function (job) {
+        const extra = jobIndex[job.id] || {};
+        return {
+          id: job.id,
+          title: job.title,
+          location: job.location,
+          type: job.type,
+          label: job.label || job.title + " (" + job.id + ")",
+          slug: job.slug || extra.slug || null,
+          detailUrl: job.detailUrl || extra.detailUrl || null,
+        };
+      });
+  }
+
   function setJobsLoading(isLoading) {
+    if (!jobsContainer) return;
     jobsContainer.dataset.state = isLoading ? "loading" : "ready";
     if (isLoading) {
       jobsContainer.innerHTML =
@@ -69,6 +120,8 @@
   }
 
   function renderJobs(jobs) {
+    if (!jobsContainer) return;
+
     if (!jobs.length) {
       jobsContainer.innerHTML =
         '<p class="jobs-status">No open positions right now. Submit a general application below — we are always looking for exceptional Salesforce talent.</p>';
@@ -77,6 +130,27 @@
 
     jobsContainer.innerHTML = jobs
       .map(function (job) {
+        const actions = [];
+
+        if (job.detailUrl) {
+          actions.push(
+            '<a class="btn btn-ghost" href="' +
+              escapeHtml(job.detailUrl) +
+              '">More info</a>',
+          );
+          actions.push(
+            '<a class="btn btn-primary" href="' +
+              escapeHtml(job.detailUrl + "#apply") +
+              '">Apply Now</a>',
+          );
+        } else {
+          actions.push(
+            '<button type="button" class="btn btn-primary apply-btn" data-role="' +
+              escapeHtml(job.label) +
+              '">Apply Now</button>',
+          );
+        }
+
         return (
           '<div class="job-row">' +
           '<div class="info">' +
@@ -90,9 +164,9 @@
           "</span><span>" +
           escapeHtml(job.type) +
           '</span></div></div>' +
-          '<button type="button" class="btn btn-primary apply-btn" data-role="' +
-          escapeHtml(job.label) +
-          '">Apply Now</button>' +
+          '<div class="job-row-actions">' +
+          actions.join("") +
+          "</div>" +
           "</div>"
         );
       })
@@ -117,7 +191,9 @@
           "</option>",
       );
     });
-    options.push('<option value="General Application">General Application</option>');
+    if (!preselectedRole) {
+      options.push('<option value="General Application">General Application</option>');
+    }
     roleSelect.innerHTML = options.join("");
   }
 
@@ -149,6 +225,9 @@
         }
 
         form.reset();
+        if (preselectedRole) {
+          selectRole(preselectedRole);
+        }
         showFormStatus(
           "success",
           "Thank you — your application was received. We review every submission personally and respond within 5 business days.",
@@ -179,6 +258,7 @@
   window.selectRole = selectRole;
 
   function showFormStatus(type, message) {
+    if (!formStatus) return;
     formStatus.hidden = false;
     formStatus.className = "form-status form-status--" + type;
     formStatus.textContent = message;
@@ -186,6 +266,7 @@
   }
 
   function clearFormStatus() {
+    if (!formStatus) return;
     formStatus.hidden = true;
     formStatus.textContent = "";
     formStatus.className = "form-status";

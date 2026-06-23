@@ -21,6 +21,9 @@ export const CONTENT_PAGES = [
   "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+  "careers/senior-salesforce-developer-0084.html",
+  "careers/salesforce-architect-0082.html",
+  "careers/salesforce-developer-0081.html",
 ] as const;
 
 export const NAV_LINKS = [
