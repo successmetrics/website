@@ -16,7 +16,7 @@
     "verify:deploy": "node scripts/verify-deploy.mjs",
     "test:netlify:e2e": "playwright test --config playwright.netlify.config.ts",
     "test:e2e": "playwright test",
-    "preview": "python3 -m http.server 8080 --directory site",
+    "preview": "npx --yes serve site -p 8080",
     "dev": "netlify dev"
   },
   "dependencies": {

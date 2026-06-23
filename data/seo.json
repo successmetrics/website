@@ -20,12 +20,14 @@
     "success-stories.html": { "changefreq": "monthly", "priority": "0.85" },
     "contact.html": { "changefreq": "monthly", "priority": "0.9" },
     "resources.html": { "changefreq": "weekly", "priority": "0.75" },
+    "ai-research.html": { "changefreq": "monthly", "priority": "0.8" },
     "about.html": { "changefreq": "quarterly", "priority": "0.7" },
     "careers.html": { "changefreq": "weekly", "priority": "0.65" },
     "content/blog-ai-enabled-delivery.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/blog-midmarket-salesforce.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/blog-lpi-accelerator.html": { "changefreq": "monthly", "priority": "0.6" },
     "content/whitepaper-midmarket-guide.html": { "changefreq": "monthly", "priority": "0.6" },
+    "content/ai-research/off-grid-ai-lab-patient-trial-matching.html": { "changefreq": "monthly", "priority": "0.75" },
     "content/success-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
     "content/success-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" }
   },
@@ -77,6 +79,14 @@
       "keywords": ["Salesforce resources", "mid-market Salesforce blog", "Salesforce implementation guide"],
       "ogType": "website",
       "schema": ["WebPage"]
+    },
+    "ai-research.html": {
+      "path": "/ai-research",
+      "title": "AI Research | White Papers & Applied Architecture",
+      "description": "SuccessMetrics white papers on privacy-preserving AI, secure medical model labs, and enterprise-grade AI governance for healthcare.",
+      "keywords": ["healthcare AI white paper", "privacy-preserving AI lab", "patient trial matching AI"],
+      "ogType": "website",
+      "schema": ["CollectionPage"]
     },
     "about.html": {
       "path": "/about",
@@ -137,6 +147,15 @@
       "ogType": "article",
       "schema": ["Article"],
       "datePublished": "2025-08-01"
+    },
+    "content/ai-research/off-grid-ai-lab-patient-trial-matching.html": {
+      "path": "/content/ai-research/off-grid-ai-lab-patient-trial-matching",
+      "title": "Off-the-Grid AI Lab for Trial Matching | White Paper",
+      "description": "Blueprint for a privacy-preserving, air-gapped AI lab to fine-tune medical models for patient-to-trial matching with HIPAA-grade controls.",
+      "keywords": ["off-the-grid AI lab", "patient trial matching AI", "privacy-preserving medical AI"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-06-01"
     },
     "content/success-stories/sfhss-agentforce-success-story.html": {
       "path": "/content/success-stories/sfhss-agentforce-success-story",

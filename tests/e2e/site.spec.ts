@@ -6,6 +6,7 @@ const MAIN_PAGES = [
   "industries.html",
   "accelerators.html",
   "resources.html",
+  "ai-research.html",
   "success-stories.html",
   "careers.html",
   "about.html",
@@ -17,6 +18,7 @@ const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
+  "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
 ];
@@ -26,6 +28,7 @@ const NAV_LINKS = [
   { href: "/industries.html" },
   { href: "/accelerators.html" },
   { href: "/resources.html" },
+  { href: "/ai-research.html" },
   { href: "/success-stories.html" },
   { href: "/careers.html" },
   { href: "/about.html" },
@@ -66,6 +69,8 @@ test.describe("page smoke tests", () => {
     await expect(page.locator('.client-logo img[alt="Caltrans"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="RLI"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="LeafLink"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="San Francisco Health Service System"]')).toBeVisible();
+    await expect(page.locator('.client-logo img[alt="Mayor’s Office of Housing and Community Development"]')).toBeVisible();
     await expect(page.locator('.client-logo img[alt="RPM"]')).toHaveCount(0);
   });
 
