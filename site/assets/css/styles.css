@@ -185,6 +185,9 @@ a:hover { text-decoration: none; }
   justify-content: center;
   padding: 0 4px;
 }
+.client-marquee .client-logo {
+  height: 76px;
+}
 .client-logo img {
   display: block;
   height: 34px;

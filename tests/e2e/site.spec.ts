@@ -233,7 +233,9 @@ test.describe("content pages", () => {
 
     for (const article of articles) {
       await page.goto(`/${article}`);
-      const backLink = page.getByRole("link", { name: "← Back to Resources" });
+      const backLink = page
+        .getByLabel("Article navigation")
+        .getByRole("link", { name: "← Back to Resources" });
       await expect(backLink).toBeVisible();
       await backLink.click();
       await expect(page).toHaveURL(/resources\.html$/);
@@ -248,7 +250,9 @@ test.describe("content pages", () => {
 
     for (const story of stories) {
       await page.goto(`/${story}`);
-      const backLink = page.getByRole("link", { name: "← Back to Success Stories" });
+      const backLink = page
+        .getByLabel("Story navigation")
+        .getByRole("link", { name: "← Back to Success Stories" });
       await expect(backLink).toBeVisible();
       await backLink.click();
       await expect(page).toHaveURL(/success-stories\.html$/);
