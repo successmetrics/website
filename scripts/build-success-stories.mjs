@@ -266,7 +266,11 @@ ${seoBlock}
 <body>
 
 <!-- @nav active="success-stories" -->
-<article class="prose prose--story">
+<div class="prose-layout prose-layout--story">
+  <nav class="prose-back" aria-label="Story navigation">
+    <a href="../../success-stories.html">← Back to Success Stories</a>
+  </nav>
+  <article class="prose prose--story">
   <div class="prose-header">
     <div class="prose-header-copy">
       <span${badgeClass}>${config.badge}</span>
@@ -284,6 +288,7 @@ ${seoBlock}
 
   ${parsed.bodyHtml}${renderFooter(parsed.footerLines)}
 </article>
+</div>
 
 <footer>
   <div class="container">

@@ -23,7 +23,7 @@
 <!-- seo:end -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
-<link rel="stylesheet" href="../../assets/css/styles.css?v=b5d18d60ff36">
+<link rel="stylesheet" href="../../assets/css/styles.css?v=d45e4aa2a5c7">
 </head>
 <body>
 
@@ -45,7 +45,11 @@
     <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<article class="prose prose--paper">
+<div class="prose-layout prose-layout--paper">
+  <nav class="prose-back" aria-label="Article navigation">
+    <a href="../../ai-research.html">← Back to AI Research</a>
+  </nav>
+  <article class="prose prose--paper">
   <span class="badge blue">White Paper</span>
   <h1>Designing Off-the-Grid AI Lab for Patient to Trial Matching</h1>
   <p class="research-lead"><em>A Practical Blueprint for Secure, On-Premises Fine-Tuning of Medical AI Models</em></p>
@@ -234,6 +238,7 @@
 
   <div class="callout"><p><strong>Discuss this architecture with our team.</strong> We design secure, governable AI labs for healthcare and enterprise workloads. <a href="../../contact.html">Talk to an expert →</a></p></div>
 </article>
+</div>
 
 <footer>
   <div class="container">

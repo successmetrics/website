@@ -138,10 +138,11 @@ describe("success stories navigation bar", () => {
 
   it.each(SUCCESS_STORY_PAGES)("%s links back to the success stories index", (page) => {
     const $ = loadPage(page);
-    const backLink = $('a[href="../../success-stories.html"]');
+    const backLinks = $('a[href="../../success-stories.html"]');
 
-    expect(backLink.length).toBe(1);
-    expect(backLink.text().trim()).toBe("← Back to Success Stories");
+    expect(backLinks.length).toBeGreaterThanOrEqual(1);
+    expect(backLinks.first().text().trim()).toBe("← Back to Success Stories");
+    expect($(".prose-layout .prose-back a").length).toBe(1);
   });
 });
 
