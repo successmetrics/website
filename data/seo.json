@@ -30,6 +30,9 @@
     "content/ai-research/off-grid-ai-lab-patient-trial-matching.html": { "changefreq": "monthly", "priority": "0.75" },
     "content/success-stories/sfhss-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
     "content/success-stories/mohcd-agentforce-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "content/success-stories/amp-customer-portal-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "content/success-stories/caloes-ppe-portal-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
+    "content/success-stories/leaflink-cpq-success-story.html": { "changefreq": "monthly", "priority": "0.85" },
     "careers/senior-salesforce-developer-0084.html": { "changefreq": "weekly", "priority": "0.6" },
     "careers/salesforce-architect-0082.html": { "changefreq": "weekly", "priority": "0.6" },
     "careers/salesforce-developer-0081.html": { "changefreq": "weekly", "priority": "0.6" }
@@ -69,9 +72,9 @@
     },
     "success-stories.html": {
       "path": "/success-stories",
-      "title": "Salesforce Agentforce Success Stories | SuccessMetrics",
-      "description": "See how SFHSS & MOHCD use embedded Salesforce Agentforce assistants to speed benefits & housing workflows — staff in full control.",
-      "keywords": ["Agentforce case study", "embedded Agentforce Service Console", "Salesforce public sector case study"],
+      "title": "Salesforce Success Stories | SuccessMetrics",
+      "description": "See how AMP, Cal OES, LeafLink, SFHSS & MOHCD use Salesforce Experience Cloud, CPQ, and Agentforce to deliver faster service and stronger outcomes.",
+      "keywords": ["Salesforce success stories", "Experience Cloud case study", "Agentforce case study", "Salesforce public sector case study"],
       "ogType": "website",
       "schema": ["CollectionPage"]
     },
@@ -201,6 +204,33 @@
       "ogType": "article",
       "schema": ["Article"],
       "datePublished": "2026-04-01"
+    },
+    "content/success-stories/amp-customer-portal-success-story.html": {
+      "path": "/content/success-stories/amp-customer-portal-success-story",
+      "title": "AMP Case Study | Customer Program Portal & DevOps",
+      "description": "How Alameda Municipal Power digitized 25+ customer programs on Salesforce Experience Cloud and accelerated delivery with AI-enabled DevOps.",
+      "keywords": ["Alameda Municipal Power Salesforce", "Experience Cloud customer portal", "utility program portal"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-05-01"
+    },
+    "content/success-stories/caloes-ppe-portal-success-story.html": {
+      "path": "/content/success-stories/caloes-ppe-portal-success-story",
+      "title": "Cal OES Case Study | 72-Hour PPE Portal Deployment",
+      "description": "California OES launched a statewide PPE pledge and collection portal in 72 hours — collecting millions of items for frontline workers.",
+      "keywords": ["Cal OES Salesforce", "PPE donation portal", "emergency response Salesforce"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-05-15"
+    },
+    "content/success-stories/leaflink-cpq-success-story.html": {
+      "path": "/content/success-stories/leaflink-cpq-success-story",
+      "title": "LeafLink Case Study | Salesforce CPQ Transformation",
+      "description": "LeafLink cut CPQ approval cycles ~50% with modular quoting, self-service promotions, and tailored approval workflows on Salesforce.",
+      "keywords": ["LeafLink Salesforce CPQ", "B2B marketplace CPQ", "Salesforce CPQ case study"],
+      "ogType": "article",
+      "schema": ["Article"],
+      "datePublished": "2026-06-01"
     }
   }
 }

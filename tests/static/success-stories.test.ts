@@ -16,8 +16,19 @@ const SEO_CONFIG = JSON.parse(
 );
 
 const SUCCESS_STORY_PAGES = [
+  "content/success-stories/amp-customer-portal-success-story.html",
+  "content/success-stories/caloes-ppe-portal-success-story.html",
+  "content/success-stories/leaflink-cpq-success-story.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+] as const;
+
+const SUCCESS_STORY_SLUGS = [
+  "amp-customer-portal-success-story",
+  "caloes-ppe-portal-success-story",
+  "leaflink-cpq-success-story",
+  "sfhss-agentforce-success-story",
+  "mohcd-agentforce-success-story",
 ] as const;
 
 const netlifyToml = readNetlifyToml();
@@ -32,7 +43,7 @@ describe("success stories site structure", () => {
     expect(existsSync(join(ROOT, "content/success-stories"))).toBe(true);
     expect(existsSync(join(ROOT, "content/client-stories"))).toBe(false);
 
-    for (const slug of ["sfhss-agentforce-success-story", "mohcd-agentforce-success-story"]) {
+    for (const slug of SUCCESS_STORY_SLUGS) {
       expect(existsSync(join(ROOT, "content/success-stories", `${slug}.md`))).toBe(true);
       expect(existsSync(join(ROOT, "content/success-stories", `${slug}.html`))).toBe(true);
     }
@@ -172,6 +183,15 @@ describe("success stories SEO and sitemap", () => {
     expect(sitemap).toContain(
       "<loc>https://www.successmetrics.io/content/success-stories/mohcd-agentforce-success-story</loc>",
     );
+    expect(sitemap).toContain(
+      "<loc>https://www.successmetrics.io/content/success-stories/amp-customer-portal-success-story</loc>",
+    );
+    expect(sitemap).toContain(
+      "<loc>https://www.successmetrics.io/content/success-stories/caloes-ppe-portal-success-story</loc>",
+    );
+    expect(sitemap).toContain(
+      "<loc>https://www.successmetrics.io/content/success-stories/leaflink-cpq-success-story</loc>",
+    );
     expect(sitemap).not.toContain("client-stories");
   });
 });
@@ -200,7 +220,7 @@ describe("netlify success stories routing", () => {
   });
 
   it.skipIf(netlifyToml === null)("maps success story content clean URLs", () => {
-    for (const slug of ["sfhss-agentforce-success-story", "mohcd-agentforce-success-story"]) {
+    for (const slug of SUCCESS_STORY_SLUGS) {
       expect(netlifyToml).toContain(`from = "/content/success-stories/${slug}"`);
       expect(netlifyToml).toContain(`to = "/content/success-stories/${slug}.html"`);
     }

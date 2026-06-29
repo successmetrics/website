@@ -8,14 +8,63 @@ const STORIES_DIR = join(ROOT, "site", "content", "success-stories");
 const INDEX_PATH = join(ROOT, "site", "success-stories.html");
 
 const STORY_ORDER = [
+  "amp-customer-portal-success-story",
+  "caloes-ppe-portal-success-story",
+  "leaflink-cpq-success-story",
   "sfhss-agentforce-success-story",
   "mohcd-agentforce-success-story",
 ];
 
 const STORY_CONFIG = {
+  "amp-customer-portal-success-story": {
+    badge: "Public Utility",
+    badgeTeal: false,
+    badgeBlue: false,
+    logo: "alameda-municipal-power.png",
+    logoClass: "prose-client-logo--amp",
+    thumbLogoClass: "story-client-logo--amp",
+    logoWidth: 864,
+    logoHeight: 307,
+    thumbWidth: 280,
+    thumbHeight: 100,
+    thumbClass: "thumb-1",
+    icon: "⚡",
+    pageTitle: "AMP Customer Portal Success Story",
+  },
+  "caloes-ppe-portal-success-story": {
+    badge: "Public Sector",
+    badgeTeal: true,
+    badgeBlue: false,
+    logo: "caloes.jpg",
+    logoClass: "prose-client-logo--caloes",
+    thumbLogoClass: "story-client-logo--caloes",
+    logoWidth: 792,
+    logoHeight: 307,
+    thumbWidth: 260,
+    thumbHeight: 100,
+    thumbClass: "thumb-4",
+    icon: "🛡️",
+    pageTitle: "Cal OES PPE Portal Success Story",
+  },
+  "leaflink-cpq-success-story": {
+    badge: "Technology",
+    badgeTeal: false,
+    badgeBlue: true,
+    logo: "leaflink.svg",
+    logoClass: "prose-client-logo--leaflink",
+    thumbLogoClass: "story-client-logo--leaflink",
+    logoWidth: 136,
+    logoHeight: 24,
+    thumbWidth: 160,
+    thumbHeight: 28,
+    thumbClass: "thumb-2",
+    icon: "📊",
+    pageTitle: "LeafLink CPQ Success Story",
+  },
   "sfhss-agentforce-success-story": {
     badge: "Public Sector",
     badgeTeal: false,
+    badgeBlue: false,
     logo: "sfhss.svg",
     logoClass: "prose-client-logo--sfhss",
     thumbLogoClass: "story-client-logo--sfhss",
@@ -30,6 +79,7 @@ const STORY_CONFIG = {
   "mohcd-agentforce-success-story": {
     badge: "Public Sector",
     badgeTeal: true,
+    badgeBlue: false,
     logo: "mohcd.png",
     logoClass: "prose-client-logo--mohcd",
     thumbLogoClass: "story-client-logo--mohcd",
@@ -56,7 +106,9 @@ function inlineMarkdown(text) {
   out = out.replace(
     /\[([^\]]+)\]\(([^)]+)\)/g,
     (_, label, url) => {
-      const href = /successmetricscorp\.com\/contact/i.test(url)
+      const href = /successmetrics(?:corp)?\.io\/contact|successmetricscorp\.com\/contact/i.test(
+        url,
+      )
         ? "../../contact.html"
         : url;
       return `<a href="${href}">${label}</a>`;
@@ -184,9 +236,15 @@ function renderFooter(footerLines) {
   </div>`;
 }
 
+function storyBadgeClass(config) {
+  if (config.badgeBlue) return ' class="badge blue"';
+  if (config.badgeTeal) return ' class="badge teal"';
+  return ' class="badge"';
+}
+
 function renderStoryPage(slug, parsed) {
   const config = STORY_CONFIG[slug];
-  const badgeClass = config.badgeTeal ? ' class="badge teal"' : ' class="badge"';
+  const badgeClass = storyBadgeClass(config);
   const pageKey = `content/success-stories/${slug}.html`;
   const seoBlock = applySeoToHtml(
     "<title>placeholder</title>\n<meta name=\"description\" content=\"placeholder\">",
@@ -217,7 +275,7 @@ ${seoBlock}
       <div class="story-meta">
         <div><strong>Client:</strong> ${inlineMarkdown(parsed.meta.Client || "")}</div>
         <div><strong>Industry:</strong> ${inlineMarkdown(parsed.meta.Industry || "")}</div>
-        <div><strong>Solution:</strong> ${inlineMarkdown(parsed.meta.Solution || "")}</div>
+        <div><strong>${parsed.meta.Solutions ? "Solutions" : "Solution"}:</strong> ${inlineMarkdown(parsed.meta.Solutions || parsed.meta.Solution || "")}</div>
         <div><strong>Implementation Partner:</strong> ${inlineMarkdown(parsed.meta["Implementation Partner"] || "")}</div>
       </div>
     </div>
@@ -243,7 +301,7 @@ ${seoBlock}
 
 function renderIndexCard(slug, parsed, markdown) {
   const config = STORY_CONFIG[slug];
-  const badgeClass = config.badgeTeal ? ' class="badge teal"' : ' class="badge"';
+  const badgeClass = storyBadgeClass(config);
   const excerpt = challengeExcerpt(markdown);
 
   return `      <div class="card res-card story-card">
