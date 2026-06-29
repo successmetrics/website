@@ -92,7 +92,7 @@ jobs:
     name: Resend email notifications
     needs: repo-ready
     runs-on: ubuntu-latest
-    if: needs.repo-ready.outputs.ready == 'true' && secrets.RESEND_API_KEY != ''
+    if: needs.repo-ready.outputs.ready == 'true'
     steps:
       - uses: actions/checkout@v4
 

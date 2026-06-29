@@ -116,6 +116,18 @@
   from = "/content/success-stories/mohcd-agentforce-success-story"
   to = "/content/success-stories/mohcd-agentforce-success-story.html"
   status = 200
+[[redirects]]
+  from = "/content/success-stories/amp-customer-portal-success-story"
+  to = "/content/success-stories/amp-customer-portal-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/success-stories/caloes-ppe-portal-success-story"
+  to = "/content/success-stories/caloes-ppe-portal-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/success-stories/leaflink-cpq-success-story"
+  to = "/content/success-stories/leaflink-cpq-success-story.html"
+  status = 200
 
 # Legacy client-stories URLs (renamed to success-stories)
 [[redirects]]

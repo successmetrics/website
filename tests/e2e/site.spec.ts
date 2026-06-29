@@ -19,6 +19,9 @@ const CONTENT_PAGES = [
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
   "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
+  "content/success-stories/amp-customer-portal-success-story.html",
+  "content/success-stories/caloes-ppe-portal-success-story.html",
+  "content/success-stories/leaflink-cpq-success-story.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
   "careers/senior-salesforce-developer-0084.html",
@@ -230,7 +233,9 @@ test.describe("content pages", () => {
 
     for (const article of articles) {
       await page.goto(`/${article}`);
-      const backLink = page.getByRole("link", { name: "← Back to Resources" });
+      const backLink = page
+        .getByLabel("Article navigation")
+        .getByRole("link", { name: "← Back to Resources" });
       await expect(backLink).toBeVisible();
       await backLink.click();
       await expect(page).toHaveURL(/resources\.html$/);
@@ -245,7 +250,9 @@ test.describe("content pages", () => {
 
     for (const story of stories) {
       await page.goto(`/${story}`);
-      const backLink = page.getByRole("link", { name: "← Back to Success Stories" });
+      const backLink = page
+        .getByLabel("Story navigation")
+        .getByRole("link", { name: "← Back to Success Stories" });
       await expect(backLink).toBeVisible();
       await backLink.click();
       await expect(page).toHaveURL(/success-stories\.html$/);
