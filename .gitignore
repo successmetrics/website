@@ -9,3 +9,5 @@ docs/*
 media/*
 
 .DS_Store
+# Local Netlify folder
+.netlify

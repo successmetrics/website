@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow">
+<title>City of Lomita — Salesforce Permitting & Licensing Prototype</title>
+<style>
+:root{
+ --sf:#0176d3; --sf-dark:#014486; --sf-navy:#032d60; --ink:#181818; --sub:#5c5c5c;
+ --line:#e5e5e5; --bg:#f3f3f3; --card:#fff; --green:#2e844a; --amber:#b9750a; --red:#ba0517;
+ --chip:#e8f1fb; --gov:#1b3a5b; --gov2:#2e6bd6;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.app{display:flex;min-height:100vh}
+/* sidebar */
+.side{width:264px;background:var(--sf-navy);color:#fff;flex:0 0 264px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.15)}
+.brand b{font-size:15px} .brand span{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.navgrp{padding:10px 14px 4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.navi{display:block;padding:9px 18px;color:#dbe9fb;text-decoration:none;font-size:13px;border-left:3px solid transparent;cursor:pointer}
+.navi:hover{background:rgba(255,255,255,.07)}
+.navi.active{background:rgba(1,118,211,.25);border-left-color:#1ab7ff;color:#fff;font-weight:600}
+.tag{font-size:9px;background:#1ab7ff;color:#03263f;border-radius:8px;padding:1px 6px;margin-left:6px;font-weight:700;vertical-align:middle}
+.tag.pub{background:#ffd86b}
+/* main */
+.main{flex:1;min-width:0}
+.screen{display:none;animation:fade .25s ease} .screen.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+/* lightning chrome */
+.lx-top{background:var(--sf);color:#fff;display:flex;align-items:center;gap:14px;padding:0 18px;height:50px}
+.lx-top .wa{background:#fff;color:var(--sf);width:26px;height:26px;border-radius:5px;display:grid;place-items:center;font-weight:800;font-size:13px}
+.lx-tabs{display:flex;gap:2px;background:#eef3f8;padding:0 12px;border-bottom:1px solid var(--line);overflow:auto}
+.lx-tab{padding:10px 16px;font-size:13px;color:var(--sf-dark);white-space:nowrap;border-bottom:3px solid transparent;cursor:pointer}
+.lx-tab.on{border-bottom-color:var(--sf);font-weight:700;background:#fff}
+.wrap{padding:18px 22px;max-width:1180px}
+.hrow{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.objline{display:flex;align-items:center;gap:10px}
+.objicon{width:34px;height:34px;border-radius:7px;display:grid;place-items:center;color:#fff;font-size:16px}
+.h1{font-size:19px;font-weight:700} .h1 small{display:block;font-size:11px;color:var(--sub);font-weight:400}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--sf);background:#fff;color:var(--sf-dark);padding:6px 13px;border-radius:5px;font-size:13px;cursor:pointer}
+.btn.p{background:var(--sf);color:#fff}
+.btn.g{border-color:#c9c9c9;color:#444}
+/* path */
+.path{display:flex;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:8px 0 18px}
+.step{flex:1;position:relative;padding:10px 8px 10px 24px;font-size:11.5px;color:var(--sub);background:#f4f6f9;white-space:nowrap}
+.step:after{content:"";position:absolute;right:-11px;top:0;border-left:11px solid #f4f6f9;border-top:19px solid transparent;border-bottom:19px solid transparent;z-index:2}
+.step:before{content:"";position:absolute;right:-13px;top:0;border-left:11px solid #fff;border-top:19px solid transparent;border-bottom:19px solid transparent;z-index:1}
+.step.done{background:#c8e6c9;color:#15431f}.step.done:after{border-left-color:#c8e6c9}
+.step.cur{background:var(--sf);color:#fff;font-weight:700}.step.cur:after{border-left-color:var(--sf)}
+.cols{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+@media(max-width:900px){.cols{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;margin-bottom:16px}
+.card h3{margin:0;padding:11px 15px;border-bottom:1px solid var(--line);font-size:13px;color:var(--sf-navy);display:flex;justify-content:space-between;align-items:center}
+.card .bd{padding:14px 15px}
+.fld{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+.fld>div{min-width:0}
+.lab{font-size:11px;color:var(--sub);margin-bottom:2px}
+.val{font-size:13.5px;border-bottom:1px dotted #ccc;padding-bottom:4px;min-height:20px}
+.val.edit{border:1px solid #c9c9c9;border-radius:4px;padding:6px 8px}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:11px;font-weight:600}
+.pill.b{background:var(--chip);color:var(--sf-dark)} .pill.g{background:#e3f3e8;color:var(--green)}
+.pill.a{background:#fdf0dd;color:var(--amber)} .pill.r{background:#fde7e9;color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--sub);font-weight:600;font-size:11px;padding:7px 10px;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
+tr:hover td{background:#fafcff}
+.lk{color:var(--sf);text-decoration:none;cursor:pointer}.lk:hover{text-decoration:underline}
+.rel{font-size:11px;color:var(--sub);margin-left:6px}
+.note{background:#fff8e6;border:1px solid #f3e2b3;border-radius:6px;padding:9px 12px;font-size:12px;color:#705a14;margin-bottom:14px}
+.toggle{display:inline-flex;border:1px solid var(--sf);border-radius:6px;overflow:hidden;font-size:12px;cursor:pointer}
+.toggle b{padding:5px 12px} .toggle b.on{background:var(--sf);color:#fff} .toggle b:not(.on){color:var(--sf-dark)}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.kpi{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--sf);border-radius:7px;padding:12px 14px}
+.kpi b{font-size:22px;color:var(--sf-navy)} .kpi span{display:block;font-size:11px;color:var(--sub)}
+.map{position:relative;height:230px;border-radius:8px;overflow:hidden;border:1px solid var(--line);
+ background:linear-gradient(180deg,#dfeee0,#cfe6e8)}
+.road{position:absolute;background:#fff;box-shadow:0 0 0 1px #cdd}
+.dot{position:absolute;width:16px;height:16px;border-radius:50%;border:2px solid #fff;transform:translate(-50%,-50%);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.legend{position:absolute;right:8px;bottom:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-size:10.5px}
+.dotl{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.checkrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0f0}
+.seg{display:inline-flex;border:1px solid #ccc;border-radius:5px;overflow:hidden;font-size:11px}
+.seg b{padding:4px 9px;cursor:pointer}.seg b.pass{background:var(--green);color:#fff}.seg b.fail{background:var(--red);color:#fff}.seg b.na{background:#ddd}
+.photo{height:46px;width:60px;border-radius:5px;background:linear-gradient(135deg,#b8c6d9,#8aa0bd);display:inline-grid;place-items:center;color:#fff;font-size:9px;margin-right:5px}
+/* mobile inspector */
+.phone{max-width:380px;margin:0 auto;border:10px solid #1a1a1a;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.ph-top{background:var(--sf);color:#fff;padding:12px 16px;font-size:14px;font-weight:600}
+.ph-bd{padding:12px 14px;max-height:560px;overflow:auto}
+.insp{border:1px solid var(--line);border-radius:9px;padding:11px 12px;margin-bottom:10px}
+.insp .t{font-weight:600;font-size:13px} .insp .s{font-size:11px;color:var(--sub)}
+/* public portal */
+.gov-top{background:var(--gov);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:12px 22px}
+.gov-top .l{display:flex;align-items:center;gap:12px}
+.gov-seal{width:34px;height:34px;border-radius:50%;background:#ffd86b;color:var(--gov);display:grid;place-items:center;font-weight:800}
+.gov-nav{background:var(--gov2);color:#fff;display:flex;gap:4px;padding:0 22px;font-size:13px;overflow:auto}
+.gov-nav a{color:#fff;padding:11px 14px;text-decoration:none;white-space:nowrap;opacity:.92;cursor:pointer}
+.gov-nav a:hover{background:rgba(255,255,255,.12)}
+.gov-wrap{padding:22px;max-width:1080px;margin:0 auto}
+.hero{background:linear-gradient(120deg,var(--gov),#264a73);color:#fff;border-radius:12px;padding:26px 28px;margin-bottom:20px}
+.hero h2{margin:0 0 6px;font-size:23px} .hero p{margin:0;opacity:.9;font-size:14px}
+.searchbar{display:flex;margin-top:16px;background:#fff;border-radius:8px;overflow:hidden;max-width:560px}
+.searchbar input{flex:1;border:0;padding:12px 14px;font-size:14px;outline:none}
+.searchbar button{border:0;background:var(--gov2);color:#fff;padding:0 20px;font-weight:600;cursor:pointer}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;cursor:pointer;transition:.15s}
+.tile:hover{box-shadow:0 6px 18px rgba(0,0,0,.08);transform:translateY(-2px);border-color:var(--gov2)}
+.tile .ic{width:40px;height:40px;border-radius:9px;background:var(--chip);color:var(--gov2);display:grid;place-items:center;font-size:19px;margin-bottom:9px}
+.tile b{font-size:14px} .tile p{margin:5px 0 0;font-size:12px;color:var(--sub)}
+.wizard{display:flex;gap:18px;flex-wrap:wrap}
+.wsteps{flex:0 0 210px}
+.wstep{display:flex;gap:10px;padding:9px 6px;font-size:13px;color:var(--sub);border-radius:6px}
+.wstep b.n{width:22px;height:22px;border-radius:50%;background:#e3e3e3;color:#555;display:grid;place-items:center;font-size:12px;flex:0 0 22px}
+.wstep.on{color:var(--gov);font-weight:600}.wstep.on b.n{background:var(--gov2);color:#fff}
+.wstep.done b.n{background:var(--green);color:#fff}
+.wbody{flex:1;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.gin{width:100%;border:1px solid #c9c9c9;border-radius:6px;padding:9px 11px;font-size:13px;margin-top:4px}
+.glab{font-size:12px;color:var(--sub);margin-top:12px;display:block}
+.track{display:flex;flex-direction:column;gap:0}
+.trk{display:flex;gap:14px}
+.trk .col{display:flex;flex-direction:column;align-items:center}
+.trk .d{width:18px;height:18px;border-radius:50%;background:#dcdcdc;border:3px solid #fff;box-shadow:0 0 0 1px #ccc;z-index:2}
+.trk.done .d{background:var(--green)} .trk.cur .d{background:var(--gov2);box-shadow:0 0 0 3px #cfe0f7}
+.trk .line{width:2px;flex:1;background:#dcdcdc;margin:2px 0} .trk.done .line{background:var(--green)}
+.trk .txt{padding-bottom:18px} .trk .txt b{font-size:13.5px} .trk .txt span{display:block;font-size:11.5px;color:var(--sub)}
+.fineprint{font-size:11px;color:var(--sub);text-align:center;padding:20px}
+.banner{background:#03263f;color:#cfe3fb;font-size:11.5px;padding:7px 22px;text-align:center}
+h4.sec{font-size:13px;color:var(--gov);margin:22px 0 10px;border-bottom:2px solid var(--line);padding-bottom:5px}
+</style>
+</head>
+<body>
+<div class="app">
+ <nav class="side">
+  <div class="brand"><b>City of Lomita</b><span>Salesforce Permitting · Licensing · Inspections — Demo Prototype</span></div>
+  <div class="navgrp">Staff — Lightning Experience</div>
+  <a class="navi active" data-s="home">Console Home</a>
+  <a class="navi" data-s="planning">Planning / Permit record<span class="tag">1</span></a>
+  <a class="navi" data-s="devreview">Development Review (CUP)<span class="tag">1b</span></a>
+  <a class="navi" data-s="inspect">Inspector mobile<span class="tag">2</span></a>
+  <a class="navi" data-s="code">Code Enforcement<span class="tag">3</span></a>
+  <a class="navi" data-s="encroach">Encroachment / ROW<span class="tag">4</span></a>
+  <a class="navi" data-s="license">Business License<span class="tag">5</span></a>
+  <div class="navgrp">Public — Experience Cloud</div>
+  <a class="navi" data-s="portal">Resident portal home<span class="tag pub">P</span></a>
+  <a class="navi" data-s="apply">Permit intake wizard<span class="tag pub">P</span></a>
+  <a class="navi" data-s="status">Status tracker<span class="tag pub">P</span></a>
+  <a class="navi" data-s="search">Public record + map<span class="tag pub">P</span></a>
+  <a class="navi" data-s="bl-apply">Business License wizard<span class="tag pub">P</span></a>
+  <a class="navi" data-s="enc-apply">Encroachment wizard<span class="tag pub">P</span></a>
+ </nav>
+ <div class="main">
+
+ <!-- ============ HOME ============ -->
+ <section class="screen show" id="home">
+  <div class="lx-top"><div class="wa">L</div><b>Lomita Community Development</b><span style="opacity:.85;font-size:12px">Salesforce Public Sector Solutions</span></div>
+  <div class="lx-tabs"><div class="lx-tab on">Home</div><div class="lx-tab">Permits</div><div class="lx-tab">Planning</div><div class="lx-tab">Inspections</div><div class="lx-tab">Code Cases</div><div class="lx-tab">Encroachment</div><div class="lx-tab">Business Licenses</div><div class="lx-tab">Reports</div></div>
+  <div class="wrap">
+   <div class="h1">Department Console <small>Single platform spanning all five Lomita modules on a shared parcel + contact spine</small></div>
+   <div class="kpis" style="margin-top:14px">
+    <div class="kpi"><b>1,204</b><span>Building permits this FY</span></div>
+    <div class="kpi"><b>912</b><span>Inspections completed</span></div>
+    <div class="kpi"><b>2,841</b><span>Active business licenses</span></div>
+    <div class="kpi" style="border-left-color:var(--amber)"><b>37</b><span>Open code cases</span></div>
+    <div class="kpi" style="border-left-color:var(--green)"><b>$184k</b><span>Fees collected (Global Pay)</span></div>
+   </div>
+   <div class="cols">
+    <div class="card"><h3>My work queue <span class="rel">live</span></h3><div class="bd"><table>
+     <tr><th>Record</th><th>Type</th><th>Stage</th><th>Address / Location</th></tr>
+     <tr><td><span class="lk" data-go="planning">PL-2041</span></td><td>Building Permit Authorization</td><td><span class="pill b">In Review</span></td><td>2438 Pennsylvania Ave</td></tr>
+     <tr><td><span class="lk" data-go="encroach">ENC-0788</span></td><td>Encroachment / Utility Trench</td><td><span class="pill a">External Review</span></td><td>Narbonne Ave @ 250th St</td></tr>
+     <tr><td><span class="lk" data-go="code">CE-0335</span></td><td>Property Maintenance</td><td><span class="pill r">Notice Sent</span></td><td>24910 Eshelman Ave</td></tr>
+     <tr><td><span class="lk" data-go="license">BLA-1190</span></td><td>Massage Establishment</td><td><span class="pill a">Zone Clearance</span></td><td>24323 Narbonne Ave</td></tr>
+     <tr><td><span class="lk" data-go="planning">PL-2033</span></td><td>SB9 Urban Lot Split</td><td><span class="pill b">Completeness</span></td><td>1925 251st St</td></tr>
+    </table></div></div>
+    <div class="card"><h3>Activity by module</h3><div class="bd">
+     <div style="font-size:12px;color:var(--sub);margin-bottom:8px">Public dashboard (no login) embeds this same data.</div>
+     <div style="display:flex;flex-direction:column;gap:10px">
+      <div><div style="font-size:12px">Permits &nbsp;<b>1,204</b></div><div style="height:9px;background:#e9eef5;border-radius:5px"><div style="height:9px;width:88%;background:var(--sf);border-radius:5px"></div></div></div>
+      <div><div style="font-size:12px">Inspections &nbsp;<b>912</b></div><div style="height:9px;background:#e9eef5;border-radius:5px"><div style="height:9px;width:70%;background:#1ab7ff;border-radius:5px"></div></div></div>
+      <div><div style="font-size:12px">Licenses &nbsp;<b>2,841</b></div><div style="height:9px;background:#e9eef5;border-radius:5px"><div style="height:9px;width:96%;background:var(--green);border-radius:5px"></div></div></div>
+      <div><div style="font-size:12px">Code cases &nbsp;<b>37</b></div><div style="height:9px;background:#e9eef5;border-radius:5px"><div style="height:9px;width:22%;background:var(--amber);border-radius:5px"></div></div></div>
+      <div><div style="font-size:12px">Encroachment &nbsp;<b>61</b></div><div style="height:9px;background:#e9eef5;border-radius:5px"><div style="height:9px;width:34%;background:#7d5fff;border-radius:5px"></div></div></div>
+     </div>
+    </div></div>
+   </div>
+   <div class="note">Demo nav: this is a static prototype. Click record links, path stages, the parcel/GPS toggle, and inspection checkboxes — they respond. Use the left sidebar to jump between the 11 screens.</div>
+  </div>
+ </section>
+
+ <!-- ============ PLANNING / PERMIT ============ -->
+ <section class="screen" id="planning">
+  <div class="lx-top"><div class="wa">L</div><b>Lomita Community Development</b></div>
+  <div class="lx-tabs"><div class="lx-tab">Home</div><div class="lx-tab">Permits</div><div class="lx-tab on">Planning</div><div class="lx-tab">Inspections</div><div class="lx-tab">Code Cases</div></div>
+  <div class="wrap">
+   <div class="hrow">
+    <div class="objline"><div class="objicon" style="background:var(--sf)">▦</div>
+     <div class="h1">PL-2041 · Building Permit Authorization Review <small>Planning Application · Pre-Review track · Parcel 7374-016-021</small></div></div>
+    <div class="btns"><button class="btn g">Request Corrections</button><button class="btn g">Route to Agency</button><button class="btn p">Approve &amp; Issue Letter</button></div>
+   </div>
+   <div class="path">
+    <div class="step done">Submitted</div>
+    <div class="step done">Completeness Check</div>
+    <div class="step cur">Standards Review</div>
+    <div class="step">Corrections</div>
+    <div class="step">Approval Letter</div>
+    <div class="step">Permit Issued (Willdan/County)</div>
+   </div>
+   <div class="note">Lomita reality modeled here: Planning confirms zoning/development standards and issues an <b>approval letter</b>; the building/electrical/plumbing/mechanical permit is then issued by the City's partner (Willdan Eng.) / LA County. Solar follows the SolarAPP+ auto-issue path.</div>
+   <div class="cols">
+    <div>
+     <div class="card"><h3>Application detail <button class="btn g" style="padding:3px 10px">Edit</button></h3><div class="bd">
+      <div class="fld">
+       <div><div class="lab">Application Type (Record Type)</div><div class="val">Building Permit Authorization</div></div>
+       <div><div class="lab">Review Track</div><div class="val"><span class="pill b">Pre-Review (ministerial)</span></div></div>
+       <div><div class="lab">Applicant</div><div class="val">M. Alvarez (owner)</div></div>
+       <div><div class="lab">Contractor</div><div class="val">South Bay Builders · CSLB #► verified</div></div>
+       <div><div class="lab">Parcel (APN)</div><div class="val">7374-016-021</div></div>
+       <div><div class="lab">Zoning / Overlay</div><div class="val">R-1 · <span class="pill a">Specific Plan</span></div></div>
+       <div style="grid-column:1/3"><div class="lab">Project Description</div><div class="val">350 sq ft rear addition + re-roof; site plan, floor plan &amp; elevations attached.</div></div>
+       <div><div class="lab">Valuation</div><div class="val">$78,500</div></div>
+       <div><div class="lab">Fees (due on submit)</div><div class="val">$642.00 <span class="pill g">Paid</span></div></div>
+      </div>
+     </div></div>
+     <div class="card"><h3>Plan Reviews <span class="rel">3 reviewers · parallel</span></h3><div class="bd"><table>
+      <tr><th>Reviewer</th><th>Type</th><th>Cycle</th><th>Status</th></tr>
+      <tr><td>Planning (J. Madsen)</td><td>Zoning standards</td><td>1</td><td><span class="pill g">Approved</span></td></tr>
+      <tr><td>Willdan Engineering</td><td>Grading / drainage</td><td>1</td><td><span class="pill a">In Review</span></td></tr>
+      <tr><td>LA County Fire</td><td>Defensible space</td><td>1</td><td><span class="pill b">Routed</span></td></tr>
+     </table></div></div>
+     <div class="card"><h3>Document Checklist</h3><div class="bd">
+      <div class="checkrow"><span>Site Plan</span><span class="pill g">✓ Received</span></div>
+      <div class="checkrow"><span>Floor Plan</span><span class="pill g">✓ Received</span></div>
+      <div class="checkrow"><span>Elevations</span><span class="pill g">✓ Received</span></div>
+      <div class="checkrow" style="border:none"><span>Title-24 Energy</span><span class="pill a">Requested</span></div>
+     </div></div>
+    </div>
+    <div>
+     <div class="card"><h3>Status</h3><div class="bd">
+      <div class="fld" style="grid-template-columns:1fr">
+       <div><div class="lab">Stage</div><div class="val"><span class="pill b">Standards Review</span></div></div>
+       <div><div class="lab">Assigned Planner</div><div class="val">J. Madsen</div></div>
+       <div><div class="lab">Days in stage</div><div class="val">3</div></div>
+       <div><div class="lab">External Routing</div><div class="val">Willdan Eng.; LA County Fire</div></div>
+       <div><div class="lab">Linked Permit</div><div class="val"><span class="pill" style="background:#eee;color:#777">Created on approval</span></div></div>
+      </div>
+     </div></div>
+     <div class="card"><h3>Related</h3><div class="bd" style="font-size:12.5px;line-height:2">
+      <div><span class="lk">▦ Parcel 7374-016-021</span></div>
+      <div><span class="lk">$ 1 Payment · RCPT-3320</span></div>
+      <div><span class="lk">📄 3 Files</span></div>
+      <div><span class="lk">🕑 Activity timeline (6)</span></div>
+     </div></div>
+     <div class="card"><h3>Other application types (same object)</h3><div class="bd" style="font-size:12px;line-height:1.9;color:var(--sub)">
+      Record types configured: SB9 Lot Split · Director's Determination · Zoning Letter · CUP / Minor CUP · Variance · Site Plan Review · Sign Review · Home Occupation · Residential Property Report · Special Event · Pre-Application.
+     </div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ DEVELOPMENT REVIEW (CUP) HEARING FLOW ============ -->
+ <section class="screen" id="devreview">
+  <div class="lx-top"><div class="wa">L</div><b>Lomita Community Development</b></div>
+  <div class="lx-tabs"><div class="lx-tab">Home</div><div class="lx-tab">Permits</div><div class="lx-tab on">Planning</div><div class="lx-tab">Hearings</div><div class="lx-tab">Code Cases</div></div>
+  <div class="wrap">
+   <div class="hrow">
+    <div class="objline"><div class="objicon" style="background:#b4007a">⚖</div>
+     <div class="h1">PL-2026-044 · Conditional Use Permit (Major) <small>Planning Application · Development Review track · discretionary / hearing</small></div></div>
+    <div class="btns"><button class="btn g">Generate Staff Report</button><button class="btn g">Send Notices</button><button class="btn p">Record Decision</button></div>
+   </div>
+   <div class="path">
+    <div class="step done">Pre-Application</div>
+    <div class="step done">Application</div>
+    <div class="step done">Completeness</div>
+    <div class="step done">Staff Report</div>
+    <div class="step cur">Public Noticing</div>
+    <div class="step">PC Hearing</div>
+    <div class="step">Appeal Period</div>
+    <div class="step">City Council</div>
+    <div class="step">Effective</div>
+   </div>
+   <div class="note">This is the discretionary path from Lomita's Planning Division: staff report → newspaper notice + 300-ft neighbor mailers → Planning Commission hearing → 15-day appeal → City Council if appealed. Contrast with the ministerial Pre-Review path on screen 1.</div>
+   <div class="cols">
+    <div>
+     <div class="card"><h3>Application detail</h3><div class="bd"><div class="fld">
+      <div><div class="lab">Application Type (Record Type)</div><div class="val">Conditional Use Permit — Major</div></div>
+      <div><div class="lab">Review Track</div><div class="val"><span class="pill" style="background:#fbe6f3;color:#b4007a">Development Review</span></div></div>
+      <div><div class="lab">Request</div><div class="val">On-sale alcohol (Type 47) for new restaurant</div></div>
+      <div><div class="lab">Parcel / Zoning</div><div class="val">7375-012-008 · C-2</div></div>
+      <div><div class="lab">Applicant</div><div class="val">Harbor Table LLC</div></div>
+      <div><div class="lab">Assigned Planner</div><div class="val">J. Madsen</div></div>
+     </div></div></div>
+     <div class="card"><h3>Public Noticing <span class="rel">required for discretionary</span></h3><div class="bd"><table>
+      <tr><th>Notice</th><th>Method</th><th>Status</th></tr>
+      <tr><td>Newspaper legal ad</td><td>Daily Breeze</td><td><span class="pill g">Published Jun 20</span></td></tr>
+      <tr><td>Neighbor mailers (300-ft radius)</td><td>42 parcels</td><td><span class="pill g">Mailed Jun 20</span></td></tr>
+      <tr><td>Site posting</td><td>Property frontage</td><td><span class="pill a">Pending</span></td></tr>
+     </table>
+      <div style="font-size:11.5px;color:var(--sub);margin-top:8px">Radius mailer list auto-generated from nearby Parcels (replaces the manual Mailing Labels/Radius Maps service — real fee $503.72).</div>
+     </div></div>
+     <div class="card"><h3>Conditions of Approval</h3><div class="bd">
+      <div class="checkrow"><span>1 · Hours of operation limited to 7am–11pm</span><span class="pill b">Draft</span></div>
+      <div class="checkrow"><span>2 · Security plan reviewed by Sheriff</span><span class="pill b">Draft</span></div>
+      <div class="checkrow"><span>3 · No live entertainment without separate permit</span><span class="pill b">Draft</span></div>
+      <div class="checkrow" style="border:none"><span>4 · Annual review of CUP compliance</span><span class="pill b">Draft</span></div>
+     </div></div>
+    </div>
+    <div>
+     <div class="card"><h3>Planning Commission Hearing</h3><div class="bd"><div class="fld" style="grid-template-columns:1fr">
+      <div><div class="lab">Hearing body</div><div class="val">Planning Commission</div></div>
+      <div><div class="lab">Hearing date</div><div class="val">Jul 14, 2026 · 6:30 PM</div></div>
+      <div><div class="lab">Staff recommendation</div><div class="val"><span class="pill g">Approve w/ conditions</span></div></div>
+      <div><div class="lab">Decision</div><div class="val"><span class="pill" style="background:#eee;color:#777">Pending hearing</span></div></div>
+      <div><div class="lab">Appeal window</div><div class="val">15 days → City Council</div></div>
+     </div></div></div>
+     <div class="card"><h3>Staff Report &amp; files</h3><div class="bd" style="font-size:12.5px;line-height:2">
+      <div><span class="lk">📄 Staff Report (draft) — PL-2026-044.pdf</span></div>
+      <div><span class="lk">📄 Site plan + floor plan</span></div>
+      <div><span class="lk">📄 ABC Type 47 application</span></div>
+      <div><span class="lk">🕑 Activity timeline (11)</span></div>
+     </div></div>
+     <div class="card"><h3>Fees</h3><div class="bd" style="font-size:13px">
+      CUP (Major): <b>$4,922.78</b> <span class="pill g">Paid</span><br>
+      <span style="color:var(--sub)">+ environmental fees if not exempt · real fee schedule</span>
+     </div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ INSPECTOR MOBILE ============ -->
+ <section class="screen" id="inspect">
+  <div class="lx-top"><div class="wa">L</div><b>Field Inspections — Salesforce Mobile</b></div>
+  <div class="wrap">
+   <div class="h1" style="margin-bottom:14px">Inspector in-field experience <small>RFP 4.1.d — view, schedule, modify inspections; capture photos &amp; GPS; works offline</small></div>
+   <div class="cols">
+    <div class="phone">
+     <div class="ph-top">≡ &nbsp; My Inspections · Tue Jun 24</div>
+     <div class="ph-bd">
+      <div class="insp" style="border-left:4px solid var(--sf)">
+       <div class="t">Foundation — BP-1882</div>
+       <div class="s">2438 Pennsylvania Ave · 9:00–11:00</div>
+       <div class="s">📍 0.3 mi · M. Alvarez · ☎ tap to call</div>
+       <div style="margin-top:7px"><span class="pill b">Scheduled</span> <button class="btn p" style="padding:3px 10px" data-open="checklist">Start</button> <button class="btn g" style="padding:3px 10px">Reschedule</button></div>
+      </div>
+      <div class="insp">
+       <div class="t">Rough Electrical — BP-1855</div>
+       <div class="s">25104 Walnut St · 11:30–1:00</div>
+       <div class="s">📍 0.9 mi</div>
+       <div style="margin-top:7px"><span class="pill b">Scheduled</span></div>
+      </div>
+      <div class="insp">
+       <div class="t">ROW Final — ENC-0788</div>
+       <div class="s">Narbonne Ave @ 250th St (no APN · GPS)</div>
+       <div class="s">📍 1.4 mi</div>
+       <div style="margin-top:7px"><span class="pill b">Scheduled</span></div>
+      </div>
+      <div class="insp" style="opacity:.7">
+       <div class="t">Solar Final — BP-1840</div>
+       <div class="s">2210 Lomita Blvd · done 8:10a</div>
+       <div style="margin-top:7px"><span class="pill g">Passed ✓</span></div>
+      </div>
+     </div>
+    </div>
+    <div class="phone" id="checklistPhone">
+     <div class="ph-top">‹ &nbsp; Foundation · BP-1882</div>
+     <div class="ph-bd">
+      <div style="font-size:12px;color:var(--sub);margin-bottom:8px">📍 GPS auto-captured 33.792,-118.318 · 9:04a</div>
+      <div class="checkrow"><span>Form boards &amp; setbacks</span><span class="seg"><b class="pass">Pass</b><b>Fail</b><b>N/A</b></span></div>
+      <div class="checkrow"><span>Rebar size &amp; spacing</span><span class="seg"><b class="pass">Pass</b><b>Fail</b><b>N/A</b></span></div>
+      <div class="checkrow"><span>Footing depth</span><span class="seg"><b>Pass</b><b class="fail">Fail</b><b>N/A</b></span></div>
+      <div class="checkrow"><span>Anchor bolts / hold-downs</span><span class="seg"><b class="pass">Pass</b><b>Fail</b><b>N/A</b></span></div>
+      <div style="margin-top:10px"><div class="lab">Photos</div>
+       <span class="photo">IMG</span><span class="photo">IMG</span><span class="photo" style="background:#eef;color:var(--sf)">＋</span></div>
+      <div style="margin-top:10px"><div class="lab">Field note</div>
+       <div class="val edit" style="font-size:12px">Footing depth short at NE corner — correct &amp; call for re-inspection.</div></div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+       <button class="btn p" style="flex:1">Submit · Partial</button>
+       <button class="btn g">Save offline</button></div>
+     </div>
+    </div>
+   </div>
+   <div class="note" style="margin-top:16px">Result, photos, GPS and notes write straight back to <b>Inspection__c</b>; the permit's Path advances automatically and the applicant gets a portal/email update. Global search lets the inspector pull up any permit, parcel, contact or license by any parameter.</div>
+  </div>
+ </section>
+
+ <!-- ============ CODE ENFORCEMENT ============ -->
+ <section class="screen" id="code">
+  <div class="lx-top"><div class="wa">L</div><b>Code Enforcement</b></div>
+  <div class="lx-tabs"><div class="lx-tab">Home</div><div class="lx-tab on">Code Cases</div><div class="lx-tab">Vacant Registry</div><div class="lx-tab">Map</div></div>
+  <div class="wrap">
+   <div class="hrow">
+    <div class="objline"><div class="objicon" style="background:var(--amber)">⚠</div>
+     <div class="h1">CE-0335 · Property Maintenance <small>Code Case · 24910 Eshelman Ave · Parcel 7375-009-014</small></div></div>
+    <div class="btns"><button class="btn g">Add Violation</button><button class="btn g">Schedule Re-inspection</button><button class="btn p">Issue Citation</button></div>
+   </div>
+   <div class="path">
+    <div class="step done">New</div><div class="step done">Assigned</div><div class="step done">Investigating</div>
+    <div class="step cur">Notice Sent</div><div class="step">Compliance Pending</div><div class="step">Cited / Abated</div><div class="step">Closed</div>
+   </div>
+   <div class="cols">
+    <div>
+     <div class="card"><h3>Case detail</h3><div class="bd"><div class="fld">
+      <div><div class="lab">Source</div><div class="val">Public Complaint (anonymous)</div></div>
+      <div><div class="lab">Category</div><div class="val">Property Maintenance</div></div>
+      <div><div class="lab">Priority</div><div class="val"><span class="pill a">High</span></div></div>
+      <div><div class="lab">Assigned Officer</div><div class="val">R. Tan</div></div>
+      <div><div class="lab">Compliance Due</div><div class="val">Jul 8, 2026</div></div>
+      <div><div class="lab">Parcel</div><div class="val">7375-009-014</div></div>
+     </div></div></div>
+     <div class="card"><h3>Violations</h3><div class="bd"><table>
+      <tr><th>Code §</th><th>Description</th><th>Status</th></tr>
+      <tr><td>LMC 8-1.03</td><td>Accumulation of debris / inoperable vehicle</td><td><span class="pill a">Open</span></td></tr>
+      <tr><td>LMC 11-1.12</td><td>Overgrown vegetation in front setback</td><td><span class="pill a">Open</span></td></tr>
+     </table></div></div>
+     <div class="card"><h3>Notices &amp; Citations</h3><div class="bd"><table>
+      <tr><th>Doc</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+      <tr><td>Notice of Violation</td><td>Jun 18</td><td>—</td><td><span class="pill b">Mailed</span></td></tr>
+      <tr><td>Admin Citation (1st)</td><td>—</td><td>$100</td><td><span class="pill" style="background:#eee;color:#777">Pending</span></td></tr>
+     </table></div></div>
+    </div>
+    <div>
+     <div class="card"><h3>Vacant / Abandoned &amp; hot-spots</h3><div class="bd">
+      <div class="map">
+       <div class="road" style="left:0;right:0;top:120px;height:8px"></div>
+       <div class="road" style="top:0;bottom:0;left:150px;width:8px"></div>
+       <div class="road" style="top:0;bottom:0;left:280px;width:6px"></div>
+       <div class="dot" style="left:154px;top:124px;background:var(--red)"></div>
+       <div class="dot" style="left:284px;top:70px;background:var(--amber)"></div>
+       <div class="dot" style="left:90px;top:170px;background:var(--amber)"></div>
+       <div class="dot" style="left:230px;top:150px;background:var(--red)"></div>
+       <div class="dot" style="left:320px;top:190px;background:#7d5fff"></div>
+       <div class="legend"><span class="dotl" style="background:var(--red)"></span>Open case &nbsp;<span class="dotl" style="background:var(--amber)"></span>Vacant reg.<br><span class="dotl" style="background:#7d5fff"></span>Abandoned bldg</div>
+      </div>
+      <div style="font-size:11.5px;color:var(--sub);margin-top:8px">Native Salesforce Maps — <b>no Esri/GIS platform required</b> (Q&amp;A #30). Vacant_Property__c registry feeds the hot-spot layer (RFP 4.1.f).</div>
+     </div></div>
+     <div class="card"><h3>Status</h3><div class="bd"><div class="fld" style="grid-template-columns:1fr">
+      <div><div class="lab">Stage</div><div class="val"><span class="pill r">Notice Sent</span></div></div>
+      <div><div class="lab">Re-inspection</div><div class="val">Jul 9, 2026 · R. Tan</div></div>
+      <div><div class="lab">Days open</div><div class="val">6</div></div>
+     </div></div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ ENCROACHMENT ============ -->
+ <section class="screen" id="encroach">
+  <div class="lx-top"><div class="wa">L</div><b>Public Works — Engineering</b></div>
+  <div class="lx-tabs"><div class="lx-tab">Home</div><div class="lx-tab on">Encroachment</div><div class="lx-tab">Drawdown Accounts</div></div>
+  <div class="wrap">
+   <div class="hrow">
+    <div class="objline"><div class="objicon" style="background:#7d5fff">⛏</div>
+     <div class="h1">ENC-0788 · Utility Trench <small>Encroachment Permit · Right-of-Way work (no parcel)</small></div></div>
+    <div class="btns"><button class="btn g">Send to Transtech</button><button class="btn g">Add Condition</button><button class="btn p">Issue Permit</button></div>
+   </div>
+   <div class="path">
+    <div class="step done">Draft</div><div class="step done">Submitted</div><div class="step cur">External Review</div>
+    <div class="step">Conditioned</div><div class="step">Issued</div><div class="step">Active</div><div class="step">Closed</div>
+   </div>
+   <div class="cols">
+    <div>
+     <div class="card"><h3>Location — parcel or GPS/address <span class="rel">click to toggle</span></h3><div class="bd">
+      <div style="margin-bottom:10px"><span class="toggle" id="locToggle"><b>By Parcel (APN)</b><b class="on">By GPS / Address</b></span></div>
+      <div class="fld" id="locFields">
+       <div><div class="lab">Location Name</div><div class="val">Narbonne Ave @ 250th St</div></div>
+       <div><div class="lab">Location Type</div><div class="val">Right-of-Way</div></div>
+       <div><div class="lab">GPS Coordinate <span class="pill b">preferred</span></div><div class="val">33.7921, -118.3174</div></div>
+       <div><div class="lab">Address (no APN)</div><div class="val">~25000 block Narbonne Ave</div></div>
+      </div>
+      <div class="note" style="margin:12px 0 0">Q&amp;A #4: ROW work not tied to a parcel is tracked by <b>GPS coordinate (preferred)</b> or address only. A validation rule requires either a Parcel <i>or</i> a Location — never neither.</div>
+     </div></div>
+     <div class="card"><h3>Permit detail</h3><div class="bd"><div class="fld">
+      <div><div class="lab">Work Type</div><div class="val">Utility Trench</div></div>
+      <div><div class="lab">Applicant</div><div class="val">SoCal Gas (contractor)</div></div>
+      <div><div class="lab">Bond / Deposit</div><div class="val">$5,000</div></div>
+      <div><div class="lab">External Review (Transtech)</div><div class="val"><span class="pill a">In Review</span></div></div>
+     </div></div></div>
+    </div>
+    <div>
+     <div class="card"><h3>Drawdown Account <span class="rel">consultant-reviewed</span></h3><div class="bd"><div class="fld" style="grid-template-columns:1fr">
+      <div><div class="lab">Account</div><div class="val">DD-0044 · SoCal Gas ROW deposit</div></div>
+      <div><div class="lab">Opening deposit</div><div class="val">$10,000</div></div>
+      <div><div class="lab">Current balance</div><div class="val"><b>$6,150</b></div></div>
+      <div><div class="lab">Low-balance alert</div><div class="val">$2,000 → reminder</div></div>
+     </div>
+      <table style="margin-top:10px"><tr><th>Debit</th><th>Reviewer</th><th>Amt</th></tr>
+       <tr><td>Plan check</td><td>Transtech</td><td>$1,850</td></tr>
+       <tr><td>Traffic report</td><td>City consultant</td><td>$2,000</td></tr></table>
+      <div style="font-size:11.5px;color:var(--sub);margin-top:8px">Q&amp;A #5 — drawdown funds consultant review (engineering, traffic, environmental).</div>
+     </div></div>
+     <div class="card"><h3>Status</h3><div class="bd"><div class="fld" style="grid-template-columns:1fr">
+      <div><div class="lab">Stage</div><div class="val"><span class="pill a">External Review</span></div></div>
+      <div><div class="lab">Inspections</div><div class="val">ROW Pre-Pave, ROW Final (scheduled)</div></div>
+     </div></div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ BUSINESS LICENSE ============ -->
+ <section class="screen" id="license">
+  <div class="lx-top"><div class="wa">L</div><b>Administrative Services — Business Licensing</b></div>
+  <div class="lx-tabs"><div class="lx-tab">Home</div><div class="lx-tab on">Business Licenses</div><div class="lx-tab">Renewals</div><div class="lx-tab">Reports</div></div>
+  <div class="wrap">
+   <div class="hrow">
+    <div class="objline"><div class="objicon" style="background:var(--green)">🏪</div>
+     <div class="h1">BLA-1190 · Serenity Massage &amp; Spa <small>Business License Application · Massage Establishment</small></div></div>
+    <div class="btns"><button class="btn g">CAMTC Lookup</button><button class="btn g">Add Technician</button><button class="btn p">Issue License</button></div>
+   </div>
+   <div class="path">
+    <div class="step done">Submitted</div><div class="step cur">Zone Clearance</div><div class="step">In Review</div>
+    <div class="step">Approved</div><div class="step">Issued</div>
+   </div>
+   <div class="note">Cross-module flow (from Lomita's site): a new license auto-creates a <b>Zone Clearance</b> task to Planning, which checks the Permitted Use Table vs. parcel zoning. By-right → clear &amp; issue; needs a CUP → route to Development Review.</div>
+   <div class="cols">
+    <div>
+     <div class="card"><h3>Application detail</h3><div class="bd"><div class="fld">
+      <div><div class="lab">Business Type</div><div class="val">Massage Establishment</div></div>
+      <div><div class="lab">Application Type</div><div class="val">New</div></div>
+      <div><div class="lab">Account</div><div class="val">Serenity Massage &amp; Spa LLC</div></div>
+      <div><div class="lab">Location</div><div class="val">24323 Narbonne Ave · C-2</div></div>
+      <div><div class="lab">SIC → NAICS</div><div class="val">7299 → 812199</div></div>
+      <div><div class="lab">State verify</div><div class="val">CAMTC (staff-assisted)</div></div>
+      <div><div class="lab">Zone Clearance</div><div class="val"><span class="pill a">Pending Planning</span></div></div>
+      <div><div class="lab">Tax ID</div><div class="val" style="letter-spacing:2px">••••• <span class="pill r">restricted FLS</span></div></div>
+     </div></div></div>
+     <div class="card"><h3>Affiliated technicians <span class="rel">master ↔ sub licenses</span></h3><div class="bd"><table>
+      <tr><th>Technician</th><th>CAMTC #</th><th>Cert / photo</th><th>Status</th></tr>
+      <tr><td>A. Nguyen</td><td>CAMTC verified ✓</td><td><span class="photo" style="height:30px;width:38px;font-size:8px">ID</span></td><td><span class="pill g">Active</span></td></tr>
+      <tr><td>L. Park</td><td>CAMTC verified ✓</td><td><span class="photo" style="height:30px;width:38px;font-size:8px">ID</span></td><td><span class="pill g">Active</span></td></tr>
+     </table>
+      <div style="font-size:11.5px;color:var(--sub);margin-top:8px">RFP 4.3.5 — independent technicians linked to the establishment's master license; photos &amp; certs viewable in the field.</div>
+     </div></div>
+    </div>
+    <div>
+     <div class="card"><h3>Fees &amp; payment</h3><div class="bd"><table>
+      <tr><th>Fee</th><th>Amt</th></tr>
+      <tr><td>Application</td><td>$95</td></tr>
+      <tr><td>Massage establishment</td><td>$340</td></tr>
+      <tr><td>Technology surcharge</td><td>$12</td></tr>
+      <tr><td><b>Total</b></td><td><b>$447</b></td></tr></table>
+      <button class="btn p" style="width:100%;margin-top:10px">Pay — Global Payments</button>
+      <div style="font-size:11px;color:var(--sub);margin-top:6px">Posts in real time to Tyler Munis (Q&amp;A #37). Counter, cash &amp; override-audited too.</div>
+     </div></div>
+     <div class="card"><h3>Renewal &amp; status</h3><div class="bd"><div class="fld" style="grid-template-columns:1fr">
+      <div><div class="lab">License #</div><div class="val">BL-issued on approval</div></div>
+      <div><div class="lab">Term / renewal</div><div class="val">Annual · auto-reminders</div></div>
+      <div><div class="lab">Reports</div><div class="val">New · Renewal · Delinquent · Aging · Cash receipts · SIC/NAICS · Labels</div></div>
+     </div></div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ PUBLIC PORTAL HOME ============ -->
+ <section class="screen" id="portal">
+  <div class="banner">Experience Cloud public site — unregistered residents can search records &amp; the map with no login (RFP 4.1.c)</div>
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">Online Permitting &amp; Licensing</div></div></div>
+   <div style="font-size:13px">Sign In · Sign Up</div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a data-go="apply">Apply</a><a data-go="status">My Records</a><a data-go="search">Search Records</a><a data-go="search">Map</a><a>Contractor Directory</a><a>Pay a Fee</a></div>
+  <div class="gov-wrap">
+   <div class="hero">
+    <h2>Permits, licenses &amp; code requests — all online</h2>
+    <p>Apply, pay, upload plans and track status 24/7. Look up any property or permit without an account.</p>
+    <div class="searchbar"><input placeholder="Search by address or APN — e.g. 24300 Narbonne Ave"><button>Search</button></div>
+   </div>
+   <h4 class="sec">I want to…</h4>
+   <div class="tiles">
+    <div class="tile" data-go="apply"><div class="ic">🏗</div><b>Building Permit Authorization</b><p>Planning zoning/standards review before a building, electrical, plumbing, mechanical or solar permit.</p></div>
+    <div class="tile" data-go="apply"><div class="ic">🌱</div><b>SB9 Urban Lot Split</b><p>Administrative subdivision review for individual property owners.</p></div>
+    <div class="tile" data-go="apply"><div class="ic">📐</div><b>Director's Determination</b><p>Request a use determination for a use not listed in the Zoning Code.</p></div>
+    <div class="tile" data-go="apply"><div class="ic">📄</div><b>Zoning Letter</b><p>Formal written zoning &amp; land-use designation for a property.</p></div>
+    <div class="tile" data-go="bl-apply"><div class="ic">🏪</div><b>Business License</b><p>Apply, renew, close, or change address. Massage, salon, contractor &amp; more.</p></div>
+    <div class="tile" data-go="enc-apply"><div class="ic">⛏</div><b>Encroachment / ROW Permit</b><p>Driveway, sidewalk, utility trench, tree, parking &amp; ground-water work.</p></div>
+    <div class="tile" data-go="code"><div class="ic">⚠</div><b>Report a Code Violation</b><p>Property maintenance, vehicles, vegetation, graffiti — anonymous OK.</p></div>
+    <div class="tile" data-go="status"><div class="ic">🔎</div><b>Track an application</b><p>Check status, fees and inspection results on your records.</p></div>
+   </div>
+   <div class="fineprint">Mirrors Lomita's current OpenGov/ViewPoint categories — rebuilt on Salesforce Experience Cloud. Portal powered by City of Lomita.</div>
+  </div>
+ </section>
+
+ <!-- ============ APPLY WIZARD (real multi-page) ============ -->
+ <section class="screen" id="apply">
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">Apply — Building Permit Authorization Review</div></div></div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a style="background:rgba(255,255,255,.15)">Apply</a><a data-go="status">My Records</a><a data-go="search">Search Records</a></div>
+  <div class="gov-wrap">
+   <div class="note" style="margin-bottom:14px">Fields below mirror Lomita's real fillable Planning application + 2026 submittal checklist + fee schedule. Click the steps or Back/Continue to walk the pages.</div>
+   <div class="wizard">
+    <div class="wsteps">
+     <div class="wstep" data-wp="1" onclick="goPage(1)"><b class="n">1</b> Property / Location</div>
+     <div class="wstep" data-wp="2" onclick="goPage(2)"><b class="n">2</b> Applicant &amp; contacts</div>
+     <div class="wstep" data-wp="3" onclick="goPage(3)"><b class="n">3</b> Project details</div>
+     <div class="wstep" data-wp="4" onclick="goPage(4)"><b class="n">4</b> Documents</div>
+     <div class="wstep" data-wp="5" onclick="goPage(5)"><b class="n">5</b> Review &amp; fees</div>
+     <div class="wstep" data-wp="6" onclick="goPage(6)"><b class="n">6</b> Pay &amp; submit</div>
+    </div>
+    <div class="wbody">
+     <!-- PAGE 1 -->
+     <div class="wpage" data-page="1">
+      <h3 style="margin:0 0 4px">Property / Location</h3>
+      <label class="glab">Property address</label><input class="gin" value="2438 Pennsylvania Ave, Lomita CA 90717">
+      <label class="glab">APN (if known)</label><input class="gin" value="7374-016-021">
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Zoning (auto)</label><input class="gin" value="R-1" readonly></div>
+       <div style="flex:1"><label class="glab">Overlay (auto)</label><input class="gin" value="Specific Plan" readonly></div></div>
+      <label class="glab" style="display:flex;gap:8px;align-items:center;margin-top:14px"><input type="checkbox"> Work is in the public right-of-way (no parcel) — track by GPS / address</label>
+     </div>
+     <!-- PAGE 2 -->
+     <div class="wpage" data-page="2" style="display:none">
+      <h3 style="margin:0 0 4px">Applicant &amp; contacts</h3>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Applicant / Agent name</label><input class="gin" value="M. Alvarez"></div>
+       <div style="flex:1"><label class="glab">Relationship to property</label>
+        <select class="gin"><option>Owner</option><option>Agent</option><option>Contractor</option><option>Tenant</option></select></div></div>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Email</label><input class="gin" value="m.alvarez@email.com"></div>
+       <div style="flex:1"><label class="glab">Phone</label><input class="gin" value="(310) 555-0182"></div></div>
+      <label class="glab">Mailing address</label><input class="gin" value="2438 Pennsylvania Ave, Lomita CA 90717">
+      <label class="glab">Property owner (name &amp; contact)</label><input class="gin" value="M. Alvarez (same as applicant)">
+      <h4 class="sec" style="margin-top:18px">Contractor (if applicable)</h4>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Contractor name</label><input class="gin" value="South Bay Builders"></div>
+       <div style="flex:1"><label class="glab">CSLB license #</label><input class="gin" value="B-1042277"></div></div>
+      <label class="glab">Lomita Business License # <b style="color:var(--red)">(required for contractors)</b></label><input class="gin" value="BL-2207">
+      <div class="note" style="margin-top:10px">Portal rule: contractors working on behalf of owners must hold a Lomita business license (out-of-city contractors apply via a linked flow).</div>
+     </div>
+     <!-- PAGE 3 -->
+     <div class="wpage" data-page="3" style="display:none">
+      <h3 style="margin:0 0 4px">Project details</h3>
+      <p style="font-size:12.5px;color:var(--sub);margin:0 0 6px">Smart form — fields adapt to the type of work.</p>
+      <label class="glab">Type of work</label>
+      <select class="gin"><option>Addition (residential)</option><option>New single-family residence</option><option>ADU</option><option>SB9 two-unit</option><option>Garage</option><option>Re-roof</option><option>Swimming pool</option><option>Fence</option><option>Solar PV (routes to SolarAPP+)</option></select>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Valuation ($)</label><input class="gin" value="78,500"></div>
+       <div style="flex:1"><label class="glab">Square footage (new/added)</label><input class="gin" value="350"></div></div>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Stories / height (ft)</label><input class="gin" value="1 / 14"></div>
+       <div style="flex:1"><label class="glab">Earth moved (cubic yards)</label><input class="gin" value="0"></div></div>
+      <label class="glab">Description of work</label><textarea class="gin" rows="3">350 sq ft rear addition and re-roof.</textarea>
+      <div class="note" style="margin-top:12px">Choosing <b>Solar PV</b> diverts to the SolarAPP+ auto-issue path — instant permit number, no staff plan check (RFP 4.1.h / SB 379). Entering ≥20 cy or 3 ft cut/fill auto-requires a Grading &amp; Drainage plan on the next page.</div>
+     </div>
+     <!-- PAGE 4 -->
+     <div class="wpage" data-page="4" style="display:none">
+      <h3 style="margin:0 0 4px">Documents (submittal checklist)</h3>
+      <p style="font-size:12.5px;color:var(--sub);margin:0 0 8px">Required &amp; conditional items from Lomita's 2026 Planning Submittal Checklist.</p>
+      <div class="checkrow"><span>Project Plans — site, floor, elevations, roof (PDF) <b style="color:var(--red)">*</b></span><button class="btn p" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Title Report &amp; related docs <span class="pill a">if applicable</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Boundary &amp; Topographic Survey <span class="pill a">if applicable</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Grading &amp; Drainage Plan <span class="pill a">if ≥20 cy / 3 ft</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Landscape &amp; Irrigation Plan (MWELO) <span class="pill a">if applicable</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Colored Renderings / Perspectives <span class="pill a">commercial / MF</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Master Sign Program <span class="pill a">2+ tenants</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow" style="border:none"><span>Traffic and/or Parking Study <span class="pill a">new commercial</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+     </div>
+     <!-- PAGE 5 -->
+     <div class="wpage" data-page="5" style="display:none">
+      <h3 style="margin:0 0 4px">Review &amp; fees</h3>
+      <p style="font-size:12.5px;color:var(--sub);margin:0 0 8px">Real Lomita fees (eff. 4/6/2024), inclusive of 4% Technology Surcharge. All fees due upon submission.</p>
+      <table>
+       <tr><th>Fee</th><th style="text-align:right">Amount</th></tr>
+       <tr><td>Pre-Review for Building Permit</td><td style="text-align:right">$194.62</td></tr>
+       <tr><td>Landscape Plan Review (Single-Family Res.)</td><td style="text-align:right">$194.62</td></tr>
+       <tr><td>Technology Surcharge (4%)</td><td style="text-align:right">included</td></tr>
+       <tr><td><b>Total due</b></td><td style="text-align:right"><b>$389.24</b></td></tr>
+      </table>
+      <label class="glab" style="display:flex;gap:8px;align-items:center;margin-top:14px"><input type="checkbox"> A City Business License is required for this work</label>
+     </div>
+     <!-- PAGE 6 -->
+     <div class="wpage" data-page="6" style="display:none">
+      <h3 style="margin:0 0 4px">Pay &amp; submit</h3>
+      <label class="glab">Payment method</label>
+      <select class="gin"><option>Credit Card — Global Payments</option><option>eCheck / ACH</option><option>Pay at counter</option></select>
+      <label class="glab" style="display:flex;gap:8px;align-items:flex-start;margin-top:14px"><input type="checkbox" checked> I certify the information is true and I am authorized to submit this application. (e-signature)</label>
+      <button class="btn p" style="width:100%;margin-top:16px" data-go="status">Pay $389.24 &amp; Submit</button>
+      <div class="note" style="margin-top:12px">Payment posts in real time to Tyler Munis (Q&amp;A #37); submission creates a <b>Planning_Application__c</b> on the Pre-Review track and emails a confirmation.</div>
+     </div>
+     <div style="display:flex;justify-content:space-between;margin-top:18px">
+      <button class="btn g" onclick="prevPage()">‹ Back</button>
+      <button class="btn p" id="wNext" onclick="nextPage()">Continue ›</button></div>
+    </div>
+   </div>
+  </div>
+  <script>
+   let wp=1;const WMAX=6;
+   function goPage(n){wp=Math.max(1,Math.min(WMAX,n));
+    document.querySelectorAll('#apply .wpage').forEach(p=>p.style.display=(+p.dataset.page===wp)?'block':'none');
+    document.querySelectorAll('#apply .wstep').forEach(s=>{const i=+s.dataset.wp;s.classList.toggle('on',i===wp);s.classList.toggle('done',i<wp);s.querySelector('.n').textContent=i<wp?'✓':i;});
+    const nx=document.getElementById('wNext');if(nx)nx.textContent=wp===WMAX?'Submitted ✓':'Continue ›';}
+   function nextPage(){if(wp<WMAX)goPage(wp+1);else show('status');}
+   function prevPage(){if(wp>1)goPage(wp-1);}
+   goPage(1);
+  </script>
+ </section>
+
+ <!-- ============ STATUS TRACKER ============ -->
+ <section class="screen" id="status">
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">My Records — PL-2041</div></div></div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a data-go="apply">Apply</a><a style="background:rgba(255,255,255,.15)">My Records</a><a data-go="search">Search Records</a></div>
+  <div class="gov-wrap">
+   <div class="cols">
+    <div class="wbody">
+     <h3 style="margin:0 0 14px">PL-2041 · Building Permit Authorization</h3>
+     <div class="track">
+      <div class="trk done"><div class="col"><div class="d"></div><div class="line"></div></div><div class="txt"><b>Submitted</b><span>Jun 18 · fees paid $642</span></div></div>
+      <div class="trk done"><div class="col"><div class="d"></div><div class="line"></div></div><div class="txt"><b>Completeness check</b><span>Jun 19 · plans accepted</span></div></div>
+      <div class="trk cur"><div class="col"><div class="d"></div><div class="line"></div></div><div class="txt"><b>Standards review</b><span>In progress · Planner J. Madsen · Willdan + Fire routed</span></div></div>
+      <div class="trk"><div class="col"><div class="d"></div><div class="line"></div></div><div class="txt"><b>Corrections (if any)</b><span>—</span></div></div>
+      <div class="trk"><div class="col"><div class="d"></div><div class="line"></div></div><div class="txt"><b>Approval letter</b><span>Auto-emailed &amp; stamped on approval</span></div></div>
+      <div class="trk"><div class="col"><div class="d"></div></div><div class="txt"><b>Permit issued</b><span>By Willdan Eng. / LA County B&amp;S</span></div></div>
+     </div>
+    </div>
+    <div>
+     <div class="card"><h3>Messages from staff</h3><div class="bd" style="font-size:12.5px;line-height:1.6">
+      <b>J. Madsen · Jun 20</b><br>Please add a Title-24 energy form to complete the submittal.
+      <button class="btn p" style="width:100%;margin-top:10px">Upload document</button>
+     </div></div>
+     <div class="card"><h3>Fees</h3><div class="bd" style="font-size:12.5px">
+      Application + plan review: <b>$642.00</b> <span class="pill g">Paid</span><br>
+      <span style="color:var(--sub)">Receipt RCPT-3320 · Global Payments</span>
+     </div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ PUBLIC SEARCH + MAP ============ -->
+ <section class="screen" id="search">
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">Search Records — no login required</div></div></div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a data-go="apply">Apply</a><a data-go="status">My Records</a><a style="background:rgba(255,255,255,.15)">Search Records</a></div>
+  <div class="gov-wrap">
+   <div class="searchbar" style="max-width:100%;border:1px solid var(--line)"><input placeholder="Address, APN, permit #, business name…" value="Narbonne Ave"><button>Search</button></div>
+   <div class="cols" style="margin-top:16px">
+    <div class="card"><h3>Results <span class="rel">public fields only</span></h3><div class="bd"><table>
+     <tr><th>Record</th><th>Type</th><th>Address</th><th>Status</th></tr>
+     <tr><td>BP-1882</td><td>Building permit</td><td>2438 Pennsylvania</td><td><span class="pill b">Inspections</span></td></tr>
+     <tr><td>ENC-0788</td><td>Encroachment</td><td>Narbonne @ 250th</td><td><span class="pill a">External review</span></td></tr>
+     <tr><td>BL-2207</td><td>Business license</td><td>24323 Narbonne</td><td><span class="pill g">Active</span></td></tr>
+     <tr><td>PL-2041</td><td>Planning</td><td>2438 Pennsylvania</td><td><span class="pill b">In review</span></td></tr>
+    </table>
+     <div style="font-size:11.5px;color:var(--sub);margin-top:8px">Sensitive fields (owner contact, Tax ID) hidden from the public via field-level security (RFP 4.3.13).</div>
+    </div></div>
+    <div class="card"><h3>Active permits &amp; complaints map</h3><div class="bd">
+     <div class="map">
+      <div class="road" style="left:0;right:0;top:100px;height:8px"></div>
+      <div class="road" style="left:0;right:0;top:175px;height:6px"></div>
+      <div class="road" style="top:0;bottom:0;left:170px;width:8px"></div>
+      <div class="dot" style="left:120px;top:104px;background:var(--sf)"></div>
+      <div class="dot" style="left:174px;top:80px;background:var(--sf)"></div>
+      <div class="dot" style="left:240px;top:104px;background:#7d5fff"></div>
+      <div class="dot" style="left:174px;top:178px;background:var(--amber)"></div>
+      <div class="dot" style="left:300px;top:150px;background:var(--green)"></div>
+      <div class="legend"><span class="dotl" style="background:var(--sf)"></span>Permit &nbsp;<span class="dotl" style="background:#7d5fff"></span>Encroach<br><span class="dotl" style="background:var(--amber)"></span>Code case &nbsp;<span class="dotl" style="background:var(--green)"></span>License</div>
+     </div>
+     <div style="font-size:11.5px;color:var(--sub);margin-top:8px">RFP 4.1.c — public map of active permits &amp; complaints, built on native Salesforce Maps.</div>
+    </div></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- ============ BUSINESS LICENSE WIZARD ============ -->
+ <section class="screen" id="bl-apply">
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">Apply — Business License</div></div></div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a style="background:rgba(255,255,255,.15)">Apply</a><a data-go="status">My Records</a><a data-go="search">Search Records</a></div>
+  <div class="gov-wrap">
+   <div class="note" style="margin-bottom:14px">Real Lomita rules baked in: <b>every</b> applicant completes Zoning Verification + the Storm Water (NPDES/SB 205) form; other documents appear based on your answers.</div>
+   <div class="wizard">
+    <div class="wsteps">
+     <div class="wstep" data-bp="1" onclick="goBL(1)"><b class="n">1</b> Business info</div>
+     <div class="wstep" data-bp="2" onclick="goBL(2)"><b class="n">2</b> Location &amp; zoning</div>
+     <div class="wstep" data-bp="3" onclick="goBL(3)"><b class="n">3</b> Owners / officers</div>
+     <div class="wstep" data-bp="4" onclick="goBL(4)"><b class="n">4</b> Required forms</div>
+     <div class="wstep" data-bp="5" onclick="goBL(5)"><b class="n">5</b> Documents</div>
+     <div class="wstep" data-bp="6" onclick="goBL(6)"><b class="n">6</b> Review &amp; fees</div>
+     <div class="wstep" data-bp="7" onclick="goBL(7)"><b class="n">7</b> Pay &amp; submit</div>
+    </div>
+    <div class="wbody">
+     <div class="blpage" data-bpage="1">
+      <h3 style="margin:0 0 4px">Business info</h3>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Legal business name</label><input class="gin" value="Serenity Massage &amp; Spa LLC"></div>
+       <div style="flex:1"><label class="glab">DBA / fictitious name</label><input class="gin" value="Serenity Spa"></div></div>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Business structure</label><select class="gin"><option>LLC</option><option>Sole Proprietor</option><option>Partnership</option><option>C-Corp</option><option>S-Corp</option><option>Non-profit</option></select></div>
+       <div style="flex:1"><label class="glab">Business type / activity</label><select class="gin"><option>Massage Establishment</option><option>Salon</option><option>Cosmetologist (independent)</option><option>Live Entertainment</option><option>Mobile Detailing</option><option>Contractor (in-city)</option><option>Contractor (out-of-city)</option><option>General Business</option><option>Home Occupation</option></select></div></div>
+      <label class="glab">Description of business activity</label><textarea class="gin" rows="2">Therapeutic massage and day-spa services.</textarea>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Start date</label><input class="gin" value="07/01/2026"></div>
+       <div style="flex:1"><label class="glab">SIC / NAICS</label><input class="gin" value="7299 → 812199"></div>
+       <div style="flex:1"><label class="glab"># employees</label><input class="gin" value="4"></div></div>
+      <label class="glab">FEIN / SSN <span class="pill r">restricted (field-level security)</span></label><input class="gin" value="••-•••••••">
+     </div>
+     <div class="blpage" data-bpage="2" style="display:none">
+      <h3 style="margin:0 0 4px">Location &amp; zoning</h3>
+      <label class="glab">Business address</label><input class="gin" value="24323 Narbonne Ave, Lomita CA 90717">
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">In-city or out-of-city?</label><select class="gin"><option>In-city (fixed location)</option><option>Out-of-city (works in Lomita)</option></select></div>
+       <div style="flex:1"><label class="glab">Home-based business?</label><select class="gin"><option>No</option><option>Yes — needs Home Occupation Permit</option></select></div></div>
+      <div class="note" style="margin-top:12px"><b>Zoning Verification — required for all applicants.</b> Auto-creates a Zone Clearance task to Planning, which checks the Permitted Use Table vs. the parcel's C-2 zoning. By-right → clears automatically; needs a CUP → routes to Development Review.</div>
+      <div class="checkrow" style="margin-top:8px"><span>Zoning Verification</span><span class="pill a">Pending Planning</span></div>
+     </div>
+     <div class="blpage" data-bpage="3" style="display:none">
+      <h3 style="margin:0 0 4px">Owners / officers</h3>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Owner / officer name</label><input class="gin" value="J. Serrano"></div>
+       <div style="flex:1"><label class="glab">Title</label><input class="gin" value="Managing Member"></div></div>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Phone</label><input class="gin" value="(310) 555-0147"></div>
+       <div style="flex:1"><label class="glab">Email</label><input class="gin" value="jserrano@email.com"></div></div>
+      <label class="glab">Owner address</label><input class="gin" value="1820 Lomita Blvd, Lomita CA 90717">
+      <div class="checkrow" style="margin-top:10px"><span>Driver's license <span class="pill a">if applicable</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+     </div>
+     <div class="blpage" data-bpage="4" style="display:none">
+      <h3 style="margin:0 0 4px">Required forms</h3>
+      <div class="checkrow"><span>Storm Water form (NPDES / SB 205) <b style="color:var(--red)">* required for all</b></span><button class="btn p" style="padding:3px 10px">Complete</button></div>
+      <div class="checkrow" style="border:none"><span>Home Occupation Permit <span class="pill a">if home-based</span></span><button class="btn g" style="padding:3px 10px">Complete</button></div>
+      <div class="note" style="margin-top:12px">Both forms come straight from Lomita's Business Licensing page — the Storm Water form is required of every applicant; the Home Occupation Permit appears only when "home-based = Yes".</div>
+     </div>
+     <div class="blpage" data-bpage="5" style="display:none">
+      <h3 style="margin:0 0 4px">Documents (conditional on your answers)</h3>
+      <div class="checkrow"><span>Articles of Incorporation / Organization <span class="pill a">Corp/LLC</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Fictitious Business Name Statement <span class="pill a">if DBA</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Resale License / Seller's Permit <span class="pill a">retail</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Public Health Permit <span class="pill a">food/health</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>State license — CAMTC / CSLB / Cosmetology <span class="pill a">staff-verified</span></span><button class="btn p" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow" style="border:none"><span>DACC facility grade <span class="pill a">animal businesses</span></span><button class="btn g" style="padding:3px 10px">N/A</button></div>
+     </div>
+     <div class="blpage" data-bpage="6" style="display:none">
+      <h3 style="margin:0 0 4px">Review &amp; fees</h3>
+      <table><tr><th>Fee</th><th style="text-align:right">Amount</th></tr>
+       <tr><td>Business license tax (massage establishment)</td><td style="text-align:right">$340.00</td></tr>
+       <tr><td>Application fee</td><td style="text-align:right">$95.00</td></tr>
+       <tr><td>Technology surcharge (4%)</td><td style="text-align:right">$12.00</td></tr>
+       <tr><td><b>Total due</b></td><td style="text-align:right"><b>$447.00</b></td></tr></table>
+      <div class="note" style="margin-top:10px">CAMTC verified for the establishment &amp; its technicians via staff-assisted lookup (Q&amp;A #3).</div>
+     </div>
+     <div class="blpage" data-bpage="7" style="display:none">
+      <h3 style="margin:0 0 4px">Pay &amp; submit</h3>
+      <label class="glab">Payment method</label><select class="gin"><option>Credit Card — Global Payments</option><option>eCheck / ACH</option><option>Pay at counter</option></select>
+      <label class="glab" style="display:flex;gap:8px;align-items:flex-start;margin-top:14px"><input type="checkbox" checked> I certify the information is true (LMC Title VI). (e-signature)</label>
+      <button class="btn p" style="width:100%;margin-top:16px" data-go="license">Pay $447.00 &amp; Submit</button>
+      <div class="note" style="margin-top:12px">Creates a <b>BusinessLicenseApplication</b>; Zone Clearance result gates issuance; posts to Tyler Munis.</div>
+     </div>
+     <div style="display:flex;justify-content:space-between;margin-top:18px">
+      <button class="btn g" onclick="prevBL()">‹ Back</button><button class="btn p" id="blNext" onclick="nextBL()">Continue ›</button></div>
+    </div>
+   </div>
+  </div>
+  <script>
+   let bp=1;const BLMAX=7;
+   function goBL(n){bp=Math.max(1,Math.min(BLMAX,n));
+    document.querySelectorAll('#bl-apply .blpage').forEach(p=>p.style.display=(+p.dataset.bpage===bp)?'block':'none');
+    document.querySelectorAll('#bl-apply .wstep').forEach(s=>{const i=+s.dataset.bp;s.classList.toggle('on',i===bp);s.classList.toggle('done',i<bp);s.querySelector('.n').textContent=i<bp?'✓':i;});
+    const nx=document.getElementById('blNext');if(nx)nx.textContent=bp===BLMAX?'Submitted ✓':'Continue ›';}
+   function nextBL(){if(bp<BLMAX)goBL(bp+1);else show('license');}
+   function prevBL(){if(bp>1)goBL(bp-1);}
+   goBL(1);
+  </script>
+ </section>
+
+ <!-- ============ ENCROACHMENT / PW PERMIT WIZARD ============ -->
+ <section class="screen" id="enc-apply">
+  <div class="gov-top"><div class="l"><div class="gov-seal">L</div><div><b>City of Lomita</b><div style="font-size:11px;opacity:.8">Apply — Public Works / Encroachment Permit</div></div></div></div>
+  <div class="gov-nav"><a data-go="portal">Home</a><a style="background:rgba(255,255,255,.15)">Apply</a><a data-go="status">My Records</a><a data-go="search">Search Records</a></div>
+  <div class="gov-wrap">
+   <div class="note" style="margin-bottom:14px">For work in the City's right-of-way. Location can be a parcel OR a GPS/cross-street point with no APN (Q&amp;A #4).</div>
+   <div class="wizard">
+    <div class="wsteps">
+     <div class="wstep" data-ep="1" onclick="goEN(1)"><b class="n">1</b> Location &amp; limits</div>
+     <div class="wstep" data-ep="2" onclick="goEN(2)"><b class="n">2</b> Applicant &amp; contractor</div>
+     <div class="wstep" data-ep="3" onclick="goEN(3)"><b class="n">3</b> Work details</div>
+     <div class="wstep" data-ep="4" onclick="goEN(4)"><b class="n">4</b> Documents</div>
+     <div class="wstep" data-ep="5" onclick="goEN(5)"><b class="n">5</b> Review &amp; fees</div>
+     <div class="wstep" data-ep="6" onclick="goEN(6)"><b class="n">6</b> Pay &amp; submit</div>
+    </div>
+    <div class="wbody">
+     <div class="enpage" data-epage="1">
+      <h3 style="margin:0 0 4px">Location &amp; limits</h3>
+      <div style="margin-bottom:8px"><span class="toggle" id="encLoc" onclick="this.querySelectorAll('b').forEach(b=>b.classList.toggle('on'))"><b>By Parcel (APN)</b><b class="on">By GPS / cross-streets</b></span></div>
+      <label class="glab">Work location (address or cross-streets in ROW)</label><input class="gin" value="Narbonne Ave @ 250th St">
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">GPS coordinate <span class="pill b">preferred</span></label><input class="gin" value="33.7921, -118.3174"></div>
+       <div style="flex:1"><label class="glab">Adjacent parcel (optional)</label><input class="gin" value="—"></div></div>
+      <label class="glab">Limits of work / dimensions</label><input class="gin" value="120 ft trench × 2 ft wide × 4 ft deep; restore 18 sf concrete">
+     </div>
+     <div class="enpage" data-epage="2" style="display:none">
+      <h3 style="margin:0 0 4px">Applicant &amp; contractor</h3>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Applicant / company</label><input class="gin" value="SoCal Gas"></div>
+       <div style="flex:1"><label class="glab">Contractor CSLB #</label><input class="gin" value="A-998145"></div></div>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Lomita Business License # <b style="color:var(--red)">(required)</b></label><input class="gin" value="BL-3320"></div>
+       <div style="flex:1"><label class="glab">24-hr emergency contact</label><input class="gin" value="(800) 555-4900"></div></div>
+     </div>
+     <div class="enpage" data-epage="3" style="display:none">
+      <h3 style="margin:0 0 4px">Work details</h3>
+      <label class="glab">Type of work</label>
+      <select class="gin"><option>Utility Trench</option><option>Driveway Approach</option><option>Sidewalk</option><option>Curb &amp; Gutter</option><option>Sewer Lateral</option><option>Street Cut</option><option>Tree Trim/Removal</option><option>Parking</option><option>Ground-water / Industrial Waste Discharge</option></select>
+      <label class="glab">Description of work</label><textarea class="gin" rows="2">Open trench to tie in new gas service; backfill and restore pavement.</textarea>
+      <div style="display:flex;gap:12px">
+       <div style="flex:1"><label class="glab">Proposed start</label><input class="gin" value="07/14/2026"></div>
+       <div style="flex:1"><label class="glab">Proposed end</label><input class="gin" value="07/18/2026"></div></div>
+      <label class="glab" style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" checked> Pavement cut / lane closure — traffic control plan required</label>
+     </div>
+     <div class="enpage" data-epage="4" style="display:none">
+      <h3 style="margin:0 0 4px">Documents</h3>
+      <div class="checkrow"><span>Plans / sketch / exhibit <b style="color:var(--red)">*</b></span><button class="btn p" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow"><span>Traffic control plan <span class="pill a">if lane impact</span></span><button class="btn g" style="padding:3px 10px">Upload</button></div>
+      <div class="checkrow" style="border:none"><span>Certificate of insurance + bond <b style="color:var(--red)">*</b></span><button class="btn p" style="padding:3px 10px">Upload</button></div>
+     </div>
+     <div class="enpage" data-epage="5" style="display:none">
+      <h3 style="margin:0 0 4px">Review &amp; fees</h3>
+      <div class="checkrow"><span>External review — Transtech Engineering (surveyor/plan check)</span><span class="pill a">In Review</span></div>
+      <table style="margin-top:8px"><tr><th>Item</th><th style="text-align:right">Amount</th></tr>
+       <tr><td>Encroachment permit fee</td><td style="text-align:right">$285.00</td></tr>
+       <tr><td>Inspection fee (ROW pre-pave + final)</td><td style="text-align:right">$190.00</td></tr>
+       <tr><td>Refundable bond / deposit</td><td style="text-align:right">$5,000.00</td></tr>
+       <tr><td><b>Due now (fees)</b></td><td style="text-align:right"><b>$475.00</b></td></tr></table>
+      <div class="note" style="margin-top:10px">Consultant-reviewed projects can draw against a <b>Drawdown Account</b> instead of paying per-review (Q&amp;A #5).</div>
+     </div>
+     <div class="enpage" data-epage="6" style="display:none">
+      <h3 style="margin:0 0 4px">Pay &amp; submit</h3>
+      <label class="glab">Payment method</label><select class="gin"><option>Credit Card — Global Payments</option><option>Drawdown debit</option><option>Check</option></select>
+      <label class="glab" style="display:flex;gap:8px;align-items:flex-start;margin-top:14px"><input type="checkbox" checked> I agree to the City's ROW conditions &amp; restoration standards. (e-signature)</label>
+      <button class="btn p" style="width:100%;margin-top:16px" data-go="encroach">Pay $475.00 &amp; Submit</button>
+      <div class="note" style="margin-top:12px">Creates an <b>Encroachment_Permit__c</b> on the External Review track; schedules ROW inspections.</div>
+     </div>
+     <div style="display:flex;justify-content:space-between;margin-top:18px">
+      <button class="btn g" onclick="prevEN()">‹ Back</button><button class="btn p" id="enNext" onclick="nextEN()">Continue ›</button></div>
+    </div>
+   </div>
+  </div>
+  <script>
+   let ep=1;const ENMAX=6;
+   function goEN(n){ep=Math.max(1,Math.min(ENMAX,n));
+    document.querySelectorAll('#enc-apply .enpage').forEach(p=>p.style.display=(+p.dataset.epage===ep)?'block':'none');
+    document.querySelectorAll('#enc-apply .wstep').forEach(s=>{const i=+s.dataset.ep;s.classList.toggle('on',i===ep);s.classList.toggle('done',i<ep);s.querySelector('.n').textContent=i<ep?'✓':i;});
+    const nx=document.getElementById('enNext');if(nx)nx.textContent=ep===ENMAX?'Submitted ✓':'Continue ›';}
+   function nextEN(){if(ep<ENMAX)goEN(ep+1);else show('encroach');}
+   function prevEN(){if(ep>1)goEN(ep-1);}
+   goEN(1);
+  </script>
+ </section>
+
+ </div>
+</div>
+<script>
+const navs=[...document.querySelectorAll('.navi')];
+const screens=[...document.querySelectorAll('.screen')];
+function show(id){
+ screens.forEach(s=>s.classList.toggle('show',s.id===id));
+ navs.forEach(n=>n.classList.toggle('active',n.dataset.s===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+navs.forEach(n=>n.addEventListener('click',()=>show(n.dataset.s)));
+document.addEventListener('click',e=>{
+ const g=e.target.closest('[data-go]'); if(g){show(g.dataset.go);return;}
+});
+// encroachment toggle
+const lt=document.getElementById('locToggle');
+if(lt){lt.addEventListener('click',()=>{lt.querySelectorAll('b').forEach(b=>b.classList.toggle('on'));});}
+// inspection seg buttons
+document.querySelectorAll('.seg').forEach(seg=>{
+ seg.querySelectorAll('b').forEach(b=>b.addEventListener('click',()=>{
+  seg.querySelectorAll('b').forEach(x=>{if(!x.classList.contains('pass')&&!x.classList.contains('fail')&&!x.classList.contains('na'))return;});
+  seg.querySelectorAll('b').forEach(x=>x.className='');
+  b.classList.add(b.textContent.toLowerCase().replace('/',''));
+  b.className = b.textContent==='Pass'?'pass':b.textContent==='Fail'?'fail':'na';
+ }));
+});
+</script>
+</body>
+</html>
