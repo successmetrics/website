@@ -39,7 +39,9 @@ function findHtmlPages(dir: string, relativeDir = ""): string[] {
   return pages;
 }
 
-export const HTML_PAGES = findHtmlPages(ROOT);
+export const HTML_PAGES = findHtmlPages(ROOT).filter(
+  (page) => !page.startsWith("prototypes/"),
+);
 
 export function readPage(filename: string): string {
   return readFileSync(join(ROOT, filename), "utf8");

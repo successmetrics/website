@@ -45,6 +45,11 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+[[headers]]
+  for = "/prototypes/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # Friendly URLs: /careers works same as /careers.html
 [[redirects]]
   from = "/careers"
@@ -85,6 +90,11 @@
 [[redirects]]
   from = "/contact"
   to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/prototypes/lomita"
+  to = "/prototypes/40ef452d60d962bd.html"
   status = 200
 
 # Clean URLs for content pages
