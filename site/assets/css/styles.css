@@ -278,6 +278,10 @@ a:hover { text-decoration: none; }
 /* ============ SECTIONS ============ */
 section.block { padding: 90px 0; }
 section.block.alt { background: var(--bg-2); }
+body:has(.page-hero):not(.page-about) section.block { padding: 68px 0; }
+body:has(.page-hero):not(.page-about) .page-hero { padding: 64px 0 44px; }
+body:has(.page-hero):not(.page-about) .section-head { margin-bottom: 38px; }
+body:has(.page-hero):not(.page-about) .divider { margin: 42px 0; }
 .section-head { max-width: 700px; margin-bottom: 54px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .kicker {
@@ -902,21 +906,15 @@ footer {
   flex: 1;
 }
 .card.res-card.story-card .thumb {
-  height: 260px;
-  min-height: 260px;
+  height: 190px;
+  min-height: 190px;
 }
 .story-card-thumb {
-  flex-direction: column;
-  gap: 22px;
   justify-content: center;
-  padding: 32px 28px;
+  padding: 24px 20px;
 }
-.story-card-icon {
-  font-size: 5rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.card.res-card.story-card .link { margin-top: auto; padding-top: 18px; }
+.card.res-card.story-card .body { padding: 22px; }
+.card.res-card.story-card .link { margin-top: auto; padding-top: 14px; }
 
 [data-story-carousel] {
   --carousel-gutter-start: 48px;
@@ -1017,21 +1015,17 @@ footer {
   max-width: min(420px, calc(100vw - var(--carousel-gutter-start) - var(--carousel-gutter-end) - 24px));
 }
 .story-carousel-track .story-card .thumb {
-  height: 220px;
-  min-height: 220px;
+  height: 170px;
+  min-height: 170px;
 }
 .story-carousel-track .story-card .story-card-thumb {
-  gap: 16px;
-  padding: 24px;
-}
-.story-carousel-track .story-card .story-card-icon {
-  font-size: 4rem;
+  padding: 20px;
 }
 .story-carousel-track .story-card .body {
-  padding: 22px;
+  padding: 20px;
 }
 .story-carousel-track .story-card .link {
-  padding-top: 14px;
+  padding-top: 12px;
 }
 .story-carousel-track .story-card:last-child {
   scroll-snap-align: end;
@@ -1247,6 +1241,7 @@ footer {
   .grid-2, .grid-3, .grid-4, .process, .two-col, .form-grid, .footer-grid, .partners-grid { grid-template-columns: 1fr; }
   .hero { padding: 32px 0 60px; }
   section.block { padding: 60px 0; }
+  body:has(.page-hero):not(.page-about) section.block { padding: 48px 0; }
   .container { padding: 0 18px; }
   .form-card { padding: 24px 18px; }
   .cta-banner .inner { padding: 44px 26px; }

@@ -98,7 +98,7 @@ test.describe("page smoke tests", () => {
     await expect(thumb).toBeVisible();
 
     const height = await thumb.evaluate((el) => el.getBoundingClientRect().height);
-    expect(height).toBeGreaterThanOrEqual(240);
+    expect(height).toBeGreaterThanOrEqual(150);
   });
 
   test("homepage shows partner logos", async ({ page }) => {
