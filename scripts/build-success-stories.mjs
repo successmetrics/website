@@ -28,7 +28,6 @@ const STORY_CONFIG = {
     thumbWidth: 280,
     thumbHeight: 100,
     thumbClass: "thumb-1",
-    icon: "⚡",
     pageTitle: "AMP Customer Portal Success Story",
   },
   "caloes-ppe-portal-success-story": {
@@ -43,7 +42,6 @@ const STORY_CONFIG = {
     thumbWidth: 260,
     thumbHeight: 100,
     thumbClass: "thumb-4",
-    icon: "🛡️",
     pageTitle: "Cal OES PPE Portal Success Story",
   },
   "leaflink-cpq-success-story": {
@@ -58,7 +56,6 @@ const STORY_CONFIG = {
     thumbWidth: 160,
     thumbHeight: 28,
     thumbClass: "thumb-2",
-    icon: "📊",
     pageTitle: "LeafLink CPQ Success Story",
   },
   "sfhss-agentforce-success-story": {
@@ -73,7 +70,6 @@ const STORY_CONFIG = {
     thumbWidth: 130,
     thumbHeight: 28,
     thumbClass: "thumb-3",
-    icon: "🩺",
     pageTitle: "SFHSS Agentforce Success Story",
   },
   "mohcd-agentforce-success-story": {
@@ -88,7 +84,6 @@ const STORY_CONFIG = {
     thumbWidth: 300,
     thumbHeight: 77,
     thumbClass: "thumb-2",
-    icon: "🏠",
     pageTitle: "MOHCD Agentforce Success Story",
   },
 };
@@ -311,7 +306,6 @@ function renderIndexCard(slug, parsed, markdown) {
 
   return `      <div class="card res-card story-card">
         <div class="thumb ${config.thumbClass} story-card-thumb">
-          <span class="story-card-icon" aria-hidden="true">${config.icon}</span>
           <img class="story-client-logo story-client-logo--thumb ${config.thumbLogoClass}" src="assets/images/clients/${config.logo}" alt="${escapeHtml(parsed.meta.Client?.split("(")[0].trim() || slug)}" width="${config.thumbWidth}" height="${config.thumbHeight}" loading="lazy">
         </div>
         <div class="body">
