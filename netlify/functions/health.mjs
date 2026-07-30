@@ -14,6 +14,12 @@ export default async function handler() {
         NOTION_APPLICATIONS_DATABASE_ID: Boolean(
           process.env.NOTION_APPLICATIONS_DATABASE_ID?.trim(),
         ),
+        GOOGLE_DRIVE_FOLDER_ID: Boolean(process.env.GOOGLE_DRIVE_FOLDER_ID?.trim()),
+        GOOGLE_SERVICE_ACCOUNT: Boolean(
+          process.env.GOOGLE_SERVICE_ACCOUNT_JSON?.trim() ||
+            (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim() &&
+              process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.trim()),
+        ),
       },
     }),
     { status: 200, headers },

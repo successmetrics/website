@@ -25,12 +25,56 @@ Main pages: Home, Services, Industries, Accelerators, Resources, Success Stories
 ```bash
 npm ci
 npm run preview    # build + serve site/ at http://localhost:8080
-npm run dev        # Netlify Dev — includes /api/* routes for forms
+npx netlify-cli dev # full local site, including /api/* routes
 ```
 
 Edit `templates/nav.html` for navigation changes, then run `npm run build`. Page metadata lives in `data/seo.json`.
 
-Forms require `npm run dev` or the deployed site — they won't submit from static preview alone. Copy `.env.example` to `.env` for local API credentials.
+Forms require `npx netlify-cli dev` or the deployed site — they won't submit from static preview alone. Copy `.env.example` to `.env` for local API credentials.
+
+## Review the `test` branch on another computer
+
+Prerequisites:
+
+- Git
+- Node.js 20 or newer
+- Access to this GitHub repository
+
+Clone the repository and check out the `test` branch:
+
+```bash
+git clone <repository-url>
+cd website
+git checkout test
+git pull origin test
+npm ci
+npx netlify-cli dev
+```
+
+Open the local URL printed by Netlify CLI, normally:
+
+```text
+http://localhost:8888
+```
+
+For visual review only, no `.env` file is required. Forms and integrations require environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Populate `.env` only with credentials provided through a secure channel. Never commit `.env`, API keys, service-account JSON, or other secrets.
+
+To refresh an existing checkout after more changes are pushed:
+
+```bash
+git checkout test
+git pull origin test
+npm ci
+npx netlify-cli dev
+```
+
+`localhost` is accessible only on the computer running the command. Pushing to GitHub does not create a public preview by itself. For review through a browser without cloning the repository, use the Netlify branch-deploy URL for the `test` branch.
 
 ## Testing
 

@@ -40,17 +40,17 @@
   "pages": {
     "index.html": {
       "path": "/",
-      "title": "SuccessMetrics | AI-Enabled Salesforce for Mid-Market",
-      "description": "Salesforce implementation for mid-market & public sector. AI-enabled delivery, proven accelerators, Agentforce expertise. Free assessment — Moraga, CA.",
-      "keywords": ["Salesforce implementation mid-market", "AI-enabled Salesforce consulting", "Salesforce SI partner California"],
+      "title": "SuccessMetrics | AI-Powered Salesforce Engineering Partner",
+      "description": "SuccessMetrics is your AI-powered engineering partner — accelerating product development and Salesforce implementations from quarters to weeks.",
+      "keywords": ["AI-powered Salesforce engineering", "Salesforce implementation partner", "AI-native Salesforce consulting California"],
       "ogType": "website",
       "schema": ["Organization", "WebSite"]
     },
     "services.html": {
       "path": "/services",
-      "title": "Salesforce Services | Implementation & Managed Support",
-      "description": "Advisory, roadmap, implementation & managed Salesforce services for mid-market teams. AI-enabled delivery with measurable outcomes.",
-      "keywords": ["Salesforce services", "Salesforce managed services", "Salesforce implementation partner"],
+      "title": "AI-Powered Salesforce Services | SuccessMetrics Engineering Partner",
+      "description": "Every service we offer is AI-accelerated — advisory, roadmap, implementation, and managed services delivered by engineers, not billable-hour consultants.",
+      "keywords": ["AI-powered Salesforce services", "Salesforce managed services", "AI-augmented Salesforce implementation"],
       "ogType": "website",
       "schema": ["Service"]
     },
@@ -64,9 +64,9 @@
     },
     "accelerators.html": {
       "path": "/accelerators",
-      "title": "Salesforce Accelerators | LPI, Org Insights & More",
-      "description": "Proven Salesforce accelerators: LPI (120+ story points), Org Insights, Data Masking, LWC library. Go live faster with less risk.",
-      "keywords": ["Salesforce LPI accelerator", "org health check Salesforce", "Salesforce data masking"],
+      "title": "Salesforce Accelerators | Start at 60% Done with SuccessMetrics",
+      "description": "Our AI-powered delivery factory builds accelerators so your project starts months ahead — 120+ story points prebuilt, proven in production.",
+      "keywords": ["Salesforce LPI accelerator", "Salesforce accelerator 120 story points", "org health check Salesforce"],
       "ogType": "website",
       "schema": ["Product"]
     },
@@ -96,9 +96,9 @@
     },
     "about.html": {
       "path": "/about",
-      "title": "About SuccessMetrics | Salesforce Consulting Partner",
-      "description": "SuccessMetrics delivers AI-enabled Salesforce consulting for mid-market & public sector. 30+ years leadership experience. California HQ, India delivery center.",
-      "keywords": ["Salesforce consulting partner", "SuccessMetrics Salesforce", "AI-enabled Salesforce delivery"],
+      "title": "About SuccessMetrics | AI-Native Engineering Partner",
+      "description": "SuccessMetrics is an AI-native engineering partner — shipping Salesforce implementations in weeks, not quarters. 30+ years leadership experience. California HQ, India delivery center.",
+      "keywords": ["AI-native engineering partner", "SuccessMetrics Salesforce", "AI-powered Salesforce delivery"],
       "ogType": "website",
       "schema": ["Organization"]
     },
