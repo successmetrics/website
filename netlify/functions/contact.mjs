@@ -46,7 +46,7 @@ export default async function handler(request) {
       return json(
         {
           error:
-            "We could not send your message. Please email support@successmetrics.io directly.",
+            "We could not send your message. Please email success@successmetrics.io directly.",
           reason: emailResult.reason,
         },
         503,

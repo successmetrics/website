@@ -52,8 +52,31 @@ export default async function handler(request) {
       uploadResumeToDrive(application),
     ]);
 
+    const notionSaved = notionPage.status === "fulfilled";
+    const emailSent =
+      emailResult.status === "fulfilled" && Boolean(emailResult.value?.sent);
+    const driveUploaded =
+      driveResult.status === "fulfilled" && Boolean(driveResult.value?.uploaded);
+
     if (notionPage.status === "rejected") {
       console.error("Notion application create failed:", notionPage.reason);
+    }
+
+    if (emailResult.status === "rejected") {
+      console.error("Careers notification email failed:", emailResult.reason);
+    } else if (emailResult.status === "fulfilled" && !emailResult.value?.sent) {
+      console.warn(
+        "Careers notification email skipped:",
+        emailResult.value?.reason || "unknown",
+      );
+    }
+
+    if (driveResult.status === "rejected") {
+      console.error("Google Drive resume upload failed:", driveResult.reason);
+    }
+
+    // Email is the primary delivery path; Notion/Drive are best-effort archives.
+    if (!emailSent && !notionSaved) {
       return json(
         {
           error:
@@ -63,22 +86,11 @@ export default async function handler(request) {
       );
     }
 
-    if (emailResult.status === "rejected") {
-      console.error("Careers notification email failed:", emailResult.reason);
-    }
-
-    if (driveResult.status === "rejected") {
-      console.error("Google Drive resume upload failed:", driveResult.reason);
-    }
-
-    const driveUploaded =
-      driveResult.status === "fulfilled" && driveResult.value.uploaded;
-
     return json(
       {
         ok: true,
-        notionPageId: notionPage.value.id,
-        emailSent: emailResult.status === "fulfilled" && emailResult.value.sent,
+        notionPageId: notionSaved ? notionPage.value.id : null,
+        emailSent,
         driveUploaded,
       },
       200,

@@ -496,7 +496,7 @@
     "safe-seed.html": {
       "path": "/safe-seed",
       "title": "Safe Seed | Relation-Preserving Synthetic Data",
-      "description": "Safe Seed generates synthetic datasets that behave like production without exposing real people — for Salesforce, databases, and CSV.",
+      "description": "Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.",
       "keywords": [
         "synthetic data Salesforce",
         "relation-preserving synthetic data",
