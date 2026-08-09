@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- seo:start -->
+<title>Safe Seed | Relation-Preserving Synthetic Data | SuccessMetrics</title>
+<meta name="description" content="Safe Seed generates synthetic datasets that behave like production — without exposing real people. Relation-preserving synthesis with measurable privacy for Salesforce, databases, and CSV.">
+<link rel="canonical" href="https://www.successmetrics.io/safe-seed">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="Safe Seed | Relation-Preserving Synthetic Data | SuccessMetrics">
+<meta property="og:description" content="Safe Seed generates synthetic datasets that behave like production — without exposing real people. Relation-preserving synthesis with measurable privacy for Salesforce, databases, and CSV.">
+<meta property="og:url" content="https://www.successmetrics.io/safe-seed">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Safe Seed | Relation-Preserving Synthetic Data | SuccessMetrics">
+<meta name="twitter:description" content="Safe Seed generates synthetic datasets that behave like production — without exposing real people. Relation-preserving synthesis with measurable privacy for Salesforce, databases, and CSV.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"SuccessMetrics Salesforce Accelerators","brand":{"@type":"Brand","name":"SuccessMetrics Corp"},"description":"Safe Seed generates synthetic datasets that behave like production — without exposing real people. Relation-preserving synthesis with measurable privacy for Salesforce, databases, and CSV.","url":"https://www.successmetrics.io/safe-seed"}</script>
+
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+<link rel="stylesheet" href="assets/css/styles.css?v=f8f46dcbd464">
+</head>
+<body>
+
+<!-- @nav active="accelerators" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">AI Solutions</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html" class="active">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html">AI Research</a></li>
+      <li><a href="/success-stories.html">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<header class="page-hero">
+  <div class="container">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
+      <a href="accelerators.html">Accelerators</a><span class="sep" aria-hidden="true">/</span>
+      <span aria-current="page">Safe Seed</span>
+    </nav>
+    <div class="kicker">Safe Seed · Synthetic Data</div>
+    <h1>Synthetic data that behaves like production — without exposing real people</h1>
+    <p>Safe Seed generates relation-preserving datasets for regulated sandboxes, demos, and analytics. Correlations, multi-table integrity, and measurable privacy — so workflows and QA see the structure that actually matters.</p>
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;">
+      <a href="contact.html?ref=safe-seed" class="btn btn-primary">Talk to an Engineer →</a>
+      <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+    </div>
+  </div>
+</header>
+
+<section class="block alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">The Problem</div>
+      <h2 class="title">Production data is the best test data — and the one you can't use</h2>
+      <p>PHI, PII, and sensitive customer records are locked away from sandboxes, QA, demos, and analytics. Classic generators optimize for column-level realism and break the relationships that make data useful.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Behaves like production</h3>
+        <p>Correlations, distributions, and multi-table relationships stay intact — not shuffled columns that fail in workflows.</p>
+      </div>
+      <div class="card">
+        <h3>Provably safe</h3>
+        <p>Measurable privacy evidence with PASS / WARN / FAIL reporting — assurance compliance teams can sign off on.</p>
+      </div>
+      <div class="card">
+        <h3>Repeatable &amp; auditable</h3>
+        <p>Durable jobs, config hashing, and downloadable evidence packs for retention and offline review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="how-it-works">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Capabilities</div>
+      <h2 class="title">Relation-preserving synthesis, end to end</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="badge teal">Privacy &amp; PII</span>
+        <h3>Mask without breaking joins</h3>
+        <p>PII columns masked while preserving stable, usable join keys. Per-run privacy metrics for reviewers and legal — with role separation so inspectors don't mutate sources.</p>
+      </div>
+      <div class="card">
+        <span class="badge blue">Multi-table</span>
+        <h3>Full relational reconstruction</h3>
+        <p>Synthesize parents first, reconstruct children with referential integrity. Locked tables pass through unchanged for mixed real/synthetic environments.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Fidelity</span>
+        <h3>Measure every run</h3>
+        <p>Per-relation real-vs-synthetic deltas in every report. Adaptive Keep Training warm-starts from a completed run to deepen fidelity.</p>
+      </div>
+      <div class="card">
+        <span class="badge teal">Missingness</span>
+        <h3>Null patterns preserved</h3>
+        <p>Configurable NaN policies per field — null rates, imputation strategies, and missingness patterns so models see the same incomplete-data reality as production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="kicker">Where It Runs</div>
+        <h2 class="title">Works with the platforms you already use</h2>
+        <p style="color: var(--text-dim); margin-bottom: 20px;">Seed Salesforce sandboxes, databases, and files — without sending production records into environments that shouldn't hold them.</p>
+        <ul class="check-list">
+          <li><strong style="color: var(--text);">Salesforce</strong> — Sales Cloud, Service Cloud, and Health Cloud sandbox seeding with metadata-aware paths</li>
+          <li><strong style="color: var(--text);">PostgreSQL</strong> — multi-table schema support and automatic FK discovery</li>
+          <li><strong style="color: var(--text);">CSV</strong> — upload sources; download outputs for use anywhere</li>
+          <li><strong style="color: var(--text);">ServiceNow</strong> — coming soon</li>
+        </ul>
+      </div>
+      <div>
+        <div class="kicker">Who Adopts It</div>
+        <h2 class="title">Built for regulated workloads</h2>
+        <ul class="check-list">
+          <li>Healthcare &amp; life sciences — PHI-safe Health Cloud and clinical-adjacent pipelines</li>
+          <li>Financial services &amp; insurance — customer, transaction, and claims data for test and demo</li>
+          <li>CRM &amp; revenue ops — realistic volume and relationships after sandbox refreshes</li>
+          <li>Any team under GDPR, CCPA, SOC 2, or sector privacy rules</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">Why Teams Choose Safe Seed</div>
+      <h2 class="title">Utility, control, and assurance in one operator workflow</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Utility</h3>
+        <p>Coherent relationships across fields and tables — so UAT, integrations, and demos don't collapse on broken joins.</p>
+      </div>
+      <div class="card">
+        <h3>Control</h3>
+        <p>Schema locks, PII flags, NaN policies, and field policies without writing synthesizer code.</p>
+      </div>
+      <div class="card">
+        <h3>Assurance</h3>
+        <p>Reports and evidence ZIPs that survive legal review — privacy and fidelity in the same vocabulary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="cta-banner">
+    <div class="inner">
+      <h2>Seed sandboxes that compliance can approve</h2>
+      <p>Talk to an engineer about Safe Seed for your Salesforce org, database, or regulated analytics pipeline.</p>
+      <a href="contact.html?ref=safe-seed" class="btn btn-primary">Talk to an Engineer →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+        <p>AI-native engineering partner for organizations that need enterprise software delivered faster — fusing AI-powered delivery pipelines, prebuilt accelerators, and deep Salesforce expertise to ship in weeks, not quarters.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="success-stories.html">Success Stories</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Expertise</h5>
+        <ul>
+          <li><a href="services.html">AI Solutions</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="accelerators.html">Accelerators</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="why-ai-salesforce.html">Why AI + Salesforce</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="resources.html">Blog &amp; Articles</a></li>
+          <li><a href="resources.html#whitepapers">White Papers</a></li>
+          <li><a href="customer-questions.html">Q&amp;A</a></li>
+          <li><a href="https://www.linkedin.com/company/successmetrics-corp">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div>460 Center Street #6021, Moraga, CA 94570 · <a href="tel:+15103306457">(510) 330-6457</a> · <a href="mailto:support@successmetrics.io">support@successmetrics.io</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

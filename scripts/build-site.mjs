@@ -24,6 +24,7 @@ const ACTIVE_KEYS = {
   "ai-research": "ACTIVE_AI_RESEARCH",
   "success-stories": "ACTIVE_SUCCESS_STORIES",
   careers: "ACTIVE_CAREERS",
+  "customer-questions": "ACTIVE_CUSTOMER_QUESTIONS",
   about: "ACTIVE_ABOUT",
 };
 

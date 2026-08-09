@@ -91,6 +91,34 @@
   from = "/contact"
   to = "/contact.html"
   status = 200
+[[redirects]]
+  from = "/easymask"
+  to = "/easymask.html"
+  status = 200
+[[redirects]]
+  from = "/safe-seed"
+  to = "/safe-seed.html"
+  status = 200
+[[redirects]]
+  from = "/org-insights"
+  to = "/org-insights.html"
+  status = 200
+[[redirects]]
+  from = "/how-we-work"
+  to = "/how-we-work.html"
+  status = 200
+[[redirects]]
+  from = "/why-ai-salesforce"
+  to = "/why-ai-salesforce.html"
+  status = 200
+[[redirects]]
+  from = "/customer-questions"
+  to = "/customer-questions.html"
+  status = 200
+[[redirects]]
+  from = "/qa"
+  to = "/customer-questions.html"
+  status = 200
 
 [[redirects]]
   from = "/prototypes/lomita"
