@@ -1,5 +1,6 @@
 import { createApplicationPage } from "./shared/notion.mjs";
 import { sendApplicationNotification } from "./shared/email.mjs";
+import { uploadResumeToDrive } from "./shared/google-drive.mjs";
 
 const MAX_RESUME_BYTES = 8 * 1024 * 1024;
 const ALLOWED_RESUME_TYPES = new Set([
@@ -45,9 +46,10 @@ export default async function handler(request) {
       resumeFile,
     };
 
-    const [notionPage, emailResult] = await Promise.allSettled([
+    const [notionPage, emailResult, driveResult] = await Promise.allSettled([
       createApplicationPage(application),
       sendApplicationNotification(application),
+      uploadResumeToDrive(application),
     ]);
 
     if (notionPage.status === "rejected") {
@@ -65,11 +67,19 @@ export default async function handler(request) {
       console.error("Careers notification email failed:", emailResult.reason);
     }
 
+    if (driveResult.status === "rejected") {
+      console.error("Google Drive resume upload failed:", driveResult.reason);
+    }
+
+    const driveUploaded =
+      driveResult.status === "fulfilled" && driveResult.value.uploaded;
+
     return json(
       {
         ok: true,
         notionPageId: notionPage.value.id,
         emailSent: emailResult.status === "fulfilled" && emailResult.value.sent,
+        driveUploaded,
       },
       200,
     );

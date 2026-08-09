@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- seo:start -->
+<title>EasyMask Case Study | AI-Built Product Engineering</title>
+<meta name="description" content="How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.">
+<link rel="canonical" href="https://www.successmetrics.io/content/success-stories/easymask-product-engineering-success-story">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="EasyMask Case Study | AI-Built Product Engineering">
+<meta property="og:description" content="How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.">
+<meta property="og:url" content="https://www.successmetrics.io/content/success-stories/easymask-product-engineering-success-story">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EasyMask Case Study | AI-Built Product Engineering">
+<meta name="twitter:description" content="How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"EasyMask Case Study | AI-Built Product Engineering","description":"How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.","url":"https://www.successmetrics.io/content/success-stories/easymask-product-engineering-success-story","datePublished":"2026-08-03","dateModified":"2026-08-03","author":{"@type":"Organization","name":"SuccessMetrics Corp","url":"https://www.successmetrics.io"},"publisher":{"@type":"Organization","name":"SuccessMetrics Corp","logo":{"@type":"ImageObject","url":"https://www.successmetrics.io/assets/images/logo.svg"}},"mainEntityOfPage":"https://www.successmetrics.io/content/success-stories/easymask-product-engineering-success-story"}</script>
+
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/styles.css?v=f8f46dcbd464">
+</head>
+<body>
+
+<!-- @nav active="success-stories" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">AI Solutions</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html">AI Research</a></li>
+      <li><a href="/success-stories.html" class="active">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="prose-layout prose-layout--story">
+  <nav class="prose-back" aria-label="Story navigation">
+    <a href="../../success-stories.html">← Back to Success Stories</a>
+  </nav>
+  <article class="prose prose--story">
+  <div class="prose-header">
+    <div class="prose-header-copy">
+      <span class="badge blue">Product Engineering</span>
+      <h1>Customer Zero: 62% Less Testing Time Shipping an AppExchange-Grade Product</h1>
+      <div class="story-meta">
+        <div><strong>Client:</strong> SuccessMetrics (Customer Zero — our own product team)</div>
+        <div><strong>Domain:</strong> AppExchange product engineering — sandbox data masking</div>
+        <div><strong>Engagement:</strong> EasyMask: native Salesforce managed package, built end-to-end with our AI delivery engine</div>
+        <div><strong>Implementation Partner:</strong> SuccessMetrics</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>The Challenge</h2>
+  <p>Shipping a commercial AppExchange product is a different bar than a consulting deliverable: a managed 2GP package, a Salesforce security review, deterministic behavior across thousands of org configurations, and a test suite deep enough to prove all of it. For a lean team, the traditional bottleneck isn't writing the code — it's the testing: building coverage for batch processing, rollback safety, automation muting, and failure handling across every edge case.</p>
+
+  <h2>The Approach</h2>
+  <p>EasyMask became the proving ground for our AI delivery engine. AI agents generated and maintained the Apex and LWC test suites alongside the code, drafted edge-case scenarios engineers hadn't enumerated, and ran build-test-fix loops that kept coverage moving with every change — with our engineers reviewing and approving every gate. The same pipeline produced the security-review documentation trail.</p>
+  <p>We didn't use EasyMask to demo the engine. We bet the product on it. Every client engagement now runs on the same pipeline that shipped a commercial product — and the pipeline got sharper because a product's quality bar demanded it.</p>
+
+  <h2>What We Shipped</h2>
+  <ul>
+    <li><strong>A native Salesforce data-masking product</strong> — deterministic fake data, multi-object jobs, dry-run and pre-flight safety checks, automation muting with fail-closed restore, and full audit logging</li>
+    <li><strong>Managed 2GP package</strong> prepared for AppExchange, including the complete security-review submission packet</li>
+    <li><strong>Production guardrails throughout</strong> — sandbox-only execution enforced at every entry point</li>
+  </ul>
+
+  <h2>The Impact</h2>
+  <ul>
+    <li><strong>62% reduction in development testing time</strong> — AI agents generated and maintained test suites alongside the code, eliminating the sprint-end bottleneck of manual test authoring</li>
+    <li><strong>Deeper test coverage</strong> — agents drafted edge-case scenarios beyond the initial spec, validated by engineers, resulting in coverage that exceeded the minimum bar</li>
+    <li><strong>Continuous security-review readiness</strong> — review evidence produced throughout the pipeline rather than as a separate documentation phase at the end</li>
+    <li><strong>Every client engagement benefits</strong> — the pipeline hardened on a product-grade quality bar is the same one running every SuccessMetrics implementation today</li>
+  </ul>
+
+  <h2>Why It Matters</h2>
+  <p>We were customer zero. We didn't ask clients to trust a pipeline we hadn't proven on something that mattered. EasyMask had a quality bar — a security review, deterministic behavior across orgs, test coverage with real teeth — and we built it with the engine before we offered the engine to anyone else. That's the standard we hold every client engagement to.</p>
+  <hr>
+
+  <div class="callout">
+    <p>Want to see how the same engine applies to your Salesforce challenge? <a href="../../contact.html">Contact SuccessMetrics</a></p>
+  </div>
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div><a href="../../success-stories.html">← Back to Success Stories</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/js/prose-back.js" defer></script>
+</body>
+</html>

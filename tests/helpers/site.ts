@@ -39,8 +39,13 @@ function findHtmlPages(dir: string, relativeDir = ""): string[] {
   return pages;
 }
 
+/** Draft / source copies that must not be treated as published pages. */
+const EXCLUDED_HTML_PAGES = new Set([
+  "SuccessMetrics_customer_questions_marketing_copy.html",
+]);
+
 export const HTML_PAGES = findHtmlPages(ROOT).filter(
-  (page) => !page.startsWith("prototypes/"),
+  (page) => !page.startsWith("prototypes/") && !EXCLUDED_HTML_PAGES.has(page),
 );
 
 export function readPage(filename: string): string {

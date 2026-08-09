@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- seo:start -->
+<title>How We Work | AI Delivery Engine | SuccessMetrics</title>
+<meta name="description" content="Discover, Design, Build, Prove: how SuccessMetrics' AI-native delivery engine and engineering team ship Salesforce solutions in weeks.">
+<link rel="canonical" href="https://www.successmetrics.io/how-we-work">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="How We Work | AI Delivery Engine | SuccessMetrics">
+<meta property="og:description" content="Discover, Design, Build, Prove: how SuccessMetrics' AI-native delivery engine and engineering team ship Salesforce solutions in weeks.">
+<meta property="og:url" content="https://www.successmetrics.io/how-we-work">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How We Work | AI Delivery Engine | SuccessMetrics">
+<meta name="twitter:description" content="Discover, Design, Build, Prove: how SuccessMetrics' AI-native delivery engine and engineering team ship Salesforce solutions in weeks.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"How We Work | AI Delivery Engine | SuccessMetrics","description":"Discover, Design, Build, Prove: how SuccessMetrics' AI-native delivery engine and engineering team ship Salesforce solutions in weeks.","url":"https://www.successmetrics.io/how-we-work"}</script>
+
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/images/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/css/styles.css?v=f8f46dcbd464" rel="stylesheet"/>
+<style>
+/* Stage number display */
+.stage-bignum {
+  font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em;
+  background: var(--gradient-text);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.1; display: block; margin-bottom: 6px;
+}
+.stage-promise { color: var(--accent); font-weight: 700; font-size: 1.05rem; margin: 6px 0 16px; }
+.stage-body { color: var(--text-dim); font-size: 1rem; max-width: 860px; margin-bottom: 22px; }
+/* Breakdown 3-col */
+.breakdown-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.breakdown-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 10px; padding: 18px;
+}
+.breakdown-card h4 {
+  font-size: 0.74rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.breakdown-card p { font-size: 0.9rem; color: var(--text-dim); }
+/* Proof callout */
+.proof-callout {
+  display: inline-block; margin-top: 20px;
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 18px;
+  font-size: 0.92rem; color: var(--text-dim);
+}
+.proof-callout b { color: var(--accent-2); }
+/* Oversight dark band */
+.oversight-band {
+  background: var(--bg-3);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 80px 0;
+}
+.oversight-band h2 {
+  font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 800;
+  max-width: 720px; margin-bottom: 14px;
+}
+.oversight-band h2 em { color: var(--accent-2); font-style: normal; }
+.oversight-band p { color: var(--text-dim); max-width: 780px; font-size: 1.02rem; }
+.chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.chip {
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 7px 16px; font-size: 0.85rem;
+  color: var(--text-dim); background: var(--bg-2);
+}
+.chip::before { content: "✓  "; color: var(--accent-2); font-weight: 700; }
+/* Customer Zero callout */
+.czero-box {
+  background: linear-gradient(120deg, var(--bg-2), var(--bg-3));
+  border: 1px solid var(--border); border-radius: 18px; padding: 40px;
+}
+.czero-box h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+.czero-box p { color: var(--text-dim); max-width: 820px; font-size: 1.02rem; }
+/* FAQ */
+details.faq-item {
+  border: 1px solid var(--border); border-radius: 10px;
+  margin-bottom: 10px; background: var(--card);
+}
+details.faq-item summary {
+  cursor: pointer; padding: 16px 20px; font-weight: 600;
+  color: var(--text); list-style: none; position: relative;
+}
+details.faq-item summary::-webkit-details-marker { display: none; }
+details.faq-item summary::after {
+  content: "+"; position: absolute; right: 20px;
+  color: var(--accent); font-weight: 700; font-size: 1.2rem;
+}
+details.faq-item[open] summary::after { content: "−"; }
+details.faq-item p { padding: 0 20px 16px; color: var(--text-dim); font-size: 0.95rem; }
+/* Stage stepper in hero */
+.stage-stepper {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 40px; padding-bottom: 20px;
+}
+.stage-step-card {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px;
+  text-decoration: none; color: var(--text); transition: background 0.2s, border-color 0.2s;
+}
+.stage-step-card:hover {
+  background: rgba(22,166,216,0.07); border-color: rgba(22,166,216,0.4);
+}
+.stage-step-card .sn { color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.stage-step-card .st { font-weight: 700; font-size: 1rem; margin-top: 4px; }
+.stage-step-card .sd { color: var(--text-dim); font-size: 0.82rem; margin-top: 3px; }
+@media (max-width: 820px) {
+  .stage-stepper { grid-template-columns: repeat(2, 1fr); }
+  .breakdown-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<!-- @nav active="" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">AI Solutions</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html">AI Research</a></li>
+      <li><a href="/success-stories.html">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<header class="page-hero" style="padding-bottom: 0;">
+<div class="container">
+<nav aria-label="Breadcrumb" class="page-breadcrumb">
+<a href="index.html">Home</a><span aria-hidden="true" class="sep">/</span>
+<span aria-current="page">How We Work</span>
+</nav>
+<div class="kicker">How We Work</div>
+<h1>Four stages. AI doing the heavy lifting. Engineers owning every outcome.</h1>
+<p>This is how a project that used to take quarters ships in weeks — and every use case ships with proof it does what was promised.</p>
+<div class="stage-stepper">
+<a class="stage-step-card" href="#discover">
+<div class="sn">Stage 1</div>
+<div class="st">Discover</div>
+<div class="sd">From documents to decisions in days</div>
+</a>
+<a class="stage-step-card" href="#design">
+<div class="sn">Stage 2</div>
+<div class="st">Design</div>
+<div class="sd">Standard platform first. Your processes always.</div>
+</a>
+<a class="stage-step-card" href="#build">
+<div class="sn">Stage 3</div>
+<div class="st">Build</div>
+<div class="sd">Start with 60% built — keep the work moving</div>
+</a>
+<a class="stage-step-card" href="#prove">
+<div class="sn">Stage 4</div>
+<div class="st">Prove</div>
+<div class="sd">Done is demonstrated with evidence.</div>
+</a>
+</div>
+</div>
+</header>
+<section class="block">
+<div class="container">
+<p style="font-size: 1.1rem; color: var(--text-dim); max-width: 820px; margin-bottom: 18px;">We bring a delivery system alongside the engineering team: an <strong style="color: var(--text);">AI-native delivery engine</strong> — a pipeline of specialized agents, prebuilt solution libraries, and automated quality gates, supervised at every step by senior engineers. It's the same engine we used to ship our own commercial product, and it runs every client engagement we deliver.</p>
+<p style="font-size: 1.05rem; color: var(--text-dim); max-width: 820px;">The result isn't just speed. It's consistency: every requirement traced to a use case, every use case to a build, every build to a test that proves it works.</p>
+</div>
+</section>
+<section class="block alt" id="discover">
+<div class="container">
+<div class="kicker">Stage 1</div>
+<span class="stage-bignum">Discover</span>
+<div class="stage-promise">From documents to decisions in days.</div>
+<p class="stage-body">Every engagement starts with what you already have — RFPs, requirements documents, discovery notes, even meeting transcripts. Our Requirements Agent normalizes all of it into structured requirements and use cases with acceptance criteria, flagging what's standard, what's custom, and what's ambiguous. If you have an existing Salesforce org, the OrgInsights Agent maps its health, technical debt, and license dependencies before we design anything.</p>
+<div class="breakdown-grid">
+<div class="breakdown-card">
+<h4>What the agents do</h4>
+<p>Read every source document; produce structured requirements, personas, and testable acceptance criteria; flag what's standard, custom, or ambiguous.</p>
+</div>
+<div class="breakdown-card">
+<h4>What our engineers do</h4>
+<p>Run discovery workshops, resolve the ambiguities agents flag, and make the scope calls only humans should make.</p>
+</div>
+<div class="breakdown-card">
+<h4>What you see</h4>
+<p>A requirements catalog you can challenge line by line — in days, before release a month of interviews.</p>
+</div>
+</div>
+<div class="proof-callout">Every requirement <b>numbered, traced, and testable</b> from day one.</div>
+</div>
+</section>
+<section class="block" id="design">
+<div class="container">
+<div class="kicker">Stage 2</div>
+<span class="stage-bignum">Design</span>
+<div class="stage-promise">Standard platform first. Your processes always.</div>
+<p class="stage-body">Design starts from our solution libraries — prebuilt configurations refined across public sector and nonprofit implementations — giving the team a strong foundation from day one. Agents draft the solution architecture on native Salesforce objects wherever possible, keeping you on the platform's upgrade path and keeping configuration in your admins' hands after go-live. License dependencies are detected up front, so there are no surprise SKUs at deployment. Every design element traces back to the requirement that justified it.</p>
+<div class="breakdown-grid">
+<div class="breakdown-card">
+<h4>What the agents do</h4>
+<p>Draft the solution architecture from the library, right-size the footprint to exactly what you need, and validate the design against your actual org before anything is built.</p>
+</div>
+<div class="breakdown-card">
+<h4>What our engineers do</h4>
+<p>Architect the integrations, security posture, and the decisions that shape the platform for the next decade.</p>
+</div>
+<div class="breakdown-card">
+<h4>What you see</h4>
+<p>A design document with full requirement-to-design traceability — plus a working walkthrough by week 3.</p>
+</div>
+</div>
+<div class="proof-callout">First working walkthrough in <b>week 3</b> — org, portal, data model, and first intake form, live.</div>
+</div>
+</section>
+<section class="block alt" id="build">
+<div class="container">
+<div class="kicker">Stage 3</div>
+<span class="stage-bignum">Build</span>
+<div class="stage-promise">Start with 60% already built — then keep the work moving.</div>
+<p class="stage-body">Build Agents configure and generate the solution from the design: forms, flows, portals, components, integrations. Domain libraries and the LPI Accelerator mean 75% of core solution is pre-built and ready to go on day one — so our engineers spend their time on what makes it yours. Every change ships through an automated build-test-deploy loop, with quality gates and engineer approval before deployment. Work is delivered in demoable two-week slices, so you watch the system grow instead of waiting for a big reveal.</p>
+<div class="breakdown-grid">
+<div class="breakdown-card">
+<h4>What the agents do</h4>
+<p>Generate configuration and code, write the tests alongside, run the deploy loop, and fix what the gates catch.</p>
+</div>
+<div class="breakdown-card">
+<h4>What our engineers do</h4>
+<p>Review every generated component, own the complex decisions, and approve every deployment.</p>
+</div>
+<div class="breakdown-card">
+<h4>What you see</h4>
+<p>A working demo at the end of every sprint — and a change log your team can audit.</p>
+</div>
+</div>
+<div class="proof-callout">A full municipal permitting system — 14 permit types, resident portal, inspector mobile — <b>built in 3 weeks</b>.</div>
+</div>
+</section>
+<section class="block" id="prove">
+<div class="container">
+<div class="kicker">Stage 4</div>
+<span class="stage-bignum">Prove</span>
+<div class="stage-promise">Done is demonstrated with evidence.</div>
+<p class="stage-body">Every use case ships with plain, testable acceptance criteria, and agents turn those criteria into executable tests against your actual org. Our quality gates check the big things and the small ones: security and access by persona, end-to-end functionality, and the finishing details your users notice on day one. A use case is complete when its criteria pass. At handover, you receive the evidence alongside the system.</p>
+<div class="breakdown-grid">
+<div class="breakdown-card">
+<h4>What the agents do</h4>
+<p>Convert acceptance criteria to executable tests, run them against the org, and report pass/fail per criterion.</p>
+</div>
+<div class="breakdown-card">
+<h4>What our engineers do</h4>
+<p>Design UAT with your team, triage what testing surfaces, and sign off only on demonstrated results.</p>
+</div>
+<div class="breakdown-card">
+<h4>What you see</h4>
+<p>A pass/fail report mapped to every requirement — proof your system does what was promised.</p>
+</div>
+</div>
+<div class="proof-callout"><b>62% less</b> development testing time — proven building our own AppExchange-grade product.</div>
+</div>
+</section>
+<div class="oversight-band">
+<div class="container">
+<h2>AI handles the repeatable work. <em>Engineers own the decisions and outcomes.</em></h2>
+<p>AI autonomy works best with clear engineering accountability. Every agent in our pipeline operates inside human approval gates: engineers review generated designs before they're presented, approve every deployment before it runs, and stand behind every outcome. Your data stays in your org. Our agents inherit only the permissions you grant. Everything they produce is logged, traceable, and auditable.</p>
+<div class="chips">
+<div class="chip">Human approval before every deploy</div>
+<div class="chip">Your data stays in your org</div>
+<div class="chip">Full audit trail</div>
+</div>
+</div>
+</div>
+<section class="block">
+<div class="container">
+<div class="czero-box">
+<h2>We were customer zero.</h2>
+<p>We don't ask clients to trust a pipeline we wouldn't bet on ourselves. Our own AppExchange product — EasyMask — was built, tested, and security-review-prepped by the same engine. The pipeline got sharper because a product's quality bar demanded it. Every project hardens the engine; every release makes our delivery faster. <a href="content/success-stories/easymask-product-engineering-success-story.html">Read the case study →</a></p>
+</div>
+</div>
+</section>
+<section class="block alt">
+<div class="container">
+<div class="section-head">
+<div class="kicker">Proof from the Engine</div>
+<h2 class="title">What this looks like in practice</h2>
+<p>Three engagements — one internal, two client — that show what the pipeline actually produces.</p>
+</div>
+<div class="grid grid-3">
+<div class="card">
+<div class="icon">🔐</div>
+<span class="badge blue" style="margin-bottom: 14px;">Product Engineering</span>
+<h3>62% less development testing time — our own product</h3>
+<p>EasyMask, our native Salesforce data-masking package, was built end-to-end with the AI-native delivery engine. We were customer zero: proof-of-concept on a commercial product before we offered the engine to any client.</p>
+<a class="link" href="content/success-stories/easymask-product-engineering-success-story.html">Read the case study →</a>
+</div>
+<div class="card">
+<div class="icon">🏛️</div>
+<span class="badge" style="margin-bottom: 14px;">Public Sector</span>
+<h3>40%+ lower cost and timeline — statewide licensing</h3>
+<p>A state labor &amp; workforce agency replaced a decades-old trade-certification system — 24 license types, 400,000 records, full SSO integration — in 17 weeks, with a working org by week 3.</p>
+<a class="link" href="content/success-stories/state-licensing-modernization-success-story.html">Read the case study →</a>
+</div>
+<div class="card">
+<div class="icon">🏙️</div>
+<span class="badge teal" style="margin-bottom: 14px;">Local Government</span>
+<h3>Full municipal permitting system — 3 weeks</h3>
+<p>Five city departments, 14 permit types, a resident portal, inspector mobile, and map-based code enforcement — built on Salesforce Public Sector Solutions in three weeks.</p>
+<a class="link" href="content/success-stories/city-permitting-success-story.html">Read the case study →</a>
+</div>
+</div>
+</div>
+</section>
+<div class="stats-bar">
+<div class="stats-inner">
+<div class="stat"><div class="num">75%</div><div class="lbl">of core solution pre-built and ready to go on day one</div></div>
+<div class="stat"><div class="num">3 weeks</div><div class="lbl">to first walkthrough</div></div>
+<div class="stat"><div class="num">62%</div><div class="lbl">less development testing time</div></div>
+<div class="stat"><div class="num">24/7</div><div class="lbl">global engineering</div></div>
+</div>
+</div>
+<section class="block alt">
+<div class="container">
+<div class="section-head">
+<div class="kicker">FAQ</div>
+<h2 class="title">Frequently asked questions</h2>
+<p>Delivery, data access, go-live, and more — now collected with our other customer questions.</p>
+</div>
+<a class="link" href="customer-questions.html#delivery">See all Customer Questions →</a>
+</div>
+</section>
+<section class="block">
+<div class="cta-banner">
+<div class="inner">
+<h2>See it applied to your roadmap</h2>
+<p>Bring us one project you'd normally scope in quarters. We'll show you the week-by-week plan to ship it in weeks — starting with a free OrgInsights assessment.</p>
+<a class="btn btn-primary" href="contact.html">Talk to an Engineer →</a>
+</div>
+</div>
+</section>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-about">
+<a class="logo" href="index.html"><img alt="SuccessMetrics logo" class="mark" src="assets/images/logo.svg"/>Success<span class="sm">Metrics</span></a>
+<p>AI-native engineering partner for organizations that want enterprise software delivered with clear momentum — combining AI-native delivery, proven accelerators, and deep Salesforce expertise to ship in weeks.</p>
+</div>
+<div>
+<h5>Company</h5>
+<ul>
+<li><a href="about.html">About Us</a></li>
+<li><a href="success-stories.html">Success Stories</a></li>
+<li><a href="careers.html">Careers</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5>Expertise</h5>
+<ul>
+<li><a href="services.html">AI Solutions</a></li>
+<li><a href="industries.html">Industries</a></li>
+<li><a href="accelerators.html">Accelerators</a></li>
+<li><a href="how-we-work.html">How We Work</a></li>
+<li><a href="why-ai-salesforce.html">Why AI + Salesforce</a></li>
+</ul>
+</div>
+<div>
+<h5>Resources</h5>
+<ul>
+<li><a href="resources.html">Blog &amp; Articles</a></li>
+<li><a href="resources.html#whitepapers">White Papers</a></li>
+<li><a href="customer-questions.html">Q&amp;A</a></li>
+<li><a href="https://www.linkedin.com/company/successmetrics-corp">LinkedIn</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+<div>460 Center Street #6021, Moraga, CA 94570 · <a href="tel:+15103306457">(510) 330-6457</a> · <a href="mailto:support@successmetrics.io">support@successmetrics.io</a></div>
+</div>
+</div>
+</footer>
+</body>
+</html>

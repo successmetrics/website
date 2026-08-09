@@ -5,6 +5,12 @@ export const MAIN_PAGES = [
   "services.html",
   "industries.html",
   "accelerators.html",
+  "easymask.html",
+  "safe-seed.html",
+  "org-insights.html",
+  "how-we-work.html",
+  "why-ai-salesforce.html",
+  "customer-questions.html",
   "resources.html",
   "ai-research.html",
   "success-stories.html",
@@ -24,13 +30,16 @@ export const CONTENT_PAGES = [
   "content/success-stories/leaflink-cpq-success-story.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+  "content/success-stories/city-permitting-success-story.html",
+  "content/success-stories/easymask-product-engineering-success-story.html",
+  "content/success-stories/state-licensing-modernization-success-story.html",
   "careers/senior-salesforce-developer-0084.html",
   "careers/salesforce-architect-0082.html",
   "careers/salesforce-developer-0081.html",
 ] as const;
 
 export const NAV_LINKS = [
-  { label: "Services", href: "/services.html" },
+  { label: "AI Solutions", href: "/services.html" },
   { label: "Industries", href: "/industries.html" },
   { label: "Accelerators", href: "/accelerators.html" },
   { label: "Resources", href: "/resources.html" },
@@ -38,7 +47,7 @@ export const NAV_LINKS = [
   { label: "Success Stories", href: "/success-stories.html" },
   { label: "Careers", href: "/careers.html" },
   { label: "About", href: "/about.html" },
-  { label: "Talk to an Expert", href: "/contact.html" },
+  { label: "Talk to an Engineer", href: "/contact.html" },
 ] as const;
 
 export const NETLIFY_CLEAN_URLS: Record<string, string> = {
@@ -51,6 +60,12 @@ export const NETLIFY_CLEAN_URLS: Record<string, string> = {
   "/success-stories": "success-stories.html",
   "/about": "about.html",
   "/contact": "contact.html",
+  "/easymask": "easymask.html",
+  "/safe-seed": "safe-seed.html",
+  "/org-insights": "org-insights.html",
+  "/how-we-work": "how-we-work.html",
+  "/why-ai-salesforce": "why-ai-salesforce.html",
+  "/customer-questions": "customer-questions.html",
 };
 
 export const STYLESHEET = "assets/css/styles.css";
