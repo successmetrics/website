@@ -4,11 +4,14 @@
   publish = "site"
 
 # Keep CI/Netlify on the same Node major as GitHub Actions.
-# Smart secret scanning can false-positive on credential-shaped docs/examples
-# and fail the deploy before publish (Header/Redirect/Pages checks then cascade).
+# Public inbox / from addresses are also stored as Netlify env vars (often
+# marked "Contains secret values"). They intentionally appear in site HTML and
+# code defaults — omit those keys so secrets scanning does not fail the build.
+# Keep scanning enabled for real secrets (RESEND_API_KEY, NOTION_TOKEN, etc.).
 [build.environment]
   NODE_VERSION = "20"
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  SECRETS_SCAN_OMIT_KEYS = "CAREERS_NOTIFY_EMAIL,CONTACT_NOTIFY_EMAIL,RESEND_FROM_EMAIL,RESEND_CONTACT_FROM_EMAIL"
 
 [functions]
   directory = "netlify/functions"
