@@ -117,6 +117,18 @@
       "changefreq": "monthly",
       "priority": "0.85"
     },
+    "content/success-stories/city-permitting-success-story.html": {
+      "changefreq": "monthly",
+      "priority": "0.85"
+    },
+    "content/success-stories/easymask-product-engineering-success-story.html": {
+      "changefreq": "monthly",
+      "priority": "0.85"
+    },
+    "content/success-stories/state-licensing-modernization-success-story.html": {
+      "changefreq": "monthly",
+      "priority": "0.85"
+    },
     "careers/senior-salesforce-developer-0084.html": {
       "changefreq": "weekly",
       "priority": "0.6"
@@ -148,7 +160,7 @@
     },
     "services.html": {
       "path": "/services",
-      "title": "AI-Powered Salesforce Services | SuccessMetrics Engineering Partner",
+      "title": "AI-Powered Salesforce Services | SuccessMetrics",
       "description": "Every service we offer is AI-accelerated — advisory, roadmap, implementation, and managed services delivered by engineers, not billable-hour consultants.",
       "keywords": [
         "AI-powered Salesforce services",
@@ -177,8 +189,8 @@
     },
     "accelerators.html": {
       "path": "/accelerators",
-      "title": "Salesforce Accelerators | Start at 60% Done with SuccessMetrics",
-      "description": "Our AI-powered delivery factory builds accelerators so your project starts months ahead — 75% of core solution pre-built and ready to go on day one — proven in production.",
+      "title": "Salesforce Accelerators | Start Ahead | SuccessMetrics",
+      "description": "Our AI-powered delivery factory builds accelerators so your project starts months ahead — 75% of the core solution pre-built and ready on day one.",
       "keywords": [
         "Salesforce LPI accelerator",
         "Salesforce LPI accelerator configuration",
@@ -235,7 +247,7 @@
     "about.html": {
       "path": "/about",
       "title": "About SuccessMetrics | AI-Native Engineering Partner",
-      "description": "SuccessMetrics is an AI-native engineering partner — shipping Salesforce implementations in weeks, not quarters. 30+ years leadership experience. California HQ, India delivery center.",
+      "description": "SuccessMetrics is an AI-native engineering partner shipping Salesforce in weeks, not quarters. 30+ years leadership experience. California HQ, India delivery.",
       "keywords": [
         "AI-native engineering partner",
         "SuccessMetrics Salesforce",
@@ -263,7 +275,7 @@
     "customer-questions.html": {
       "path": "/customer-questions",
       "title": "Customer Questions | SuccessMetrics Q&A",
-      "description": "Answers to the questions customers ask most — about our AI delivery engine, Salesforce focus, EasyMask, Org Insights, data security, and what happens after go-live.",
+      "description": "Answers to questions customers ask most — AI delivery, Salesforce focus, EasyMask, Org Insights, data security, and what happens after go-live.",
       "keywords": [
         "SuccessMetrics FAQ",
         "AI Salesforce delivery questions",
@@ -483,8 +495,8 @@
     },
     "safe-seed.html": {
       "path": "/safe-seed",
-      "title": "Safe Seed | Relation-Preserving Synthetic Data | SuccessMetrics",
-      "description": "Safe Seed generates synthetic datasets that behave like production — without exposing real people. Relation-preserving synthesis with measurable privacy for Salesforce, databases, and CSV.",
+      "title": "Safe Seed | Relation-Preserving Synthetic Data",
+      "description": "Safe Seed generates synthetic datasets that behave like production without exposing real people — for Salesforce, databases, and CSV.",
       "keywords": [
         "synthetic data Salesforce",
         "relation-preserving synthetic data",
@@ -495,6 +507,107 @@
       "schema": [
         "Product"
       ]
+    },
+    "easymask.html": {
+      "path": "/easymask",
+      "title": "EasyMask | Salesforce Sandbox Data Protection",
+      "description": "Protect customer data in Salesforce sandboxes. EasyMask gives developers realistic test data entirely inside Salesforce, with controls and a full audit trail.",
+      "keywords": [
+        "Salesforce sandbox data masking",
+        "EasyMask SuccessMetrics",
+        "Salesforce test data protection"
+      ],
+      "ogType": "website",
+      "schema": [
+        "SoftwareApplication"
+      ]
+    },
+    "org-insights.html": {
+      "path": "/org-insights",
+      "title": "Org Insights | Salesforce Org Health Reports",
+      "description": "Before your next rollout or audit, know what's in your org. Org Insights delivers an executive health report in 2 weeks with clear priorities.",
+      "keywords": [
+        "Salesforce org health check",
+        "Org Insights SuccessMetrics",
+        "Salesforce technical debt assessment"
+      ],
+      "ogType": "website",
+      "schema": [
+        "Product"
+      ]
+    },
+    "how-we-work.html": {
+      "path": "/how-we-work",
+      "title": "How We Work | AI Delivery Engine | SuccessMetrics",
+      "description": "Discover, Design, Build, Prove: how SuccessMetrics' AI-native delivery engine and engineering team ship Salesforce solutions in weeks.",
+      "keywords": [
+        "AI-native Salesforce delivery",
+        "how SuccessMetrics works",
+        "Salesforce delivery engine"
+      ],
+      "ogType": "website",
+      "schema": [
+        "WebPage"
+      ]
+    },
+    "why-ai-salesforce.html": {
+      "path": "/why-ai-salesforce",
+      "title": "Why AI + Salesforce | SuccessMetrics Engineering Partner",
+      "description": "AI is reshaping how enterprise software is built. Salesforce is where we put that approach into practice — and why the combination wins for your roadmap.",
+      "keywords": [
+        "AI and Salesforce",
+        "AI-powered Salesforce delivery",
+        "SuccessMetrics AI approach"
+      ],
+      "ogType": "website",
+      "schema": [
+        "WebPage"
+      ]
+    },
+    "content/success-stories/city-permitting-success-story.html": {
+      "path": "/content/success-stories/city-permitting-success-story",
+      "title": "Municipal Permitting System Built in 3 Weeks",
+      "description": "Five departments, 14 permit types, and a resident portal — a Southern California city built a municipal permitting system in 3 weeks with the LPI Build Agent.",
+      "keywords": [
+        "municipal permitting Salesforce",
+        "LPI accelerator case study",
+        "public sector permitting portal"
+      ],
+      "ogType": "article",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-03"
+    },
+    "content/success-stories/easymask-product-engineering-success-story.html": {
+      "path": "/content/success-stories/easymask-product-engineering-success-story",
+      "title": "EasyMask Case Study | AI-Built Product Engineering",
+      "description": "How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.",
+      "keywords": [
+        "EasyMask case study",
+        "AI product engineering Salesforce",
+        "AppExchange data masking"
+      ],
+      "ogType": "article",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-03"
+    },
+    "content/success-stories/state-licensing-modernization-success-story.html": {
+      "path": "/content/success-stories/state-licensing-modernization-success-story",
+      "title": "State Licensing Modernization | 40%+ Lower Cost",
+      "description": "How a state labor agency replaced a legacy trade-certification system — 24 license types, 17 weeks — at more than 40% lower cost and timeline.",
+      "keywords": [
+        "state licensing modernization",
+        "Salesforce public sector licensing",
+        "trade certification case study"
+      ],
+      "ogType": "article",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-03"
     }
   }
 }

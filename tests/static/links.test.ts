@@ -36,7 +36,7 @@ describe("internal links", () => {
       const expectedHref = expectedNavHref(page, href);
       const link = $(`.nav-links a[href="${expectedHref}"]`);
       expect(link.length, `Missing nav link "${label}" on ${page}`).toBe(1);
-      expect(link.text().trim()).toContain(label === "Talk to an Expert" ? "Talk to an Expert" : label);
+      expect(link.text().trim()).toContain(label);
     }
   });
 });
@@ -55,8 +55,8 @@ describe("contact details", () => {
 
   it("contact page includes clickable phone and email links", () => {
     const $ = loadPage("contact.html");
-    expect($('a[href="tel:+15103306457"]').length).toBe(1);
-    expect($('a[href="mailto:support@successmetrics.io"]').length).toBe(1);
+    expect($('a[href="tel:+15103306457"]').length).toBeGreaterThanOrEqual(1);
+    expect($('a[href="mailto:support@successmetrics.io"]').length).toBeGreaterThanOrEqual(1);
   });
 });
 

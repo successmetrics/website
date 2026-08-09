@@ -191,7 +191,7 @@ ${seoBlock}
   <div class="nav-inner">
     <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/services.html">Services</a></li>
+      <li><a href="/services.html">AI Solutions</a></li>
       <li><a href="/industries.html">Industries</a></li>
       <li><a href="/accelerators.html">Accelerators</a></li>
       <li><a href="/resources.html">Resources</a></li>
@@ -199,7 +199,7 @@ ${seoBlock}
       <li><a href="/success-stories.html">Success Stories</a></li>
       <li><a href="/careers.html" class="active">Careers</a></li>
       <li><a href="/about.html">About</a></li>
-      <li><a href="/contact.html" class="nav-cta">Talk to an Expert</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
     </ul>
     <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>

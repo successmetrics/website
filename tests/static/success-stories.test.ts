@@ -21,14 +21,25 @@ const SUCCESS_STORY_PAGES = [
   "content/success-stories/leaflink-cpq-success-story.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+  "content/success-stories/city-permitting-success-story.html",
+  "content/success-stories/easymask-product-engineering-success-story.html",
+  "content/success-stories/state-licensing-modernization-success-story.html",
 ] as const;
 
-const SUCCESS_STORY_SLUGS = [
+/** Stories built from markdown by scripts/build-success-stories.mjs */
+const BUILT_SUCCESS_STORY_SLUGS = [
   "amp-customer-portal-success-story",
   "caloes-ppe-portal-success-story",
   "leaflink-cpq-success-story",
   "sfhss-agentforce-success-story",
   "mohcd-agentforce-success-story",
+] as const;
+
+const SUCCESS_STORY_SLUGS = [
+  ...BUILT_SUCCESS_STORY_SLUGS,
+  "city-permitting-success-story",
+  "easymask-product-engineering-success-story",
+  "state-licensing-modernization-success-story",
 ] as const;
 
 const netlifyToml = readNetlifyToml();
@@ -43,8 +54,12 @@ describe("success stories site structure", () => {
     expect(existsSync(join(ROOT, "content/success-stories"))).toBe(true);
     expect(existsSync(join(ROOT, "content/client-stories"))).toBe(false);
 
-    for (const slug of SUCCESS_STORY_SLUGS) {
+    for (const slug of BUILT_SUCCESS_STORY_SLUGS) {
       expect(existsSync(join(ROOT, "content/success-stories", `${slug}.md`))).toBe(true);
+      expect(existsSync(join(ROOT, "content/success-stories", `${slug}.html`))).toBe(true);
+    }
+
+    for (const slug of SUCCESS_STORY_SLUGS) {
       expect(existsSync(join(ROOT, "content/success-stories", `${slug}.html`))).toBe(true);
     }
   });

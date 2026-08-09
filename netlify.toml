@@ -50,6 +50,11 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
+[[headers]]
+  for = "/SuccessMetrics_customer_questions_marketing_copy.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # Friendly URLs: /careers works same as /careers.html
 [[redirects]]
   from = "/careers"
@@ -165,6 +170,18 @@
 [[redirects]]
   from = "/content/success-stories/leaflink-cpq-success-story"
   to = "/content/success-stories/leaflink-cpq-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/success-stories/city-permitting-success-story"
+  to = "/content/success-stories/city-permitting-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/success-stories/easymask-product-engineering-success-story"
+  to = "/content/success-stories/easymask-product-engineering-success-story.html"
+  status = 200
+[[redirects]]
+  from = "/content/success-stories/state-licensing-modernization-success-story"
+  to = "/content/success-stories/state-licensing-modernization-success-story.html"
   status = 200
 
 # Legacy client-stories URLs (renamed to success-stories)

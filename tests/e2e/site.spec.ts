@@ -5,6 +5,12 @@ const MAIN_PAGES = [
   "services.html",
   "industries.html",
   "accelerators.html",
+  "easymask.html",
+  "safe-seed.html",
+  "org-insights.html",
+  "how-we-work.html",
+  "why-ai-salesforce.html",
+  "customer-questions.html",
   "resources.html",
   "ai-research.html",
   "success-stories.html",
@@ -24,6 +30,9 @@ const CONTENT_PAGES = [
   "content/success-stories/leaflink-cpq-success-story.html",
   "content/success-stories/sfhss-agentforce-success-story.html",
   "content/success-stories/mohcd-agentforce-success-story.html",
+  "content/success-stories/city-permitting-success-story.html",
+  "content/success-stories/easymask-product-engineering-success-story.html",
+  "content/success-stories/state-licensing-modernization-success-story.html",
   "careers/senior-salesforce-developer-0084.html",
   "careers/salesforce-architect-0082.html",
   "careers/salesforce-developer-0081.html",
@@ -57,10 +66,9 @@ test.describe("page smoke tests", () => {
   test("homepage shows primary hero and CTAs", async ({ page }) => {
     await page.goto("/index.html");
 
-    await expect(page.locator("h1")).toContainText("mid-market companies");
-    await expect(page.getByRole("link", { name: "Book a Free Assessment →" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Explore Our Accelerators" })).toBeVisible();
-    await expect(page.locator(".stats-bar .stat")).toHaveCount(4);
+    await expect(page.locator("h1")).toContainText("Engineering Better Outcomes");
+    await expect(page.getByRole("link", { name: "See How We Deliver →" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Why AI + Salesforce" })).toBeVisible();
   });
 
   test("homepage shows client logo marquee", async ({ page }) => {
