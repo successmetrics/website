@@ -7,15 +7,17 @@ function getResendClient() {
 }
 
 function getFromEmail(kind = "careers") {
+  const fallback = "no-reply@successmetrics.io";
+
   if (kind === "contact") {
     return (
       process.env.RESEND_CONTACT_FROM_EMAIL?.trim() ||
       process.env.RESEND_FROM_EMAIL?.trim() ||
-      ""
+      fallback
     );
   }
 
-  return process.env.RESEND_FROM_EMAIL?.trim() || "";
+  return process.env.RESEND_FROM_EMAIL?.trim() || fallback;
 }
 
 const DEFAULT_CAREERS_NOTIFY_EMAIL = "careers@successmetrics.io";

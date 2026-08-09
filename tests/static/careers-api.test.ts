@@ -84,9 +84,10 @@ describe("job application API handler", () => {
     expect(payload.error).toMatch(/required/i);
   });
 
-  it("returns 502 when Notion is not configured", async () => {
+  it("returns 502 when neither Notion nor email delivery is configured", async () => {
     process.env.NOTION_TOKEN = "";
     process.env.NOTION_APPLICATIONS_DATABASE_ID = "";
+    delete process.env.RESEND_API_KEY;
 
     const response = await jobApplicationHandler(
       new Request("http://localhost/api/job-application", {
