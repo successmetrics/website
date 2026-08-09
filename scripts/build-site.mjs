@@ -222,10 +222,15 @@ if (existsSync(orgInsightsSource)) {
     ],
     { stdio: "inherit" },
   );
-  if (ffmpeg.status !== 0) {
+  if (ffmpeg.status === 0) {
+    console.log("Converted Org Insights demo video to site/assets/videos/orginsights.mp4");
+  } else if (existsSync(orgInsightsTarget)) {
+    console.warn(
+      "ffmpeg conversion failed; using committed Org Insights demo video in site/assets/videos/orginsights.mp4",
+    );
+  } else {
     process.exit(ffmpeg.status ?? 1);
   }
-  console.log("Converted Org Insights demo video to site/assets/videos/orginsights.mp4");
 } else if (existsSync(orgInsightsTarget)) {
   console.log("Using committed Org Insights demo video in site/assets/videos/orginsights.mp4");
 } else {

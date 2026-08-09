@@ -18,18 +18,17 @@ function getFromEmail(kind = "careers") {
   return process.env.RESEND_FROM_EMAIL?.trim() || "";
 }
 
-const DEFAULT_NOTIFY_EMAIL = "guru@successmetrics.io";
+const DEFAULT_CAREERS_NOTIFY_EMAIL = "careers@successmetrics.io";
+const DEFAULT_CONTACT_NOTIFY_EMAIL = "success@successmetrics.io";
 
 function getNotifyEmail(kind = "careers") {
   if (kind === "contact") {
     return (
-      process.env.CONTACT_NOTIFY_EMAIL?.trim() ||
-      process.env.CAREERS_NOTIFY_EMAIL?.trim() ||
-      DEFAULT_NOTIFY_EMAIL
+      process.env.CONTACT_NOTIFY_EMAIL?.trim() || DEFAULT_CONTACT_NOTIFY_EMAIL
     );
   }
 
-  return process.env.CAREERS_NOTIFY_EMAIL?.trim() || DEFAULT_NOTIFY_EMAIL;
+  return process.env.CAREERS_NOTIFY_EMAIL?.trim() || DEFAULT_CAREERS_NOTIFY_EMAIL;
 }
 
 function missingEmailConfig(fromEmail, notifyEmail) {

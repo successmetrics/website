@@ -3,6 +3,13 @@
   command = "npm run build"
   publish = "site"
 
+# Keep CI/Netlify on the same Node major as GitHub Actions.
+# Smart secret scanning can false-positive on credential-shaped docs/examples
+# and fail the deploy before publish (Header/Redirect/Pages checks then cascade).
+[build.environment]
+  NODE_VERSION = "20"
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

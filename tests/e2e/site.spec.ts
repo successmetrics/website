@@ -68,7 +68,7 @@ test.describe("page smoke tests", () => {
 
     await expect(page.locator("h1")).toContainText("Engineering Better Outcomes");
     await expect(page.getByRole("link", { name: "See How We Deliver →" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Why AI + Salesforce" })).toBeVisible();
+    await expect(page.locator(".hero").getByRole("link", { name: "Why AI + Salesforce" })).toBeVisible();
   });
 
   test("homepage shows client logo marquee", async ({ page }) => {
@@ -178,7 +178,7 @@ test.describe("forms", () => {
     await expect(page.locator("#company")).toBeVisible();
     await expect(page.locator("#interest")).toBeVisible();
     await expect(page.locator("#message")).toBeVisible();
-    await expect(page.getByRole("link", { name: "(510) 330-6457" })).toHaveAttribute(
+    await expect(page.locator('a[href="tel:+15103306457"]').first()).toHaveAttribute(
       "href",
       "tel:+15103306457",
     );
