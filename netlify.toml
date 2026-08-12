@@ -119,6 +119,10 @@
   to = "/org-insights.html"
   status = 200
 [[redirects]]
+  from = "/lpi-accelerator"
+  to = "/lpi-accelerator.html"
+  status = 200
+[[redirects]]
   from = "/how-we-work"
   to = "/how-we-work.html"
   status = 200
@@ -158,8 +162,16 @@
   to = "/content/whitepaper-midmarket-guide.html"
   status = 200
 [[redirects]]
+  from = "/content/whitepaper-safe-seed-synthetic-data"
+  to = "/content/whitepaper-safe-seed-synthetic-data.html"
+  status = 200
+[[redirects]]
   from = "/content/ai-research/off-grid-ai-lab-patient-trial-matching"
   to = "/content/ai-research/off-grid-ai-lab-patient-trial-matching.html"
+  status = 200
+[[redirects]]
+  from = "/content/ai-research/beyond-masking-synthetic-data"
+  to = "/content/ai-research/beyond-masking-synthetic-data.html"
   status = 200
 [[redirects]]
   from = "/content/success-stories/sfhss-agentforce-success-story"

@@ -79,7 +79,9 @@ export async function sendContactNotification({
     from: fromEmail,
     to: [notifyEmail],
     replyTo: email,
-    subject: `New contact inquiry: ${interest || "General"} — ${name}`,
+    subject: interest?.startsWith("White Paper")
+      ? `${interest} — ${email}`
+      : `New contact inquiry: ${interest || "General"} — ${name}`,
     html,
   });
 

@@ -67,7 +67,8 @@ describe("resources index", () => {
       "content/blog-ai-enabled-delivery.html",
       "content/blog-midmarket-salesforce.html",
       "content/blog-lpi-accelerator.html",
-      "content/whitepaper-midmarket-guide.html",
+      "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
+      "content/ai-research/beyond-masking-synthetic-data.html",
     ];
 
     for (const href of expected) {

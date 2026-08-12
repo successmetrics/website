@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- seo:start -->
+<title>Beyond Masking: Synthetic Data &amp; PII Risk | White Paper</title>
+<meta name="description" content="2026 market assessment of PII risk in non-production environments and the rise of relation-preserving synthetic data for regulated teams.">
+<link rel="canonical" href="https://www.successmetrics.io/content/ai-research/beyond-masking-synthetic-data">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="Beyond Masking: Synthetic Data &amp; PII Risk | White Paper">
+<meta property="og:description" content="2026 market assessment of PII risk in non-production environments and the rise of relation-preserving synthetic data for regulated teams.">
+<meta property="og:url" content="https://www.successmetrics.io/content/ai-research/beyond-masking-synthetic-data">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/ai-research/PII-diagram.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beyond Masking: Synthetic Data &amp; PII Risk | White Paper">
+<meta name="twitter:description" content="2026 market assessment of PII risk in non-production environments and the rise of relation-preserving synthetic data for regulated teams.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/ai-research/PII-diagram.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Beyond Masking: Synthetic Data & PII Risk | White Paper","description":"2026 market assessment of PII risk in non-production environments and the rise of relation-preserving synthetic data for regulated teams.","url":"https://www.successmetrics.io/content/ai-research/beyond-masking-synthetic-data","datePublished":"2026-08-01","dateModified":"2026-08-01","author":{"@type":"Organization","name":"SuccessMetrics Corp","url":"https://www.successmetrics.io"},"publisher":{"@type":"Organization","name":"SuccessMetrics Corp","logo":{"@type":"ImageObject","url":"https://www.successmetrics.io/assets/images/logo.svg"}},"mainEntityOfPage":"https://www.successmetrics.io/content/ai-research/beyond-masking-synthetic-data"}</script>
+
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/styles.css?v=494c091c4f7c">
+</head>
+<body>
+
+<!-- @nav active="ai-research" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">AI Solutions</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html" class="active">AI Research</a></li>
+      <li><a href="/success-stories.html">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="prose-layout prose-layout--paper">
+  <nav class="prose-back" aria-label="Article navigation">
+    <a href="../../ai-research.html">← Back to AI Research</a>
+  </nav>
+  <article class="prose prose--paper">
+  <span class="badge teal">White Paper</span>
+  <h1>Beyond Masking: A 2026 Market Assessment of PII Risk and the Rise of Relation-Preserving Synthetic Data</h1>
+  <p class="research-lead"><em>Why regulated data teams are rewriting their non-production data strategy — and what &ldquo;privacy&rdquo; is starting to mean when it has to be proven, not promised.</em></p>
+  <div class="meta"><span>SuccessMetrics Research</span><span>·</span><span>Version 1.0</span><span>·</span><span>August 2026</span><span>·</span><span>11 min read</span></div>
+
+  <figure class="prose-figure">
+    <img alt="PII risk and relation-preserving synthetic data diagram" height="1728" loading="lazy" src="../../assets/images/ai-research/PII-diagram.jpg" width="1152"/>
+  </figure>
+
+  <div class="paper-preview-note">Free preview · Executive summary</div>
+  <h2>Executive summary</h2>
+  <p>For most of the last decade, &ldquo;protecting&rdquo; a non-production environment meant one thing: strip or scramble anything that looked like a name, a Social Security number, or a date of birth, then call the sandbox safe. That standard is no longer holding.</p>
+  <p>Three forces are converging on regulated data teams at once. Regulatory scope is widening — 19 U.S. states now have comprehensive privacy laws in effect, with new obligations arriving in 2026 that reach beyond consumer opt-outs into automated decision-making and formal risk assessments. Breach economics remain brutal, especially in healthcare, where the average breach still costs north of $7 million and takes the better part of a year to fully contain. And the environments most exposed to this risk — sandboxes, demo orgs, QA copies, analytics pipelines — are also the ones enterprise security teams have historically under-invested in, even though they now represent a majority of most organizations&rsquo; attack surface.</p>
+  <p>Into that gap has stepped a synthetic data market that is growing roughly 34–35% a year, on pace to more than triple in size by 2030. But market growth has outpaced market maturity. Most of the tools organizations reach for first — static masking, tokenization, simple data generators — were built to make individual columns look plausible. They were not built to keep a diagnosis correlated with the right medication, a parent record joinable to its children, or a synthetic dataset defensible in front of a privacy reviewer who wants evidence rather than assurances.</p>
+  <p>This brief lays out what&rsquo;s driving that gap, how a small number of organizations are already closing it, and what a rational buyer — Salesforce architect, privacy officer, or data science lead — should be evaluating for in 2026.</p>
+
+  <div class="paper-locked" data-paper-title="Beyond Masking: A 2026 Market Assessment of PII Risk and the Rise of Relation-Preserving Synthetic Data" data-paper-interest="White Paper Request — Beyond Masking">
+    <div class="paper-gate-card" role="dialog" aria-labelledby="paperGateTitle">
+      <h3 id="paperGateTitle">Request the full document</h3>
+      <p>The executive summary is free. Request the full white paper and we&rsquo;ll email it to you. Notifications go to <strong>success@successmetrics.io</strong>.</p>
+      <form class="paper-gate-form">
+        <input type="hidden" name="bot-field" value="">
+        <input type="hidden" name="interest" value="White Paper Request — Beyond Masking">
+        <label for="paperGateEmail">Work email</label>
+        <input id="paperGateEmail" name="email" type="email" required placeholder="you@company.com" autocomplete="email">
+        <label for="paperGateAffiliation">Affiliation</label>
+        <input id="paperGateAffiliation" name="company" type="text" required placeholder="Organization, agency, or institution" autocomplete="organization">
+        <button class="btn btn-primary paper-gate-submit" type="submit">Request full document →</button>
+        <p class="paper-gate-status">Includes which document you requested, your email, and affiliation.</p>
+      </form>
+    </div>
+
+    <div class="paper-locked-body" aria-hidden="true">
+      <h2>What the full paper covers</h2>
+      <p>Market pressure from expanding state privacy law, healthcare breach economics, and non-production attack surface — plus where column-level synthesis fails on correlations, multi-table integrity, and provable privacy.</p>
+      <p>Further sections introduce a maturity model for non-production data risk, the cross-functional buying room in 2026, and a five-criterion evaluation framework for relation-preserving approaches with exportable evidence.</p>
+      <p>Outlook guidance covers Salesforce and Health Cloud proving grounds, evidence as a procurement requirement, and the masking-to-synthesis migration for regulated industries.</p>
+    </div>
+    <div class="paper-locked-fade" aria-hidden="true"></div>
+  </div>
+
+  <div class="callout"><p><strong>See Safe Seed for your org.</strong> Relation-preserving synthetic data for regulated sandboxes. <a href="../../safe-seed.html">Explore Safe Seed →</a> · <a href="../../contact.html?ref=beyond-masking-whitepaper">Talk to an Engineer →</a></p></div>
+</article>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div><a href="../../ai-research.html">← Back to AI Research</a></div>
+    </div>
+  </div>
+</footer>
+
+  <script src="../../assets/js/paper-gate.js"></script>
+</body>
+</html>

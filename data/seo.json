@@ -41,6 +41,10 @@
       "changefreq": "monthly",
       "priority": "0.85"
     },
+    "lpi-accelerator.html": {
+      "changefreq": "monthly",
+      "priority": "0.85"
+    },
     "how-we-work.html": {
       "changefreq": "monthly",
       "priority": "0.8"
@@ -93,7 +97,15 @@
       "changefreq": "monthly",
       "priority": "0.6"
     },
+    "content/whitepaper-safe-seed-synthetic-data.html": {
+      "changefreq": "monthly",
+      "priority": "0.7"
+    },
     "content/ai-research/off-grid-ai-lab-patient-trial-matching.html": {
+      "changefreq": "monthly",
+      "priority": "0.75"
+    },
+    "content/ai-research/beyond-masking-synthetic-data.html": {
       "changefreq": "monthly",
       "priority": "0.75"
     },
@@ -140,13 +152,14 @@
     "careers/salesforce-developer-0081.html": {
       "changefreq": "weekly",
       "priority": "0.6"
-    }
+    },
+    "pages": {}
   },
   "pages": {
     "index.html": {
       "path": "/",
       "title": "SuccessMetrics | AI-Powered Salesforce Engineering Partner",
-      "description": "SuccessMetrics is your AI-powered engineering partner — accelerating product development and Salesforce implementations from quarters to weeks.",
+      "description": "SuccessMetrics is your AI-powered engineering partner \u2014 accelerating product development and Salesforce implementations from quarters to weeks.",
       "keywords": [
         "AI-powered Salesforce engineering",
         "Salesforce implementation partner",
@@ -161,7 +174,7 @@
     "services.html": {
       "path": "/services",
       "title": "AI-Powered Salesforce Services | SuccessMetrics",
-      "description": "Every service we offer is AI-accelerated — advisory, roadmap, implementation, and managed services delivered by engineers, not billable-hour consultants.",
+      "description": "Every service we offer is AI-accelerated \u2014 advisory, roadmap, implementation, and managed services delivered by engineers, not billable-hour consultants.",
       "keywords": [
         "AI-powered Salesforce services",
         "Salesforce managed services",
@@ -190,7 +203,7 @@
     "accelerators.html": {
       "path": "/accelerators",
       "title": "Salesforce Accelerators | Start Ahead | SuccessMetrics",
-      "description": "Our AI-powered delivery factory builds accelerators so your project starts months ahead — 75% of the core solution pre-built and ready on day one.",
+      "description": "Our AI-powered delivery factory builds accelerators so your project starts months ahead \u2014 75% of the core solution pre-built and ready on day one.",
       "keywords": [
         "Salesforce LPI accelerator",
         "Salesforce LPI accelerator configuration",
@@ -275,7 +288,7 @@
     "customer-questions.html": {
       "path": "/customer-questions",
       "title": "Customer Questions | SuccessMetrics Q&A",
-      "description": "Answers to questions customers ask most — AI delivery, Salesforce focus, EasyMask, Org Insights, data security, and what happens after go-live.",
+      "description": "Answers to questions customers ask most \u2014 AI delivery, Salesforce focus, EasyMask, Org Insights, data security, and what happens after go-live.",
       "keywords": [
         "SuccessMetrics FAQ",
         "AI Salesforce delivery questions",
@@ -304,7 +317,7 @@
     "careers/senior-salesforce-developer-0084.html": {
       "path": "/careers/senior-salesforce-developer-0084",
       "title": "Senior Salesforce Developer | Careers at SuccessMetrics",
-      "description": "Senior Salesforce Developer role in Pondicherry. 5–7 years experience, PD1, Admin, App Builder, and OmniStudio. Apply at SuccessMetrics.",
+      "description": "Senior Salesforce Developer role in Pondicherry. 5\u20137 years experience, PD1, Admin, App Builder, and OmniStudio. Apply at SuccessMetrics.",
       "keywords": [
         "Senior Salesforce Developer jobs",
         "Salesforce developer Pondicherry",
@@ -318,7 +331,7 @@
     "careers/salesforce-architect-0082.html": {
       "path": "/careers/salesforce-architect-0082",
       "title": "Salesforce Architect | Careers at SuccessMetrics",
-      "description": "Salesforce Solution Architect role with 8–10 years experience. Lead enterprise Salesforce design across Sales, Service, and Experience Cloud.",
+      "description": "Salesforce Solution Architect role with 8\u201310 years experience. Lead enterprise Salesforce design across Sales, Service, and Experience Cloud.",
       "keywords": [
         "Salesforce architect jobs",
         "Salesforce solution architect Pondicherry",
@@ -332,7 +345,7 @@
     "careers/salesforce-developer-0081.html": {
       "path": "/careers/salesforce-developer-0081",
       "title": "Salesforce Developer | Careers at SuccessMetrics",
-      "description": "Salesforce Developer role with 3–4 years experience. Apex, LWC, OmniStudio, and multi-cloud delivery across public sector and nonprofit projects.",
+      "description": "Salesforce Developer role with 3\u20134 years experience. Apex, LWC, OmniStudio, and multi-cloud delivery across public sector and nonprofit projects.",
       "keywords": [
         "Salesforce developer jobs",
         "Salesforce PD1 jobs",
@@ -346,7 +359,7 @@
     "content/blog-ai-enabled-delivery.html": {
       "path": "/content/blog-ai-enabled-delivery",
       "title": "AI-Enabled Salesforce Development | SuccessMetrics",
-      "description": "How SuccessMetrics uses AI for requirements, code generation, automated testing & documentation — faster delivery without sacrificing quality.",
+      "description": "How SuccessMetrics uses AI for requirements, code generation, automated testing & documentation \u2014 faster delivery without sacrificing quality.",
       "keywords": [
         "AI-enabled Salesforce development",
         "AI Salesforce delivery",
@@ -361,7 +374,7 @@
     "content/blog-midmarket-salesforce.html": {
       "path": "/content/blog-midmarket-salesforce",
       "title": "Mid-Market Salesforce Mistakes & Fixes | SuccessMetrics",
-      "description": "Five ways mid-market Salesforce projects fail — and the playbook to prevent scope creep, adoption gaps & budget overruns.",
+      "description": "Five ways mid-market Salesforce projects fail \u2014 and the playbook to prevent scope creep, adoption gaps & budget overruns.",
       "keywords": [
         "mid-market Salesforce mistakes",
         "Salesforce implementation failures",
@@ -376,7 +389,7 @@
     "content/blog-lpi-accelerator.html": {
       "path": "/content/blog-lpi-accelerator",
       "title": "Salesforce LPI Accelerator | Launch in Months, Not Years",
-      "description": "Cut public-sector licensing & permitting timelines with SuccessMetrics LPI Accelerator — 75% of core solution pre-built and ready to go on day one.",
+      "description": "Cut public-sector licensing & permitting timelines with SuccessMetrics LPI Accelerator \u2014 75% of core solution pre-built and ready to go on day one.",
       "keywords": [
         "Salesforce LPI accelerator",
         "licensing permitting Salesforce",
@@ -418,6 +431,22 @@
       ],
       "datePublished": "2026-06-01"
     },
+    "content/ai-research/beyond-masking-synthetic-data.html": {
+      "path": "/content/ai-research/beyond-masking-synthetic-data",
+      "title": "Beyond Masking: Synthetic Data & PII Risk | White Paper",
+      "description": "2026 market assessment of PII risk in non-production environments and the rise of relation-preserving synthetic data for regulated teams.",
+      "keywords": [
+        "beyond masking synthetic data",
+        "relation-preserving synthetic data",
+        "non-production PII risk"
+      ],
+      "ogType": "article",
+      "ogImage": "/assets/images/ai-research/PII-diagram.jpg",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-01"
+    },
     "content/success-stories/sfhss-agentforce-success-story.html": {
       "path": "/content/success-stories/sfhss-agentforce-success-story",
       "title": "SFHSS Agentforce Case Study | Benefits Administration",
@@ -436,7 +465,7 @@
     "content/success-stories/mohcd-agentforce-success-story.html": {
       "path": "/content/success-stories/mohcd-agentforce-success-story",
       "title": "MOHCD Agentforce Case Study | Affordable Housing",
-      "description": "MOHCD staff use embedded Salesforce Agentforce for housing program guidance, application updates & applicant email — one workspace, full control.",
+      "description": "MOHCD staff use embedded Salesforce Agentforce for housing program guidance, application updates & applicant email \u2014 one workspace, full control.",
       "keywords": [
         "MOHCD Agentforce",
         "Salesforce affordable housing",
@@ -466,7 +495,7 @@
     "content/success-stories/caloes-ppe-portal-success-story.html": {
       "path": "/content/success-stories/caloes-ppe-portal-success-story",
       "title": "Cal OES Case Study | 72-Hour PPE Portal Deployment",
-      "description": "California OES launched a statewide PPE pledge and collection portal in 72 hours — collecting millions of items for frontline workers.",
+      "description": "California OES launched a statewide PPE pledge and collection portal in 72 hours \u2014 collecting millions of items for frontline workers.",
       "keywords": [
         "Cal OES Salesforce",
         "PPE donation portal",
@@ -496,7 +525,7 @@
     "safe-seed.html": {
       "path": "/safe-seed",
       "title": "Safe Seed | Relation-Preserving Synthetic Data",
-      "description": "Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.",
+      "description": "Safe Seed generates synthetic datasets that behave like production without PHI/PII \u2014 for Salesforce, databases, and CSV.",
       "keywords": [
         "synthetic data Salesforce",
         "relation-preserving synthetic data",
@@ -536,6 +565,20 @@
         "Product"
       ]
     },
+    "lpi-accelerator.html": {
+      "path": "/lpi-accelerator",
+      "title": "LPI Accelerator | Licensing, Permitting & Inspections",
+      "description": "Licensing, Permitting & Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.",
+      "keywords": [
+        "Salesforce LPI accelerator",
+        "licensing permitting inspections Salesforce",
+        "Public Sector Solutions permitting"
+      ],
+      "ogType": "website",
+      "schema": [
+        "Product"
+      ]
+    },
     "how-we-work.html": {
       "path": "/how-we-work",
       "title": "How We Work | AI Delivery Engine | SuccessMetrics",
@@ -553,7 +596,7 @@
     "why-ai-salesforce.html": {
       "path": "/why-ai-salesforce",
       "title": "Why AI + Salesforce | SuccessMetrics Engineering Partner",
-      "description": "AI is reshaping how enterprise software is built. Salesforce is where we put that approach into practice — and why the combination wins for your roadmap.",
+      "description": "AI is reshaping how enterprise software is built. Salesforce is where we put that approach into practice \u2014 and why the combination wins for your roadmap.",
       "keywords": [
         "AI and Salesforce",
         "AI-powered Salesforce delivery",
@@ -567,7 +610,7 @@
     "content/success-stories/city-permitting-success-story.html": {
       "path": "/content/success-stories/city-permitting-success-story",
       "title": "Municipal Permitting System Built in 3 Weeks",
-      "description": "Five departments, 14 permit types, and a resident portal — a Southern California city built a municipal permitting system in 3 weeks with the LPI Build Agent.",
+      "description": "Five departments, 14 permit types, and a resident portal \u2014 a Southern California city built a municipal permitting system in 3 weeks with the LPI Build Agent.",
       "keywords": [
         "municipal permitting Salesforce",
         "LPI accelerator case study",
@@ -582,7 +625,7 @@
     "content/success-stories/easymask-product-engineering-success-story.html": {
       "path": "/content/success-stories/easymask-product-engineering-success-story",
       "title": "EasyMask Case Study | AI-Built Product Engineering",
-      "description": "How SuccessMetrics used its own AI delivery engine to build EasyMask — a native Salesforce data-masking product — achieving 62% less development testing time.",
+      "description": "How SuccessMetrics used its own AI delivery engine to build EasyMask \u2014 a native Salesforce data-masking product \u2014 achieving 62% less development testing time.",
       "keywords": [
         "EasyMask case study",
         "AI product engineering Salesforce",
@@ -597,7 +640,7 @@
     "content/success-stories/state-licensing-modernization-success-story.html": {
       "path": "/content/success-stories/state-licensing-modernization-success-story",
       "title": "State Licensing Modernization | 40%+ Lower Cost",
-      "description": "How a state labor agency replaced a legacy trade-certification system — 24 license types, 17 weeks — at more than 40% lower cost and timeline.",
+      "description": "How a state labor agency replaced a legacy trade-certification system \u2014 24 license types, 17 weeks \u2014 at more than 40% lower cost and timeline.",
       "keywords": [
         "state licensing modernization",
         "Salesforce public sector licensing",
@@ -608,6 +651,21 @@
         "Article"
       ],
       "datePublished": "2026-08-03"
+    },
+    "content/whitepaper-safe-seed-synthetic-data.html": {
+      "path": "/content/whitepaper-safe-seed-synthetic-data",
+      "title": "Safe Seed Synthetic Data Without PHI/PII | White Paper",
+      "description": "Relation-preserving synthetic data for regulated sandboxes \u2014 realistic relationships without PHI/PII, with measurable privacy evidence and an audit trail.",
+      "keywords": [
+        "synthetic data without PHI",
+        "Safe Seed white paper",
+        "relation-preserving synthetic data"
+      ],
+      "ogType": "article",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-01"
     }
   }
 }
