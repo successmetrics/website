@@ -8,6 +8,7 @@ const MAIN_PAGES = [
   "easymask.html",
   "safe-seed.html",
   "org-insights.html",
+  "lpi-accelerator.html",
   "how-we-work.html",
   "why-ai-salesforce.html",
   "customer-questions.html",
@@ -24,7 +25,9 @@ const CONTENT_PAGES = [
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
   "content/whitepaper-midmarket-guide.html",
+  "content/whitepaper-safe-seed-synthetic-data.html",
   "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",
+  "content/ai-research/beyond-masking-synthetic-data.html",
   "content/success-stories/amp-customer-portal-success-story.html",
   "content/success-stories/caloes-ppe-portal-success-story.html",
   "content/success-stories/leaflink-cpq-success-story.html",
@@ -237,6 +240,7 @@ test.describe("content pages", () => {
       "content/blog-midmarket-salesforce.html",
       "content/blog-lpi-accelerator.html",
       "content/whitepaper-midmarket-guide.html",
+  "content/whitepaper-safe-seed-synthetic-data.html",
     ];
 
     for (const article of articles) {

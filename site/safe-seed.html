@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <!-- seo:start -->
 <title>Safe Seed | Relation-Preserving Synthetic Data</title>
 <meta name="description" content="Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.">
@@ -18,15 +19,282 @@
 <meta name="twitter:title" content="Safe Seed | Relation-Preserving Synthetic Data">
 <meta name="twitter:description" content="Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.">
 <meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"SuccessMetrics Salesforce Accelerators","brand":{"@type":"Brand","name":"SuccessMetrics Corp"},"description":"Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.","url":"https://www.successmetrics.io/safe-seed"}</script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Safe Seed | Relation-Preserving Synthetic Data","description":"Safe Seed generates synthetic datasets that behave like production without PHI/PII — for Salesforce, databases, and CSV.","url":"https://www.successmetrics.io/safe-seed"}</script>
 <!-- seo:end -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-<link rel="stylesheet" href="assets/css/styles.css?v=f8f46dcbd464">
-</head>
-<body>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/images/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/css/styles.css?v=494c091c4f7c" rel="stylesheet"/>
+<style>
+/* ── Stats bar ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stats-bar-item {
+  padding: 28px 20px;
+  border-right: 1px solid var(--border);
+}
+.stats-bar-item:last-child { border-right: none; }
+.stats-bar-num {
+  font-size: 2.6rem;
+  font-weight: 900;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stats-bar-num--icon {
+  background: none;
+  -webkit-text-fill-color: unset;
+  color: var(--accent-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stats-bar-num--icon svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: block;
+}
+.stats-bar-label { font-size: 0.86rem; color: var(--text-dim); line-height: 1.4; }
+@media (max-width: 700px) {
+  .stats-bar { grid-template-columns: 1fr; max-width: 420px; }
+  .stats-bar-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stats-bar-item:last-child { border-bottom: none; }
+}
 
+/* ── Problem cards ── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 700px) { .problem-grid { grid-template-columns: 1fr; } }
+.problem-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent-3);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  transition: border-color 0.2s;
+}
+.problem-card:hover { border-color: var(--border-hover); }
+.problem-card .problem-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+.problem-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.problem-card p { font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.6; }
+
+/* ── Capability cards ── */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 640px) { .cap-grid { grid-template-columns: 1fr; } }
+.cap-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  transition: border-color 0.2s;
+}
+.cap-card:hover { border-color: var(--border-hover); }
+.cap-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; margin-top: 10px; }
+.cap-card p { font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.6; }
+
+/* ── Diff grid (Utility / Control / Assurance) ── */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 700px) { .diff-grid { grid-template-columns: 1fr; } }
+.diff-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  transition: border-color 0.2s;
+}
+.diff-card:hover { border-color: var(--border-hover); }
+.diff-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.diff-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: rgba(22, 166, 216, 0.12);
+  flex-shrink: 0;
+}
+.diff-card h3 { font-size: 1.05rem; font-weight: 800; margin: 0; }
+.diff-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.diff-card ul li {
+  font-size: 0.88rem; color: var(--text-dim);
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.diff-card ul li::before { content: "✓"; color: var(--accent-2); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Compliance callout ── */
+.compliance-callout {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-2);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  max-width: 860px;
+  margin: 32px auto 0;
+}
+.compliance-callout h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; }
+.compliance-callout p { font-size: 0.92rem; color: var(--text-dim); margin: 0 0 16px; line-height: 1.65; }
+.compliance-pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.compliance-pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(56, 217, 192, 0.1);
+  border: 1px solid rgba(56, 217, 192, 0.3);
+  color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+
+/* ── Engagement steps ── */
+.eng-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 640px) { .eng-steps { grid-template-columns: 1fr; } }
+.eng-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  transition: border-color 0.2s;
+}
+.eng-step:hover { border-color: var(--border-hover); }
+.eng-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.eng-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.eng-step p { font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.6; }
+
+/* ── Product demo ── */
+.demo-video-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #0a0f1a;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.demo-video-wrap video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1440 / 900;
+  object-fit: contain;
+  object-position: center center;
+  background: #0a0f1a;
+}
+.demo-video-label {
+  margin: 12px auto 0;
+  max-width: 1440px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.83rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ── Screenshot gallery ── */
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+@media (max-width: 900px) { .screenshot-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .screenshot-grid { grid-template-columns: 1fr; } }
+.screenshot-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  background: var(--card);
+  aspect-ratio: 16/10;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.screenshot-item:hover { border-color: var(--border-hover); transform: scale(1.02); }
+.screenshot-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.screenshot-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 6px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.68) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+/* Lightbox for screenshots */
+.ss-lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.88);
+}
+.ss-lightbox[hidden] { display: none; }
+.ss-lightbox img {
+  max-width: 92vw; max-height: 88vh;
+  border-radius: 10px;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+  display: block;
+}
+.ss-lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  background: rgba(255,255,255,0.12); border: none;
+  color: #fff; font-size: 1.5rem; width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.ss-lightbox-close:hover { background: rgba(255,255,255,0.22); }
+</style>
+</head>
+<body class="page-product">
 <!-- @nav active="accelerators" -->
 <nav class="nav">
   <div class="nav-inner">
@@ -46,135 +314,331 @@
     <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
 <header class="page-hero">
   <div class="container">
-    <nav class="page-breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
-      <a href="accelerators.html">Accelerators</a><span class="sep" aria-hidden="true">/</span>
+    <nav aria-label="Breadcrumb" class="page-breadcrumb">
+      <a href="index.html">Home</a><span aria-hidden="true" class="sep">/</span>
+      <a href="accelerators.html">Accelerators</a><span aria-hidden="true" class="sep">/</span>
       <span aria-current="page">Safe Seed</span>
     </nav>
     <div class="kicker">Safe Seed · Synthetic Data</div>
     <h1>Synthetic data that behaves like production — without PHI/PII</h1>
-    <p>Safe Seed generates relation-preserving datasets for regulated sandboxes, demos, and analytics. Correlations, multi-table integrity, and measurable privacy — so workflows and QA see the structure that actually matters.</p>
+    <p>Safe Seed generates relation-preserving synthetic datasets for regulated sandboxes, demos, and analytics. Correlations, multi-table referential integrity, and measurable privacy — so workflows and QA encounter the structure that actually matters.</p>
     <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;">
-      <a href="contact.html?ref=safe-seed" class="btn btn-primary">Talk to an Engineer →</a>
-      <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+      <a class="btn btn-primary" href="contact.html?ref=safe-seed">Talk to an Engineer →</a>
+      <a class="btn btn-ghost" href="#how-it-works">See how it works</a>
     </div>
   </div>
 </header>
 
+<div class="sticky-toc-content">
+<div class="accelerators-toc-rail">
+<nav aria-label="On this page" class="accelerators-toc" id="accelerators-toc">
+<ul>
+<li><a href="#problem" data-toc-id="problem">The Problem</a></li>
+<li><a href="#how-it-works" data-toc-id="how-it-works">Capabilities</a></li>
+<li><a href="#platforms" data-toc-id="platforms">Where It Runs</a></li>
+<li><a href="#why" data-toc-id="why">Why Teams Choose</a></li>
+<li><a href="#compliance" data-toc-id="compliance">Compliance</a></li>
+<li><a href="#getting-started" data-toc-id="getting-started">Getting Started</a></li>
+<li><a href="#screenshots" data-toc-id="screenshots">Screenshots</a></li>
+<li><a href="#product-demo" data-toc-id="product-demo">Product Demo</a></li>
+</ul>
+</nav>
+</div>
+
+<!-- Stats bar -->
 <section class="block alt">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stats-bar-item">
+        <div class="stats-bar-num">3</div>
+        <div class="stats-bar-label">Platforms supported<br>(Salesforce, PostgreSQL, CSV)</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-num stats-bar-num--icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Lock">
+            <rect x="4.5" y="10.5" width="15" height="11" rx="2.5"></rect>
+            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"></path>
+          </svg>
+        </div>
+        <div class="stats-bar-label">Privacy evidence your<br>compliance team can sign off on</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-num">∞</div>
+        <div class="stats-bar-label">Rows — synthetic volume<br>independent of source size</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Problem -->
+<section class="block" id="problem">
   <div class="container">
     <div class="section-head">
       <div class="kicker">The Problem</div>
       <h2 class="title">Production data is the best test data — and the one you can't use</h2>
-      <p>PHI, PII, and sensitive customer records are locked away from sandboxes, QA, demos, and analytics. Classic generators optimize for column-level realism and break the relationships that make data useful.</p>
+      <p>PHI, PII, and sensitive customer records are locked away from sandboxes, QA environments, demos, and analytics pipelines. Classic generators optimize for column-level realism and break the relationships that make data useful for testing.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Behaves like production</h3>
-        <p>Correlations, distributions, and multi-table relationships stay intact — not shuffled columns that fail in workflows.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🔗</span>
+        <h3>Broken relationships kill tests</h3>
+        <p>Classic generators shuffle columns independently — joins fail, automations error, and data-dependent workflows produce false negatives that aren't bugs.</p>
       </div>
-      <div class="card">
-        <h3>Provably safe</h3>
-        <p>Measurable privacy evidence with PASS / WARN / FAIL reporting — assurance compliance teams can sign off on.</p>
+      <div class="problem-card">
+        <span class="problem-icon">📋</span>
+        <h3>Compliance needs evidence, not promises</h3>
+        <p>A statement that data is "anonymized" isn't enough. Reviewers need reproducible PASS / WARN / FAIL metrics they can validate and retain.</p>
       </div>
-      <div class="card">
-        <h3>Repeatable &amp; auditable</h3>
-        <p>Durable jobs, config hashing, and downloadable evidence packs for retention and offline review.</p>
+      <div class="problem-card">
+        <span class="problem-icon">🔁</span>
+        <h3>Sandbox refreshes reset everything</h3>
+        <p>Every refresh means another compliance review, another manual scrub, another delay before QA can safely run. There's no durable, repeatable path.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block" id="how-it-works">
+<!-- Capabilities -->
+<section class="block alt" id="how-it-works">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Capabilities</div>
       <h2 class="title">Relation-preserving synthesis, end to end</h2>
+      <p>Every Safe Seed run preserves the statistical and relational structure of your source data — so synthetic outputs behave like production in tests, demos, and analytics pipelines.</p>
     </div>
-    <div class="grid grid-2">
-      <div class="card">
+    <div class="cap-grid">
+      <div class="cap-card">
         <span class="badge teal">Privacy &amp; PII</span>
         <h3>Mask without breaking joins</h3>
         <p>PII columns masked while preserving stable, usable join keys. Per-run privacy metrics for reviewers and legal — with role separation so inspectors don't mutate sources.</p>
       </div>
-      <div class="card">
+      <div class="cap-card">
         <span class="badge blue">Multi-table</span>
         <h3>Full relational reconstruction</h3>
-        <p>Synthesize parents first, reconstruct children with referential integrity. Locked tables pass through unchanged for mixed real/synthetic environments.</p>
+        <p>Synthesize parents first, reconstruct children with referential integrity. Locked tables pass through unchanged for mixed real/synthetic environments where some tables should stay untouched.</p>
       </div>
-      <div class="card">
+      <div class="cap-card">
         <span class="badge">Fidelity</span>
         <h3>Measure every run</h3>
-        <p>Per-relation real-vs-synthetic deltas in every report. Adaptive Keep Training warm-starts from a completed run to deepen fidelity.</p>
+        <p>Per-relation real-vs-synthetic deltas included in every report. Adaptive Keep Training warm-starts from a completed run to deepen fidelity — no full re-run required.</p>
       </div>
-      <div class="card">
+      <div class="cap-card">
         <span class="badge teal">Missingness</span>
         <h3>Null patterns preserved</h3>
-        <p>Configurable NaN policies per field — null rates, imputation strategies, and missingness patterns so models see the same incomplete-data reality as production.</p>
+        <p>Configurable NaN policies per field — null rates, imputation strategies, and missingness patterns so models and workflows encounter the same incomplete-data reality as production.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block alt">
+<!-- Platforms / Who Adopts -->
+<section class="block" id="platforms">
   <div class="container">
     <div class="two-col">
       <div>
         <div class="kicker">Where It Runs</div>
         <h2 class="title">Works with the platforms you already use</h2>
-        <p style="color: var(--text-dim); margin-bottom: 20px;">Seed Salesforce sandboxes, databases, and files — without sending production records into environments that shouldn't hold them.</p>
+        <p style="color: var(--text-dim); margin-bottom: 20px;">Seed Salesforce sandboxes, databases, and flat files — without sending production records into environments that shouldn't hold them.</p>
         <ul class="check-list">
-          <li><strong style="color: var(--text);">Salesforce</strong> — Sales Cloud, Service Cloud, and Health Cloud sandbox seeding with metadata-aware paths</li>
-          <li><strong style="color: var(--text);">PostgreSQL</strong> — multi-table schema support and automatic FK discovery</li>
-          <li><strong style="color: var(--text);">CSV</strong> — upload sources; download outputs for use anywhere</li>
-          <li><strong style="color: var(--text);">ServiceNow</strong> — coming soon</li>
+          <li><strong style="color: var(--text);">Salesforce</strong> — Sales Cloud, Service Cloud, and Health Cloud sandbox seeding with metadata-aware synthetic paths</li>
+          <li><strong style="color: var(--text);">PostgreSQL</strong> — multi-table schema support with automatic FK discovery and dependency ordering</li>
+          <li><strong style="color: var(--text);">CSV</strong> — upload source files; download synthetic outputs for use in any downstream system</li>
+          <li><strong style="color: var(--text);">ServiceNow</strong> — on the roadmap; contact us for early access</li>
         </ul>
       </div>
       <div>
         <div class="kicker">Who Adopts It</div>
         <h2 class="title">Built for regulated workloads</h2>
         <ul class="check-list">
-          <li>Healthcare &amp; life sciences — PHI-safe Health Cloud and clinical-adjacent pipelines</li>
-          <li>Financial services &amp; insurance — customer, transaction, and claims data for test and demo</li>
-          <li>CRM &amp; revenue ops — realistic volume and relationships after sandbox refreshes</li>
-          <li>Any team under GDPR, CCPA, SOC 2, or sector privacy rules</li>
+          <li><strong style="color: var(--text);">Healthcare &amp; life sciences</strong> — PHI-safe Health Cloud and clinical-adjacent pipelines without touching patient records</li>
+          <li><strong style="color: var(--text);">Financial services &amp; insurance</strong> — customer, transaction, and claims data for test, demo, and analytics environments</li>
+          <li><strong style="color: var(--text);">CRM &amp; revenue ops</strong> — realistic volume and relationship structures after sandbox refreshes</li>
+          <li><strong style="color: var(--text);">Regulated teams generally</strong> — any team operating under GDPR, CCPA, HIPAA, SOC 2, or sector-specific privacy rules</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block">
+<!-- Differentiators: Utility / Control / Assurance -->
+<section class="block alt" id="why">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">Why Teams Choose Safe Seed</div>
       <h2 class="title">Utility, control, and assurance in one operator workflow</h2>
+      <p>Three properties that classic generators trade off against each other — Safe Seed treats them as equally non-negotiable.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Utility</h3>
-        <p>Coherent relationships across fields and tables — so UAT, integrations, and demos don't collapse on broken joins.</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-card-header">
+          <div class="diff-icon">🔗</div>
+          <h3>Utility</h3>
+        </div>
+        <ul>
+          <li>Correlations and distributions match production statistics</li>
+          <li>Multi-table referential integrity preserved — joins work</li>
+          <li>Workflows, automations, and integrations run without errors</li>
+          <li>Scalable to any row count — independent of source volume</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Control</h3>
-        <p>Schema locks, PII flags, NaN policies, and field policies without writing synthesizer code.</p>
+      <div class="diff-card" style="border-color: var(--accent);">
+        <div class="diff-card-header">
+          <div class="diff-icon" style="background: rgba(91,107,214,0.15);">⚙️</div>
+          <h3>Control</h3>
+        </div>
+        <ul>
+          <li>Schema locks, PII flags, and NaN policies per field</li>
+          <li>Locked tables pass through unchanged for mixed environments</li>
+          <li>Role separation — inspectors review without mutating sources</li>
+          <li>Config hashing ensures reproducible runs</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Assurance</h3>
-        <p>Reports and evidence ZIPs that survive legal review — privacy and fidelity in the same vocabulary.</p>
+      <div class="diff-card">
+        <div class="diff-card-header">
+          <div class="diff-icon" style="background: rgba(56,217,192,0.12);">📋</div>
+          <h3>Assurance</h3>
+        </div>
+        <ul>
+          <li>PASS / WARN / FAIL privacy metrics on every run</li>
+          <li>Per-relation fidelity deltas in every evidence report</li>
+          <li>Downloadable evidence ZIPs for retention and offline review</li>
+          <li>Audit trail your compliance and legal teams can sign off on</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block alt">
+<!-- Compliance callout -->
+<section class="block" id="compliance">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">Compliance</div>
+      <h2 class="title">Built for regulated data environments</h2>
+      <p>Safe Seed is designed for teams where data governance isn't optional — evidence packs are built to survive compliance review.</p>
+    </div>
+    <div class="compliance-callout">
+      <h3>Evidence that travels with every run</h3>
+      <p>Each Safe Seed job produces a downloadable evidence ZIP containing per-relation privacy metrics, fidelity deltas, config hashes, and run logs. Your compliance, legal, and audit teams get what they need to review and retain — without manual documentation steps.</p>
+      <div class="compliance-pill-row">
+        <span class="compliance-pill">HIPAA</span>
+        <span class="compliance-pill">CCPA</span>
+        <span class="compliance-pill">GDPR</span>
+        <span class="compliance-pill">SOC 2</span>
+        <span class="compliance-pill">GLBA</span>
+        <span class="compliance-pill">State Privacy Laws</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Engagement steps -->
+<section class="block alt" id="getting-started">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">Getting Started</div>
+      <h2 class="title">From source data to seeded sandbox in three steps</h2>
+    </div>
+    <div class="eng-steps">
+      <div class="eng-step">
+        <div class="eng-bubble">1</div>
+        <h3>Connect your source</h3>
+        <p>Upload a CSV, point at a PostgreSQL schema, or connect your Salesforce org. Safe Seed discovers your schema, flags PII candidates, and infers relationships automatically.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-bubble">2</div>
+        <h3>Configure your policy</h3>
+        <p>Set PII flags, NaN policies, lock tables, and define output volume. Preview a sample run before committing — see privacy metrics and fidelity scores before any data is generated.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-bubble">3</div>
+        <h3>Seed and get evidence</h3>
+        <p>Generate synthetic records with referential integrity intact. Download the evidence ZIP for compliance review and seed your sandbox, database, or file — immediately usable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product screenshots -->
+<section class="block" id="screenshots">
+  <div class="container">
+    <div class="section-head center" style="margin-bottom: 28px;">
+      <div class="kicker">Product Screenshots</div>
+      <h2 class="title" style="font-size: 1.8rem;">See Safe Seed in pictures</h2>
+      <p>From sign-in through schema discovery, field policy, and evidence reports — the operator workflow in seven screens.</p>
+    </div>
+
+    <!-- Screenshot gallery -->
+    <div class="screenshot-grid">
+      <div class="screenshot-item" data-img="assets/images/safe-seed/01_login.webp" data-caption="Secure workspace sign-in — email &amp; password, no org setup required">
+        <img src="assets/images/safe-seed/01_login.webp" alt="Safe Seed sign-in screen" loading="lazy">
+        <div class="screenshot-label">Sign in</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/02_schema.png" data-caption="Schema diagram — 14 tables, FK relationships and row counts auto-detected">
+        <img src="assets/images/safe-seed/02_schema.png" alt="Northwind schema diagram with FK relationships" loading="lazy">
+        <div class="screenshot-label">Schema diagram</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/03_policy.webp" data-caption="Field policy — PII auto-flagged, choose synthesize or mask per column">
+        <img src="assets/images/safe-seed/03_policy.webp" alt="Field policy editor with PII flags" loading="lazy">
+        <div class="screenshot-label">Field policy &amp; PII flags</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/04_relations.webp" data-caption="Relation discovery — statistical correlations ranked by strength before synthesis">
+        <img src="assets/images/safe-seed/04_relations.webp" alt="Relation discovery — top cross-table correlations" loading="lazy">
+        <div class="screenshot-label">Relation discovery</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/05_reconstruction.webp" data-caption="Table reconstruction — all 14 tables matched real row counts exactly">
+        <img src="assets/images/safe-seed/05_reconstruction.webp" alt="Seed run report — 14 tables reconstructed" loading="lazy">
+        <div class="screenshot-label">14 tables reconstructed</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/06_report_columns.jpg" data-caption="Column distributions — real vs synthetic fill-rate compared per field">
+        <img src="assets/images/safe-seed/06_report_columns.jpg" alt="Evidence report — column fill-rate distributions" loading="lazy">
+        <div class="screenshot-label">Column distributions</div>
+      </div>
+      <div class="screenshot-item" data-img="assets/images/safe-seed/07_report_scatter.jpg" data-caption="Cross-column correlations — scatter plots confirm synthetic preserves real-world patterns">
+        <img src="assets/images/safe-seed/07_report_scatter.jpg" alt="Evidence report — inter-column scatter plots" loading="lazy">
+        <div class="screenshot-label">Cross-column correlations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product demo -->
+<section class="block alt" id="product-demo">
+  <div class="container">
+    <div class="section-head center" style="margin-bottom: 28px;">
+      <div class="kicker">Product Demo</div>
+      <h2 class="title" style="font-size: 1.8rem;">Full walkthrough in under two minutes</h2>
+      <p>Connect a Postgres source, import 14 tables, auto-generate a field policy, run synthesis — and get a privacy evidence report.</p>
+    </div>
+    <div class="demo-video-wrap">
+      <video autoplay loop muted playsinline controls preload="metadata"
+             width="1440" height="900"
+             aria-label="Safe Seed full walkthrough — Postgres source to synthetic data report">
+        <source src="assets/videos/safeseed.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="demo-video-label">Full walkthrough · Postgres → 14-table synthesis → privacy &amp; fidelity report</p>
+  </div>
+</section>
+
+</div>
+
+<!-- Lightbox for screenshots -->
+<div class="ss-lightbox" id="ss-lightbox" hidden role="dialog" aria-modal="true" aria-label="Screenshot enlarged view">
+  <button class="ss-lightbox-close" aria-label="Close">&times;</button>
+  <img src="" alt="">
+</div>
+
+<!-- CTA -->
+<section class="block">
   <div class="cta-banner">
     <div class="inner">
       <h2>Seed sandboxes that compliance can approve</h2>
       <p>Talk to an engineer about Safe Seed for your Salesforce org, database, or regulated analytics pipeline.</p>
-      <a href="contact.html?ref=safe-seed" class="btn btn-primary">Talk to an Engineer →</a>
+      <a class="btn btn-primary" href="contact.html?ref=safe-seed">Talk to an Engineer →</a>
     </div>
   </div>
 </section>
@@ -183,8 +647,8 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
-        <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
-        <p>AI-native engineering partner for organizations that need enterprise software delivered faster — fusing AI-powered delivery pipelines, prebuilt accelerators, and deep Salesforce expertise to ship in weeks, not quarters.</p>
+        <a class="logo" href="index.html"><img alt="SuccessMetrics logo" class="mark" src="assets/images/logo.svg"/>Success<span class="sm">Metrics</span></a>
+        <p>AI-native engineering partner for organizations that want enterprise software delivered with clear momentum — combining AI-native delivery, proven accelerators, and deep Salesforce expertise to ship in weeks.</p>
       </div>
       <div>
         <h5>Company</h5>
@@ -221,6 +685,33 @@
     </div>
   </div>
 </footer>
+<script>
+(function() {
+  var lb = document.getElementById('ss-lightbox');
+  var lbImg = lb && lb.querySelector('img');
+  var lbClose = lb && lb.querySelector('.ss-lightbox-close');
+  if (!lb || !lbImg || !lbClose) return;
 
+  document.querySelectorAll('.screenshot-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      lbImg.src = item.dataset.img || '';
+      lbImg.alt = item.dataset.caption || '';
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    });
+  });
+
+  function close() {
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e) { if (!lb.hidden && e.key === 'Escape') close(); });
+})();
+</script>
+<script defer="" src="assets/js/accelerators-toc.js?v=84e620e6e38e"></script>
 </body>
 </html>

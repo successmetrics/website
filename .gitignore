@@ -4,10 +4,11 @@ playwright-report/
 blob-report/
 playwright/.cache/
 .env
-backup/*
 
 docs/*
 media/*
+whitepapers/*
+backup/*
 
 .DS_Store
 # Local Netlify folder

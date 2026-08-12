@@ -1,147 +1,116 @@
 (function () {
-  const overlay = document.getElementById("accelerator-demo-overlay");
-  const card = document.querySelector(".accelerator-demo-card");
-  const video = document.querySelector(".accelerator-demo-video");
-  const caption = document.querySelector(".accelerator-demo-caption");
-  const overlayWrap = document.querySelector(".accelerator-demo-overlay-video-wrap");
-  const backdrop = overlay && overlay.querySelector(".accelerator-demo-overlay-backdrop");
-  const minimizeBtn = overlay && overlay.querySelector(".accelerator-demo-overlay-minimize");
-  const skipControls = overlayWrap && overlayWrap.querySelector(".accelerator-demo-overlay-skip-controls");
+  var overlay = document.getElementById("accelerator-demo-overlay");
+  if (!overlay) return;
 
-  if (!overlay || !card || !video || !caption || !overlayWrap || !skipControls || !backdrop || !minimizeBtn) {
-    return;
-  }
+  var overlayWrap = overlay.querySelector(".accelerator-demo-overlay-video-wrap");
+  var backdrop = overlay.querySelector(".accelerator-demo-overlay-backdrop");
+  var minimizeBtn = overlay.querySelector(".accelerator-demo-overlay-minimize");
+  var skipControls = overlayWrap && overlayWrap.querySelector(".accelerator-demo-overlay-skip-controls");
 
-  const videoSrc = video.getAttribute("src") || "";
-  const videoUrl = new URL(videoSrc, window.location.href).href;
-  let seekableUrl = null;
-  let seekablePromise = null;
-  let lastFocus = null;
-  let openToken = 0;
-  const skipSeconds = 10;
+  if (!overlayWrap || !backdrop || !minimizeBtn || !skipControls) return;
+
+  // Track the currently active card + video
+  var activeCard = null;
+  var activeVideo = null;
+  var activeCaption = null;
+  var lastFocus = null;
+  var openToken = 0;
+
+  // Per-video seekable URL cache
+  var seekableCache = {};
+  var seekablePromises = {};
+
+  var skipSeconds = 10;
 
   function isExpanded() {
     return !overlay.hidden;
   }
 
-  function prepareSeekableVideo() {
-    if (seekableUrl) {
-      return Promise.resolve(seekableUrl);
-    }
-
-    if (seekablePromise) {
-      return seekablePromise;
-    }
-
-    seekablePromise = fetch(videoUrl)
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error("Video fetch failed");
-        }
-        return response.blob();
-      })
-      .then(function (blob) {
-        seekableUrl = URL.createObjectURL(blob);
-        return seekableUrl;
-      })
-      .catch(function (error) {
-        seekablePromise = null;
-        throw error;
-      });
-
-    return seekablePromise;
+  function prepareSeekableVideo(video) {
+    var src = video.getAttribute("src") || "";
+    if (!src) return Promise.resolve(null);
+    var url = new URL(src, window.location.href).href;
+    if (seekableCache[url]) return Promise.resolve(seekableCache[url]);
+    if (seekablePromises[url]) return seekablePromises[url];
+    seekablePromises[url] = fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("fetch failed"); return r.blob(); })
+      .then(function (b) { seekableCache[url] = URL.createObjectURL(b); return seekableCache[url]; })
+      .catch(function () { seekablePromises[url] = null; return null; });
+    return seekablePromises[url];
   }
 
-  function swapToSeekableSource(savedTime) {
+  function swapToSeekable(video, savedTime) {
     if (video.dataset.seekableReady === "true") {
-      if (Number.isFinite(savedTime)) {
-        video.currentTime = savedTime;
-      }
+      if (Number.isFinite(savedTime)) video.currentTime = savedTime;
       return Promise.resolve();
     }
-
-    return prepareSeekableVideo()
-      .then(function (url) {
-        return new Promise(function (resolve) {
-          let settled = false;
-
-          function done() {
-            if (settled) return;
-            settled = true;
-            video.removeEventListener("loadedmetadata", done);
-            video.dataset.seekableReady = "true";
-            if (Number.isFinite(savedTime)) {
-              video.currentTime = savedTime;
-            }
-            resolve();
-          }
-
-          video.addEventListener("loadedmetadata", done);
-
-          if (video.src !== url) {
-            video.src = url;
-            video.load();
-          }
-
-          if (video.readyState >= 1) {
-            done();
-          } else {
-            window.setTimeout(done, 4000);
-          }
-        });
-      })
-      .catch(function () {
-        return Promise.resolve();
+    return prepareSeekableVideo(video).then(function (url) {
+      if (!url) return;
+      return new Promise(function (resolve) {
+        var settled = false;
+        function done() {
+          if (settled) return;
+          settled = true;
+          video.removeEventListener("loadedmetadata", done);
+          video.dataset.seekableReady = "true";
+          if (Number.isFinite(savedTime)) video.currentTime = savedTime;
+          resolve();
+        }
+        video.addEventListener("loadedmetadata", done);
+        if (video.src !== url) { video.src = url; video.load(); }
+        if (video.readyState >= 1) { done(); } else { window.setTimeout(done, 4000); }
       });
+    }).catch(function () {});
   }
 
-  function seekToTime(target) {
+  function seekTo(video, target) {
     return new Promise(function (resolve) {
-      if (!Number.isFinite(video.duration) || video.duration <= 0) {
-        resolve();
-        return;
-      }
-
-      const clamped = Math.max(0, Math.min(video.duration, target));
-      if (Math.abs(video.currentTime - clamped) < 0.05 && !video.seeking) {
-        resolve();
-        return;
-      }
-
-      let settled = false;
+      if (!Number.isFinite(video.duration) || video.duration <= 0) { resolve(); return; }
+      var clamped = Math.max(0, Math.min(video.duration, target));
+      if (Math.abs(video.currentTime - clamped) < 0.05 && !video.seeking) { resolve(); return; }
+      var settled = false;
       function finish() {
-        if (settled) return;
-        settled = true;
-        video.removeEventListener("seeked", finish);
-        resolve();
+        if (settled) return; settled = true;
+        video.removeEventListener("seeked", finish); resolve();
       }
-
       video.addEventListener("seeked", finish);
-      video.pause();
-      video.currentTime = clamped;
+      video.pause(); video.currentTime = clamped;
       window.setTimeout(finish, 1000);
     });
   }
 
   function skipVideo(delta) {
-    function runSkip() {
-      const duration = video.duration;
-      if (!Number.isFinite(duration) || duration <= 0) return;
-
-      const wasPlaying = !video.paused;
-      const target = video.currentTime + delta;
-
-      seekToTime(target).then(function () {
-        if (wasPlaying) {
-          video.play().catch(function () {});
-        }
+    if (!activeVideo) return;
+    var v = activeVideo;
+    swapToSeekable(v, v.currentTime).then(function () {
+      if (!Number.isFinite(v.duration) || v.duration <= 0) return;
+      var wasPlaying = !v.paused;
+      seekTo(v, v.currentTime + delta).then(function () {
+        if (wasPlaying) v.play().catch(function () {});
       });
-    }
-
-    swapToSeekableSource(video.currentTime).then(runSkip);
+    });
   }
 
-  function mountExpandedVideo() {
+  function openOverlay(card) {
+    var video = card.querySelector(".accelerator-demo-video");
+    var caption = card.querySelector(".accelerator-demo-caption");
+    if (!video || !caption) return;
+
+    var token = ++openToken;
+    lastFocus = document.activeElement;
+    var savedTime = video.currentTime;
+    var wasPlaying = !video.paused;
+
+    activeCard = card;
+    activeVideo = video;
+    activeCaption = caption;
+
+    var panel = overlay.querySelector(".accelerator-demo-overlay-panel");
+    if (panel) {
+      var label = video.getAttribute("aria-label") || "Demo video";
+      panel.setAttribute("aria-label", label + " — expanded view");
+    }
+
     video.setAttribute("controls", "");
     video.setAttribute("tabindex", "0");
     video.removeAttribute("loop");
@@ -152,106 +121,75 @@
     document.body.classList.add("accelerator-demo-overlay-open");
     video.focus();
     video.play().catch(function () {});
-  }
 
-  function openOverlay() {
-    if (isExpanded()) return;
-
-    const token = ++openToken;
-    lastFocus = document.activeElement;
-    const savedTime = video.currentTime;
-    const wasPlaying = !video.paused;
-
-    mountExpandedVideo();
-
-    swapToSeekableSource(savedTime).then(function () {
+    swapToSeekable(video, savedTime).then(function () {
       if (token !== openToken || !isExpanded()) return;
-      if (!wasPlaying) {
-        video.pause();
-      } else {
-        video.play().catch(function () {});
-      }
+      if (!wasPlaying) { video.pause(); } else { video.play().catch(function () {}); }
     });
   }
 
   function closeOverlay() {
-    if (!isExpanded()) return;
+    if (!isExpanded() || !activeCard || !activeVideo || !activeCaption) return;
 
     openToken += 1;
-    video.pause();
-    video.removeAttribute("controls");
-    video.removeAttribute("tabindex");
-    video.setAttribute("loop", "");
-    video.setAttribute("autoplay", "");
-    card.insertBefore(video, caption);
+    activeVideo.pause();
+    activeVideo.removeAttribute("controls");
+    activeVideo.removeAttribute("tabindex");
+    activeVideo.setAttribute("loop", "");
+    activeVideo.setAttribute("autoplay", "");
+    // Re-insert video before caption in its card
+    activeCard.insertBefore(activeVideo, activeCaption);
 
     overlay.hidden = true;
-    card.classList.remove("accelerator-demo-card--expanded");
+    activeCard.classList.remove("accelerator-demo-card--expanded");
     document.body.classList.remove("accelerator-demo-overlay-open");
 
-    if (lastFocus && typeof lastFocus.focus === "function") {
-      lastFocus.focus();
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    activeVideo.play().catch(function () {});
+
+    activeCard = null;
+    activeVideo = null;
+    activeCaption = null;
+  }
+
+  // Wire up all demo cards
+  var cards = document.querySelectorAll(".accelerator-demo-card");
+  cards.forEach(function (card) {
+    card.addEventListener("click", function (event) {
+      if (isExpanded()) return;
+      if (event.target.closest(".accelerator-demo-overlay-minimize")) return;
+      openOverlay(card);
+    });
+
+    // Warm up each video's seekable blob
+    var video = card.querySelector(".accelerator-demo-video");
+    if (video && "requestIdleCallback" in window) {
+      window.requestIdleCallback(function () { prepareSeekableVideo(video).catch(function () {}); });
+    } else if (video) {
+      window.setTimeout(function () { prepareSeekableVideo(video).catch(function () {}); }, 1500 + Math.random() * 1000);
     }
-
-    video.play().catch(function () {});
-  }
-
-  function handleOpenRequest(event) {
-    if (isExpanded()) return;
-    if (event.target.closest(".accelerator-demo-overlay-minimize")) return;
-    openOverlay();
-  }
-
-  card.addEventListener("click", handleOpenRequest);
+  });
 
   minimizeBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    closeOverlay();
+    event.preventDefault(); event.stopPropagation(); closeOverlay();
   });
 
   backdrop.addEventListener("click", closeOverlay);
 
   skipControls.addEventListener("click", function (event) {
-    const button = event.target.closest("[data-skip-seconds]");
+    var button = event.target.closest("[data-skip-seconds]");
     if (!button) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const delta = Number(button.getAttribute("data-skip-seconds"));
-    if (Number.isFinite(delta)) {
-      skipVideo(delta);
-    }
+    event.preventDefault(); event.stopPropagation();
+    var delta = Number(button.getAttribute("data-skip-seconds"));
+    if (Number.isFinite(delta)) skipVideo(delta);
   });
 
   document.addEventListener("keydown", function (event) {
     if (!isExpanded()) return;
-
-    const tag = event.target && event.target.tagName;
+    var tag = event.target && event.target.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-
-    if (event.key === "Escape") {
-      closeOverlay();
-      return;
-    }
-
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      skipVideo(skipSeconds);
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      skipVideo(-skipSeconds);
-    }
+    if (event.key === "Escape") { closeOverlay(); return; }
+    if (event.key === "ArrowRight") { event.preventDefault(); skipVideo(skipSeconds); }
+    else if (event.key === "ArrowLeft") { event.preventDefault(); skipVideo(-skipSeconds); }
   });
-
-  if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(function () {
-      prepareSeekableVideo().catch(function () {});
-    });
-  } else {
-    window.setTimeout(function () {
-      prepareSeekableVideo().catch(function () {});
-    }, 1500);
-  }
 })();

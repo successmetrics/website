@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<!-- seo:start -->
+<title>LPI Accelerator | Licensing, Permitting &amp; Inspections</title>
+<meta name="description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
+<link rel="canonical" href="https://www.successmetrics.io/lpi-accelerator">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SuccessMetrics">
+<meta property="og:title" content="LPI Accelerator | Licensing, Permitting &amp; Inspections">
+<meta property="og:description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
+<meta property="og:url" content="https://www.successmetrics.io/lpi-accelerator">
+<meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LPI Accelerator | Licensing, Permitting &amp; Inspections">
+<meta name="twitter:description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
+<meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"LPI Accelerator","brand":{"@type":"Brand","name":"SuccessMetrics Corp"},"description":"Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.","url":"https://www.successmetrics.io/lpi-accelerator"}</script>
+<!-- seo:end -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/images/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="assets/css/styles.css?v=494c091c4f7c" rel="stylesheet"/>
+<style>
+/* ── Stats bar ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+.stats-bar-item {
+  padding: 28px 20px;
+  border-right: 1px solid var(--border);
+}
+.stats-bar-item:last-child { border-right: none; }
+.stats-bar-num {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stats-bar-label { font-size: 0.86rem; color: var(--text-dim); line-height: 1.4; }
+@media (max-width: 600px) {
+  .stats-bar { grid-template-columns: 1fr; }
+  .stats-bar-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stats-bar-item:last-child { border-bottom: none; }
+}
+
+/* ── Module cards ── */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 16px;
+}
+.module-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.module-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.module-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.module-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.module-card h3 { font-size: 0.97rem; font-weight: 700; }
+.module-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.module-card ul li {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.module-card ul li::before {
+  content: '→';
+  color: var(--text-faint);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Alternating walkthrough ── */
+.walkthrough { display: flex; flex-direction: column; gap: 64px; }
+.walk-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.walk-item.reverse { direction: rtl; }
+.walk-item.reverse > * { direction: ltr; }
+.walk-step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.walk-item h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.walk-item p { font-size: 0.93rem; color: var(--text-dim); margin-bottom: 16px; line-height: 1.65; }
+.walk-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.walk-bullets li {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+.walk-bullets li::before { content: '✓'; color: var(--accent-2); font-weight: 700; flex-shrink: 0; }
+.walk-img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+@media (max-width: 768px) {
+  .walk-item, .walk-item.reverse { grid-template-columns: 1fr; direction: ltr; }
+  .walk-item.reverse .walk-img-wrap { order: -1; }
+}
+
+/* ── Differentiator cards ── */
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) { .diff-grid { grid-template-columns: 1fr; } }
+.diff-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+.diff-card:hover { border-color: var(--border-hover); }
+.diff-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.diff-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.diff-card h3 { font-size: 0.97rem; font-weight: 700; }
+.diff-card ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.diff-card ul li {
+  font-size: 0.88rem; color: var(--text-dim);
+  display: flex; gap: 9px; align-items: flex-start; line-height: 1.5;
+}
+.diff-card ul li::before { content: '•'; color: var(--text-faint); flex-shrink: 0; }
+
+/* ── Chip grid (permit families) ── */
+.chip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+.chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.chip:hover { border-color: var(--border-hover); }
+.chip-icon { font-size: 1.4rem; margin-bottom: 5px; }
+.chip-label { font-size: 0.78rem; color: var(--text-dim); line-height: 1.3; }
+
+/* ── Callout banner ── */
+.callout-banner {
+  background: linear-gradient(135deg, rgba(9,149,197,0.12) 0%, rgba(56,217,192,0.06) 100%);
+  border: 1px solid rgba(22,166,216,0.2);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.callout-banner-icon { font-size: 44px; flex-shrink: 0; }
+.callout-banner h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+.callout-banner p { font-size: 0.92rem; color: var(--text-dim); line-height: 1.6; }
+.callout-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.callout-pill {
+  background: rgba(22,166,216,0.1);
+  border: 1px solid rgba(22,166,216,0.2);
+  border-radius: 100px;
+  padding: 3px 11px;
+  font-size: 0.78rem; color: var(--accent); font-weight: 500;
+}
+@media (max-width: 640px) {
+  .callout-banner { flex-direction: column; padding: 24px 20px; }
+  .module-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Engagement steps ── */
+.eng-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  position: relative;
+}
+.eng-steps::before {
+  content: '';
+  position: absolute;
+  top: 34px;
+  left: calc(100%/6);
+  right: calc(100%/6);
+  height: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+.eng-step { position: relative; z-index: 1; text-align: center; padding: 0 18px; }
+.eng-bubble {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; font-weight: 900;
+  margin: 0 auto 18px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 4px var(--bg-2);
+}
+.eng-step h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 7px; }
+.eng-step p { font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }
+@media (max-width: 680px) {
+  .eng-steps { grid-template-columns: 1fr; gap: 28px; }
+  .eng-steps::before { display: none; }
+}
+</style>
+</head>
+<body class="page-product">
+<!-- @nav active="accelerators" -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="logo"><img src="/assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html">AI Solutions</a></li>
+      <li><a href="/industries.html">Industries</a></li>
+      <li><a href="/accelerators.html" class="active">Accelerators</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/ai-research.html">AI Research</a></li>
+      <li><a href="/success-stories.html">Success Stories</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
+      <a href="accelerators.html">Accelerators</a><span class="sep" aria-hidden="true">/</span>
+      <span aria-current="page">LPI Accelerator</span>
+    </nav>
+    <div class="kicker">LPI Accelerator · Licensing, Permitting &amp; Inspections</div>
+    <h1>Live in weeks, on the platform your agency already owns.</h1>
+    <p>The LPI Accelerator delivers a Enterprise-class permitting, licensing, and inspections system as a managed package on standard Salesforce Public Sector Solutions objects — your org, your data, your modules.</p>
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;">
+      <a href="contact.html?ref=lpi-accelerator" class="btn btn-primary">Request a Demo →</a>
+      <a href="#modules" class="btn btn-ghost">See what's included</a>
+    </div>
+  </div>
+</header>
+
+<div class="sticky-toc-content">
+<div class="accelerators-toc-rail">
+<nav aria-label="On this page" class="accelerators-toc" id="accelerators-toc">
+<ul>
+<li><a href="#problem" data-toc-id="problem">The Problem</a></li>
+<li><a href="#modules" data-toc-id="modules">Modules</a></li>
+<li><a href="#see-it-in-action" data-toc-id="see-it-in-action">See It In Action</a></li>
+<li><a href="#different" data-toc-id="different">What Makes It Different</a></li>
+<li><a href="#permit-library" data-toc-id="permit-library">Permit Library</a></li>
+<li><a href="#california" data-toc-id="california">California Compliance</a></li>
+<li><a href="#engagement" data-toc-id="engagement">Engagement</a></li>
+</ul>
+</nav>
+</div>
+
+<!-- Stats bar -->
+<section class="block alt">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stats-bar-item">
+        <div class="stats-bar-num">37</div>
+        <div class="stats-bar-label">Pre-built permit &amp; license types<br>across 9 families</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-num">16</div>
+        <div class="stats-bar-label">Pick-what-you-need<br>modules</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-num">75%</div>
+        <div class="stats-bar-label">Delivered by configuration,<br>not custom code</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why it matters -->
+<section class="block" id="problem">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">The Problem</div>
+      <h2 class="title">Legacy permitting systems are holding agencies back</h2>
+      <p>Paper counters slow builders, frustrate residents, and hide backlog problems until they become council problems. Purpose-built replacements take 18+ months, cost millions, and lock your data into proprietary models.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top: 36px;">
+      <div class="card">
+        <h3>18+ Month Implementations</h3>
+        <p>Purpose-built replacements take over a year to deploy, burning budget before residents see any benefit.</p>
+      </div>
+      <div class="card">
+        <h3>Millions in Upfront Cost</h3>
+        <p>Traditional permitting platforms demand massive licensing fees plus costly custom development that only grows over time.</p>
+      </div>
+      <div class="card">
+        <h3>Proprietary Data Lock-In</h3>
+        <p>Legacy vendors trap your data in proprietary models, making migrations painful and audits difficult when you need transparency most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modules -->
+<section class="block alt" id="modules">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">What You Get</div>
+      <h2 class="title">Six integrated modules. One Salesforce org.</h2>
+      <p>Pick only the modules your agency needs — each deploys on standard PSS objects with no proprietary layer.</p>
+    </div>
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: var(--accent);"></div>
+          <h3>Permitting &amp; Licensing</h3>
+        </div>
+        <ul>
+          <li>Guided intake wizards for every permit type</li>
+          <li>Rule-driven fee calculation at application</li>
+          <li>Per-type stage models, renewals &amp; expirations</li>
+          <li>Certificates &amp; PDF generation</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: var(--accent-2);"></div>
+          <h3>GIS &amp; Parcels</h3>
+        </div>
+        <ul>
+          <li>Address → parcel → zoning pre-check at intake</li>
+          <li>Parcel maps embedded on every record</li>
+          <li>Esri sync or license-free native maps</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: #ea580c;"></div>
+          <h3>Payments &amp; Cashiering</h3>
+        </div>
+        <ul>
+          <li>Online payment via credit card or ACH</li>
+          <li>Counter cashiering with till close-out</li>
+          <li>Receipts, refunds &amp; daily GL journal export</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: #a78bfa;"></div>
+          <h3>Mobile Inspections</h3>
+        </div>
+        <ul>
+          <li>Checklists, photos &amp; signature capture in the field</li>
+          <li>Day-view route map for inspectors</li>
+          <li>Automatic re-inspection scheduling on failure</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: #ef4444;"></div>
+          <h3>Public Portal &amp; 311</h3>
+        </div>
+        <ul>
+          <li>Guest search — no account required</li>
+          <li>Apply &amp; pay online with pre-application guidance</li>
+          <li>Complaint intake &amp; 311 reporting</li>
+          <li>"By the numbers" public transparency page</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: #0891b2;"></div>
+          <h3>Reporting &amp; Compliance</h3>
+        </div>
+        <ul>
+          <li>Turnaround &amp; SLA analytics dashboards</li>
+          <li>Operations dashboards — no analytics add-on needed</li>
+          <li>CA HCD housing report export</li>
+          <li>SolarAPP+ connector for instant solar permits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screenshot walkthrough -->
+<section class="block" id="see-it-in-action">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">See It In Action</div>
+      <h2 class="title">The resident experience, end-to-end</h2>
+      <p>A single demo walks a permit from application to inspection, payment, and public dashboard — on a standard Salesforce org, no slideware.</p>
+    </div>
+    <div class="walkthrough">
+
+      <div class="walk-item">
+        <div>
+          <div class="walk-step-label">01 — Resident Portal</div>
+          <h3>Self-service from day one</h3>
+          <p>Residents land on a branded portal tailored to your agency. Every permit type, fee schedule, and service is discoverable without a phone call.</p>
+          <ul class="walk-bullets">
+            <li>Search by address, record number, or keyword</li>
+            <li>Organized by Building, Business &amp; Special categories</li>
+            <li>Live fee display before application starts</li>
+            <li>Anonymous concern / code-violation reporting</li>
+          </ul>
+        </div>
+        <div class="walk-img-wrap">
+          <img class="walk-img" src="assets/images/lpi/lpi-01-resident-portal-home.png" alt="Resident portal home — Demo City permits and licenses" loading="lazy">
+        </div>
+      </div>
+
+      <div class="walk-item reverse">
+        <div>
+          <div class="walk-step-label">02 — Guided Application Wizard</div>
+          <h3>Six structured steps, zero phone tag</h3>
+          <p>A clear, stepper-based wizard walks applicants through every required field — parcel check, contacts, project details, document uploads, fee review, and payment.</p>
+          <ul class="walk-bullets">
+            <li>Address → APN parcel pre-check at step 1</li>
+            <li>Save &amp; resume drafts across sessions</li>
+            <li>Zoning overlay shown in context</li>
+            <li>Documents, signatures, and fees in one flow</li>
+          </ul>
+        </div>
+        <div class="walk-img-wrap">
+          <img class="walk-img" src="assets/images/lpi/lpi-02-guided-application-wizard.png" alt="Guided application wizard — six-step stepper" loading="lazy">
+        </div>
+      </div>
+
+      <div class="walk-item">
+        <div>
+          <div class="walk-step-label">03 — Fees &amp; Online Payment</div>
+          <h3>Pay at submission or later</h3>
+          <p>Rule-driven fees are calculated automatically and presented transparently before the applicant pays. Credit card processing is embedded — no redirect to a third-party site.</p>
+          <ul class="walk-bullets">
+            <li>Integrated credit card (Global Payments) checkout</li>
+            <li>Option to pay later from My Applications</li>
+            <li>Receipts auto-generated on payment</li>
+            <li>Counter cashiering for in-person payment</li>
+          </ul>
+        </div>
+        <div class="walk-img-wrap">
+          <img class="walk-img" src="assets/images/lpi/lpi-03-fees-and-online-payment.png" alt="Pay &amp; Submit screen with secure payment form" loading="lazy">
+        </div>
+      </div>
+
+      <div class="walk-item reverse">
+        <div>
+          <div class="walk-step-label">04 — Public Transparency Map</div>
+          <h3>Council-ready accountability built in</h3>
+          <p>Residents and council members can see permit activity on a live map — no custom reporting requests, no FOIA responses for basic data.</p>
+          <ul class="walk-bullets">
+            <li>"What's Happening Near Me" live map view</li>
+            <li>Filter by time window and status</li>
+            <li>Median issuance times published automatically</li>
+            <li>Contractor license verification — no account needed</li>
+          </ul>
+        </div>
+        <div class="walk-img-wrap">
+          <img class="walk-img" src="assets/images/lpi/lpi-04-public-transparency-map.png" alt="Public transparency map with recent permit activity" loading="lazy">
+        </div>
+      </div>
+
+      <div class="walk-item">
+        <div>
+          <div class="walk-step-label">05 — Contractor License Lookup</div>
+          <h3>Verify before you hire</h3>
+          <p>Any resident can look up whether a contractor is licensed with the city before signing a contract — protecting homeowners and reducing fly-by-night operators.</p>
+          <ul class="walk-bullets">
+            <li>Search by name or CSLB number</li>
+            <li>Shows license type, status &amp; expiration</li>
+            <li>No login required — truly public</li>
+            <li>Synced from your business licensing records</li>
+          </ul>
+        </div>
+        <div class="walk-img-wrap">
+          <img class="walk-img" src="assets/images/lpi/lpi-05-contractor-license-lookup.png" alt="Contractor license verification search results" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- What makes it different -->
+<section class="block alt" id="different">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">What Makes It Different</div>
+      <h2 class="title">Beyond custom builds and point products</h2>
+      <p>Two dimensions that no legacy LPI vendor and no generic PSS implementation can match.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-card-header">
+          <div class="diff-icon" style="background: rgba(22,166,216,0.1);">📦</div>
+          <h3>No forks. No proprietary lock.</h3>
+        </div>
+        <ul>
+          <li>Managed base package + a thin extension per agency — upgrades keep flowing, nothing is forked</li>
+          <li>Standard PSS data model — no proprietary layer, no data lock-in</li>
+          <li>Generation factory turns your requirements into a working configuration in days</li>
+          <li>License-dependency check: every proposal states what your scope needs — and what it does NOT</li>
+          <li>Coexists cleanly with your other Salesforce programs (grants, 311, CRM) on one org</li>
+        </ul>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-header">
+          <div class="diff-icon" style="background: rgba(56,217,192,0.1);">🎯</div>
+          <h3>Real agency outcomes</h3>
+        </div>
+        <ul>
+          <li>Live in weeks with a fixed-scope QuickStart — not an 18-month program</li>
+          <li>Counter deflection: applicants self-serve online with pre-application guidance</li>
+          <li>Council-ready transparency: median issuance times published to your portal automatically</li>
+          <li>California compliance built in: SolarAPP+ instant permits, HCD APR, ADU/SB9 types</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Permit library -->
+<section class="block" id="permit-library">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">Permit Library</div>
+      <h2 class="title">37 pre-built types across 9 families</h2>
+      <p>Map your existing permit catalog to the library in the Discover &amp; Scope phase — most agencies match 80%+ out of the box.</p>
+    </div>
+    <div class="chip-grid" style="margin-top: 36px;">
+      <div class="chip"><div class="chip-icon">🏗️</div><div class="chip-label">Building &amp; Planning</div></div>
+      <div class="chip"><div class="chip-icon">☀️</div><div class="chip-label">Solar &amp; Energy</div></div>
+      <div class="chip"><div class="chip-icon">🏠</div><div class="chip-label">ADU / SB9</div></div>
+      <div class="chip"><div class="chip-icon">💼</div><div class="chip-label">Business Licensing</div></div>
+      <div class="chip"><div class="chip-icon">🎪</div><div class="chip-label">Special Events</div></div>
+      <div class="chip"><div class="chip-icon">🌿</div><div class="chip-label">Landscape / MWELO</div></div>
+      <div class="chip"><div class="chip-icon">📋</div><div class="chip-label">Sign Review</div></div>
+      <div class="chip"><div class="chip-icon">🏡</div><div class="chip-label">Home Occupation</div></div>
+      <div class="chip"><div class="chip-icon">⚡</div><div class="chip-label">Electrical &amp; Mechanical</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- California compliance -->
+<section class="block alt" id="california">
+  <div class="container">
+    <div class="callout-banner">
+      <div class="callout-banner-icon">🌴</div>
+      <div>
+        <h3>California Compliance — Built In, Not Bolted On</h3>
+        <p>State mandates don't arrive as change orders. SolarAPP+, HCD Annual Progress Reports, ADU and SB9 types, and CSLB contractor verification are part of the base configuration — activated per agency, not billed as extras.</p>
+        <div class="callout-pills">
+          <span class="callout-pill">SolarAPP+ Instant Permits</span>
+          <span class="callout-pill">HCD APR Export</span>
+          <span class="callout-pill">ADU / SB9 Types</span>
+          <span class="callout-pill">CSLB License Lookup</span>
+          <span class="callout-pill">CA HCD Housing Reports</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Engagement -->
+<section class="block" id="engagement">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">Recommended Engagement</div>
+      <h2 class="title">From scoping to live in three phases</h2>
+      <p>Fixed-price QuickStart scoping keeps the budget predictable. Go-live is measured in weeks, not quarters.</p>
+    </div>
+    <div class="eng-steps" style="margin-top: 48px;">
+      <div class="eng-step">
+        <div class="eng-bubble" style="color: var(--accent);">1</div>
+        <h3>Discover &amp; Scope</h3>
+        <p>Map your permit types to the library, pick your modules, confirm the license matrix and fee structure. Output: a fixed-scope SOW.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-bubble" style="color: var(--accent-3);">2</div>
+        <h3>Generate &amp; Configure</h3>
+        <p>The generation factory clones your types, applies fees &amp; workflows, and deploys a right-sized footprint to your sandbox — then UAT.</p>
+      </div>
+      <div class="eng-step">
+        <div class="eng-bubble" style="color: var(--accent-2);">3</div>
+        <h3>Go Live &amp; Extend</h3>
+        <p>Portal launch with staff training, then managed upgrades as new modules or state mandates roll in — add capability as programs grow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- CTA -->
+<section class="block alt">
+  <div class="cta-banner">
+    <div class="inner">
+      <h2>See it live in one hour</h2>
+      <p>A one-hour demo walks a permit from application to inspection, payment, and public dashboard — on a standard Salesforce org, no slideware. Fixed-price QuickStart scoping available on request.</p>
+      <a href="contact.html?ref=lpi-accelerator" class="btn btn-primary">Request a Demo →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" class="logo"><img src="assets/images/logo.svg" class="mark" alt="SuccessMetrics logo">Success<span class="sm">Metrics</span></a>
+        <p>AI-native engineering partner for organizations that want enterprise software delivered with clear momentum — combining AI-native delivery, proven accelerators, and deep Salesforce expertise to ship in weeks.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="success-stories.html">Success Stories</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Expertise</h5>
+        <ul>
+          <li><a href="services.html">AI Solutions</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="accelerators.html">Accelerators</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="why-ai-salesforce.html">Why AI + Salesforce</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="resources.html">Blog &amp; Articles</a></li>
+          <li><a href="resources.html#whitepapers">White Papers</a></li>
+          <li><a href="customer-questions.html">Q&amp;A</a></li>
+          <li><a href="https://www.linkedin.com/company/successmetrics-corp">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 SuccessMetrics Corp. All rights reserved.</div>
+      <div>460 Center Street #6021, Moraga, CA 94570 · <a href="tel:+15103306457">(510) 330-6457</a> · <a href="mailto:support@successmetrics.io">support@successmetrics.io</a></div>
+    </div>
+  </div>
+</footer>
+<script defer="" src="assets/js/accelerators-toc.js?v=84e620e6e38e"></script>
+</body>
+</html>

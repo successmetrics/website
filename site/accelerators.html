@@ -24,9 +24,9 @@
 <!-- seo:end -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="assets/images/logo.svg" rel="icon" type="image/svg+xml"/>
-<link href="assets/css/styles.css?v=f8f46dcbd464" rel="stylesheet"/>
+<link href="assets/css/styles.css?v=494c091c4f7c" rel="stylesheet"/>
 </head>
-<body>
+<body class="page-accelerators">
 <!-- @nav active="accelerators" -->
 <nav class="nav">
   <div class="nav-inner">
@@ -57,6 +57,21 @@
 <p>Our AI-native delivery factory builds field-tested accelerators so every engagement begins with proven capabilities and months of work already done. Pre-configured, field-tested, and proven in production — built on lessons from real implementations.</p>
 </div>
 </header>
+<div class="accelerators-products">
+<div class="accelerators-toc-rail">
+<nav aria-label="On this page" class="accelerators-toc" id="accelerators-toc">
+<ul>
+<li><a href="#insights" data-toc-id="insights">Org Insights</a></li>
+<li><a href="#safe-seed" data-toc-id="safe-seed">Safe Seed</a></li>
+<li><a href="#masking" data-toc-id="masking">EasyMask</a></li>
+<li><a href="#lpi" data-toc-id="lpi">LPI Accelerator</a></li>
+<li><a href="#grants" data-toc-id="grants">Grants Management</a></li>
+<li><a href="#field-inspections" data-toc-id="field-inspections">Field Inspections</a></li>
+<li><a href="#lwc" data-toc-id="lwc">LWC Component Library</a></li>
+<li><a href="#nonprofit" data-toc-id="nonprofit">Nonprofit Accelerator</a></li>
+</ul>
+</nav>
+</div>
 <section class="block" id="insights">
 <div class="container">
 <div class="two-col">
@@ -65,10 +80,10 @@
 <h2 class="title">Org Insights</h2>
 <p style="color: var(--text-dim); margin-bottom: 20px;">See the signals that shape your next Salesforce decision — security gaps, automation conflicts, permission sprawl, data quality issues. Before your next rollout, expansion, or audit, Org Insights gives your leadership team a clear picture of what's there and a prioritized plan for what to prioritize first. Delivered in two weeks.</p>
 <ul class="check-list">
-<li>24 risk areas analyzed: security, access, automation debt, platform limits, governance, and data quality</li>
+<li>24+ risk areas analyzed: security, access, automation debt, platform limits, governance, and data quality</li>
 <li>Executive readout with a health score and expansion-readiness rating your leadership team can act on</li>
 <li>Prioritized findings workbook — every issue ranked by business impact and remediation effort</li>
-<li>Governance recommendations and a sequenced expansion roadmap</li>
+<li>Governance recommendations your team can put into practice</li>
 <li>Repeatable baseline — run it again after remediation to show measurable improvement</li>
 </ul>
 <div style="margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
@@ -77,7 +92,7 @@
 </div>
 </div>
 <div class="card accelerator-demo-card">
-<video aria-label="Org Insights Tool demo — click to view larger" autoplay="" class="accelerator-demo-video" loop="" muted="" playsinline="" preload="metadata" src="assets/videos/orginsights.mp4"></video>
+<video aria-label="Org Insights Tool demo — click to view larger" autoplay="" class="accelerator-demo-video" loop="" muted="" playsinline="" preload="metadata" width="1522" height="1152" src="assets/videos/orginsights.mp4"></video>
 <span aria-hidden="true" class="accelerator-demo-expand-hint">
 <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
           Full screen view
@@ -90,10 +105,13 @@
 <section class="block alt" id="safe-seed">
 <div class="container">
 <div class="two-col">
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">🌱</div>
-<div style="font-size: 1.35rem; font-weight: 800; margin-bottom: 10px;">Safe Seed</div>
-<p style="font-size: 1.02rem; color: var(--text);">Relation-preserving synthetic data — realistic sandboxes without PHI/PII</p>
+<div class="card accelerator-demo-card">
+<video aria-label="Safe Seed demo — click to view larger" autoplay class="accelerator-demo-video" loop muted playsinline preload="metadata" width="1440" height="900" src="assets/videos/safeseed.mp4"></video>
+<span aria-hidden="true" class="accelerator-demo-expand-hint">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+          Full screen view
+        </span>
+<p class="accelerator-demo-caption">Postgres → 14 tables → synthetic data with privacy evidence — under 2 min</p>
 </div>
 <div>
 <span class="badge teal">Data &amp; Security</span>
@@ -118,9 +136,6 @@
 <div class="container">
 <div class="two-col">
 <div>
-<img alt="EasyMask — native Salesforce sandbox data masking" src="assets/images/easymask/easymask-listing-hero.png" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);"/>
-</div>
-<div>
 <span class="badge teal">Data &amp; Security</span>
 <h2 class="title">EasyMask</h2>
 <p style="color: var(--text-dim); margin-bottom: 20px;">Every sandbox refresh exposes real customer data to developers, QA teams, and demo environments. EasyMask replaces it with realistic fake data — entirely inside Salesforce, with no data ever leaving your org and nothing new for your security team to approve.</p>
@@ -136,12 +151,18 @@
 <a href="easymask.html" style="color: var(--accent); font-weight: 600; font-size: 0.95rem;">Full details →</a>
 </div>
 </div>
+<div>
+<img alt="EasyMask — native Salesforce sandbox data masking" src="assets/images/easymask/easymask-listing-hero.png" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);"/>
+</div>
 </div>
 </div>
 </section>
-<section class="block" id="lpi">
+<section class="block alt" id="lpi">
 <div class="container">
 <div class="two-col">
+<div>
+<img alt="LPI Accelerator resident portal — Demo City permits, licenses, and inspections" src="assets/images/lpi/lpi-01-resident-portal-home.png" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);"/>
+</div>
 <div>
 <span class="badge blue">Public Sector</span>
 <h2 class="title">LPI Accelerator</h2>
@@ -152,25 +173,20 @@
 <li>Automated routing and approval workflows</li>
 <li>Complaint and registration management</li>
 <li>Accessibility-compliant citizen portal components</li>
-<li>Solar application and integration</li>
+<li>Solar APP + integration</li>
 <li>Payment gateway integration</li>
 </ul>
+<div style="margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+<a class="btn btn-primary" href="contact.html?ref=lpi-accelerator">Request a Demo →</a>
+<a href="lpi-accelerator.html" style="color: var(--accent); font-weight: 600; font-size: 0.95rem;">Full details →</a>
 </div>
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">🏛️</div>
-<div class="grad-text" style="font-size: 2.4rem; font-weight: 800;"><span style="background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">75%</span></div>
-<p>of core solution pre-built and ready to go on day one</p>
 </div>
 </div>
 </div>
 </section>
-<section class="block alt" id="grants">
+<section class="block" id="grants">
 <div class="container">
 <div class="two-col">
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">📋</div>
-<p style="font-size: 1.05rem; color: var(--text);">Grant intake, awards, compliance, and outcome reporting — coming soon</p>
-</div>
 <div>
 <span class="badge teal">Coming Soon</span>
 <h2 class="title">Grants Management</h2>
@@ -182,12 +198,20 @@
 <li>Payment gateway integration</li>
 </ul>
 </div>
+<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
+<div style="font-size: 3.4rem; margin-bottom: 12px;">📋</div>
+<p style="font-size: 1.05rem; color: var(--text);">Grant intake, awards, compliance, and outcome reporting — coming soon</p>
+</div>
 </div>
 </div>
 </section>
-<section class="block" id="field-inspections">
+<section class="block alt" id="field-inspections">
 <div class="container">
 <div class="two-col">
+<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
+<div style="font-size: 3.4rem; margin-bottom: 12px;">📍</div>
+<p style="font-size: 1.05rem; color: var(--text);">Inspect in the field — offline mobile, maps, and GIS sync</p>
+</div>
 <div>
 <span class="badge teal">Coming Soon</span>
 <h2 class="title">Field Inspections</h2>
@@ -198,20 +222,12 @@
 <li>Geospatial / GIS integration with back-office case systems</li>
 </ul>
 </div>
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">📍</div>
-<p style="font-size: 1.05rem; color: var(--text);">Inspect in the field — offline mobile, maps, and GIS sync</p>
-</div>
 </div>
 </div>
 </section>
-<section class="block alt" id="lwc">
+<section class="block" id="lwc">
 <div class="container">
 <div class="two-col">
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">🧩</div>
-<p style="font-size: 1.05rem; color: var(--text);">Reusable, accessible, documented components — drop in and ship</p>
-</div>
 <div>
 <span class="badge teal">Development</span>
 <h2 class="title">LWC Component Library</h2>
@@ -223,12 +239,20 @@
 <li>Maintained and extended with every release</li>
 </ul>
 </div>
+<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
+<div style="font-size: 3.4rem; margin-bottom: 12px;">🧩</div>
+<p style="font-size: 1.05rem; color: var(--text);">Reusable, accessible, documented components — drop in and ship</p>
+</div>
 </div>
 </div>
 </section>
-<section class="block" id="nonprofit">
+<section class="block alt" id="nonprofit">
 <div class="container">
 <div class="two-col">
+<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
+<div style="font-size: 3.4rem; margin-bottom: 12px;">💚</div>
+<p style="font-size: 1.05rem; color: var(--text);">More outcomes, less operations — live in weeks</p>
+</div>
 <div>
 <span class="badge">Nonprofit</span>
 <h2 class="title">Nonprofit Accelerator</h2>
@@ -243,13 +267,10 @@
 <a class="btn btn-primary" href="contact.html?ref=nonprofit-accelerator">See the Accelerator →</a>
 </div>
 </div>
-<div class="card" style="text-align: center; justify-content: center; min-height: 280px;">
-<div style="font-size: 3.4rem; margin-bottom: 12px;">💚</div>
-<p style="font-size: 1.05rem; color: var(--text);">More outcomes, less operations — live in weeks</p>
-</div>
 </div>
 </div>
 </section>
+</div>
 <section class="block">
 <div class="cta-banner">
 <div class="inner">
@@ -321,6 +342,7 @@
 </div>
 </div>
 </div>
-<script defer="" src="assets/js/accelerator-demo.js"></script>
+<script defer="" src="assets/js/accelerator-demo.js?v=8b33b69cc6e5"></script>
+<script defer="" src="assets/js/accelerators-toc.js?v=84e620e6e38e"></script>
 </body>
 </html>
