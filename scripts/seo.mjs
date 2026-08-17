@@ -234,6 +234,8 @@ export function applySeoToHtml(html, pageKey, seo, gaId) {
 export function generateRobotsTxt(seo) {
   return `User-agent: *
 Allow: /
+Disallow: /demo/
+Disallow: /admin/approve/
 
 Sitemap: ${seo.siteOrigin}/sitemap.xml
 `;

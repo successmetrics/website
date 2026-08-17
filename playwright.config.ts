@@ -28,7 +28,7 @@ export default defineConfig({
     command: "npm run build && node scripts/careers-test-server.mjs",
     url: `${BASE_URL}/index.html`,
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 240_000,
     stdout: "pipe",
     stderr: "pipe",
     env: {

@@ -1,10 +1,11 @@
 # SuccessMetrics Website
 
-Static marketing site for [successmetrics.io](https://www.successmetrics.io). Plain HTML/CSS with a small Node build step for shared navigation, SEO metadata, and success story pages. Deployed on Netlify with serverless functions for contact and careers forms.
+Static marketing site for [successmetrics.io](https://www.successmetrics.io). Plain HTML/CSS with a small Node build step for shared navigation, SEO metadata, success story pages, and the Safe-Seed live demo. Deployed on Netlify with serverless functions for contact, careers, and the demo API proxy.
 
 ## Repository layout
 
 ```
+├── apps/safe-seed/          # Safe-Seed live demo (Vite + React), built into site/demo/
 ├── site/                    # Deployable static site (Netlify publish root)
 │   ├── *.html               # Main pages (/services, /careers, … via clean URLs)
 │   ├── assets/css/styles.css
@@ -13,7 +14,7 @@ Static marketing site for [successmetrics.io](https://www.successmetrics.io). Pl
 ├── templates/nav.html       # Shared primary navigation
 ├── data/seo.json            # Page titles, meta descriptions, sitemap config
 ├── scripts/build-site.mjs   # Build: nav, SEO, sitemap, success stories
-├── netlify/functions/       # Contact, careers, and job listing APIs
+├── netlify/functions/       # Contact, careers, job listing, and Safe-Seed demo APIs
 ├── tests/                   # Static checks + Playwright smoke tests
 └── netlify.toml
 ```
@@ -25,12 +26,14 @@ Main pages: Home, Services, Industries, Accelerators, Resources, Success Stories
 ```bash
 npm ci
 npm run preview    # build + serve site/ at http://localhost:8080
-npx netlify-cli dev # full local site, including /api/* routes
+npx netlify-cli dev # full local site, including /api/* and /demo/api/* routes
 ```
+
+The Safe-Seed live demo is a React app at `/demo` (login at `/demo/login`). It is built from `apps/safe-seed` during `npm run build`. API calls go to same-origin `/demo/api/*`, which a Netlify function proxies to the Hugging Face Space. Set `HF_TOKEN` in `.env` (and in Netlify env) — never `VITE_HF_TOKEN`.
 
 Edit `templates/nav.html` for navigation changes, then run `npm run build`. Page metadata lives in `data/seo.json`.
 
-Forms require `npx netlify-cli dev` or the deployed site — they won't submit from static preview alone. Copy `.env.example` to `.env` for local API credentials.
+Forms require `npx netlify-cli dev` or the deployed site — they won't submit from static preview alone. Copy `.env.example` to `.env` for local API credentials. The live demo also needs `HF_TOKEN` to reach the private Safe-Seed Space.
 
 ## Review the `test` branch on another computer
 

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /demo/
+Disallow: /admin/approve/
 
 Sitemap: https://www.successmetrics.io/sitemap.xml
