@@ -34,6 +34,7 @@ describe("netlify.toml", () => {
     expect(netlifyToml).toContain('from = "/api/job-application"');
     expect(netlifyToml).toContain('from = "/api/contact"');
     expect(netlifyToml).toContain('from = "/api/health"');
+    expect(netlifyToml).toContain('from = "/demo/api/*"');
   });
 
   it.skipIf(netlifyToml === null)("runs the site build before publish", () => {

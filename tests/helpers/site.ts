@@ -45,7 +45,10 @@ const EXCLUDED_HTML_PAGES = new Set([
 ]);
 
 export const HTML_PAGES = findHtmlPages(ROOT).filter(
-  (page) => !page.startsWith("prototypes/") && !EXCLUDED_HTML_PAGES.has(page),
+  (page) =>
+    !page.startsWith("prototypes/") &&
+    !page.startsWith("demo/") &&
+    !EXCLUDED_HTML_PAGES.has(page),
 );
 
 export function readPage(filename: string): string {
@@ -96,7 +99,11 @@ export function pageExists(fromPage: string, href: string): boolean {
   const cleanHref = href.split("#")[0]?.split("?")[0] ?? href;
   const target = resolvePagePath(fromPage, cleanHref);
   if (!target) return false;
-  return existsSync(join(ROOT, target));
+  if (existsSync(join(ROOT, target))) return true;
+  if (target === "demo" || target.startsWith("demo/")) {
+    return existsSync(join(ROOT, "demo/index.html"));
+  }
+  return false;
 }
 
 export function expectedNavHref(_fromPage: string, toPage: string): string {

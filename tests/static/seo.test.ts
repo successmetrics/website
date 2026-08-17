@@ -71,6 +71,7 @@ describe("site-wide SEO files", () => {
     const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
     expect(robots).toContain("User-agent: *");
     expect(robots).toContain("Allow: /");
+    expect(robots).toContain("Disallow: /demo/");
     expect(robots).toContain(`Sitemap: ${SEO_CONFIG.siteOrigin}/sitemap.xml`);
   });
 

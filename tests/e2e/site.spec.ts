@@ -66,6 +66,14 @@ test.describe("page smoke tests", () => {
     });
   }
 
+  test("Safe Seed live demo login page loads the product app", async ({ page }) => {
+    const response = await page.goto("/demo/login");
+    expect(response?.status()).toBe(200);
+    await expect(page.locator("#root")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
+    await expect(page).toHaveTitle(/Safe-Seed/);
+  });
+
   test("homepage shows primary hero and CTAs", async ({ page }) => {
     await page.goto("/index.html");
 

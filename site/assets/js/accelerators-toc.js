@@ -17,7 +17,7 @@
   var ticking = false;
 
   function setActive(id) {
-    if (id === activeId) return;
+    if (!id || id === activeId) return;
     activeId = id;
     links.forEach(function (link) {
       var isActive = link.getAttribute("data-toc-id") === id;
@@ -27,17 +27,31 @@
     });
   }
 
+  function markerY() {
+    var nav = document.querySelector("nav.nav");
+    return (nav ? nav.getBoundingClientRect().bottom : 68) + 20;
+  }
+
   function updateActive() {
-    var marker = 120;
-    var current = sections[0] ? sections[0].id : null;
+    var marker = markerY();
+    var current = sections[0].id;
 
     for (var i = 0; i < sections.length; i++) {
-      var top = sections[i].getBoundingClientRect().top;
-      if (top <= marker) current = sections[i].id;
-      else break;
+      if (sections[i].getBoundingClientRect().top <= marker) {
+        current = sections[i].id;
+      }
     }
 
-    if (current) setActive(current);
+    var scrollBottom = window.scrollY + window.innerHeight;
+    var docHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
+    if (docHeight - scrollBottom < 120) {
+      current = sections[sections.length - 1].id;
+    }
+
+    setActive(current);
   }
 
   function onScroll() {
@@ -56,7 +70,20 @@
   });
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+  window.addEventListener("hashchange", updateActive);
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(onScroll, {
+      root: null,
+      rootMargin: "-88px 0px -55% 0px",
+      threshold: [0, 0.1, 0.25, 0.5, 1],
+    });
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  }
 
   updateActive();
 })();

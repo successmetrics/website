@@ -20,6 +20,7 @@ export default async function handler() {
             (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim() &&
               process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.trim()),
         ),
+        HF_TOKEN: Boolean(process.env.HF_TOKEN?.trim()),
       },
     }),
     { status: 200, headers },

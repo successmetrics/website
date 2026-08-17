@@ -18,6 +18,9 @@
   node_bundler = "esbuild"
   included_files = ["data/careers-fallback.json"]
 
+[functions."safe-seed-api"]
+  timeout = 26
+
 # Careers + Notion API
 [[redirects]]
   from = "/api/jobs"
@@ -34,6 +37,33 @@
 [[redirects]]
   from = "/api/health"
   to = "/.netlify/functions/health"
+  status = 200
+
+# Safe-Seed demo API proxy — must stay above the /demo/* SPA fallback.
+# Do not use a plain redirect to *.hf.space; the private Space needs HF_TOKEN.
+[[redirects]]
+  from = "/demo/api/*"
+  to = "/.netlify/functions/safe-seed-api/:splat"
+  status = 200
+[[redirects]]
+  from = "/demo/api"
+  to = "/.netlify/functions/safe-seed-api"
+  status = 200
+
+# Approval emails are origin-only; send them into the SPA basename.
+[[redirects]]
+  from = "/admin/approve/:reqId"
+  to = "/demo/admin/approve/:reqId"
+  status = 302
+
+# Safe-Seed SPA (existing files such as /demo/assets/* still win).
+[[redirects]]
+  from = "/demo"
+  to = "/demo/index.html"
+  status = 200
+[[redirects]]
+  from = "/demo/*"
+  to = "/demo/index.html"
   status = 200
 
 # Security headers
@@ -57,6 +87,11 @@
 
 [[headers]]
   for = "/prototypes/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/demo/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 

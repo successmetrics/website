@@ -106,7 +106,9 @@ function buildPage(filename) {
 const seo = loadSeoConfig(ROOT);
 const gaId = process.env.GOOGLE_ANALYTICS_ID?.trim() || "";
 
-const pages = findHtmlPages(SITE_DIR).filter((page) => !page.startsWith("prototypes/"));
+const pages = findHtmlPages(SITE_DIR).filter(
+  (page) => !page.startsWith("prototypes/") && !page.startsWith("demo/"),
+);
 let navUpdated = 0;
 let seoUpdated = 0;
 

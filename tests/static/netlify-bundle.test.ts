@@ -7,6 +7,7 @@ const functionEntries = [
   "netlify/functions/contact.mjs",
   "netlify/functions/jobs.mjs",
   "netlify/functions/job-application.mjs",
+  "netlify/functions/safe-seed-api.mjs",
 ];
 
 describe("Netlify function bundles", () => {

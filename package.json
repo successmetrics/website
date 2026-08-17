@@ -2,7 +2,7 @@
   "name": "successmetrics-website",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-site.mjs",
+    "build": "node scripts/build-site.mjs && node scripts/build-safe-seed.mjs",
     "prepreview": "npm run build",
     "pretest:static": "npm run build",
     "pretest:e2e": "npm run build",

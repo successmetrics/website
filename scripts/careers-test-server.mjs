@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import jobsHandler from "../netlify/functions/jobs.mjs";
 import jobApplicationHandler from "../netlify/functions/job-application.mjs";
 import contactHandler from "../netlify/functions/contact.mjs";
+import safeSeedApiHandler from "../netlify/functions/safe-seed-api.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -89,6 +90,12 @@ function resolveStaticPath(pathname) {
   }
 
   let filePath = join(SITE, rel);
+  if (existsSync(filePath) && statSync(filePath).isDirectory()) {
+    const indexPath = join(filePath, "index.html");
+    if (existsSync(indexPath) && statSync(indexPath).isFile()) {
+      return indexPath;
+    }
+  }
   if (existsSync(filePath) && statSync(filePath).isFile()) {
     return filePath;
   }
@@ -96,6 +103,13 @@ function resolveStaticPath(pathname) {
   const htmlPath = join(SITE, `${rel}.html`);
   if (existsSync(htmlPath) && statSync(htmlPath).isFile()) {
     return htmlPath;
+  }
+
+  if (rel === "demo" || rel.startsWith("demo/")) {
+    const spa = join(SITE, "demo/index.html");
+    if (existsSync(spa) && statSync(spa).isFile()) {
+      return spa;
+    }
   }
 
   return null;
@@ -132,6 +146,10 @@ createServer(async (req, res) => {
 
     if (url.pathname === "/api/contact") {
       return sendResponse(res, await contactHandler(toWebRequest(req, url)));
+    }
+
+    if (url.pathname === "/demo/api" || url.pathname.startsWith("/demo/api/")) {
+      return sendResponse(res, await safeSeedApiHandler(toWebRequest(req, url)));
     }
 
     serveStatic(url.pathname, res);
