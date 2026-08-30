@@ -17,6 +17,7 @@ export {
   SITE_DIR,
   STYLESHEET,
   LOGO,
+  OG_DEFAULT_IMAGE,
 } from "./constants";
 
 export const ROOT = join(process.cwd(), SITE_DIR);

@@ -72,6 +72,16 @@ describe("careers pages", () => {
       expectCareerDetailApplyForm($, job);
     },
   );
+
+  it("forward deployed engineer listing includes outcome-owned copy and apply path", () => {
+    const $ = loadPage("careers/forward-deployed-engineer-0085.html");
+
+    expect($("h1").text()).toContain("Forward Deployed Engineer");
+    expect($(".job-detail-meta").text()).toContain("Remote — United States");
+    expect($(".job-detail-meta").text()).toContain("20–30% Travel");
+    expect($(".job-detail-content").text()).toContain("You own the outcome");
+    expect($('a[href="mailto:guru@successmetrics.io"]').length).toBeGreaterThan(0);
+  });
 });
 
 describe("form API routes", () => {

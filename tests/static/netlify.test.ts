@@ -73,8 +73,9 @@ describe("careers data and listing structure", () => {
       readFileSync(join(process.cwd(), "data/careers-fallback.json"), "utf8"),
     );
 
-    expect(fallback).toHaveLength(3);
+    expect(fallback).toHaveLength(4);
     expect(fallback.map((job: { id: string }) => job.id)).toEqual([
+      "JD-0085",
       "JD-0084",
       "JD-0082",
       "JD-0081",
@@ -89,7 +90,8 @@ describe("careers data and listing structure", () => {
     expect(existsSync(indexPath)).toBe(true);
 
     const index = JSON.parse(readFileSync(indexPath, "utf8"));
-    expect(Object.keys(index)).toEqual(["JD-0084", "JD-0082", "JD-0081"]);
+    expect(Object.keys(index)).toEqual(["JD-0085", "JD-0084", "JD-0082", "JD-0081"]);
+    expect(index["JD-0085"].detailUrl).toBe("/careers/forward-deployed-engineer-0085");
     expect(index["JD-0081"].detailUrl).toBe("/careers/salesforce-developer-0081");
   });
 

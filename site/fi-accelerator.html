@@ -4,24 +4,24 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <!-- seo:start -->
-<title>LPI Accelerator | Licensing, Permitting &amp; Inspections</title>
-<meta name="description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
-<link rel="canonical" href="https://www.successmetrics.io/lpi-accelerator">
+<title>Field Inspection Accelerator | Offline Inspections</title>
+<meta name="description" content="Asset inventory, recurring field inspections, and condition scoring on Salesforce Public Sector Solutions — offline-capable, live in weeks.">
+<link rel="canonical" href="https://www.successmetrics.io/fi-accelerator">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SuccessMetrics">
-<meta property="og:title" content="LPI Accelerator | Licensing, Permitting &amp; Inspections">
-<meta property="og:description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
-<meta property="og:url" content="https://www.successmetrics.io/lpi-accelerator">
+<meta property="og:title" content="Field Inspection Accelerator | Offline Inspections">
+<meta property="og:description" content="Asset inventory, recurring field inspections, and condition scoring on Salesforce Public Sector Solutions — offline-capable, live in weeks.">
+<meta property="og:url" content="https://www.successmetrics.io/fi-accelerator">
 <meta property="og:image" content="https://www.successmetrics.io/assets/images/og-default.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LPI Accelerator | Licensing, Permitting &amp; Inspections">
-<meta name="twitter:description" content="Licensing, Permitting &amp; Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.">
+<meta name="twitter:title" content="Field Inspection Accelerator | Offline Inspections">
+<meta name="twitter:description" content="Asset inventory, recurring field inspections, and condition scoring on Salesforce Public Sector Solutions — offline-capable, live in weeks.">
 <meta name="twitter:image" content="https://www.successmetrics.io/assets/images/og-default.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"SuccessMetrics Salesforce Accelerators","brand":{"@type":"Brand","name":"SuccessMetrics Corp"},"description":"Licensing, Permitting & Inspections on Salesforce Public Sector Solutions — live in weeks, on the platform your agency already owns.","url":"https://www.successmetrics.io/lpi-accelerator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"SuccessMetrics Salesforce Accelerators","brand":{"@type":"Brand","name":"SuccessMetrics Corp"},"description":"Asset inventory, recurring field inspections, and condition scoring on Salesforce Public Sector Solutions — offline-capable, live in weeks.","url":"https://www.successmetrics.io/fi-accelerator"}</script>
 
 <!-- seo:end -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
@@ -60,7 +60,7 @@
 /* ── Module cards ── */
 .module-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .module-card {
@@ -132,13 +132,30 @@
   align-items: flex-start;
 }
 .walk-bullets li::before { content: '✓'; color: var(--accent-2); font-weight: 700; flex-shrink: 0; }
-.walk-img {
+.walk-shot {
   width: 100%;
+  min-height: 260px;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  display: block;
+  border: 1px dashed rgba(22,166,216,0.35);
+  background: linear-gradient(180deg, rgba(22,166,216,0.08) 0%, var(--bg-3) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 24px;
+  color: var(--text-dim);
   box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  gap: 8px;
 }
+.walk-shot-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.walk-shot-label { font-size: 0.92rem; color: var(--text); font-weight: 600; line-height: 1.4; }
 @media (max-width: 768px) {
   .walk-item, .walk-item.reverse { grid-template-columns: 1fr; direction: ltr; }
   .walk-item.reverse .walk-img-wrap { order: -1; }
@@ -169,7 +186,7 @@
 }
 .diff-card ul li::before { content: '•'; color: var(--text-faint); flex-shrink: 0; }
 
-/* ── Chip grid (permit families) ── */
+/* ── Chip grid ── */
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -207,6 +224,9 @@
   border-radius: 100px;
   padding: 3px 11px;
   font-size: 0.78rem; color: var(--accent); font-weight: 500;
+}
+@media (max-width: 900px) {
+  .module-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 640px) {
   .callout-banner { flex-direction: column; padding: 24px 20px; }
@@ -274,13 +294,13 @@
     <nav class="page-breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
       <a href="accelerators.html">Accelerators</a><span class="sep" aria-hidden="true">/</span>
-      <span aria-current="page">LPI Accelerator</span>
+      <span aria-current="page">Field Inspection Accelerator</span>
     </nav>
-    <div class="kicker">LPI Accelerator · Licensing, Permitting &amp; Inspections</div>
-    <h1>Live in weeks, on the platform your agency already owns.</h1>
-    <p>The LPI Accelerator delivers a Enterprise-class permitting, licensing, and inspections system as a managed package on standard Salesforce Public Sector Solutions objects — your org, your data, your modules.</p>
+    <div class="kicker">Field Inspection Accelerator · Asset Inventory, Inspections &amp; Condition</div>
+    <h1>Every asset inspected on schedule — even where there's no signal.</h1>
+    <p>The Field Inspection Accelerator delivers an offline-first asset-inventory, recurring-inspection, and condition-scoring system on standard Salesforce Public Sector Solutions objects — offline maps, capture and updates on the tablet, sync on return. Your org, your data, your modules; the field-side sibling of the LPI and Grants accelerators.</p>
     <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;">
-      <a href="contact.html?ref=lpi-accelerator" class="btn btn-primary">Request a Demo →</a>
+      <a href="contact.html?ref=fi-accelerator" class="btn btn-primary">Request a Demo →</a>
       <a href="#modules" class="btn btn-ghost">See what's included</a>
     </div>
   </div>
@@ -294,8 +314,8 @@
 <li><a href="#modules" data-toc-id="modules">Modules</a></li>
 <li><a href="#see-it-in-action" data-toc-id="see-it-in-action">See It In Action</a></li>
 <li><a href="#different" data-toc-id="different">What Makes It Different</a></li>
-<li><a href="#permit-library" data-toc-id="permit-library">Permit Library</a></li>
-<li><a href="#california" data-toc-id="california">California Compliance</a></li>
+<li><a href="#domain-library" data-toc-id="domain-library">Domain Library</a></li>
+<li><a href="#compliance" data-toc-id="compliance">Regulator Compliance</a></li>
 <li><a href="#engagement" data-toc-id="engagement">Engagement</a></li>
 </ul>
 </nav>
@@ -306,16 +326,16 @@
   <div class="container">
     <div class="stats-bar">
       <div class="stats-bar-item">
-        <div class="stats-bar-num">37</div>
-        <div class="stats-bar-label">Pre-built permit &amp; license types<br>across 9 families</div>
+        <div class="stats-bar-num">12</div>
+        <div class="stats-bar-label">Pick-what-you-need modules,<br>asset register to regulator reporting</div>
       </div>
       <div class="stats-bar-item">
-        <div class="stats-bar-num">16</div>
-        <div class="stats-bar-label">Pick-what-you-need<br>modules</div>
+        <div class="stats-bar-num">$0</div>
+        <div class="stats-bar-label">Add-on licenses in the base tier —<br>no Field Service, no CRM Analytics</div>
       </div>
       <div class="stats-bar-item">
-        <div class="stats-bar-num">75%</div>
-        <div class="stats-bar-label">Delivered by configuration,<br>not custom code</div>
+        <div class="stats-bar-num">100%</div>
+        <div class="stats-bar-label">Configurable condition scales &amp; exports —<br>PCI, NBI/SNBI, PACP, MS4 as config</div>
       </div>
     </div>
   </div>
@@ -326,21 +346,21 @@
   <div class="container">
     <div class="section-head center">
       <div class="kicker">The Problem</div>
-      <h2 class="title">Legacy permitting systems are holding agencies back</h2>
-      <p>Paper counters slow builders, frustrate residents, and hide backlog problems until they become council problems. Purpose-built replacements take 18+ months, cost millions, and lock your data into proprietary models.</p>
+      <h2 class="title">Compliance programs outgrow spreadsheets fast</h2>
+      <p>Stormwater devices, bridges, culverts, sewers, signs, pavement — regulators expect every one inventoried, inspected on a recurring schedule, condition-scored, and reported on their format. Most agencies run this on spreadsheets, paper, and tribal knowledge.</p>
     </div>
     <div class="grid grid-3" style="margin-top: 36px;">
       <div class="card">
-        <h3>18+ Month Implementations</h3>
-        <p>Purpose-built replacements take over a year to deploy, burning budget before residents see any benefit.</p>
+        <h3>Overdue Until It's an Audit Finding</h3>
+        <p>Spreadsheets don't escalate. A missed re-inspection stays invisible until the regulator, or a failure, finds it first.</p>
       </div>
       <div class="card">
-        <h3>Millions in Upfront Cost</h3>
-        <p>Traditional permitting platforms demand massive licensing fees plus costly custom development that only grows over time.</p>
+        <h3>Years &amp; Millions for Bespoke EAM</h3>
+        <p>Purpose-built enterprise asset-management replacements take years to deploy and demand licensing plus custom development that only grows.</p>
       </div>
       <div class="card">
         <h3>Proprietary Data Lock-In</h3>
-        <p>Legacy vendors trap your data in proprietary models, making migrations painful and audits difficult when you need transparency most.</p>
+        <p>Legacy vendors trap your asset history in proprietary models — painful migrations, and hard audits exactly when you need transparency.</p>
       </div>
     </div>
   </div>
@@ -351,175 +371,179 @@
   <div class="container">
     <div class="section-head center">
       <div class="kicker">What You Get</div>
-      <h2 class="title">Six integrated modules. One Salesforce org.</h2>
-      <p>Pick only the modules your agency needs — each deploys on standard PSS objects with no proprietary layer.</p>
+      <h2 class="title">Modular by design. One Salesforce org.</h2>
+      <p>Pick only the modules your program needs — each deploys on standard PSS objects with no proprietary layer, and coexists with permitting, grants, and 311 on the same org.</p>
     </div>
     <div class="module-grid">
       <div class="module-card">
         <div class="module-header">
           <div class="module-dot" style="background: var(--accent);"></div>
-          <h3>Permitting &amp; Licensing</h3>
+          <h3>Asset Register &amp; Inventory</h3>
         </div>
         <ul>
-          <li>Guided intake wizards for every permit type</li>
-          <li>Rule-driven fee calculation at application</li>
-          <li>Per-type stage models, renewals &amp; expirations</li>
-          <li>Certificates &amp; PDF generation</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <div class="module-header">
-          <div class="module-dot" style="background: var(--accent-2);"></div>
-          <h3>GIS &amp; Parcels</h3>
-        </div>
-        <ul>
-          <li>Address → parcel → zoning pre-check at intake</li>
-          <li>Parcel maps embedded on every record</li>
-          <li>Esri sync or license-free native maps</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <div class="module-header">
-          <div class="module-dot" style="background: #ea580c;"></div>
-          <h3>Payments &amp; Cashiering</h3>
-        </div>
-        <ul>
-          <li>Online payment via credit card or ACH</li>
-          <li>Counter cashiering with till close-out</li>
-          <li>Receipts, refunds &amp; daily GL journal export</li>
+          <li>Standard-object register: types, criticality, districts</li>
+          <li>GIS location &amp; element-level features</li>
+          <li>Lifecycle status: Current / Due Soon / Overdue / Expired at a glance</li>
         </ul>
       </div>
       <div class="module-card">
         <div class="module-header">
           <div class="module-dot" style="background: #a78bfa;"></div>
-          <h3>Mobile Inspections</h3>
+          <h3>Inspection Lifecycle &amp; QC</h3>
         </div>
         <ul>
-          <li>Checklists, photos &amp; signature capture in the field</li>
-          <li>Day-view route map for inspectors</li>
-          <li>Automatic re-inspection scheduling on failure</li>
+          <li>Typed field inspections with checklist attributes</li>
+          <li>Deficiency flagging with severity &amp; defect coding</li>
+          <li>Permission-gated District → HQ approval — only approved results become official</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: var(--accent-2);"></div>
+          <h3>Condition Scoring</h3>
+        </div>
+        <ul>
+          <li>Numeric score → condition band → recommended action</li>
+          <li>Any domain scale: PCI 0–100, NBIS 0–9, PACP 1–5</li>
+          <li>Temporal model: current, prior &amp; historic inspections</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-dot" style="background: #22c55e;"></div>
+          <h3>Scheduling &amp; Maintenance</h3>
+        </div>
+        <ul>
+          <li>Risk-based intervals by asset type &amp; criticality</li>
+          <li>A severe defect pulls the next inspection forward — automatically</li>
+          <li>One work order per deficiency, no Field Service license</li>
         </ul>
       </div>
       <div class="module-card">
         <div class="module-header">
           <div class="module-dot" style="background: #ef4444;"></div>
-          <h3>Public Portal &amp; 311</h3>
+          <h3>GIS &amp; Offline Mobility</h3>
         </div>
         <ul>
-          <li>Guest search — no account required</li>
-          <li>Apply &amp; pay online with pre-application guidance</li>
-          <li>Complaint intake &amp; 311 reporting</li>
-          <li>"By the numbers" public transparency page</li>
+          <li>Map-first office console; ArcGIS bridge tier</li>
+          <li>Offline tablet capture in the field — tiered: Briefcase, first-party Field App, or Axsy</li>
+          <li>Per-inspector check-out scoping for large estates</li>
         </ul>
       </div>
       <div class="module-card">
         <div class="module-header">
-          <div class="module-dot" style="background: #0891b2;"></div>
-          <h3>Reporting &amp; Compliance</h3>
+          <div class="module-dot" style="background: #ea580c;"></div>
+          <h3>Reporting &amp; Regulator Exports</h3>
         </div>
         <ul>
-          <li>Turnaround &amp; SLA analytics dashboards</li>
-          <li>Operations dashboards — no analytics add-on needed</li>
-          <li>CA HCD housing report export</li>
-          <li>SolarAPP+ connector for instant solar permits</li>
+          <li>License-free analytics workbench: aging, condition mix, turnaround</li>
+          <li>Operational reports &amp; due-for-reinspection views</li>
+          <li>CSV export engine mapped to NBI/SNBI, MS4, PACP</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Screenshot walkthrough -->
+<!-- Walkthrough -->
 <section class="block" id="see-it-in-action">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">See It In Action</div>
-      <h2 class="title">The resident experience, end-to-end</h2>
-      <p>A single demo walks a permit from application to inspection, payment, and public dashboard — on a standard Salesforce org, no slideware.</p>
+      <h2 class="title">From field capture to regulator report, end-to-end</h2>
+      <p>A single demo takes one asset through inspection, QC approval, condition rollup, corrective work order, and the regulator export — on a standard Salesforce org, no slideware.</p>
     </div>
     <div class="walkthrough">
 
       <div class="walk-item">
         <div>
-          <div class="walk-step-label">01 — Resident Portal</div>
-          <h3>Self-service from day one</h3>
-          <p>Residents land on a branded portal tailored to your agency. Every permit type, fee schedule, and service is discoverable without a phone call.</p>
+          <div class="walk-step-label">01 — Asset Register &amp; Map</div>
+          <h3>Your whole estate, one screen</h3>
+          <p>Every device, structure, or segment with its type, criticality, condition band, and inspection status — on a list and on a map.</p>
           <ul class="walk-bullets">
-            <li>Search by address, record number, or keyword</li>
-            <li>Organized by Building, Business &amp; Special categories</li>
-            <li>Live fee display before application starts</li>
-            <li>Anonymous concern / code-violation reporting</li>
+            <li>Due-for-reinspection list views out of the box</li>
+            <li>Click an asset to see its full inspection history</li>
+            <li>Reposition with GIS QC review — authoritative coordinates protected</li>
           </ul>
         </div>
         <div class="walk-img-wrap">
-          <img class="walk-img" src="assets/images/lpi/lpi-01-resident-portal-home.png" alt="Resident portal home — Demo City permits and licenses" loading="lazy">
+          <img class="walk-img" src="assets/images/fi/fi-listing-hero.jpg" alt="Asset register with inspection map — Demo County" loading="lazy">
         </div>
       </div>
 
       <div class="walk-item reverse">
         <div>
-          <div class="walk-step-label">02 — Guided Application Wizard</div>
-          <h3>Six structured steps, zero phone tag</h3>
-          <p>A clear, stepper-based wizard walks applicants through every required field — parcel check, contacts, project details, document uploads, fee review, and payment.</p>
+          <div class="walk-step-label">02 — Field Capture, Offline</div>
+          <h3>Inspect where there's no signal</h3>
+          <p>Inspectors check out their route, work fully offline on a tablet, and sync when they're back — checklists, scores, deficiencies, photos.</p>
           <ul class="walk-bullets">
-            <li>Address → APN parcel pre-check at step 1</li>
-            <li>Save &amp; resume drafts across sessions</li>
-            <li>Zoning overlay shown in context</li>
-            <li>Documents, signatures, and fees in one flow</li>
+            <li>Per-inspector device scoping keeps syncs small</li>
+            <li>New assets registered in the field slot straight into the model</li>
+            <li>Defect coding with severity on every finding</li>
           </ul>
         </div>
         <div class="walk-img-wrap">
-          <img class="walk-img" src="assets/images/lpi/lpi-02-guided-application-wizard.png" alt="Guided application wizard — six-step stepper" loading="lazy">
+          <div class="walk-shot">
+            <span class="walk-shot-kicker">Product walkthrough</span>
+            <span class="walk-shot-label">Tablet inspection form — offline capture</span>
+          </div>
         </div>
       </div>
 
       <div class="walk-item">
         <div>
-          <div class="walk-step-label">03 — Fees &amp; Online Payment</div>
-          <h3>Pay at submission or later</h3>
-          <p>Rule-driven fees are calculated automatically and presented transparently before the applicant pays. Credit card processing is embedded — no redirect to a third-party site.</p>
+          <div class="walk-step-label">03 — QC Approval</div>
+          <h3>The office decides what becomes official</h3>
+          <p>District reviews, HQ approves. Only an approved inspection becomes the asset's current condition — and the approval is permission-gated and audited.</p>
           <ul class="walk-bullets">
-            <li>Integrated credit card (Global Payments) checkout</li>
-            <li>Option to pay later from My Applications</li>
-            <li>Receipts auto-generated on payment</li>
-            <li>Counter cashiering for in-person payment</li>
+            <li>One-click approve from the review queue</li>
+            <li>Built-in integrity audits: exactly one current inspection per asset</li>
+            <li>Return-to-inspector path for rework</li>
           </ul>
         </div>
         <div class="walk-img-wrap">
-          <img class="walk-img" src="assets/images/lpi/lpi-03-fees-and-online-payment.png" alt="Pay &amp; Submit screen with secure payment form" loading="lazy">
+          <div class="walk-shot">
+            <span class="walk-shot-kicker">Product walkthrough</span>
+            <span class="walk-shot-label">District review queue</span>
+          </div>
         </div>
       </div>
 
       <div class="walk-item reverse">
         <div>
-          <div class="walk-step-label">04 — Public Transparency Map</div>
-          <h3>Council-ready accountability built in</h3>
-          <p>Residents and council members can see permit activity on a live map — no custom reporting requests, no FOIA responses for basic data.</p>
+          <div class="walk-step-label">04 — Automatic Follow-Through</div>
+          <h3>Severe defects can't hide</h3>
+          <p>On approval, the condition rolls up, a work order is raised per deficiency, and the next inspection date is computed once — the sooner of the routine schedule and the defect-driven rule.</p>
           <ul class="walk-bullets">
-            <li>"What's Happening Near Me" live map view</li>
-            <li>Filter by time window and status</li>
-            <li>Median issuance times published automatically</li>
-            <li>Contractor license verification — no account needed</li>
+            <li>Severity drives work-order priority</li>
+            <li>High-severity finding? The re-inspection moves up automatically</li>
+            <li>Complete finding → fix → re-inspection trail</li>
           </ul>
         </div>
         <div class="walk-img-wrap">
-          <img class="walk-img" src="assets/images/lpi/lpi-04-public-transparency-map.png" alt="Public transparency map with recent permit activity" loading="lazy">
+          <div class="walk-shot">
+            <span class="walk-shot-kicker">Product walkthrough</span>
+            <span class="walk-shot-label">Work order + pulled-forward due date</span>
+          </div>
         </div>
       </div>
 
       <div class="walk-item">
         <div>
-          <div class="walk-step-label">05 — Contractor License Lookup</div>
-          <h3>Verify before you hire</h3>
-          <p>Any resident can look up whether a contractor is licensed with the city before signing a contract — protecting homeowners and reducing fly-by-night operators.</p>
+          <div class="walk-step-label">05 — Reporting &amp; Export</div>
+          <h3>Regulator-ready in one click</h3>
+          <p>The analytics workbench shows aging, condition mix, and program throughput without an analytics add-on; the export engine emits your regulator's format from configuration.</p>
           <ul class="walk-bullets">
-            <li>Search by name or CSLB number</li>
-            <li>Shows license type, status &amp; expiration</li>
-            <li>No login required — truly public</li>
-            <li>Synced from your business licensing records</li>
+            <li>Median &amp; P90 turnaround, backlog aging</li>
+            <li>NBI/SNBI, MS4, PACP export mappings as config rows</li>
+            <li>Standard reports &amp; dashboards for daily operations</li>
           </ul>
         </div>
         <div class="walk-img-wrap">
-          <img class="walk-img" src="assets/images/lpi/lpi-05-contractor-license-lookup.png" alt="Contractor license verification search results" loading="lazy">
+          <div class="walk-shot">
+            <span class="walk-shot-kicker">Product walkthrough</span>
+            <span class="walk-shot-label">Analytics workbench + CSV export</span>
+          </div>
         </div>
       </div>
 
@@ -532,8 +556,7 @@
   <div class="container">
     <div class="section-head center">
       <div class="kicker">What Makes It Different</div>
-      <h2 class="title">Beyond custom builds and point products</h2>
-      <p>Two dimensions that no legacy LPI vendor and no generic PSS implementation can match.</p>
+      <h2 class="title">Beyond spreadsheets and bespoke EAM</h2>
     </div>
     <div class="diff-grid">
       <div class="diff-card">
@@ -542,11 +565,11 @@
           <h3>No forks. No proprietary lock.</h3>
         </div>
         <ul>
-          <li>Managed base package + a thin extension per agency — upgrades keep flowing, nothing is forked</li>
-          <li>Standard PSS data model — no proprietary layer, no data lock-in</li>
-          <li>Generation factory turns your requirements into a working configuration in days</li>
-          <li>License-dependency check: every proposal states what your scope needs — and what it does NOT</li>
-          <li>Coexists cleanly with your other Salesforce programs (grants, 311, CRM) on one org</li>
+          <li>Standard PSS data model (Asset, inspection Visits, WorkOrders) — no proprietary layer, no data lock-in</li>
+          <li>Configuration over code: condition bands, frequencies, re-inspection rules, and regulator exports are metadata rows</li>
+          <li>Generation factory turns your device types and program rules into working configuration in days — behind a test-first quality gate</li>
+          <li>GIS, offline mobility &amp; dispatch are swappable tiers; a license-dependency check states what your scope needs, and what it does NOT</li>
+          <li>Coexists cleanly with permitting (LPI), grants, and 311 on one org</li>
         </ul>
       </div>
       <div class="diff-card">
@@ -555,52 +578,52 @@
           <h3>Real agency outcomes</h3>
         </div>
         <ul>
-          <li>Live in weeks with a fixed-scope QuickStart — not an 18-month program</li>
-          <li>Counter deflection: applicants self-serve online with pre-application guidance</li>
-          <li>Council-ready transparency: median issuance times published to your portal automatically</li>
-          <li>California compliance built in: SolarAPP+ instant permits, HCD APR, ADU/SB9 types</li>
+          <li>Regulator-ready: overdue status on every asset; a severe open defect can never hide behind a routine re-inspection date</li>
+          <li>Field crews work offline; QC keeps the office in control of what becomes official</li>
+          <li>A complete finding-to-fix trail: deficiency → work order → re-inspection, automatically</li>
+          <li>Proven pattern: built and hardened on a Caltrans-class stormwater (NPDES/MS4) device-inspection program</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Permit library -->
-<section class="block" id="permit-library">
+<!-- Domain library -->
+<section class="block" id="domain-library">
   <div class="container">
     <div class="section-head center">
-      <div class="kicker">Permit Library</div>
-      <h2 class="title">37 pre-built types across 9 families</h2>
-      <p>Map your existing permit catalog to the library in the Discover &amp; Scope phase — most agencies match 80%+ out of the box.</p>
+      <div class="kicker">Domain Library</div>
+      <h2 class="title">One engine, any inspection domain</h2>
+      <p>The product ships domain-neutral; your domain arrives as configuration — asset types, condition scales, frequencies, defect codes, and export mappings.</p>
     </div>
     <div class="chip-grid" style="margin-top: 36px;">
-      <div class="chip"><div class="chip-icon">🏗️</div><div class="chip-label">Building &amp; Planning</div></div>
-      <div class="chip"><div class="chip-icon">☀️</div><div class="chip-label">Solar &amp; Energy</div></div>
-      <div class="chip"><div class="chip-icon">🏠</div><div class="chip-label">ADU / SB9</div></div>
-      <div class="chip"><div class="chip-icon">💼</div><div class="chip-label">Business Licensing</div></div>
-      <div class="chip"><div class="chip-icon">🎪</div><div class="chip-label">Special Events</div></div>
-      <div class="chip"><div class="chip-icon">🌿</div><div class="chip-label">Landscape / MWELO</div></div>
-      <div class="chip"><div class="chip-icon">📋</div><div class="chip-label">Sign Review</div></div>
-      <div class="chip"><div class="chip-icon">🏡</div><div class="chip-label">Home Occupation</div></div>
-      <div class="chip"><div class="chip-icon">⚡</div><div class="chip-label">Electrical &amp; Mechanical</div></div>
+      <div class="chip"><div class="chip-icon">🌊</div><div class="chip-label">Stormwater / MS4 Devices</div></div>
+      <div class="chip"><div class="chip-icon">🌉</div><div class="chip-label">Bridges &amp; Structures (NBIS)</div></div>
+      <div class="chip"><div class="chip-icon">🚧</div><div class="chip-label">Culverts &amp; Drainage</div></div>
+      <div class="chip"><div class="chip-icon">🔧</div><div class="chip-label">Sewer &amp; Water (PACP)</div></div>
+      <div class="chip"><div class="chip-icon">🛣️</div><div class="chip-label">Pavement (PCI)</div></div>
+      <div class="chip"><div class="chip-icon">🚦</div><div class="chip-label">Signs &amp; Signals</div></div>
+      <div class="chip"><div class="chip-icon">🌳</div><div class="chip-label">Parks &amp; Facilities</div></div>
+      <div class="chip"><div class="chip-icon">🚚</div><div class="chip-label">Fleet &amp; Equipment</div></div>
+      <div class="chip"><div class="chip-icon">🗺️</div><div class="chip-label">Right-of-Way Assets</div></div>
     </div>
   </div>
 </section>
 
-<!-- California compliance -->
-<section class="block alt" id="california">
+<!-- Regulator compliance -->
+<section class="block alt" id="compliance">
   <div class="container">
     <div class="callout-banner">
-      <div class="callout-banner-icon">🌴</div>
+      <div class="callout-banner-icon">📋</div>
       <div>
-        <h3>California Compliance — Built In, Not Bolted On</h3>
-        <p>State mandates don't arrive as change orders. SolarAPP+, HCD Annual Progress Reports, ADU and SB9 types, and CSLB contractor verification are part of the base configuration — activated per agency, not billed as extras.</p>
+        <h3>Regulator Formats — Built In, Not Bolted On</h3>
+        <p>Submission formats don't arrive as change orders. Export mappings are configuration rows on a shipped engine — activated per agency, extended per program.</p>
         <div class="callout-pills">
-          <span class="callout-pill">SolarAPP+ Instant Permits</span>
-          <span class="callout-pill">HCD APR Export</span>
-          <span class="callout-pill">ADU / SB9 Types</span>
-          <span class="callout-pill">CSLB License Lookup</span>
-          <span class="callout-pill">CA HCD Housing Reports</span>
+          <span class="callout-pill">NPDES / MS4 Annual Reporting</span>
+          <span class="callout-pill">NBI / SNBI Bridge Inventory</span>
+          <span class="callout-pill">NASSCO PACP Coding</span>
+          <span class="callout-pill">PCI Pavement Condition</span>
+          <span class="callout-pill">Custom formats as CMDT rows</span>
         </div>
       </div>
     </div>
@@ -619,17 +642,17 @@
       <div class="eng-step">
         <div class="eng-bubble" style="color: var(--accent);">1</div>
         <h3>Discover &amp; Scope</h3>
-        <p>Map your permit types to the library, pick your modules, confirm the license matrix and fee structure. Output: a fixed-scope SOW.</p>
+        <p>Map your asset types, condition scales &amp; inspection frequencies; pick modules; confirm the license matrix (mobility &amp; GIS tiers). Output: a fixed-scope SOW.</p>
       </div>
       <div class="eng-step">
         <div class="eng-bubble" style="color: var(--accent-3);">2</div>
         <h3>Generate &amp; Configure</h3>
-        <p>The generation factory clones your types, applies fees &amp; workflows, and deploys a right-sized footprint to your sandbox — then UAT.</p>
+        <p>The generation factory scaffolds your types, bands &amp; schedules, wires the mobile tier, and deploys a right-sized footprint to your sandbox — then UAT.</p>
       </div>
       <div class="eng-step">
         <div class="eng-bubble" style="color: var(--accent-2);">3</div>
         <h3>Go Live &amp; Extend</h3>
-        <p>Portal launch with staff training, then managed upgrades as new modules or state mandates roll in — add capability as programs grow.</p>
+        <p>Field rollout with QC training and regulator exports, then managed upgrades — add GIS, dispatch, or new domains as programs grow.</p>
       </div>
     </div>
   </div>
@@ -642,8 +665,8 @@
   <div class="cta-banner">
     <div class="inner">
       <h2>See it live in one hour</h2>
-      <p>A one-hour demo walks a permit from application to inspection, payment, and public dashboard — on a standard Salesforce org, no slideware. Fixed-price QuickStart scoping available on request.</p>
-      <a href="contact.html?ref=lpi-accelerator" class="btn btn-primary">Request a Demo →</a>
+      <p>A one-hour demo captures a field inspection with a deficiency, QC-approves it, and watches the condition roll up, a work order raised, and the re-inspection date pull forward — on a standard Salesforce org, no slideware. Fixed-price QuickStart scoping available on request.</p>
+      <a href="contact.html?ref=fi-accelerator" class="btn btn-primary">Request a Demo →</a>
     </div>
   </div>
 </section>

@@ -45,6 +45,10 @@
       "changefreq": "monthly",
       "priority": "0.85"
     },
+    "fi-accelerator.html": {
+      "changefreq": "monthly",
+      "priority": "0.85"
+    },
     "how-we-work.html": {
       "changefreq": "monthly",
       "priority": "0.8"
@@ -140,6 +144,10 @@
     "content/success-stories/state-licensing-modernization-success-story.html": {
       "changefreq": "monthly",
       "priority": "0.85"
+    },
+    "careers/forward-deployed-engineer-0085.html": {
+      "changefreq": "weekly",
+      "priority": "0.6"
     },
     "careers/senior-salesforce-developer-0084.html": {
       "changefreq": "weekly",
@@ -303,11 +311,26 @@
     "careers.html": {
       "path": "/careers",
       "title": "Careers at SuccessMetrics | Salesforce Jobs",
-      "description": "Join an AI-forward Salesforce consultancy hiring developers and architects. Pondicherry & remote-friendly roles.",
+      "description": "Join an AI-forward Salesforce consultancy hiring engineers, developers, and architects. Pondicherry and U.S. remote roles.",
       "keywords": [
         "Salesforce developer jobs",
         "Salesforce architect careers",
+        "Forward Deployed Engineer jobs",
         "Pondicherry Salesforce jobs"
+      ],
+      "ogType": "website",
+      "schema": [
+        "WebPage"
+      ]
+    },
+    "careers/forward-deployed-engineer-0085.html": {
+      "path": "/careers/forward-deployed-engineer-0085",
+      "title": "Forward Deployed Engineer | Careers at SuccessMetrics",
+      "description": "Remote U.S. Forward Deployed Engineer for Salesforce. Own customer outcomes with AI-native delivery. Mid-level through senior/lead.",
+      "keywords": [
+        "Forward Deployed Engineer jobs",
+        "Salesforce Forward Deployed Engineer",
+        "Remote Salesforce engineer jobs"
       ],
       "ogType": "website",
       "schema": [
@@ -573,6 +596,20 @@
         "Salesforce LPI accelerator",
         "licensing permitting inspections Salesforce",
         "Public Sector Solutions permitting"
+      ],
+      "ogType": "website",
+      "schema": [
+        "Product"
+      ]
+    },
+    "fi-accelerator.html": {
+      "path": "/fi-accelerator",
+      "title": "Field Inspection Accelerator | Offline Inspections",
+      "description": "Asset inventory, recurring field inspections, and condition scoring on Salesforce Public Sector Solutions — offline-capable, live in weeks.",
+      "keywords": [
+        "Salesforce field inspection accelerator",
+        "offline field inspections Salesforce",
+        "Public Sector Solutions asset inventory"
       ],
       "ogType": "website",
       "schema": [

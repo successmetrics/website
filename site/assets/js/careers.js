@@ -53,7 +53,10 @@
 
   async function loadJobs() {
     try {
-      const response = await fetch(JOBS_API, { headers: { Accept: "application/json" } });
+      const response = await fetch(JOBS_API, {
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+      });
       if (response.ok) {
         const payload = await response.json();
         if (Array.isArray(payload.jobs) && payload.jobs.length > 0) {
@@ -84,6 +87,8 @@
         title: job.title,
         location: job.location,
         type: job.type,
+        level: job.level || null,
+        travel: job.travel || null,
         label: job.label || job.title + " (" + job.id + ")",
         slug: job.slug || null,
         detailUrl: job.detailUrl || null,
@@ -103,6 +108,8 @@
           title: job.title,
           location: job.location,
           type: job.type,
+          level: job.level || extra.level || null,
+          travel: job.travel || extra.travel || null,
           label: job.label || job.title + " (" + job.id + ")",
           slug: job.slug || extra.slug || null,
           detailUrl: job.detailUrl || extra.detailUrl || null,
@@ -158,7 +165,10 @@
           escapeHtml(job.location) +
           "</span><span>" +
           escapeHtml(job.type) +
-          '</span></div></div>' +
+          "</span>" +
+          (job.level ? "<span>" + escapeHtml(job.level) + "</span>" : "") +
+          (job.travel ? "<span>" + escapeHtml(job.travel) + "</span>" : "") +
+          "</div></div>" +
           '<div class="job-row-actions">' +
           actions.join("") +
           "</div>" +
