@@ -174,7 +174,15 @@ gtag('config', '${escapeHtml(gaId)}');
 
 export function renderSeoBlock(page, seo, gaId) {
   const url = `${seo.siteOrigin}${page.path}`;
-  const ogImage = `${seo.siteOrigin}${page.ogImage || seo.defaultOgImage}`;
+  const ogImagePath = page.ogImage || seo.defaultOgImage;
+  const ogImage = `${seo.siteOrigin}${ogImagePath}`;
+  const ogImageSizeTags =
+    ogImagePath === seo.defaultOgImage
+      ? `
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">`
+      : "";
   const schemas = pageSchema(page, seo);
   const schemaScripts = schemas
     .map(
@@ -195,7 +203,7 @@ export function renderSeoBlock(page, seo, gaId) {
 <meta property="og:title" content="${escapeHtml(page.title)}">
 <meta property="og:description" content="${escapeHtml(page.description)}">
 <meta property="og:url" content="${escapeHtml(url)}">
-<meta property="og:image" content="${escapeHtml(ogImage)}">
+<meta property="og:image" content="${escapeHtml(ogImage)}">${ogImageSizeTags}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escapeHtml(page.title)}">
 <meta name="twitter:description" content="${escapeHtml(page.description)}">

@@ -9,6 +9,7 @@ export const MAIN_PAGES = [
   "safe-seed.html",
   "org-insights.html",
   "lpi-accelerator.html",
+  "fi-accelerator.html",
   "how-we-work.html",
   "why-ai-salesforce.html",
   "customer-questions.html",
@@ -36,6 +37,7 @@ export const CONTENT_PAGES = [
   "content/success-stories/city-permitting-success-story.html",
   "content/success-stories/easymask-product-engineering-success-story.html",
   "content/success-stories/state-licensing-modernization-success-story.html",
+  "careers/forward-deployed-engineer-0085.html",
   "careers/senior-salesforce-developer-0084.html",
   "careers/salesforce-architect-0082.html",
   "careers/salesforce-developer-0081.html",
@@ -67,6 +69,7 @@ export const NETLIFY_CLEAN_URLS: Record<string, string> = {
   "/safe-seed": "safe-seed.html",
   "/org-insights": "org-insights.html",
   "/lpi-accelerator": "lpi-accelerator.html",
+  "/fi-accelerator": "fi-accelerator.html",
   "/how-we-work": "how-we-work.html",
   "/why-ai-salesforce": "why-ai-salesforce.html",
   "/customer-questions": "customer-questions.html",
@@ -74,3 +77,4 @@ export const NETLIFY_CLEAN_URLS: Record<string, string> = {
 
 export const STYLESHEET = "assets/css/styles.css";
 export const LOGO = "assets/images/logo.svg";
+export const OG_DEFAULT_IMAGE = "assets/images/og-default.png";

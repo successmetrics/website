@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   isOpenJob,
+  mergeListedJobs,
   normalizeNotionDatabaseId,
   parseJobPage,
   toPublicJob,
@@ -64,6 +65,43 @@ describe("notion careers helpers", () => {
       slug: "salesforce-developer-0081",
       detailUrl: "/careers/salesforce-developer-0081",
     });
+  });
+
+  it("merges fallback listings that are missing from Notion", () => {
+    const merged = mergeListedJobs(
+      [
+        {
+          id: "JD-0081",
+          title: "Salesforce Developer",
+          location: "Pondicherry, India",
+          type: "Full-time",
+        },
+      ],
+      [
+        {
+          id: "JD-0085",
+          title: "Forward Deployed Engineer — Salesforce",
+          location: "Remote — United States",
+          type: "Full-Time",
+          label: "Forward Deployed Engineer — Salesforce (JD-0085)",
+          slug: "forward-deployed-engineer-0085",
+          detailUrl: "/careers/forward-deployed-engineer-0085",
+        },
+        {
+          id: "JD-0081",
+          title: "Salesforce Developer",
+          location: "Pondicherry, India",
+          type: "Full-time",
+          label: "Salesforce Developer (JD-0081)",
+          slug: "salesforce-developer-0081",
+          detailUrl: "/careers/salesforce-developer-0081",
+        },
+      ],
+    );
+
+    expect(merged.map((job) => job.id)).toEqual(["JD-0085", "JD-0081"]);
+    expect(merged[0].detailUrl).toBe("/careers/forward-deployed-engineer-0085");
+    expect(merged[1].detailUrl).toBe("/careers/salesforce-developer-0081");
   });
 
   it("filters closed jobs", () => {

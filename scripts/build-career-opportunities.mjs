@@ -10,22 +10,32 @@ const FALLBACK_PATH = join(ROOT, "data", "careers-fallback.json");
 const INDEX_PATH = join(ROOT, "site", "data", "careers-job-index.json");
 
 const JOB_ORDER = [
+  "forward-deployed-engineer-0085",
   "senior-salesforce-developer-0084",
   "salesforce-architect-0082",
   "salesforce-developer-0081",
 ];
 
 const TITLE_OVERRIDES = {
+  "forward-deployed-engineer-0085": "Forward Deployed Engineer — Salesforce",
   "salesforce-developer-0081": "Salesforce Developer",
   "salesforce-architect-0082": "Salesforce Architect",
   "senior-salesforce-developer-0084": "Senior Salesforce Developer",
 };
 
 const LIST_SECTIONS =
-  /^(Key Responsibilities|Required Qualifications|Preferred Qualifications)/i;
+  /^(Key Responsibilities|Required Qualifications|Preferred Qualifications|What You['’]ll Own|What We['’]re Looking For|Experience|Especially Valuable|Logistics & How to Apply)/i;
+
+const LABELED_LIST_SECTIONS =
+  /^(What We['’]re Looking For|Experience|Logistics & How to Apply)/i;
+
+const APPLY_PROMPTS = {
+  "forward-deployed-engineer-0085":
+    "Describe something difficult you built, fixed, automated, or untangled that you're proud of.",
+};
 
 const SECTION_HEADINGS =
-  /^(About the Role|Key Responsibilities|Required Qualifications|Preferred Qualifications|Why Join Us\??)/i;
+  /^(About the Role|Key Responsibilities|Required Qualifications|Preferred Qualifications|Why Join Us\??|What You['’]ll Own|What We['’]re Looking For|Experience|Especially Valuable|How We Work|Logistics & How to Apply|About SuccessMetrics)/i;
 
 function isDividerLine(line) {
   return /^[⸻—-]{1,}$/.test(line) || line === "---";
@@ -44,7 +54,7 @@ function escapeHtml(text) {
 }
 
 function cleanLine(line) {
-  return line.replace(/\u200b/g, "").trim();
+  return line.replace(/\u200b/g, "").replace(/^[•\-*]\s+/, "").trim();
 }
 
 function titleFromSlug(slug) {
@@ -64,11 +74,40 @@ function jobIdFromSlug(slug) {
 function parseMetaFromText(text) {
   const locationMatch = text.match(/^Location:\s*(.+)$/im);
   const typeMatch = text.match(/^Employment Type:\s*(.+)$/im);
+  const levelMatch = text.match(/^Level:\s*(.+)$/im);
+  const travelMatch = text.match(/^Travel:\s*(.+)$/im);
 
   return {
     location: locationMatch?.[1]?.trim() || "Pondicherry, India",
     type: typeMatch?.[1]?.trim() || "Full-time",
+    level: levelMatch?.[1]?.trim() || "",
+    travel: travelMatch?.[1]?.trim() || "",
   };
+}
+
+function isMetaLine(line) {
+  return /^(Location|Employment Type|Level|Travel):/i.test(line);
+}
+
+function linkifyHtml(text) {
+  return escapeHtml(text).replace(
+    /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+    '<a href="mailto:$1">$1</a>',
+  );
+}
+
+function formatListItem(heading, line) {
+  if (LABELED_LIST_SECTIONS.test(heading)) {
+    const colonLabeled = line.match(/^([^:]{2,70}):\s+(.+)$/);
+    if (colonLabeled) {
+      return `<strong>${escapeHtml(colonLabeled[1])}:</strong> ${linkifyHtml(colonLabeled[2])}`;
+    }
+    const dottedLabeled = line.match(/^([A-Za-z][^.]{1,50}\.)\s+(.+)$/);
+    if (dottedLabeled) {
+      return `<strong>${escapeHtml(dottedLabeled[1])}</strong> ${linkifyHtml(dottedLabeled[2])}`;
+    }
+  }
+  return linkifyHtml(line);
 }
 
 function splitSections(text) {
@@ -91,7 +130,9 @@ function splitSections(text) {
       current = { heading: "About the Role", bodyLines: [] };
     }
 
-    if (!/^Location:/i.test(line) && !/^Employment Type:/i.test(line)) {
+    const skipAsMeta =
+      isMetaLine(line) && (!current || /^About the Role/i.test(current.heading));
+    if (!skipAsMeta) {
       current.bodyLines.push(line);
     }
   }
@@ -102,7 +143,9 @@ function splitSections(text) {
 
 function sectionClass(heading) {
   if (/^About the Role/i.test(heading)) return "job-section job-section--about";
-  if (/^Why Join Us/i.test(heading)) return "job-section job-section--benefits";
+  if (/^(Why Join Us|How We Work)/i.test(heading)) {
+    return "job-section job-section--benefits";
+  }
   return "job-section";
 }
 
@@ -114,7 +157,7 @@ function renderSection(section) {
 
   if (LIST_SECTIONS.test(section.heading)) {
     const items = section.bodyLines
-      .map((line) => `<li>${escapeHtml(line)}</li>`)
+      .map((line) => `<li>${formatListItem(section.heading, line)}</li>`)
       .join("\n        ");
     return `${wrapperStart}
       ${h2}
@@ -138,7 +181,7 @@ function renderSection(section) {
     }
 
     let html = `${wrapperStart}\n      ${h2}\n      <div class="job-desc-body">`;
-    html += introLines.map((line) => `\n        <p>${escapeHtml(line)}</p>`).join("");
+    html += introLines.map((line) => `\n        <p>${linkifyHtml(line)}</p>`).join("");
     html += "\n      </div>";
     if (listLines.length) {
       html += `\n      <ul class="job-desc-list job-desc-list--benefits">\n        ${listLines.map((line) => `<li>${escapeHtml(line)}</li>`).join("\n        ")}\n      </ul>`;
@@ -148,7 +191,7 @@ function renderSection(section) {
   }
 
   const paragraphs = section.bodyLines
-    .map((line) => `        <p>${escapeHtml(line)}</p>`)
+    .map((line) => `        <p>${linkifyHtml(line)}</p>`)
     .join("\n");
   return `${wrapperStart}
       ${h2}
@@ -198,6 +241,7 @@ ${seoBlock}
       <li><a href="/ai-research.html">AI Research</a></li>
       <li><a href="/success-stories.html">Success Stories</a></li>
       <li><a href="/careers.html" class="active">Careers</a></li>
+      <li><a href="/customer-questions.html">Q&amp;A</a></li>
       <li><a href="/about.html">About</a></li>
       <li><a href="/contact.html" class="nav-cta">Talk to an Engineer</a></li>
     </ul>
@@ -210,7 +254,7 @@ ${seoBlock}
     <p class="job-detail-back"><a href="../careers.html#openings">← Back to openings</a></p>
     <div class="kicker">Careers</div>
     <h1>${escapeHtml(job.title)}</h1>
-    <p class="job-detail-meta"><span>${escapeHtml(job.id)}</span><span>📍 ${escapeHtml(job.location)}</span><span>${escapeHtml(job.type)}</span></p>
+    <p class="job-detail-meta"><span>${escapeHtml(job.id)}</span><span>📍 ${escapeHtml(job.location)}</span><span>${escapeHtml(job.type)}</span>${job.level ? `<span>${escapeHtml(job.level)}</span>` : ""}${job.travel ? `<span>${escapeHtml(job.travel)}</span>` : ""}</p>
   </div>
 </header>
 
@@ -259,13 +303,13 @@ ${seoBlock}
           </div>
           <div class="field full">
             <label for="message">Why SuccessMetrics? *</label>
-            <textarea id="message" name="message" required placeholder="Tell us briefly about your experience and what excites you about this role…"></textarea>
+            <textarea id="message" name="message" required placeholder="${escapeHtml(job.applyPrompt)}"></textarea>
           </div>
         </div>
         <div style="margin-top: 24px;">
           <button type="submit" class="btn btn-primary">Submit Application →</button>
         </div>
-        <p class="form-note">Prefer email? Send your resume directly to <a href="mailto:careers@successmetrics.io">careers@successmetrics.io</a> with the Job ID in the subject line.</p>
+        <p class="form-note">Prefer email? Send your resume directly to <a href="mailto:${escapeHtml(job.applyEmail)}">${escapeHtml(job.applyEmail)}</a> with the Job ID in the subject line.</p>
       </form>
     </aside>
   </div>
@@ -306,9 +350,18 @@ for (const slug of JOB_ORDER) {
     title,
     location: parsed.meta.location,
     type: parsed.meta.type,
+    level: parsed.meta.level,
+    travel: parsed.meta.travel,
     label,
     slug,
     detailUrl,
+    applyPrompt:
+      APPLY_PROMPTS[slug] ||
+      "Tell us briefly about your experience and what excites you about this role…",
+    applyEmail:
+      slug === "forward-deployed-engineer-0085"
+        ? "guru@successmetrics.io"
+        : "careers@successmetrics.io",
     bodyHtml: parsed.bodyHtml,
   };
 
@@ -316,7 +369,7 @@ for (const slug of JOB_ORDER) {
   writeFileSync(htmlPath, renderJobPage(slug, job));
   console.log(`Built ${htmlPath}`);
 
-  fallbackJobs.push({
+  const fallbackJob = {
     id: job.id,
     title: job.title,
     location: job.location,
@@ -324,7 +377,10 @@ for (const slug of JOB_ORDER) {
     label: job.label,
     slug: job.slug,
     detailUrl: job.detailUrl,
-  });
+  };
+  if (job.level) fallbackJob.level = job.level;
+  if (job.travel) fallbackJob.travel = job.travel;
+  fallbackJobs.push(fallbackJob);
 
   jobIndex[job.id] = {
     slug: job.slug,

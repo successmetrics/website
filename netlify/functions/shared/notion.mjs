@@ -123,7 +123,7 @@ export function isOpenJob(job) {
 }
 
 export function toPublicJob(job) {
-  return {
+  const publicJob = {
     id: job.id,
     title: job.title,
     location: job.location,
@@ -132,11 +132,42 @@ export function toPublicJob(job) {
     slug: job.slug || null,
     detailUrl: job.detailUrl || null,
   };
+  if (job.level) publicJob.level = job.level;
+  if (job.travel) publicJob.travel = job.travel;
+  return publicJob;
 }
 
 function isListedJob(job) {
   if (job.id === "JD-0083") return false;
   return !/accessibility specialist/i.test(job.title || "");
+}
+
+export function mergeListedJobs(notionJobs, fallbackJobs = FALLBACK_JOBS) {
+  const notionById = new Map(notionJobs.map((job) => [job.id, job]));
+  const merged = [];
+  const seen = new Set();
+
+  for (const fallback of fallbackJobs.filter(isListedJob)) {
+    const fromNotion = notionById.get(fallback.id);
+    merged.push(
+      toPublicJob({
+        ...fallback,
+        ...(fromNotion || {}),
+        slug: fallback.slug || fromNotion?.slug || null,
+        detailUrl: fallback.detailUrl || fromNotion?.detailUrl || null,
+        label: fallback.label || fromNotion?.label,
+      }),
+    );
+    seen.add(fallback.id);
+  }
+
+  for (const job of notionJobs) {
+    if (!seen.has(job.id) && isListedJob(job)) {
+      merged.push(toPublicJob(job));
+    }
+  }
+
+  return merged;
 }
 
 export async function fetchOpenJobs() {
@@ -156,14 +187,13 @@ export async function fetchOpenJobs() {
       sorts: [{ property: "Sort Order", direction: "ascending" }],
     });
 
-    const jobs = response.results
+    const notionJobs = response.results
       .map(parseJobPage)
       .filter(isOpenJob)
       .filter(isListedJob)
-      .sort((a, b) => a.sortOrder - b.sortOrder)
-      .map(toPublicJob);
+      .sort((a, b) => a.sortOrder - b.sortOrder);
 
-    return { jobs, source: "notion" };
+    return { jobs: mergeListedJobs(notionJobs), source: "notion" };
   } catch (error) {
     console.error("Notion jobs query failed:", error);
     return {

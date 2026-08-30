@@ -158,6 +158,10 @@
   to = "/lpi-accelerator.html"
   status = 200
 [[redirects]]
+  from = "/fi-accelerator"
+  to = "/fi-accelerator.html"
+  status = 200
+[[redirects]]
   from = "/how-we-work"
   to = "/how-we-work.html"
   status = 200

@@ -1,0 +1,69 @@
+About the Role
+
+Drive Salesforce solutions efficiently.
+
+SuccessMetrics is reshaping how enterprise software services are delivered. We use an AI-engineered delivery approach to accelerate requirements, solution design, development, testing, documentation, and deployment—allowing small, highly capable teams to deliver outcomes that traditionally require much larger teams and longer timelines.
+
+This is not a ticket-queue role. You will work directly with customers, understand the business problem, design the solution, use AI and automation aggressively, build where necessary, and take responsibility for getting the solution into production. You own the outcome.
+
+Location: Remote — United States
+Employment Type: Full-Time
+Level: Mid-Level through Senior / Lead
+Travel: 20–30% Travel
+⸻
+
+What You'll Own
+
+Turn ambiguous inputs—RFPs, discovery notes, spreadsheets, legacy systems, and undocumented processes—into working Salesforce solutions.
+Design standard-platform-first solutions, using custom code only where it creates meaningful value.
+Configure and build with Flow, Apex, LWC, Experience Cloud, APIs, integrations, and data migration tools.
+Use AI throughout delivery for requirements, design, coding, testing, documentation, troubleshooting, and automation.
+Identify technical constraints, dependencies, and stakeholder risks before they become project problems.
+Present and defend designs with CIOs, architects, security teams, procurement, and engineers.
+Leave customers able to confidently operate and extend what we deliver.
+Turn lessons from each engagement into reusable accelerators, tooling, and improvements to our delivery model.
+⸻
+
+What We're Looking For
+
+Salesforce Engineering. Strong hands-on knowledge of data modeling, security and sharing, Flow, Apex, LWC, Experience Cloud, APIs, integrations, data migration, and deployment.
+AI-Native Engineering. Proficiency with agentic coding, prompt/context engineering, AI-assisted requirements and design, automated testing, and building your own automations. If you do the same manual task twice, your instinct should be to automate it.
+Data & Integration. SQL, REST/SOAP APIs, ETL, authentication patterns, event-driven architectures, migration strategy, reconciliation, and production troubleshooting.
+Customer Leadership. Able to lead discovery, explain architecture to executives, work through security reviews, debug with engineers, challenge requirements constructively, and communicate status and risk proactively.
+⸻
+
+Experience
+
+Mid-Level (typically 5–8 years): Delivered real Salesforce implementations end-to-end and ready to own major workstreams and customer relationships.
+Senior / Lead (typically 10–15 years): Able to own technical direction, make architecture decisions, mentor engineers, and become the technical leader the customer trusts.
+Years are guidelines—capability, judgment, and demonstrated ownership matter more than tenure.
+⸻
+
+Especially Valuable
+
+Public Sector Solutions; Licensing, Permitting & Inspections; Service Cloud; Experience Cloud; OmniStudio; Field Service; or Agentforce.
+Enterprise integrations and complex data migrations.
+Salesforce Application/System Architect credentials, Platform Developer II, or comparable depth.
+Consulting, forward-deployed engineering, or other customer-facing delivery experience.
+Reusable internal tooling, accelerators, frameworks, or open-source contributions.
+⸻
+
+How We Work
+
+We believe the next generation of consulting teams will look different: smaller teams, stronger engineers, AI-native delivery, more automation, faster feedback, and clearer ownership. You'll have significant autonomy, direct customer exposure, and the opportunity to influence not only what we deliver, but how SuccessMetrics delivers in the future.
+⸻
+
+Logistics & How to Apply
+
+Location: Remote within the United States.
+Employment: Full-time.
+Travel: Approximately 20–30% during active engagements, primarily around discovery, workshops, and go-live.
+Compensation: Market-competitive base salary based on level, experience, and geography, plus a comprehensive benefits package.
+Apply: Use the form on this page or send your résumé to guru@successmetrics.io with a short note describing something difficult you built, fixed, automated, or untangled that you're proud of. A specific story tells us more than another page of résumé bullet points.
+⸻
+
+About SuccessMetrics
+
+SuccessMetrics is a Salesforce consulting and technology company focused on delivering complex enterprise solutions with small, highly capable teams and AI-enabled engineering.
+
+SuccessMetrics is an equal opportunity employer. We consider qualified applicants without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, age, disability, veteran status, or any other protected characteristic. If you need an accommodation during the interview process, please let us know.

@@ -106,9 +106,6 @@ function buildPage(filename) {
 const seo = loadSeoConfig(ROOT);
 const gaId = process.env.GOOGLE_ANALYTICS_ID?.trim() || "";
 
-const pages = findHtmlPages(SITE_DIR).filter(
-  (page) => !page.startsWith("prototypes/") && !page.startsWith("demo/"),
-);
 let navUpdated = 0;
 let seoUpdated = 0;
 
@@ -127,6 +124,10 @@ const careersBuild = spawnSync("node", ["scripts/build-career-opportunities.mjs"
 if (careersBuild.status !== 0) {
   process.exit(careersBuild.status ?? 1);
 }
+
+const pages = findHtmlPages(SITE_DIR).filter(
+  (page) => !page.startsWith("prototypes/") && !page.startsWith("demo/"),
+);
 
 for (const page of pages) {
   if (buildPage(page)) {

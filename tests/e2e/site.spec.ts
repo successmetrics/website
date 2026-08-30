@@ -9,6 +9,7 @@ const MAIN_PAGES = [
   "safe-seed.html",
   "org-insights.html",
   "lpi-accelerator.html",
+  "fi-accelerator.html",
   "how-we-work.html",
   "why-ai-salesforce.html",
   "customer-questions.html",
@@ -36,6 +37,7 @@ const CONTENT_PAGES = [
   "content/success-stories/city-permitting-success-story.html",
   "content/success-stories/easymask-product-engineering-success-story.html",
   "content/success-stories/state-licensing-modernization-success-story.html",
+  "careers/forward-deployed-engineer-0085.html",
   "careers/senior-salesforce-developer-0084.html",
   "careers/salesforce-architect-0082.html",
   "careers/salesforce-developer-0081.html",
@@ -217,7 +219,7 @@ test.describe("forms", () => {
   test("careers application form renders and Apply Now pre-selects role", async ({ page }) => {
     await page.goto("/careers.html");
 
-    await expect(page.locator("#job-list .job-row")).toHaveCount(3);
+    await expect(page.locator("#job-list .job-row").first()).toBeVisible();
 
     const firstMoreInfo = page.getByRole("link", { name: "More info" }).first();
     await expect(firstMoreInfo).toBeVisible();

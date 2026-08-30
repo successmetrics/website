@@ -2,7 +2,7 @@ import { fetchOpenJobs } from "./shared/notion.mjs";
 
 const headers = {
   "Content-Type": "application/json",
-  "Cache-Control": "public, max-age=300",
+  "Cache-Control": "no-store",
 };
 
 export default async function handler() {
