@@ -197,6 +197,14 @@
   to = "/content/blog-lpi-accelerator.html"
   status = 200
 [[redirects]]
+  from = "/content/blog-claudeforce-public-sector"
+  to = "/content/blog-claudeforce-public-sector.html"
+  status = 200
+[[redirects]]
+  from = "/insights/claudeforce-public-sector"
+  to = "/content/blog-claudeforce-public-sector.html"
+  status = 301
+[[redirects]]
   from = "/content/whitepaper-midmarket-guide"
   to = "/content/whitepaper-midmarket-guide.html"
   status = 200

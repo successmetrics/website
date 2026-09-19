@@ -80,7 +80,7 @@ describe("careers pages", () => {
     expect($(".job-detail-meta").text()).toContain("Remote — United States");
     expect($(".job-detail-meta").text()).toContain("20–30% Travel");
     expect($(".job-detail-content").text()).toContain("You own the outcome");
-    expect($('a[href="mailto:guru@successmetrics.io"]').length).toBeGreaterThan(0);
+    expect($('a[href="mailto:careers@successmetrics.io"]').length).toBeGreaterThan(0);
   });
 });
 

@@ -358,10 +358,7 @@ for (const slug of JOB_ORDER) {
     applyPrompt:
       APPLY_PROMPTS[slug] ||
       "Tell us briefly about your experience and what excites you about this role…",
-    applyEmail:
-      slug === "forward-deployed-engineer-0085"
-        ? "guru@successmetrics.io"
-        : "careers@successmetrics.io",
+    applyEmail: "careers@successmetrics.io",
     bodyHtml: parsed.bodyHtml,
   };
 
