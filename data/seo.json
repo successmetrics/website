@@ -97,6 +97,10 @@
       "changefreq": "monthly",
       "priority": "0.6"
     },
+    "content/blog-claudeforce-public-sector.html": {
+      "changefreq": "monthly",
+      "priority": "0.6"
+    },
     "content/whitepaper-midmarket-guide.html": {
       "changefreq": "monthly",
       "priority": "0.6"
@@ -423,6 +427,23 @@
         "Article"
       ],
       "datePublished": "2025-09-20"
+    },
+    "content/blog-claudeforce-public-sector.html": {
+      "path": "/content/blog-claudeforce-public-sector",
+      "title": "Claudeforce for Public Sector: Beyond 37 Sales Skills",
+      "description": "Salesforce and Anthropic's Claudeforce proved a pattern. Here's what happens when you extend it to permitting, inspections, grants and casework.",
+      "keywords": [
+        "claudeforce public sector",
+        "salesforce anthropic public sector",
+        "agentic ai government",
+        "claudeforce explained",
+        "licensing permitting inspections"
+      ],
+      "ogType": "article",
+      "schema": [
+        "Article"
+      ],
+      "datePublished": "2026-08-29"
     },
     "content/whitepaper-midmarket-guide.html": {
       "path": "/content/whitepaper-midmarket-guide",

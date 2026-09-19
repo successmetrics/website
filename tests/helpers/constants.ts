@@ -25,6 +25,7 @@ export const CONTENT_PAGES = [
   "content/blog-ai-enabled-delivery.html",
   "content/blog-midmarket-salesforce.html",
   "content/blog-lpi-accelerator.html",
+  "content/blog-claudeforce-public-sector.html",
   "content/whitepaper-midmarket-guide.html",
   "content/whitepaper-safe-seed-synthetic-data.html",
   "content/ai-research/off-grid-ai-lab-patient-trial-matching.html",

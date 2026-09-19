@@ -10,6 +10,7 @@ docs/*
 media/*
 whitepapers/*
 backup/*
+local/*
 
 .DS_Store
 # Local Netlify folder
